@@ -1,0 +1,6 @@
+framework module Pods_SnipTests {
+  umbrella header "Pods-SnipTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
