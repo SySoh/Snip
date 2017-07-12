@@ -7,7 +7,15 @@
 //
 
 import Foundation
+import Parse
 
 class Post {
-    
+    var postId: String?
+    var user: User?
+    var barber: Barber?
+    var photos: [PFFile]?
+    var tags: [Tag]?
+    var updatedAt: Date?
+    var createdAt: Date?
+    var price: Int?
 }
