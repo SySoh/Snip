@@ -13,7 +13,10 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     var tagList: [Tag]
     var barber: Barber
-    
+   
+    @IBAction func goBack(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     
     @IBOutlet weak var pictureView: UIImageView!
     @IBAction func locationToggle(_ sender: Any) {
