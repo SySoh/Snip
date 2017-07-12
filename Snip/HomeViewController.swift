@@ -22,6 +22,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        homeCollectionView.dataSource = self
+        homeCollectionView.delegate = self
 
         // Do any additional setup after loading the view.
     }
