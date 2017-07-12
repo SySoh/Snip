@@ -9,6 +9,16 @@
 import UIKit
 
 class HomeViewController: UIViewController {
+    
+    // outlets
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var homeCollectionView: UICollectionView!
+    
+    @IBAction func touchCamera(_ sender: Any) {
+    }
+    
+    @IBAction func touchSearch(_ sender: Any) {
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
