@@ -136,12 +136,9 @@
 			children = (
 				2E160D6E1F157F740042419F /* AppDelegate.swift */,
 				2E160D701F157F740042419F /* ViewController.swift */,
-				2E160D9F1F168F350042419F /* Barber.swift */,
 				2E160D721F157F740042419F /* Main.storyboard */,
-				2E160DA11F168F680042419F /* Shop.swift */,
-				2E160DA31F168F790042419F /* User.swift */,
-				2E160DA51F168F830042419F /* Tag.swift */,
-				2E160D9D1F168EFB0042419F /* Post.swift */,
+				2E160DA81F1694E70042419F /* CustomViewControllers */,
+				2E160DA71F1694700042419F /* Models */,
 				2E160D751F157F740042419F /* Assets.xcassets */,
 				2E160D771F157F740042419F /* LaunchScreen.storyboard */,
 				2E160D7A1F157F740042419F /* Info.plist */,
@@ -165,6 +162,25 @@
 				2E160D901F157F740042419F /* Info.plist */,
 			);
 			path = SnipUITests;
+			sourceTree = "<group>";
+		};
+		2E160DA71F1694700042419F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2E160D9F1F168F350042419F /* Barber.swift */,
+				2E160D9D1F168EFB0042419F /* Post.swift */,
+				2E160DA51F168F830042419F /* Tag.swift */,
+				2E160DA31F168F790042419F /* User.swift */,
+				2E160DA11F168F680042419F /* Shop.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		2E160DA81F1694E70042419F /* CustomViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CustomViewControllers;
 			sourceTree = "<group>";
 		};
 		96E1D16D8E803276682B8498 /* Pods */ = {
