@@ -15,6 +15,7 @@ target 'Snip' do
   pod 'RSKPlaceholderTextView'
   pod 'TTTAttributedLabel'
   pod 'ActiveLabel'
+  pod 'Parse'
 
   target 'SnipTests' do
     inherit! :search_paths

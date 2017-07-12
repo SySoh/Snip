@@ -7,3 +7,10 @@
 //
 
 import Foundation
+
+class Tag {
+    var tagId: String?
+    var name: String?
+    var updatedAt: Date?
+    var createdAt: Date?
+}

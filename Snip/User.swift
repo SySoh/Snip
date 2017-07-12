@@ -7,3 +7,17 @@
 //
 
 import Foundation
+import Parse
+
+class User {
+    var userId: String?
+    var username: String?
+    var password: String?
+    var email: String?
+    var profile_pic: PFFile?
+    var createdAt: Date?
+    var updatedAt: Date?
+    
+    
+    
+}
