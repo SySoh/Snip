@@ -11,8 +11,7 @@ import Parse
 
 class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource  {
     
-    var tagList: [Tag]
-    var barber: Barber
+    var tagList: [Tag] = []
     
     
     @IBOutlet weak var pictureView: UIImageView!
@@ -23,11 +22,11 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var barberNameText: UITextField!
     @IBOutlet weak var priceText: UITextField!
     @IBAction func addPhoto(_ sender: Any) {
-        choosepic()
+        choosePic()
     }
     
     @IBAction func makePost(_ sender: Any) {
-        Post.postPost(pictures: pictureView, barber: barberNameText.text, barbershop: shopNameText.text, tags: tagList, price: priceText)
+        Post.postPost(pictures: pictureView.image!, barber: barberNameText.text!, barbershop: shopNameText.text!, tags: tagList, price: priceText.text as! Int)
     }
     
     func choosePic() {
