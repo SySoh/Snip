@@ -9,7 +9,10 @@
 import UIKit
 import Parse
 
-class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource  {
+    
+    var tagList: [Tag]
+    var barber: Barber
     
     
     @IBOutlet weak var pictureView: UIImageView!
@@ -20,11 +23,13 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var barberNameText: UITextField!
     @IBOutlet weak var priceText: UITextField!
     @IBAction func addPhoto(_ sender: Any) {
-        makePost()
+        choosepic()
     }
     
+    @IBAction func makePost(_ sender: Any) {
+    }
     
-    func makePost(){
+    func choosePic() {
         let vc = UIImagePickerController()
         vc.delegate = self
         vc.allowsEditing = true
@@ -52,6 +57,18 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         dismiss(animated: true, completion: nil)
         
     }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TagCell", for: indexPath) as! TagCell
+            cell.tagName.text = "Hello"
+            //Once we have more tags, I'm going to have it fill in with all possible tags.
+            return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
