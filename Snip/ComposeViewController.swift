@@ -11,8 +11,12 @@ import Parse
 
 class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource  {
     
+    @IBOutlet weak var collectionView: UICollectionView!
     var tagList: [Tag] = []
     
+    @IBAction func goBack(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     
     @IBOutlet weak var pictureView: UIImageView!
     @IBAction func locationToggle(_ sender: Any) {
@@ -72,7 +76,8 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        collectionView.dataSource = self
+        collectionView.reloadData()
         // Do any additional setup after loading the view.
     }
 
@@ -82,14 +87,15 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
+ 
 
 }
