@@ -7,6 +7,13 @@
 //
 
 import Foundation
+import Parse
+
 class Barber {
-    
+    var barberId: String?
+    var name: String?
+    var venmo: String?
+    var profile_pic: PFFile?
+    var updatedAt: Date? 
+    var createdAt: Date?
 }
