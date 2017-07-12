@@ -27,6 +27,7 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     @IBAction func makePost(_ sender: Any) {
+        Post.postPost(pictures: pictureView, barber: barberNameText.text, barbershop: shopNameText.text, tags: tagList, price: priceText)
     }
     
     func choosePic() {

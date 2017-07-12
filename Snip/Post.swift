@@ -19,12 +19,14 @@ class Post {
     var createdAt: Date?
     var price: Int?
     
-    class func postPost(pictures: [UIImage], barber: String, barbershop: String, tags: [Tag], price: Int, completion: PFBooleanResultBlock?) {
-//        let post = PFObject(className: "Post")
-//        post["user"] = PFUser.current
-//        for image in pictures {
-//        post["photos"][image.row] = getPFFileFromImage(image: image)
-//        }
+    class func postPost(pictures: UIImage, barber: String, barbershop: String, tags: [Tag], price: Int) {
+        let post = PFObject(className: "Post")
+        post["user"] = PFUser.current
+       post["photos"][0] = getPFFileFromImage(image: image)
+        post["tags"] = tags
+        post["price"] = price
+        post["user"] = PFUser.current()
+        post["barber"] = barber
         
     }
 }
