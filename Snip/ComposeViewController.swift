@@ -79,6 +79,7 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     
     override func viewWillAppear(_ animated: Bool) {
+        print("Console working")
         let query = PFQuery(className: "Tag")
         query.addDescendingOrder("createdAt")
         query.findObjectsInBackground { (tags: [PFObject]?, error: Error?) in
