@@ -19,8 +19,19 @@ class Post: PFObject, PFSubclassing {
 //    var createdAt: Date?
     var price: Int?
     
+<<<<<<< HEAD
     class func parseClassName() -> String {
         return "Post"
+=======
+    class func postPost(pictures: UIImage, barber: String, barbershop: String, tags: [Tag], price: Int) {
+        let post = PFObject(className: "Post")
+        post["user"] = PFUser.current
+        post["photos"] = getPFFileFromImage(image: pictures)
+        post["tags"] = tags
+        post["price"] = price
+        post["user"] = PFUser.current()
+        post["barber"] = barber
+>>>>>>> 6936e0f0a2fc9ea4454171452e39d7af551ba08d
     }
     
     
