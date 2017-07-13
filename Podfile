@@ -16,6 +16,7 @@ target 'Snip' do
   pod 'TTTAttributedLabel'
   pod 'ActiveLabel'
   pod 'Parse'
+  pod 'ParseUI'
 
   target 'SnipTests' do
     inherit! :search_paths
