@@ -9,27 +9,34 @@
 import Foundation
 import Parse
 
-class Post {
+class Post: PFObject, PFSubclassing {
     var postId: String?
     var user: User?
     var barber: Barber?
     var photos: [PFFile]?
     var tags: [Tag]?
-    var updatedAt: Date?
-    var createdAt: Date?
+//    var updatedAt: Date?
+//    var createdAt: Date?
     var price: Int?
+    
+    class func parseClassName() -> String {
+        return "Post"
+    }
     
     class func postPost(pictures: UIImage, barber: String, barbershop: String, tags: [Tag], price: Int) {
         let post = PFObject(className: "Post")
         post["user"] = PFUser.current
-       post["photos"] = getPFFileFromImage(image: pictures)
+        post["photos"] = getPFFileFromImage(image: pictures)
         post["tags"] = tags
         post["price"] = price
         post["user"] = PFUser.current()
         post["barber"] = barber
+<<<<<<< HEAD
         
         post.saveInBackground()
         
+=======
+>>>>>>> 92cdc9ec26cec6b2127a624ac1b46b1028cb28ec
     }
     
     class func getPFFileFromImage(image: UIImage?) -> PFFile? {
@@ -42,7 +49,4 @@ class Post {
         }
         return nil
     }
-
-    
 }
-
