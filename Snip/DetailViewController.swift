@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  DetailViewController.swift
 //  Snip
 //
 //  Created by Cameryn Boyd on 7/12/17.
@@ -8,35 +8,26 @@
 
 import UIKit
 
-class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class DetailViewController: UIViewController {
     
     // outlets
     @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var homeCollectionView: UICollectionView!
+    @IBOutlet weak var postImageView: UIImageView!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var barbershopConstantLabel: UILabel!
+    @IBOutlet weak var barberConstantLabel: UILabel!
+    @IBOutlet weak var priceConstantLabel: UILabel!
     
-    @IBAction func touchCamera(_ sender: Any) {
+    @IBAction func pressDismiss(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func touchSearch(_ sender: Any) {
-    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        homeCollectionView.dataSource = self
-        homeCollectionView.delegate = self
 
         // Do any additional setup after loading the view.
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeCell", for: indexPath) as! HomeCell
-        
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 27
     }
 
     override func didReceiveMemoryWarning() {
