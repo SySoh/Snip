@@ -30,12 +30,9 @@ class Post: PFObject, PFSubclassing {
         post["price"] = price
         post["user"] = PFUser.current()
         post["barber"] = barber
-<<<<<<< HEAD
         
         post.saveInBackground()
         
-=======
->>>>>>> 92cdc9ec26cec6b2127a624ac1b46b1028cb28ec
     }
     
     class func getPFFileFromImage(image: UIImage?) -> PFFile? {
