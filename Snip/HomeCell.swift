@@ -15,9 +15,9 @@ class HomeCell: UICollectionViewCell {
     //cut image
     @IBOutlet weak var cutImageView: PFImageView!
     
-    var post: PFObject! {
+    var photo: PFObject! {
         didSet {
-            self.cutImageView.file = post["photos"] as? PFFile
+            self.cutImageView.file = photo["image"] as? PFFile
         }
     }
 }

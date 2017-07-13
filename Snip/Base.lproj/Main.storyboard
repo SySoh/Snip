@@ -61,7 +61,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cut1" translatesAutoresizingMaskIntoConstraints="NO" id="OgZ-RC-n7q">
-                                                    <rect key="frame" x="-41" y="-17" width="192" height="144"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="111" height="111"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.67218368620000002" green="1" blue="0.64294257340000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </imageView>
