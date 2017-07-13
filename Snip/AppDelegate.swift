@@ -11,8 +11,6 @@ import Parse
 import ParseUI
 
 
-import Parse
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -23,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Barber.registerSubclass() 
         // Override point for customization after application launch.
         Tag.registerSubclass()
+
         Parse.initialize(
             with: ParseClientConfiguration(block: { (configuration: ParseMutableClientConfiguration) -> Void in
                 configuration.applicationId = "Snip"
