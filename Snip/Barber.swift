@@ -9,7 +9,6 @@
 import Foundation
 import Parse
 
-
 class Barber: PFObject, PFSubclassing {
     var barberId: String?
     var name: String?
@@ -19,7 +18,7 @@ class Barber: PFObject, PFSubclassing {
     class func parseClassName() -> String {
         return "Barber"
     }
-    
+}
 
 //    class func postUserImage(image: UIImage?, withCaption caption: String?, withCompletion completion: PFBooleanResultBlock?) {
 //        //create parse object PFObject
@@ -31,7 +30,3 @@ class Barber: PFObject, PFSubclassing {
 //        post["likesCount"] = 0
 //        post["commentsCount"] = 0
 //        //post["profile_pic"] = #imageLiteral(resourceName: "gradient")
-
-
-
-
