@@ -12,7 +12,8 @@ import ParseUI
 
 class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
-    var postArray: [PFObject] = []
+    var photoArray: [PFObject] = []
+    var fullPhotoList: [PFFile] = []
     
     // outlets
     @IBOutlet weak var profileImageView: UIImageView!
@@ -38,18 +39,22 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     func refresh() {
         //construct PFQuery
-        let query = PFQuery(className: "Post")
+        let query = PFQuery(className: "Photo")
         query.order(byDescending: "createdAt")
-        query.includeKey("user")
-        query.includeKey("photos")
-        query.includeKey("barber")
-        query.includeKey("profile_pic")
-        query.includeKey("tags")
+        query.includeKey("image")
+        query.includeKey("post")
+//        let query = PFQuery(className: "Post")
+//        query.order(byDescending: "createdAt")
+//        query.includeKey("user")
+//        query.includeKey("photos")
+//        query.includeKey("barber")
+//        query.includeKey("profile_pic")
+//        query.includeKey("tags")
         query.limit = 20
         //fetch data asynchronously
-        query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
-            if let posts = posts {
-                self.postArray = posts
+        query.findObjectsInBackground { (photos: [PFObject]?, error: Error?) in
+            if let photos = photos {
+                self.photoArray = photos
                 self.homeCollectionView.reloadData()
             } else {
                 print(error?.localizedDescription)
@@ -65,14 +70,22 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeCell", for: indexPath) as! HomeCell
-        let posts = self.postArray[indexPath.row]
+        let photo = self.photoArray[indexPath.item]
         print("here is the post object")
-        cell.post = posts
+        let media = photo["image"] as? PFFile
+        //let media = fullPhotoList[indexPath.item] as? PFFile
+        media?.getDataInBackground { (backgroundData: Data?, erro: Error?) in
+            if let backgroundData = backgroundData {
+                cell.cutImageView.contentMode = .scaleAspectFill
+                cell.cutImageView.image = UIImage(data: backgroundData)
+            }
+        }
+        //cell.cutImageView.image = UIImage(data: <#T##Data#>)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return postArray.count
+        return photoArray.count
     }
 
     override func didReceiveMemoryWarning() {
