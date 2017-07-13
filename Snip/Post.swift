@@ -20,6 +20,7 @@ class Post: PFObject, PFSubclassing {
     var price: Int?
     
 <<<<<<< HEAD
+<<<<<<< HEAD
     class func parseClassName() -> String {
         return "Post"
 =======
@@ -45,7 +46,9 @@ class Post: PFObject, PFSubclassing {
         }
         return nil
     }
+=======
+>>>>>>> 59652d84a75bb520cf1f771e7c644b319772de01
 
-    
-}
+
+
 
