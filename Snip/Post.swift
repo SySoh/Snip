@@ -28,6 +28,8 @@ class Post {
         post["user"] = PFUser.current()
         post["barber"] = barber
         
+        post.saveInBackground()
+        
     }
     
     class func getPFFileFromImage(image: UIImage?) -> PFFile? {
