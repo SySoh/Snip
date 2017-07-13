@@ -9,15 +9,17 @@
 import Foundation
 import Parse
 
-class User {
+class User: PFObject, PFSubclassing {
     var userId: String?
     var username: String?
     var password: String?
     var email: String?
     var profile_pic: PFFile?
-    var createdAt: Date?
-    var updatedAt: Date?
+    //var createdAt: Date?
+    //var updatedAt: Date?
     
-    
+    class func parseClassName() -> String {
+        return "User"
+    }
     
 }

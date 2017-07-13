@@ -12,7 +12,8 @@ import Parse
 class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource  {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    var tagList: [Tag] = []
+    var tagList: [PFObject] = []
+    var tagReuse: [Tag] = []
     
     @IBAction func goBack(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -30,7 +31,7 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     @IBAction func makePost(_ sender: Any) {
-        Post.postPost(pictures: pictureView.image!, barber: barberNameText.text!, barbershop: shopNameText.text!, tags: tagList, price: priceText.text as! Int)
+        Post.postPost(pictures: pictureView.image!, barber: barberNameText.text!, barbershop: shopNameText.text!, tags: tagReuse, price: Int(priceText.text!)!)
     }
     
     func choosePic() {
@@ -64,8 +65,12 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TagCell", for: indexPath) as! TagCell
-            cell.tagName.text = "Hello"
-            //Once we have more tags, I'm going to have it fill in with all possible tags.
+        if (tagList.count != 0) {
+            print(tagList.count)
+            cell.tagName.text = tagList[indexPath.item].object(forKey: "name") as! String
+        } else {
+            cell.tagName.text = "Empty tags"
+        }
             return cell
     }
     
@@ -74,10 +79,17 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        print("Console working")
+        getTags()
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
         collectionView.reloadData()
+        getTags()
         // Do any additional setup after loading the view.
     }
 
@@ -87,12 +99,30 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
 
+    func getTags() {
+        let query = PFQuery(className: "Tag")
+        query.addDescendingOrder("createdAt")
+        query.findObjectsInBackground { (tags: [PFObject]?, error: Error?) in
+            if let error = error {
+                print (error.localizedDescription)
+            } else {
+                if let tags = tags {
+                    self.tagList = tags
+                } else {
+                    print ("No tags retrieved")
+                }
+            }
+        }
+        self.collectionView.reloadData()
+    }
     
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+            print("sending")
+            let destVC = segue.destination as! TagsViewController
+            destVC.fullTagList = self.tagList
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }

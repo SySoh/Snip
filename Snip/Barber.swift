@@ -9,11 +9,16 @@
 import Foundation
 import Parse
 
-class Barber {
+class Barber: PFObject, PFSubclassing {
     var barberId: String?
     var name: String?
     var venmo: String?
     var profile_pic: PFFile?
-    var updatedAt: Date? 
-    var createdAt: Date?
+    
+    class func parseClassName() -> String {
+        return "Barber"
+    }
+
 }
+
+

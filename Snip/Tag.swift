@@ -7,10 +7,14 @@
 //
 
 import Foundation
+import Parse
 
-class Tag {
+class Tag : PFObject, PFSubclassing {
     var tagId: String?
     var name: String?
-    var updatedAt: Date?
-    var createdAt: Date?
+    
+    class func parseClassName() -> String {
+        return "Tag"
+    }
+    
 }
