@@ -66,6 +66,7 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TagCell", for: indexPath) as! TagCell
         if (tagList.count != 0) {
+            print(tagList.count)
             cell.tagName.text = tagList[indexPath.item].object(forKey: "name") as! String
         } else {
             cell.tagName.text = "Empty tags"
@@ -79,19 +80,8 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     
     override func viewWillAppear(_ animated: Bool) {
-        let query = PFQuery(className: "Tag")
-        query.addDescendingOrder("createdAt")
-        query.findObjectsInBackground { (tags: [PFObject]?, error: Error?) in
-            if let error = error {
-                print (error.localizedDescription)
-            } else {
-                if let tags = tags {
-                    self.tagList = tags
-                } else {
-                    print ("No tags retrieved")
-                }
-            }
-        }
+        print("Console working")
+        getTags()
 
     }
     
@@ -99,6 +89,17 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         super.viewDidLoad()
         collectionView.dataSource = self
         collectionView.reloadData()
+        getTags()
+        // Do any additional setup after loading the view.
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+
+    func getTags() {
         let query = PFQuery(className: "Tag")
         query.addDescendingOrder("createdAt")
         query.findObjectsInBackground { (tags: [PFObject]?, error: Error?) in
@@ -113,21 +114,15 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
             }
         }
         self.collectionView.reloadData()
-        // Do any additional setup after loading the view.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
     
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+            print("sending")
+            let destVC = segue.destination as! TagsViewController
+            destVC.fullTagList = self.tagList
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }

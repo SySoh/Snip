@@ -10,7 +10,7 @@ import UIKit
 import Parse
 
 class TagsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-    var fullTagList: [String] = []
+    var fullTagList: [PFObject] = []
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBAction func goBack(_ sender: Any) {
@@ -19,8 +19,9 @@ class TagsViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        collectionView.dataSource = self
-//        collectionView.reloadData()
+        collectionView.dataSource = self
+        collectionView.reloadData()
+        collectionView.sizeToFit()
         // Do any additional setup after loading the view.
     }
 
@@ -29,10 +30,16 @@ class TagsViewController: UIViewController, UICollectionViewDelegate, UICollecti
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        collectionView.dataSource = self
+        collectionView.reloadData()
+    }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TagCell", for: indexPath) as! TagCell
-        cell.tagName.text = fullTagList[indexPath.item]
+        if fullTagList.count > 0 {
+        cell.tagName.text = fullTagList[indexPath.item].object(forKey: "name") as! String
+        }
         return cell
         
     }
