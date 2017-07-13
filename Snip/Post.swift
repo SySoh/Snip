@@ -19,11 +19,10 @@ class Post: PFObject, PFSubclassing {
 //    var createdAt: Date?
     var price: Int?
     
-<<<<<<< HEAD
-<<<<<<< HEAD
     class func parseClassName() -> String {
         return "Post"
-=======
+    }
+    
     class func postPost(pictures: UIImage, barber: String, barbershop: String, tags: [Tag], price: Int) {
         let post = PFObject(className: "Post")
         post["user"] = PFUser.current
@@ -32,9 +31,7 @@ class Post: PFObject, PFSubclassing {
         post["price"] = price
         post["user"] = PFUser.current()
         post["barber"] = barber
->>>>>>> 6936e0f0a2fc9ea4454171452e39d7af551ba08d
     }
-    
     
     class func getPFFileFromImage(image: UIImage?) -> PFFile? {
         // check if image is not nil
@@ -46,9 +43,4 @@ class Post: PFObject, PFSubclassing {
         }
         return nil
     }
-=======
->>>>>>> 59652d84a75bb520cf1f771e7c644b319772de01
-
-
-
-
+}
