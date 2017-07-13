@@ -379,14 +379,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tav-rt-TlZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-<<<<<<< HEAD
-<<<<<<< HEAD
             <point key="canvasLocation" x="1036" y="-584"/>
-=======
             <point key="canvasLocation" x="1276" y="120.98950524737631"/>
-=======
             <point key="canvasLocation" x="1036" y="-584"/>
->>>>>>> f7b27fdc59721f2e5c9aaf9222b1e2ac3fa1afee
         </scene>
         <!--Tags View Controller-->
         <scene sceneID="K5d-Dp-hJG">
@@ -457,15 +452,8 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mjJ-iP-ind" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-<<<<<<< HEAD
             <point key="canvasLocation" x="2114" y="121"/>
-<<<<<<< HEAD
->>>>>>> f15b7e6b5a8b456dba1ffe9c38f44c884b603780
-=======
->>>>>>> f7b27fdc59721f2e5c9aaf9222b1e2ac3fa1afee
-=======
             <point key="canvasLocation" x="2112.8000000000002" y="120.98950524737631"/>
->>>>>>> efedc1573659974a17dc84628ecf4eb0adafff9d
         </scene>
     </scenes>
     <resources>
