@@ -9,23 +9,18 @@
 import Foundation
 import Parse
 
-class Barber: NSObject {
+
+class Barber: PFObject, PFSubclassing {
     var barberId: String?
     var name: String?
     var venmo: String?
     var profile_pic: PFFile?
-    var updatedAt: Date? 
-    var createdAt: Date?
     
-    init(pfObject: PFObject) {
-        barberId = pfObject["barberId"] as? String
-        name = pfObject["name"] as? String
-        venmo = pfObject["venmo"] as? String
-        profile_pic = pfObject["profile_pic"] as? PFFile
-        updatedAt = pfObject["updatedAt"] as? Date
-        createdAt = pfObject["createdAt"] as? Date
+    class func parseClassName() -> String {
+        return "Barber"
     }
     
+
 //    class func postUserImage(image: UIImage?, withCaption caption: String?, withCompletion completion: PFBooleanResultBlock?) {
 //        //create parse object PFObject
 //        let post = PFObject(className: "Post")
@@ -36,15 +31,7 @@ class Barber: NSObject {
 //        post["likesCount"] = 0
 //        post["commentsCount"] = 0
 //        //post["profile_pic"] = #imageLiteral(resourceName: "gradient")
-        
-        
-        // Save object (following function will save the object in Parse asynchronously)
-        post.saveInBackground(block: completion)
-        print("post was saved")
-    }
 
-    
-}
 
 
 
