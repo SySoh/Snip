@@ -7,17 +7,41 @@
 //
 
 import UIKit
+import Parse
+import ParseUI
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        Parse.initialize(
+            with: ParseClientConfiguration(block: { (configuration: ParseMutableClientConfiguration) -> Void in
+                configuration.applicationId = "Snip"
+                configuration.clientKey = "snipclient"
+                configuration.server = "https://secure-lake-79194.herokuapp.com/parse"
+            }))
+        
+        if PFUser.current() != nil {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let HomeViewController = storyboard.instantiateViewController(withIdentifier: "HVC")
+            window?.rootViewController = HomeViewController
+            
+        }
+        
+//        NotificationCenter.default.addObserver(forName: NSNotification.Name("onLogout"), object: nil, queue: OperationQueue.main, using: { (Notification) in let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let vc = storyboard.instantiateViewController(withIdentifier: "signInView") as! LoginViewController
+//            self.window?.rootViewController = vc
+//            
+//        })
+        
         return true
     }
+
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
