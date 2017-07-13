@@ -19,8 +19,8 @@ class TagsViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.dataSource = self
-        collectionView.reloadData()
+//        collectionView.dataSource = self
+//        collectionView.reloadData()
         // Do any additional setup after loading the view.
     }
 
