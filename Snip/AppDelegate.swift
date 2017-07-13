@@ -18,7 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        Barber.registerSubclass() 
+        Barber.registerSubclass()
+        Post.registerSubclass()
         // Override point for customization after application launch.
         Tag.registerSubclass()
 

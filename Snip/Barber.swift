@@ -19,14 +19,3 @@ class Barber: PFObject, PFSubclassing {
         return "Barber"
     }
 }
-
-//    class func postUserImage(image: UIImage?, withCaption caption: String?, withCompletion completion: PFBooleanResultBlock?) {
-//        //create parse object PFObject
-//        let post = PFObject(className: "Post")
-//        //add relevant fields to the object
-//        post["media"] = getPFFileFromImage(image: image) // PFFile column type
-//        post["author"] = PFUser.current() // Pointer column type that points to PFUser
-//        post["caption"] = caption ?? ""
-//        post["likesCount"] = 0
-//        post["commentsCount"] = 0
-//        //post["profile_pic"] = #imageLiteral(resourceName: "gradient")
