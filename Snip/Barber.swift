@@ -18,4 +18,7 @@ class Barber: PFObject, PFSubclassing {
     class func parseClassName() -> String {
         return "Barber"
     }
+
 }
+
+

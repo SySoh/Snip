@@ -7,8 +7,17 @@
 //
 
 import UIKit
+import Parse
+import ParseUI
 
 class HomeCell: UICollectionViewCell {
     
-    @IBOutlet weak var cutImageView: UIImageView!
+    //cut image
+    @IBOutlet weak var cutImageView: PFImageView!
+    
+    var post: PFObject! {
+        didSet {
+            self.cutImageView.file = post["photos"] as? PFFile
+        }
+    }
 }
