@@ -18,6 +18,10 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var barberConstantLabel: UILabel!
     @IBOutlet weak var priceConstantLabel: UILabel!
     
+    @IBAction func pressDismiss(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     
 
     override func viewDidLoad() {
