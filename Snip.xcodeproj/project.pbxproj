@@ -53,6 +53,7 @@
 		1E8E68261F16982300635F93 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1E8E68291F169B1A00635F93 /* HomeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
 		1E8E682B1F16AA3100635F93 /* Barbershop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Barbershop.swift; sourceTree = "<group>"; };
+
 		1E8E682D1F16D2B500635F93 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		2E093BD61F16D19500D2C000 /* TagsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsViewController.swift; sourceTree = "<group>"; };
 		2E160D6B1F157F740042419F /* Snip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snip.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -202,6 +203,7 @@
 				1E8E68261F16982300635F93 /* HomeViewController.swift */,
 				1E8E682D1F16D2B500635F93 /* DetailViewController.swift */,
 				2E093BD61F16D19500D2C000 /* TagsViewController.swift */,
+
 			);
 			name = CustomViewControllers;
 			sourceTree = "<group>";
