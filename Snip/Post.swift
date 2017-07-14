@@ -13,6 +13,7 @@ class Post: PFObject, PFSubclassing {
     var postId: String?
     var user: User?
     var barber: Barber?
+    var barbershop: Barbershop?
     var photos: [PFFile]?
     var tags: [Tag]?
 //    var updatedAt: Date?
@@ -29,7 +30,7 @@ class Post: PFObject, PFSubclassing {
         post["tags"] = tags
         post["price"] = price
         post["user"] = PFUser.current()
-        post["barber"] = barber
+        post["barber"] = Barber.self
         
         post.saveInBackground()
         

@@ -208,16 +208,19 @@
                     </view>
                     <connections>
                         <outlet property="barberConstantLabel" destination="wyW-5G-o6m" id="eD1-LU-agX"/>
+                        <outlet property="barberLabel" destination="dkh-Rm-Dvv" id="3kn-mh-WoW"/>
                         <outlet property="barbershopConstantLabel" destination="EvM-mJ-n5q" id="zMw-IO-9Rg"/>
+                        <outlet property="barbershopLabel" destination="UTB-oQ-R8D" id="ILE-Wu-aWC"/>
                         <outlet property="dateLabel" destination="EEf-R0-pdt" id="X4n-Ow-NWH"/>
                         <outlet property="postImageView" destination="piF-Rm-AC8" id="tiU-i5-ntg"/>
                         <outlet property="priceConstantLabel" destination="aAq-cP-aJb" id="S0E-Nb-BgI"/>
+                        <outlet property="priceLabel" destination="BS5-Wz-h1s" id="p7s-0n-wxz"/>
                         <outlet property="profileImageView" destination="1Xh-oC-FvA" id="sgG-9k-fbd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tGp-9h-9gJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1173.5999999999999" y="99.400299850074973"/>
+            <point key="canvasLocation" x="1070" y="-552"/>
         </scene>
         <!--Compose View Controller-->
         <scene sceneID="FLR-Ri-DX9">
@@ -379,9 +382,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tav-rt-TlZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <!--point key="canvasLocation" x="1036" y="-584"/-->
             <point key="canvasLocation" x="1276" y="120.98950524737631"/>
-            <point key="canvasLocation" x="1036" y="-584"/>
         </scene>
         <!--Tags View Controller-->
         <scene sceneID="K5d-Dp-hJG">
@@ -453,7 +454,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mjJ-iP-ind" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2114" y="121"/>
-            <point key="canvasLocation" x="2112.8000000000002" y="120.98950524737631"/>
         </scene>
     </scenes>
     <resources>
