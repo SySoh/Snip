@@ -26,7 +26,6 @@ class Post: PFObject, PFSubclassing {
     class func postPost(pictures: UIImage, barber: String, barbershop: String, tags: [Tag], price: Int) {
         let post = PFObject(className: "Post")
         post["user"] = PFUser.current
-        post["photos"] = getPFFileFromImage(image: pictures)
         post["tags"] = tags
         post["price"] = price
         post["user"] = PFUser.current()

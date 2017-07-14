@@ -61,7 +61,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cut1" translatesAutoresizingMaskIntoConstraints="NO" id="OgZ-RC-n7q">
-                                                    <rect key="frame" x="-41" y="-17" width="192" height="144"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="111" height="111"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.67218368620000002" green="1" blue="0.64294257340000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </imageView>
@@ -377,7 +377,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tav-rt-TlZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+
             <point key="canvasLocation" x="1036" y="-584.25787106446785"/>
+
+
         </scene>
         <!--Tags View Controller-->
         <scene sceneID="K5d-Dp-hJG">
@@ -457,6 +460,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mjJ-iP-ind" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="SAl-TO-3Xe"/>
             </objects>
+            <point key="canvasLocation" x="2114" y="121"/>
             <point key="canvasLocation" x="2112.8000000000002" y="120.98950524737631"/>
         </scene>
     </scenes>
