@@ -67,9 +67,9 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TagCell", for: indexPath) as! TagCell
         if (tagList.count != 0) {
             print(tagList.count)
-            cell.tagName.text = tagList[indexPath.item].object(forKey: "name") as! String
+            cell.tagName.setTitle(tagList[indexPath.item].object(forKey: "name") as! String, for: .normal)
         } else {
-            cell.tagName.text = "Empty tags"
+            cell.tagName.setTitle("Empty Tags", for: .normal)
         }
             return cell
     }

@@ -9,6 +9,7 @@
 import UIKit
 
 class TagCell: UICollectionViewCell {
-    @IBOutlet weak var tagName: UILabel!
+
+    @IBOutlet weak var tagName: UIButton!
     
 }

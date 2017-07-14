@@ -11,10 +11,15 @@ import Parse
 
 class TagsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     var fullTagList: [PFObject] = []
+    var selectedTags: [PFObject] = []
     
+    @IBOutlet var selectTag: UITapGestureRecognizer!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBAction func goBack(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func didTapTag(_ sender: Any) {
     }
 
     override func viewDidLoad() {
@@ -38,9 +43,18 @@ class TagsViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TagCell", for: indexPath) as! TagCell
         if fullTagList.count > 0 {
-        cell.tagName.text = fullTagList[indexPath.item].object(forKey: "name") as! String
+            cell.tagName.setTitle(fullTagList[indexPath.item].object(forKey: "name") as! String, for: .normal)
+        cell.layer.cornerRadius = 50
+        cell.clipsToBounds = true
+            if cell.isSelected {
+                cell.tagName.backgroundColor = UIColor.blue
+            }
         }
         return cell
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
     }
     
