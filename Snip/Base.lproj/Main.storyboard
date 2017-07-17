@@ -222,7 +222,7 @@
         <!--Compose View Controller-->
         <scene sceneID="FLR-Ri-DX9">
             <objects>
-                <viewController id="sI4-xA-N1i" customClass="ComposeViewController" customModule="Snip" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="composeView" id="sI4-xA-N1i" customClass="ComposeViewController" customModule="Snip" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="YjM-cw-l9G"/>
                         <viewControllerLayoutGuide type="bottom" id="J0L-7V-rIF"/>
@@ -234,6 +234,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iN5-N5-dsN">
                                 <rect key="frame" x="63" y="28" width="248" height="216"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.82764597900000003" green="0.91809363290000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zCj-Jc-R9R">
                                 <rect key="frame" x="63" y="262" width="49" height="34"/>
@@ -319,16 +320,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="81" height="36"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kyo-yR-FKE">
-                                                    <rect key="frame" x="0.0" y="3" width="81" height="30"/>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="12M-VL-BHr">
+                                                    <rect key="frame" x="17" y="3" width="46" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Button"/>
                                                 </button>
                                             </subviews>
                                         </view>
-                                        <connections>
-                                            <outlet property="tagName" destination="Kyo-yR-FKE" id="unn-t8-yS9"/>
-                                        </connections>
+                                        <color key="backgroundColor" red="0.42976416379999999" green="0.72340381149999999" blue="0.40809243680000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -377,20 +376,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tav-rt-TlZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-<<<<<<< HEAD
-<<<<<<< HEAD
             <point key="canvasLocation" x="1036" y="-584.25787106446785"/>
-=======
-            <point key="canvasLocation" x="1036" y="-584"/>
-            <point key="canvasLocation" x="1276" y="120.98950524737631"/>
-            <point key="canvasLocation" x="1036" y="-584"/>
->>>>>>> a873bc610477bb748954b7b27b620a1e10284d70
-=======
-
-            <point key="canvasLocation" x="1036" y="-584.25787106446785"/>
-
-
->>>>>>> fc1bb8f722bad766243886861300f0f2bbb75627
         </scene>
         <!--Tags View Controller-->
         <scene sceneID="K5d-Dp-hJG">
@@ -421,19 +407,21 @@
                                             <rect key="frame" x="0.0" y="0.0" width="151" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n2T-8Z-TpK">
-                                                    <rect key="frame" x="0.0" y="6" width="151" height="30"/>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyM-kw-RdI">
+                                                    <rect key="frame" x="52" y="6" width="46" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Tag"/>
+                                                    <state key="normal" title="Button"/>
                                                     <connections>
-                                                        <action selector="didTapTag:" destination="J1R-re-waq" eventType="touchUpInside" id="iFJ-RK-sly"/>
+                                                        <action selector="didTap:" destination="lUd-l7-w7c" eventType="touchUpInside" id="avt-th-Uzx"/>
+                                                        <action selector="didTapTag:" destination="J1R-re-waq" eventType="touchUpInside" id="vyr-TG-5Yz"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                         </view>
                                         <gestureRecognizers/>
                                         <connections>
-                                            <outlet property="tagName" destination="n2T-8Z-TpK" id="eAf-bq-Kis"/>
+                                            <outlet property="tagName" destination="gyM-kw-RdI" id="KsM-yC-C2Q"/>
+                                            <segue destination="GRA-qv-gup" kind="presentation" id="XDU-1c-aCk"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -463,15 +451,30 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="collectionView" destination="Crj-2q-QqW" id="TiJ-3k-eOn"/>
-                        <outlet property="selectTag" destination="SAl-TO-3Xe" id="eWl-6B-Ipt"/>
+                        <outlet property="collectionView" destination="Crj-2q-QqW" id="PkF-gE-6pZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mjJ-iP-ind" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="SAl-TO-3Xe"/>
             </objects>
-            <point key="canvasLocation" x="2114" y="121"/>
             <point key="canvasLocation" x="2112.8000000000002" y="120.98950524737631"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="EhX-D0-vGX">
+            <objects>
+                <viewController id="GRA-qv-gup" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dah-Bc-u4L"/>
+                        <viewControllerLayoutGuide type="bottom" id="NE9-lr-N3c"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PgW-dW-eUd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Za-Ng-WuQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3270" y="-48"/>
         </scene>
     </scenes>
     <resources>

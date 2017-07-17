@@ -12,7 +12,9 @@ import Parse
 class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource  {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    //tagList is used to obtain ALL tags and pass them into the tagView
     var tagList: [PFObject] = []
+    //tagReuse is used to accumulate selected tags. It will be populated by tagView. Probably by a prepareForSegue.
     var tagReuse: [Tag] = []
     
     @IBAction func goBack(_ sender: Any) {
@@ -63,13 +65,14 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         
     }
     
+        
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TagCell", for: indexPath) as! TagCell
-        if (tagReuse.count != 0) {
+        if !(tagReuse.isEmpty) {
             print(tagReuse.count)
             cell.tagName.setTitle(tagReuse[indexPath.item].name, for: .normal)
         } else {
-            cell.tagName.setTitle("Empty Tags", for: .normal)
+            cell.tagName.setTitle("No name", for: .normal)
         }
             return cell
     }
