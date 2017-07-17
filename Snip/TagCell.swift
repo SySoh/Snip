@@ -8,7 +8,23 @@
 
 import UIKit
 
+@objc protocol TagCellDelegate {
+    func addString(tagCell: TagCell)
+}
+
 class TagCell: UICollectionViewCell {
-    @IBOutlet weak var tagName: UILabel!
+
+    @IBAction func didTap(_ sender: Any) {
+        delegate!.addString(tagCell: self)
+    }
+    
+    var delegate: TagCellDelegate?
+    @IBOutlet weak var tagName: UIButton!
+    
+    func returnTag() -> String? {
+        return tagName.titleLabel?.text
+    }
+    
+    
     
 }
