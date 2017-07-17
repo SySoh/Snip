@@ -7,13 +7,42 @@
 //
 
 import UIKit
+import Parse
 
-class SearchViewController: UIViewController {
+class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
 
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var tableView: UITableView!
+    
+    var data: [[PFObject]] = []
+    var filteredData: [[PFObject]] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        searchBar.delegate = self
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        self.getData()
+        
+        filteredData = data
+        
         // Do any additional setup after loading the view.
+    }
+    
+    func getData() {
+        
+        query.findObjectsInBackground { (photos: [PFObject]?, error: Error?) in
+            if let photos = photos {
+                self.data.append(barbers)
+                self.data.append(barbershops)
+                self.data.append(photos)
+                self.tableView.reloadData()
+            } else {
+                print(error?.localizedDescription)
+            }
+        }
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,7 +50,18 @@ class SearchViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        <#code#>
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        <#code#>
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        <#code#>
+    }
+    
     /*
     // MARK: - Navigation
 
