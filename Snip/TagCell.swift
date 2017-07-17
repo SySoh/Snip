@@ -24,7 +24,7 @@ class TagCell: UICollectionViewCell {
     func returnTag() -> String? {
         return tagName.titleLabel?.text
     }
-    
+                
     
     
 }
