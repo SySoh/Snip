@@ -28,10 +28,12 @@ class Post: PFObject, PFSubclassing {
         post["price"] = price
         post["user"] = PFUser.current()
         post["barber"] = barber
+
         let photo = PFObject(className: "Photo")
         photo["image"] = getPFFileFromImage(image: pictures)
         photo["post"] = post.objectId
         photo.saveInBackground()
+
         post.saveInBackground()
         
     }

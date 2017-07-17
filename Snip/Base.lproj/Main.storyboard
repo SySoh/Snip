@@ -380,6 +380,8 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tav-rt-TlZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1036" y="-584"/>
+            <point key="canvasLocation" x="1276" y="120.98950524737631"/>
+            <point key="canvasLocation" x="1036" y="-584"/>
         </scene>
         <!--Tags View Controller-->
         <scene sceneID="K5d-Dp-hJG">
@@ -450,6 +452,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mjJ-iP-ind" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="2114" y="121"/>
             <point key="canvasLocation" x="2112.8000000000002" y="120.98950524737631"/>
         </scene>
     </scenes>
