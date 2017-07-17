@@ -15,10 +15,10 @@ import UIKit
 class TagCell: UICollectionViewCell {
 
     @IBAction func didTap(_ sender: Any) {
-        delegate.addString(tagCell: self)
+        delegate!.addString(tagCell: self)
     }
     
-    var delegate: TagCellDelegate
+    var delegate: TagCellDelegate?
     @IBOutlet weak var tagName: UIButton!
     
     func returnTag() -> String? {
