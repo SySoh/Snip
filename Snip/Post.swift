@@ -15,8 +15,6 @@ class Post: PFObject, PFSubclassing {
     var barber: Barber?
     var photos: [PFFile]?
     var tags: [Tag]?
-//    var updatedAt: Date?
-//    var createdAt: Date?
     var price: Int?
     
     class func parseClassName() -> String {
@@ -30,10 +28,16 @@ class Post: PFObject, PFSubclassing {
         post["price"] = price
         post["user"] = PFUser.current()
         post["barber"] = barber
-        
+
+        let photo = PFObject(className: "Photo")
+        photo["image"] = getPFFileFromImage(image: pictures)
+        photo["post"] = post.objectId
+        photo.saveInBackground()
+
         post.saveInBackground()
         
     }
+    
     
     class func getPFFileFromImage(image: UIImage?) -> PFFile? {
         // check if image is not nil
@@ -45,4 +49,5 @@ class Post: PFObject, PFSubclassing {
         }
         return nil
     }
+    
 }
