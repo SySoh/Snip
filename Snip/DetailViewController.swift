@@ -14,13 +14,15 @@ class DetailViewController: UIViewController {
     
     //variables
     var post: PFObject!
+    var postId: String?
     var caption: String?
-    var price: String!
+    var price: String?
     var date: Date!
     var profileImage: PFFile!
     var barber: String!
     var barbershop: String!
     var photo: PFObject!
+    var photoId: String?
     
     // outlets
     @IBOutlet weak var profileImageView: PFImageView!
@@ -34,7 +36,8 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var priceLabel: UILabel!
     
     
-    
+    var photoArray: [PFObject]? = []
+
     
     @IBAction func pressDismiss(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -45,6 +48,48 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        let query = PFQuery(className: "Photo")
+        query.order(byDescending: "createdAt")
+        query.includeKey("image")
+        query.includeKey("post")
+        //        let query = PFQuery(className: "Post")
+        //        query.order(byDescending: "createdAt")
+        //        query.includeKey("user")
+        //        query.includeKey("photos")
+        //        query.includeKey("barber")
+        //        query.includeKey("profile_pic")
+        //        query.includeKey("tags")
+        query.limit = 20
+        //fetch data asynchronously
+        query.findObjectsInBackground { (photos: [PFObject]?, error: Error?) in
+            if let photos = photos {
+                self.photoArray = photos
+
+            } else {
+                print(error?.localizedDescription)
+            }
+        }
+        
+        self.dateLabel.text = String(describing: self.date)
+        self.barberLabel.text = self.barber
+        self.barbershopLabel.text = self.barbershop
+        self.priceLabel.text = self.price
+        
+        if let date = self.post.createdAt {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .medium
+            dateFormatter.timeStyle = .short
+            let dateString = dateFormatter.string(from: date)
+            print(dateString) // Prints: Jun 28, 2017, 2:08 PM
+            
+            self.dateLabel.text = dateString
+            }
+            
+        
+
+    
+        
         //self.profileImageView.file = profileImage
         //self.profileImageView.loadInBackground()
 
@@ -61,11 +106,6 @@ class DetailViewController: UIViewController {
         //self.priceLabel.text = post["price"] as? String
         
 
-        
-        self.dateLabel.text = String(describing: date)
-        self.barberLabel.text = barber
-        self.barbershopLabel.text = barbershop
-        self.priceLabel.text = price
     }
 
     override func didReceiveMemoryWarning() {
