@@ -46,31 +46,31 @@ class HomeCell: UICollectionViewCell {
     
     var post: PFObject! {
         didSet {
-            postId = post["postId"] as? String
-            user = post["user"] as? User
-            barberId = post["barberId"] as? String
-            barber = post["barber"] as? Barber
-            barbershop = post["barbershop"] as? Barbershop
-            photos = post["photos"] as? [PFFile]
-            tags = post["tags"] as? [Tag]
-            price = post["price"] as? Int
+//            self.postId = post["postId"] as? String
+            self.user = post["user"] as? User
+//            self.barberId = post["barberId"] as? String
+            self.barber = post["barber"] as? Barber
+            self.barbershop = post["barbershop"] as? Barbershop
+            self.photos = post["photos"] as? [PFFile]
+            self.tags = post["tags"] as? [Tag]
+            self.price = post["price"] as? Int
         }
     }
     
     var barberObject: PFObject! {
         didSet {
-            name = barberObject["name"] as? String
-            venmo = barberObject["venmo"] as? String
-            profile_pic = barberObject["profile_pic"] as? PFFile
-            barbershopId = barberObject["barbershopId"] as? String
+            self.name = barberObject["name"] as? String
+            self.venmo = barberObject["venmo"] as? String
+            self.profile_pic = barberObject["profile_pic"] as? PFFile
+            self.barbershopId = barberObject["barbershopId"] as? String
         }
     }
     
-    var barbershopObject: PFObject! {
+    var barbershopObject: Barbershop! {
         didSet {
-            barbershopName = barbershopObject["barbershopName"] as? String
-            picture = barbershopObject["picture"] as? PFFile
-            location = barbershopObject["location"] as? String
+            self.barbershopName = barbershopObject["name"] as? String
+            self.picture = barbershopObject["picture"] as? PFFile
+            self.location = barbershopObject["location"] as? String
 //            phone = bar
         }
     }

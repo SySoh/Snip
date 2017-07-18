@@ -71,8 +71,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 //            vc.dateLabel.text = photo?.createdAt as! String
             vc.postImage = cell.cutImageView.image!
             let indexPath = homeCollectionView.indexPath(for: cell)
-            //let post = postArray[(indexPath?.row)!]
-            //vc.post = post
+            let photo = photoArray[(indexPath?.item)!]
+            vc.photo = photo as! Photo
             }
     }
     

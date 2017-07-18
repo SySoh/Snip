@@ -12,22 +12,28 @@ import ParseUI
 
 class DetailViewController: UIViewController {
     
-    //variables
-    var post: PFObject!
-    var postId: String?
-    
-    var photo: PFObject!
-    var photoId: String?
-    
-    var caption: String?
-    var price: String?
-    var date: Date!
-    var profileImage: PFFile!
-    var barber: String!
-    var barbershop: String!
-    var cutImage: PFFile!
+    var photo: PFObject?
+    var post: Post?
+    var price: Int?
+    var tags: [Tag]?
+    var user: User?
+    var barber: Barber?
+
+    var barberName: String!
+    var venmo: String?
+    var profile_pic: PFFile?
+    var barbershop: Barbershop?
+    var shopName: String?
+    var shopPic: PFFile?
+    var location: String?
+    var phone: String?
+    var rating: Int?
+    var date: Date?
+
     
     var postImage: UIImage!
+    
+    var homeViewController: HomeViewController?
     
     // outlets
     @IBOutlet weak var profileImageView: PFImageView!
@@ -56,80 +62,22 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
-//        parseQuery(classname: "Photo", objectId: "photoId")
-        
-        parseQuery(classname: "Post", objectId: "postId")
-        parseQuery(classname: "Barber", objectId: "barberId")
-        parseQuery(classname: "Barbershop", objectId: "barbershopId")
-        
-//        let query = PFQuery(className: "Photo")
-//        query.order(byDescending: "createdAt")
-//        query.includeKey("image")
-//        query.includeKey("postId")
-        //        let query = PFQuery(className: "Post")
-        //        query.order(byDescending: "createdAt")
-        //        query.includeKey("user")
-        //        query.includeKey("photos")
-        //        query.includeKey("barber")
-        //        query.includeKey("profile_pic")
-        //        query.includeKey("tags")
-//        query.limit = 20
-        //fetch data asynchronously
-//        query.findObjectsInBackground { (photos: [PFObject]?, error: Error?) in
-//            if let photos = photos {
-//                self.photoArray = photos
-//
-//            } else {
-//                print(error?.localizedDescription)
-//            }
-        
-        self.postImageView.image = postImage
+        self.postImageView.image = self.postImage
         //self.postImageView.loadInBackground()
+        let post = photo!["post"] as! Post
+        let barber = post["barber"] as! Barber
+        let barbershop = barber["barbershop"] as! Barbershop
         
-        self.dateLabel.text = String(describing: self.date)
-        self.barberLabel.text = self.barber
-        self.barbershopLabel.text = self.barbershop
-        self.priceLabel.text = price
+        print(post["price"])
         
-//        if let date = self.post.createdAt {
-//            let dateFormatter = DateFormatter()
-//            dateFormatter.dateStyle = .medium
-//            dateFormatter.timeStyle = .short
-//            let dateString = dateFormatter.string(from: date)
-//            print(dateString) // Prints: Jun 28, 2017, 2:08 PM
-//            
-//            self.dateLabel.text = dateString
-//        }
-
+        self.dateLabel.text = "\(post.createdAt!)"
+        self.barberLabel.text = barber["name"] as! String
+        self.barbershopLabel.text = barbershop["name"] as? String
+        self.priceLabel.text = "\(post["price"]!)"
+        
         }
-        
-        func parseQuery(classname: String, objectId: String) {
-            let query = PFQuery(className: classname)
-            query.includeKey(objectId)
-            
-        }
-        
-        
     
-        
 
-    
-        
-        //self.profileImageView.file = profileImage
-        //self.profileImageView.loadInBackground()
-
-        //self.postImageView.file = photo.image
-        //self.postImageView.loadInBackground()
-        
-        //self.profileImageView.file = post["profile_pic"] as! PFFile
-        //self.postImageView.file = post["media"] as? PFFile
-        //self.postImageView.loadInBackground()
-        //self.captionLabel.text = (post["caption"] as! String)
-        //self.dateLabel.text = post["_created_at"] as? String
-        //self.barberLabel.text = post["barber"] as? String
-        //self.barbershopLabel.text = post["barbershop"] as? String
-        //self.priceLabel.text = post["price"] as? String
         
 
     
