@@ -160,13 +160,25 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="bEo-We-Jsd">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="bEo-We-Jsd" customClass="DetailCell" customModule="Snip" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QMb-xy-t7V">
+                                                    <rect key="frame" x="4" y="15" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </view>
+                                        <connections>
+                                            <outlet property="tagLabel" destination="QMb-xy-t7V" id="M07-29-Kk4"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -208,16 +220,20 @@
                     </view>
                     <connections>
                         <outlet property="barberConstantLabel" destination="wyW-5G-o6m" id="eD1-LU-agX"/>
+                        <outlet property="barberLabel" destination="dkh-Rm-Dvv" id="3kn-mh-WoW"/>
                         <outlet property="barbershopConstantLabel" destination="EvM-mJ-n5q" id="zMw-IO-9Rg"/>
+                        <outlet property="barbershopLabel" destination="UTB-oQ-R8D" id="ILE-Wu-aWC"/>
                         <outlet property="dateLabel" destination="EEf-R0-pdt" id="X4n-Ow-NWH"/>
-                        <outlet property="postImageView" destination="piF-Rm-AC8" id="tiU-i5-ntg"/>
+                        <outlet property="detailCollectionView" destination="omm-AJ-MfD" id="iEr-jc-FT7"/>
+                        <outlet property="postImageView" destination="piF-Rm-AC8" id="5Q7-cD-BUa"/>
                         <outlet property="priceConstantLabel" destination="aAq-cP-aJb" id="S0E-Nb-BgI"/>
+                        <outlet property="priceLabel" destination="BS5-Wz-h1s" id="p7s-0n-wxz"/>
                         <outlet property="profileImageView" destination="1Xh-oC-FvA" id="sgG-9k-fbd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tGp-9h-9gJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1173.5999999999999" y="99.400299850074973"/>
+            <point key="canvasLocation" x="1070" y="-552"/>
         </scene>
         <!--Compose View Controller-->
         <scene sceneID="FLR-Ri-DX9">
@@ -380,7 +396,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tav-rt-TlZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1036" y="-584.25787106446785"/>
+            <point key="canvasLocation" x="1276" y="120.98950524737631"/>
         </scene>
         <!--Tags View Controller-->
         <scene sceneID="K5d-Dp-hJG">
@@ -465,7 +481,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mjJ-iP-ind" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2112.8000000000002" y="120.98950524737631"/>
+            <point key="canvasLocation" x="2114" y="121"/>
         </scene>
     </scenes>
     <resources>
