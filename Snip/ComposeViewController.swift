@@ -75,11 +75,13 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TagCell", for: indexPath) as! TagCell
-        if !(tagReuse.isEmpty) {
-            cell.tagName.text = tagReuse[indexPath.item].name
-        } else {
-            cell.tagName.text = "No name"
-        }
+//        if !(tagReuse.isEmpty) {
+            cell.tagName.text = (tagReuse[indexPath.item].name)
+        print(tagReuse[indexPath.item].name)
+        print(tagReuse[indexPath.item].tagId ?? 0)
+//        } else {
+//            cell.tagName.text = "No name"
+//        }
             return cell
     }
     
@@ -111,6 +113,7 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     func getTags() {
         let query = PFQuery(className: "Tag")
         query.addDescendingOrder("createdAt")
+        query.includeKey("objectId")
         query.findObjectsInBackground { (tags: [PFObject]?, error: Error?) in
             if let error = error {
                 print (error.localizedDescription)
@@ -133,6 +136,9 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
             let destVC = segue.destination as! TagsViewController
             destVC.delegate = self
             destVC.fullTagList = self.tagList
+        if !(tagReuse.isEmpty){
+            destVC.selectedTags = Set(tagReuse)
+        }
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }

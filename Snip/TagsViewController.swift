@@ -24,6 +24,10 @@ class TagsViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var delegate: TagsViewDelegate?
     
     @IBAction func goBack(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+
+    @IBAction func didFinish(_ sender: Any) {
         print(delegate)
         delegate?.didChooseTags(tags: selectedTags)
         dismiss(animated: true, completion: nil)
@@ -62,7 +66,7 @@ class TagsViewController: UIViewController, UICollectionViewDelegate, UICollecti
         cell.layer.cornerRadius = 50
         cell.clipsToBounds = true
             if cell.isSelected {
-                cell.tagName.backgroundColor = UIColor.blue
+                cell.tagName.backgroundColor = UIColor.cyan
             }
         }
         return cell
@@ -72,14 +76,18 @@ class TagsViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("selectin")
-        let cell = collectionView.cellForItem(at: indexPath) as! TagCell
-        
+         let cell = collectionView.cellForItem(at: indexPath) as! TagCell
+        cell.tagName.backgroundColor = UIColor.blue
         for tag in fullTagList {
             if tag["name"] as? String == cell.returnTag() {
-                selectedTags.insert(tag as! Tag)
+                print(tag["name"])
+                let newTag = Tag()
+                newTag.name = tag["name"] as? String
+                newTag.tagId = tag.objectId as! String
+                selectedTags.insert(newTag)
                 print("added!")
             }
-            print(selectedTags)
+            print(tag)
         }
         
         
@@ -113,11 +121,11 @@ class TagsViewController: UIViewController, UICollectionViewDelegate, UICollecti
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destVC = segue.destination as! ComposeViewController
-        let source = sender as! UIButton
-        
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        let destVC = segue.destination as! ComposeViewController
+//        let source = sender as! UIButton
+//        
+//    }
 
  
 
