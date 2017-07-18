@@ -78,6 +78,7 @@
 		2E160DA51F168F830042419F /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		2E160DA91F1698110042419F /* ComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
 		2E160DAB1F16AA730042419F /* TagCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
+		2E86B8231F1D6A0B00C4828C /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		3C855E1780E72449BA87A51B /* Pods_SnipTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnipTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BF10CD01F17F5BA00900F07 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		7E9DF5AC6B863AAA7218A0EE /* Pods_SnipUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnipUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -195,6 +196,7 @@
 			children = (
 				1E9BDE911F1D6B6400ACE230 /* Photo.swift */,
 				2E160D9F1F168F350042419F /* Barber.swift */,
+				2E86B8231F1D6A0B00C4828C /* Photo.swift */,
 				2E160D9D1F168EFB0042419F /* Post.swift */,
 				2E160DA51F168F830042419F /* Tag.swift */,
 				2E160DA31F168F790042419F /* User.swift */,
