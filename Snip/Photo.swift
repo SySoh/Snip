@@ -10,8 +10,7 @@ import Foundation
 import Parse
 
 class Photo: PFObject, PFSubclassing {
-    var photoId: String?
-    var postId: String?
+    var post: Post?
     var image: PFFile?
     
     class func parseClassName() -> String {

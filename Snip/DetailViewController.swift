@@ -15,18 +15,24 @@ class DetailViewController: UIViewController {
     //variables
     var post: PFObject!
     var postId: String?
+    
+    var photo: PFObject!
+    var photoId: String?
+    
     var caption: String?
     var price: String?
     var date: Date!
     var profileImage: PFFile!
     var barber: String!
     var barbershop: String!
-    var photo: PFObject!
-    var photoId: String?
+    var cutImage: PFFile!
+    
+    var postImage: UIImage!
     
     // outlets
     @IBOutlet weak var profileImageView: PFImageView!
-    @IBOutlet weak var postImageView: PFImageView!
+    
+    
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var barbershopConstantLabel: UILabel!
     @IBOutlet weak var barberConstantLabel: UILabel!
@@ -34,7 +40,9 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var barbershopLabel: UILabel!
     @IBOutlet weak var barberLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var detailCollectionView: UICollectionView!
     
+    @IBOutlet weak var postImageView: UIImageView!
     
     var photoArray: [PFObject]? = []
 
@@ -49,10 +57,16 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        let query = PFQuery(className: "Photo")
-        query.order(byDescending: "createdAt")
-        query.includeKey("image")
-        query.includeKey("post")
+//        parseQuery(classname: "Photo", objectId: "photoId")
+        
+        parseQuery(classname: "Post", objectId: "postId")
+        parseQuery(classname: "Barber", objectId: "barberId")
+        parseQuery(classname: "Barbershop", objectId: "barbershopId")
+        
+//        let query = PFQuery(className: "Photo")
+//        query.order(byDescending: "createdAt")
+//        query.includeKey("image")
+//        query.includeKey("postId")
         //        let query = PFQuery(className: "Post")
         //        query.order(byDescending: "createdAt")
         //        query.includeKey("user")
@@ -60,32 +74,44 @@ class DetailViewController: UIViewController {
         //        query.includeKey("barber")
         //        query.includeKey("profile_pic")
         //        query.includeKey("tags")
-        query.limit = 20
+//        query.limit = 20
         //fetch data asynchronously
-        query.findObjectsInBackground { (photos: [PFObject]?, error: Error?) in
-            if let photos = photos {
-                self.photoArray = photos
-
-            } else {
-                print(error?.localizedDescription)
-            }
-        }
+//        query.findObjectsInBackground { (photos: [PFObject]?, error: Error?) in
+//            if let photos = photos {
+//                self.photoArray = photos
+//
+//            } else {
+//                print(error?.localizedDescription)
+//            }
+        
+        self.postImageView.image = postImage
+        //self.postImageView.loadInBackground()
         
         self.dateLabel.text = String(describing: self.date)
         self.barberLabel.text = self.barber
         self.barbershopLabel.text = self.barbershop
-        self.priceLabel.text = self.price
+        self.priceLabel.text = price
         
-        if let date = self.post.createdAt {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateStyle = .medium
-            dateFormatter.timeStyle = .short
-            let dateString = dateFormatter.string(from: date)
-            print(dateString) // Prints: Jun 28, 2017, 2:08 PM
+//        if let date = self.post.createdAt {
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateStyle = .medium
+//            dateFormatter.timeStyle = .short
+//            let dateString = dateFormatter.string(from: date)
+//            print(dateString) // Prints: Jun 28, 2017, 2:08 PM
+//            
+//            self.dateLabel.text = dateString
+//        }
+
+        }
+        
+        func parseQuery(classname: String, objectId: String) {
+            let query = PFQuery(className: classname)
+            query.includeKey(objectId)
             
-            self.dateLabel.text = dateString
-            }
-            
+        }
+        
+        
+    
         
 
     
@@ -106,7 +132,7 @@ class DetailViewController: UIViewController {
         //self.priceLabel.text = post["price"] as? String
         
 
-    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

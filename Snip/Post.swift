@@ -10,10 +10,9 @@ import Foundation
 import Parse
 
 class Post: PFObject, PFSubclassing {
-    var postId: String?
-    var user: User?
-    var barber: Barber?
-    var barbershop: Barbershop?
+    @NSManaged var user: User?
+    @NSManaged var barber: Barber?
+    @NSManaged var barbershop: Barbershop?
     var photos: [PFFile]?
     var tags: [Tag]?
     var price: Int?
