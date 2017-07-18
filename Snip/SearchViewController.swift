@@ -31,18 +31,39 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     }
     
     func getData() {
-        
-        query.findObjectsInBackground { (photos: [PFObject]?, error: Error?) in
-            if let photos = photos {
-                self.data.append(barbers)
-                self.data.append(barbershops)
-                self.data.append(photos)
-                self.tableView.reloadData()
+        self.data = []
+        self.queryParse(className: "Photo", keys: ["image", "post"])
+        self.queryParse(className: "Post", keys: ["user", "barber", "price", "tags"])
+        self.queryParse(className: "Barber", keys: ["name", "barbershop", "profile_pic"])
+        self.queryParse(className: "Barbershop", keys: ["name", "picture", "location"])
+    }
+    
+    func getFilterables(object: PFObject) -> [String] {
+        if object.parseClassName == "Post" {
+            object["barber"]
+            object["price"]
+            object["tags"]
+        } else if object.parseClassName == "Barber" {
+            
+        } else if object.parseClassName == "Barbershop" {
+            
+        }
+        print("No filterables found for \(object.parseClassName) object")
+    }
+    
+    func queryParse(className: String, keys: [String]) {
+        let query = PFQuery(className: className)
+        query.order(byDescending: "createdAt")
+        for key in keys {
+            query.includeKey(key)
+        }
+        query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
+            if let objects = objects {
+                self.data.append(objects)
             } else {
-                print(error?.localizedDescription)
+                print(error?.localizedDescription ?? "Error getting \(className)s")
             }
         }
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,16 +71,15 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         // Dispose of any resources that can be recreated.
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        <#code#>
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        <#code#>
+        return filteredData[1].count + filteredData[2].count + filteredData[3]
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        
     }
     
     /*
