@@ -10,9 +10,9 @@ import Foundation
 import Parse
 
 class Post: PFObject, PFSubclassing {
-    var postId: String?
-    var user: User?
-    var barber: Barber?
+    @NSManaged var user: User?
+    @NSManaged var barber: Barber?
+    @NSManaged var barbershop: Barbershop?
     var photos: [PFFile]?
     var tags: [Tag]?
     var price: Int?
@@ -27,18 +27,17 @@ class Post: PFObject, PFSubclassing {
         
         let post = PFObject(className: "Post")
         if !(tags.isEmpty){
-        post["tags"] = tags
+            post["tags"] = tags
         }
         post["price"] = price
         
         if PFUser.current() != nil {
-        post["user"] = PFUser.current()
+            post["user"] = PFUser.current()
         } else {
             post["user"] = NSNull()
         }
         
         post["barber"] = barber
-        
         post.saveInBackground()
         let query = PFQuery(className: "Post")
         query.addDescendingOrder("createdAt")

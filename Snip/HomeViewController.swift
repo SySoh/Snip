@@ -14,6 +14,24 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     var photoArray: [PFObject] = []
     var fullPhotoList: [PFFile] = []
+    var postArray: [PFObject] = []
+    
+    var photo: Photo?
+    var post: Post?
+    var price: Int?
+    var tags: [Tag]?
+    var user: User?
+    var barber: Barber?
+    var barberName: String!
+    var venmo: String?
+    var profile_pic: PFFile?
+    var barbershop: Barbershop?
+    var shopName: String?
+    var shopPic: PFFile?
+    var location: String?
+    var phone: String?
+    var rating: Int?
+
     
     // outlets
     @IBOutlet weak var profileImageView: UIImageView!
@@ -37,23 +55,57 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         homeCollectionView.insertSubview(refreshcontrol, at: 0)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "DetailSegue" {
+            let vc = segue.destination as! DetailViewController
+            let cell = sender as! HomeCell
+            //vc.caption = cell.captionLabel.text
+            //vc.username = cell.usernameLabel.text
+            //vc.date = cell.creationDateLabel.text
+            //vc.profileImage = cell.profilePicImageView.file
+            print(barberName)
+            //vc.profileImageView.file = profile_pic as! PFFile
+//            vc.barberLabel.text = "\(barberName)"
+//            vc.barbershopLabel.text = shopName
+//            vc.priceLabel.text = String(describing: price)
+//            vc.dateLabel.text = photo?.createdAt as! String
+            vc.postImage = cell.cutImageView.image!
+            let indexPath = homeCollectionView.indexPath(for: cell)
+            let photo = photoArray[(indexPath?.item)!]
+            vc.photo = photo as! Photo
+            }
+    }
+    
     func refresh() {
         //construct PFQuery
         let query = PFQuery(className: "Photo")
         query.order(byDescending: "createdAt")
         query.includeKey("image")
-        query.includeKey("post")
-//        let query = PFQuery(className: "Post")
-//        query.order(byDescending: "createdAt")
-//        query.includeKey("user")
-//        query.includeKey("photos")
-//        query.includeKey("barber")
-//        query.includeKey("profile_pic")
-//        query.includeKey("tags")
+        query.includeKey("post.barber")
+        query.includeKey("post.barber.barbershop")
         query.limit = 20
         //fetch data asynchronously
-        query.findObjectsInBackground { (photos: [PFObject]?, error: Error?) in
-            if let photos = photos {
+        query.findObjectsInBackground { (objects, error: Error?) in
+            if let photos = objects {
+                print("made it here")
+                let photo = photos.first as! Photo
+                let post = photo["post"] as! Post
+                self.price = post["price"] as! Int
+                self.tags = post["tags"] as! [Tag]
+                //self.user = post["user"] as! User
+                self.barber = post["barber"] as! Barber
+                print(self.barber?["name"])
+                print("ABOVE IS THE NAME")
+                self.barberName = self.barber?["name"] as! String
+                self.venmo = self.barber?["venmo"] as! String
+                self.profile_pic = self.barber?["profile_pic"] as! PFFile
+                self.barbershop = self.barber?["barbershop"] as! Barbershop
+                self.shopName = self.barbershop?["name"] as! String
+                //let shopPic = barbershop["picture"] as! PFFile
+                self.location = self.barbershop?["location"] as! String
+                self.phone = self.barbershop?["phone"] as! String
+                self.rating = self.barbershop?["rating"] as! Int
+                //print(barber["name"])
                 self.photoArray = photos
                 self.homeCollectionView.reloadData()
             } else {
@@ -77,6 +129,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         media?.getDataInBackground { (backgroundData: Data?, erro: Error?) in
             if let backgroundData = backgroundData {
                 cell.cutImageView.contentMode = .scaleAspectFill
+                cell.cutImageView.clipsToBounds = true
                 cell.cutImageView.image = UIImage(data: backgroundData)
             }
         }
