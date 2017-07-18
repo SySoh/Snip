@@ -62,7 +62,7 @@ class TagsViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TagCell", for: indexPath) as! TagCell
         if fullTagList.count > 0 {
-            cell.tagName.text = fullTagList[indexPath.item].object(forKey: "name") as? String
+            cell.tagName.text = fullTagList[indexPath.item].object(forKey: "name") as! String
         cell.layer.cornerRadius = 50
         cell.clipsToBounds = true
             if cell.isSelected {
@@ -87,7 +87,6 @@ class TagsViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 selectedTags.insert(newTag)
                 print("added!")
             }
-            print(tag)
         }
         
         
@@ -114,7 +113,7 @@ class TagsViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return fullTagList.count
     }
     
     

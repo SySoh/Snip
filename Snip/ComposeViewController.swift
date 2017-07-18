@@ -21,13 +21,16 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBAction func goBack(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    @IBOutlet weak var shopChoosingButton: UIButton!
+    @IBOutlet weak var shopNameText: UILabel!
+    @IBOutlet weak var barberChoosingButton: UIButton!
+    @IBOutlet weak var barberNameText: UILabel!
     
     @IBOutlet weak var pictureView: UIImageView!
     @IBAction func locationToggle(_ sender: Any) {
     }
 
-    @IBOutlet weak var shopNameText: UITextField!
-    @IBOutlet weak var barberNameText: UITextField!
+
     @IBOutlet weak var priceText: UITextField!
     @IBAction func addPhoto(_ sender: Any) {
         choosePic()
@@ -38,9 +41,17 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     @IBAction func makePost(_ sender: Any) {
-        let image = pictureView.image!
+        let alertController = UIAlertController(title: "One or more fields were left empty", message: "Please fill out all fields", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title:"Okay", style: .cancel) {(UIAlertAction) in }
+        alertController.addAction(cancelAction)
         
+        if ((shopNameText.text?.isEmpty)! || (barberNameText.text?.isEmpty)! || (priceText.text?.isEmpty)! || tagReuse.isEmpty || pictureView.image == nil){
+            present(alertController, animated: true)
+            print("pop up notif here")
+        } else {
+        let image = pictureView.image!
         Post.postPost(pictures: image, barber: barberNameText.text!, barbershop: shopNameText.text!, tags: tagReuse, price: 10)
+        }
     }
     
     func choosePic() {
@@ -135,7 +146,11 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
             print("sending")
             let destVC = segue.destination as! TagsViewController
             destVC.delegate = self
-            destVC.fullTagList = self.tagList
+        for tag in self.tagList {
+            if (tag["name"] != nil) {
+                destVC.fullTagList.append(tag)
+            }
+        }
         if !(tagReuse.isEmpty){
             destVC.selectedTags = Set(tagReuse)
         }
