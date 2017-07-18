@@ -9,13 +9,14 @@
 import UIKit
 import Parse
 
-class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource  {
+class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource, TagsViewDelegate  {
     
     @IBOutlet weak var collectionView: UICollectionView!
     //tagList is used to obtain ALL tags and pass them into the tagView
     var tagList: [PFObject] = []
     //tagReuse is used to accumulate selected tags. It will be populated by tagView. Probably by a prepareForSegue.
     var tagReuse: [Tag] = []
+        
     
     @IBAction func goBack(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -32,8 +33,14 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         choosePic()
     }
     
+    func didChooseTags(tags: Set<Tag>) {
+        tagReuse = Array(tags)
+    }
+    
     @IBAction func makePost(_ sender: Any) {
-        Post.postPost(pictures: pictureView.image!, barber: barberNameText.text!, barbershop: shopNameText.text!, tags: tagReuse, price: Int(priceText.text!)!)
+        let image = pictureView.image!
+        
+        Post.postPost(pictures: image, barber: barberNameText.text!, barbershop: shopNameText.text!, tags: tagReuse, price: 10)
     }
     
     func choosePic() {
@@ -68,17 +75,18 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TagCell", for: indexPath) as! TagCell
-        if !(tagReuse.isEmpty) {
-            print(tagReuse.count)
-            cell.tagName.setTitle(tagReuse[indexPath.item].name, for: .normal)
-        } else {
-            cell.tagName.setTitle("No name", for: .normal)
-        }
+//        if !(tagReuse.isEmpty) {
+            cell.tagName.text = (tagReuse[indexPath.item].name)
+        print(tagReuse[indexPath.item].name)
+        print(tagReuse[indexPath.item].tagId ?? 0)
+//        } else {
+//            cell.tagName.text = "No name"
+//        }
             return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return tagReuse.count
     }
     
     
@@ -105,6 +113,7 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     func getTags() {
         let query = PFQuery(className: "Tag")
         query.addDescendingOrder("createdAt")
+        query.includeKey("objectId")
         query.findObjectsInBackground { (tags: [PFObject]?, error: Error?) in
             if let error = error {
                 print (error.localizedDescription)
@@ -125,7 +134,11 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
             print("sending")
             let destVC = segue.destination as! TagsViewController
+            destVC.delegate = self
             destVC.fullTagList = self.tagList
+        if !(tagReuse.isEmpty){
+            destVC.selectedTags = Set(tagReuse)
+        }
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }

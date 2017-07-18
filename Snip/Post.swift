@@ -23,15 +23,25 @@ class Post: PFObject, PFSubclassing {
     
     class func postPost(pictures: UIImage, barber: String, barbershop: String, tags: [Tag], price: Int) {
         let post = PFObject(className: "Post")
-        post["user"] = PFUser.current
+        if !(tags.isEmpty){
         post["tags"] = tags
+        }
         post["price"] = price
+        
+        if PFUser.current() != nil {
         post["user"] = PFUser.current()
+        } else {
+            post["user"] = NSNull()
+        }
+        
         post["barber"] = barber
 
         let photo = PFObject(className: "Photo")
+        
         photo["image"] = getPFFileFromImage(image: pictures)
+        
         photo["post"] = post.objectId
+        
         photo.saveInBackground()
 
         post.saveInBackground()
