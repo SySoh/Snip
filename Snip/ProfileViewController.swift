@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import Parse
+import ParseUI
 
 class ProfileViewController: UIViewController {
     
     @IBOutlet weak var profileImageVIew: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var favShopConstantLabel: UILabel!
+    
+    @IBOutlet weak var shopConstantLabel: UILabel!
     @IBOutlet weak var favBarberConstantLabel: UILabel!
     @IBOutlet weak var barbershopLabel: UILabel!
     @IBOutlet weak var favBarberLabel: UILabel!
@@ -21,10 +24,21 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var postCollectionView: UICollectionView!
     @IBOutlet weak var tagCollectionView: UICollectionView!
     
+    var photo: PFObject!
+    var barberName: String!
+    var barbershopName: String!
+    var venmo: String!
+    var profileImage: UIImage!
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.profileImageVIew.image = profileImage
+        //self.profileImageVIew.loadInBackground()
+        self.barbershopLabel.text = barbershopName
+        self.venmoLabel.text = venmo
+        self.usernameLabel.text = barberName
 
         // Do any additional setup after loading the view.
     }

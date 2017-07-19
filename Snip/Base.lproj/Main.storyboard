@@ -112,7 +112,7 @@
         <!--Detail View Controller-->
         <scene sceneID="Mxp-Eq-OpW">
             <objects>
-                <viewController id="8hR-A2-Bpa" customClass="DetailViewController" customModule="Snip" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailViewController" id="8hR-A2-Bpa" customClass="DetailViewController" customModule="Snip" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ope-pF-pm5"/>
                         <viewControllerLayoutGuide type="bottom" id="rZP-M2-pJr"/>
@@ -371,12 +371,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="barbershopLabel" destination="F6Y-nf-FVD" id="pnH-UB-Qdj"/>
                         <outlet property="favBarberConstantLabel" destination="pkO-Ml-8zt" id="1vU-qi-Fye"/>
                         <outlet property="favBarberLabel" destination="ILH-is-Lpf" id="Vb1-EN-aO6"/>
-                        <outlet property="favShopConstantLabel" destination="Ula-Ya-Jpq" id="LMm-Es-dlf"/>
-                        <outlet property="favShopLabel" destination="F6Y-nf-FVD" id="dfK-Te-8h6"/>
                         <outlet property="postCollectionView" destination="eTq-mu-ifo" id="spc-1A-V0y"/>
                         <outlet property="profileImageVIew" destination="wet-4C-Y1c" id="ecH-pv-zLC"/>
+                        <outlet property="shopConstantLabel" destination="Ula-Ya-Jpq" id="d33-6f-m7c"/>
                         <outlet property="tagCollectionView" destination="Bs8-cm-Cbw" id="MSE-NF-mG8"/>
                         <outlet property="usernameLabel" destination="m6G-sg-XUc" id="gSC-5n-PHd"/>
                         <outlet property="venmoConstantLabel" destination="cJ3-xr-hjn" id="XQB-7j-IFK"/>
@@ -607,7 +607,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="103"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FHO-c0-cLq" id="2ub-e4-G7y">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="103"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="102.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Lb-Xk-exl">
@@ -686,7 +686,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="109"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="euQ-1u-DMu" id="uX1-eK-1sw">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="109"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="108.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="BarberShopName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5xG-GZ-HTx">

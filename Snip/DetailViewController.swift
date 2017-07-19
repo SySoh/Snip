@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import ParseUI
 
-class DetailViewController: UIViewController,  HomeCellDelegate {
+class DetailViewController: UIViewController{
     
     var photo: PFObject?
     var post: Post?
@@ -21,7 +21,7 @@ class DetailViewController: UIViewController,  HomeCellDelegate {
 
     var barberName: String!
     var venmo: String?
-    var profile_pic: PFFile?
+    var profile_pic: UIImage?
     var barbershop: Barbershop?
     var shopName: String?
     var shopPic: PFFile?
@@ -50,12 +50,26 @@ class DetailViewController: UIViewController,  HomeCellDelegate {
     @IBOutlet weak var postImageView: UIImageView!
     
     var photoArray: [PFObject]? = []
+    var detailView: DetailViewController!
     //homeCell:
 
     
     @IBAction func pressDismiss(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "barberProfileSegue" {
+            let vc = segue.destination as! ProfileViewController
+            vc.barberName = self.barberLabel.text
+            vc.barbershopName = self.barbershopLabel.text
+//            vc.venmo = self.venmo!
+            vc.profileImage = self.profile_pic
+            
+            
+        }
+    }
+    
     @IBAction func didPressBarberProfile(_ sender: Any) {
         performSegue(withIdentifier: "barberProfileSegue", sender: DetailViewController.self)
     }
@@ -92,10 +106,7 @@ class DetailViewController: UIViewController,  HomeCellDelegate {
         
     }
     
-    func didMoveToProfile(HomeCell: HomeCell) {
-        performSegue(withIdentifier: "barberProfileSegue", sender: HomeCell)
-    }
-    
+
 
         
 
