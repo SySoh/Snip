@@ -83,6 +83,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         query.includeKey("image")
         query.includeKey("post.barber")
         query.includeKey("post.barber.barbershop")
+        query.includeKey("post.tags")
         query.limit = 20
         //fetch data asynchronously
         query.findObjectsInBackground { (objects, error: Error?) in
