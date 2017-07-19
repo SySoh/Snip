@@ -21,15 +21,16 @@ class Post: PFObject, PFSubclassing {
         return "Post"
     }
     
-    class func postPost(pictures: UIImage, barber: String, barbershop: String, tags: [Tag], price: Int) {
-        let shopQuery = PFQuery(className: "Barbershop")
-        
-        
+    class func postPost(pictures: UIImage, barber: Barber, barbershop: Barbershop, tags: [Tag], price: Int64, caption: String?) {
         let post = PFObject(className: "Post")
+        post["barbershop"] = barbershop
+        post["barber"] = barber
         if !(tags.isEmpty){
             post["tags"] = tags
         }
         post["price"] = price
+        
+        post["caption"] = caption
         
         if PFUser.current() != nil {
             post["user"] = PFUser.current()
@@ -37,7 +38,6 @@ class Post: PFObject, PFSubclassing {
             post["user"] = NSNull()
         }
         
-        post["barber"] = barber
         post.saveInBackground()
         let query = PFQuery(className: "Post")
         query.addDescendingOrder("createdAt")

@@ -37,7 +37,9 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var barberChoosingButton: UIButton!
     @IBOutlet weak var barberNameText: UILabel!
     @IBOutlet weak var pictureView: UIImageView!
+    @IBOutlet weak var captionTextView: UITextView!
     
+    @IBOutlet weak var pickBarberButton: UIButton!
     
     //All button actions
     @IBAction func locationToggle(_ sender: Any) {
@@ -56,14 +58,15 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         let cancelAction = UIAlertAction(title:"Okay", style: .cancel) {(UIAlertAction) in }
         alertController.addAction(cancelAction)
         
-        if ((shopNameText.text?.isEmpty)! || (barberNameText.text?.isEmpty)! || (priceText.text?.isEmpty)! || tagReuse.isEmpty || pictureView.image == nil){
+        if ((barbershop == nil) || (barber == nil) || (priceText.text?.isEmpty)! || tagReuse.isEmpty || pictureView.image == nil){
             present(alertController, animated: true)
             print("pop up notif here")
         } else {
             let image = pictureView.image!
             
             //redo post function
-            Post.postPost(pictures: image, barber: barberNameText.text!, barbershop: shopNameText.text!, tags: tagReuse, price: 10)
+            Post.postPost(pictures: image, barber: self.barber!, barbershop: self.barbershop!, tags: tagReuse, price: Int64(priceText.text!)!, caption: captionTextView.text)
+            dismiss(animated: true, completion: nil)
         }
     }
 
@@ -76,6 +79,16 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         getTags()
         barberShopQuery()
         barberQuery()
+        if barbershop == nil {
+            pickBarberButton.isEnabled = false
+            pickBarberButton.titleLabel?.textColor = UIColor.gray
+        }
+        collectionView.layer.borderColor = UIColor.black.cgColor
+        collectionView.layer.borderWidth = 1.0
+        captionTextView.layer.borderColor = UIColor.black.cgColor
+        captionTextView.layer.borderWidth = 0.5
+        
+        
         // Do any additional setup after loading the view.
     }
     
@@ -95,6 +108,8 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     func didChooseBarberShop(barberShopName: Barbershop) {
         shopNameText.text = barberShopName.name
         self.barbershop = barberShopName
+        pickBarberButton.isEnabled = true
+        pickBarberButton.titleLabel?.textColor = UIColor.blue
     }
     
     func didChooseBarber(barberName: Barber) {
@@ -132,7 +147,7 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
         
-        pictureView.image = originalImage
+        pictureView.image = editedImage
         
         dismiss(animated: true, completion: nil)
         
@@ -236,7 +251,11 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         } else if (segue.identifier == "BarberPick") {
             let destVC = segue.destination as! BarberPickViewController
             destVC.delegate = self
-            destVC.barberList = self.barberList
+            for barber in self.barberList {
+                if barbershop?.objectId == barber.barbershop?.objectId {
+                destVC.barberList.append(barber)
+            }
+        }
         }
         
             //Barber segue work
