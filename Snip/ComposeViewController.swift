@@ -16,6 +16,9 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     var tagList: [PFObject] = []
     //tagReuse is used to accumulate selected tags. It will be populated by tagView. Probably by a prepareForSegue.
     var tagReuse: [Tag] = []
+    
+    var shopList: [PFObject] = []
+    
         
     
     @IBAction func goBack(_ sender: Any) {
@@ -111,7 +114,9 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         super.viewDidLoad()
         collectionView.dataSource = self
         collectionView.reloadData()
+        //Grab info for other view controllers
         getTags()
+        barberShopQuery()
         // Do any additional setup after loading the view.
     }
 
@@ -139,11 +144,28 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.collectionView.reloadData()
     }
     
+    func barberShopQuery(){
+        let query = PFQuery(className:"Barbershop")
+        query.includeKey("objectId")
+        query.addDescendingOrder("createdAt")
+        query.findObjectsInBackground { (
+            shops: [PFObject]?, error: Error?) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                self.shopList = shops!
+            }
+        }
+        
+    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
             print("sending")
+        //Tag segue work
+        if segue.identifier == "TagSegue"{
             let destVC = segue.destination as! TagsViewController
             destVC.delegate = self
         for tag in self.tagList {
@@ -153,6 +175,14 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
         if !(tagReuse.isEmpty){
             destVC.selectedTags = Set(tagReuse)
+        }
+            
+            //Barbershop segue work
+        } else if (segue.identifier == "BarberShopSegue") {
+            let destVC = segue.destination as! BarberShopPickViewController
+            //Add delegate line here
+            destVC.barberShopList = self.shopList
+        
         }
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
