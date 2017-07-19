@@ -17,6 +17,7 @@ target 'Snip' do
   pod 'ActiveLabel'
   pod 'Parse'
   pod 'ParseUI'
+  pod 'PageMenu'
 
   target 'SnipTests' do
     inherit! :search_paths

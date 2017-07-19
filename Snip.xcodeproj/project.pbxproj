@@ -14,7 +14,7 @@
 		2C13359FEE42DCB61FE9CDEF /* Pods_SnipTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C855E1780E72449BA87A51B /* Pods_SnipTests.framework */; };
 		2E093BD71F16D19500D2C000 /* TagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E093BD61F16D19500D2C000 /* TagsViewController.swift */; };
 		2E160D6F1F157F740042419F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E160D6E1F157F740042419F /* AppDelegate.swift */; };
-		2E160D741F157F740042419F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E160D721F157F740042419F /* Main.storyboard */; };
+		2E160D741F157F740042419F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E160D721F157F740042419F /* Main.storyboard */; settings = {ASSET_TAGS = (tagsControllerNibName, ); }; };
 		2E160D761F157F740042419F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E160D751F157F740042419F /* Assets.xcassets */; };
 		2E160D791F157F740042419F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E160D771F157F740042419F /* LaunchScreen.storyboard */; };
 		2E160D841F157F740042419F /* SnipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E160D831F157F740042419F /* SnipTests.swift */; };
@@ -299,6 +299,10 @@
 		2E160D631F157F740042419F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					tagsControllerNibName,
+					tagsV,
+				);
 				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Shao Yie Soh";

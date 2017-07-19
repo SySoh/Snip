@@ -71,7 +71,6 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeCell", for: indexPath) as! HomeCell
         let photo = self.photoArray[indexPath.item]
-        print("here is the post object")
         let media = photo["image"] as? PFFile
         //let media = fullPhotoList[indexPath.item] as? PFFile
         media?.getDataInBackground { (backgroundData: Data?, erro: Error?) in

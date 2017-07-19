@@ -8,85 +8,55 @@
 
 import UIKit
 import Parse
+import PageMenu
 
-class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
-
-    @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var tableView: UITableView!
+class SearchViewController: UIViewController {
     
-    var data: [PFObject] = []
-    var filteredData: [[PFObject]] = []
-    
-    var temp: [PFObject] = []
-    var photos: [PFObject] = []
-    var posts: [PFObject] = []
-    var barbers: [PFObject] = []
-    var barbershops: [PFObject] = []
-    var tags: [PFObject] = []
-    
-    var tagNames: [String] = []
+    var pageMenu: CAPSPageMenu?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchBar.delegate = self
-        tableView.delegate = self
-        tableView.dataSource = self
-        self.getData()
-        //print(self.getTagNames(tags: tags))
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        //filteredData = data
+        // Array to keep track of controllers in page menu
+        var controllerArray : [UIViewController] = []
         
-        // Do any additional setup after loading the view.
+        // Create variables for all view controllers you want to put in the
+        // page menu, initialize them, and add each to the controller array.
+        let tagsController: UIViewController = storyboard.instantiateViewController(withIdentifier: "tagSearch")
+        tagsController.title = "TAGS"
+        controllerArray.append(tagsController)
+        
+        let barbersController: UIViewController = storyboard.instantiateViewController(withIdentifier: "barberSearch")
+        barbersController.title = "BARBERS"
+        controllerArray.append(barbersController)
+        
+        let barbershopsController: UIViewController = storyboard.instantiateViewController(withIdentifier: "barbershopSearch")
+        barbershopsController.title = "BARBERSHOPS"
+        controllerArray.append(barbershopsController)
+        
+        // Customize page menu to your liking (optional) or use default settings by sending nil for 'options' in the init
+        let parameters: [CAPSPageMenuOption] = [
+            .menuItemSeparatorWidth(0.0),
+            .useMenuLikeSegmentedControl(true),
+            .menuItemSeparatorPercentageHeight(0.1),
+        ]
+        
+        // Initialize page menu with controller array, frame, and optional parameters
+        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRectMake(0.0, 64.0, self.view.frame.width, self.view.frame.height - 64.0), pageMenuOptions: parameters)
+        
+        // Lastly add page menu as subview of base view controller view
+        // or use pageMenu controller in you view hierachy as desired
+        self.view.addSubview(pageMenu!.view)
     }
     
-    func getData() {
-        self.queryParse(className: "Photo", keys: ["image", "post"])
-      //  self.queryParse(className: "Post", keys: ["user", "barber", "price", "tags"])
-       // self.queryParse(className: "Barber", keys: ["name", "barbershop", "profile_pic"])
-       // self.queryParse(className: "Barbershop", keys: ["name", "picture", "location"])
-    }
-    
-    func getTagNames(tags: [PFObject]) -> [String] {
-        for t in tags {
-            let tag = t as! Tag
-            tagNames.append(tag.name!)
-        }
-        return tagNames
-    }
-    
-    func queryParse(className: String, keys: [String]) {
-        let query = PFQuery(className: className)
-        query.order(byDescending: "createdAt")
-        for key in keys {
-            query.includeKey(key)
-        }
-        query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
-            if let objects = objects {
-                self.data = objects
-                self.tableView.reloadData()
-            } else {
-                print(error?.localizedDescription ?? "Error getting \(className)s")
-            }
-        }
+    func CGRectMake(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) -> CGRect {
+        return CGRect(x: x, y: y, width: width, height: height)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
-//        return filteredData[1].count + filteredData[2].count + filteredData[3].count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Search Cell", for: indexPath) as! SearchCell
-        cell.bigLabel.text = data[indexPath.row].objectId
-        return cell
     }
     
     /*
