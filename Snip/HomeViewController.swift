@@ -59,16 +59,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         if segue.identifier == "DetailSegue" {
             let vc = segue.destination as! DetailViewController
             let cell = sender as! HomeCell
-            //vc.caption = cell.captionLabel.text
-            //vc.username = cell.usernameLabel.text
-            //vc.date = cell.creationDateLabel.text
-            //vc.profileImage = cell.profilePicImageView.file
-            print(barberName)
-            //vc.profileImageView.file = profile_pic as! PFFile
-//            vc.barberLabel.text = "\(barberName)"
-//            vc.barbershopLabel.text = shopName
-//            vc.priceLabel.text = String(describing: price)
-//            vc.dateLabel.text = photo?.createdAt as! String
+//            print(barberName)
             vc.postImage = cell.cutImageView.image!
             let indexPath = homeCollectionView.indexPath(for: cell)
             let photo = photoArray[(indexPath?.item)!]

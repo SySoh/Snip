@@ -41,8 +41,7 @@ class DetailViewController: UIViewController {
     
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var barbershopConstantLabel: UILabel!
-    @IBOutlet weak var barberConstantLabel: UILabel!
-    @IBOutlet weak var priceConstantLabel: UILabel!
+    @IBOutlet weak var captionLabel: UILabel!
     @IBOutlet weak var barbershopLabel: UILabel!
     @IBOutlet weak var barberLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
@@ -74,6 +73,7 @@ class DetailViewController: UIViewController {
         self.barberLabel.text = barber["name"] as! String
         self.barbershopLabel.text = barbershop["name"] as? String
         self.priceLabel.text = "\(post["price"]!)"
+        self.captionLabel.text = post["caption"] as! String
         
         }
     
