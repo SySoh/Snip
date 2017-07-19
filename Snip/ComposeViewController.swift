@@ -52,6 +52,9 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBAction func addPhoto(_ sender: Any) {
         choosePic()
     }
+    @IBAction func onTap(_ sender: Any) {
+        view.endEditing(true)
+    }
     
     @IBAction func makePost(_ sender: Any) {
         let alertController = UIAlertController(title: "One or more fields were left empty", message: "Please fill out all fields", preferredStyle: .alert)
