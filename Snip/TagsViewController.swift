@@ -14,7 +14,7 @@ import Parse
 }
 
 class TagsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-    var fullTagList: [PFObject] = []
+    var fullTagList: [Tag] = []
     var selectedTags = Set<Tag>()
     var tagList: [String] = []
     
@@ -62,12 +62,13 @@ class TagsViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TagCell", for: indexPath) as! TagCell
         if fullTagList.count > 0 {
-            cell.tagName.text = fullTagList[indexPath.item].object(forKey: "name") as? String
+            cell.tagName.text = fullTagList[indexPath.item].object(forKey: "name") as! String
         cell.layer.cornerRadius = 50
         cell.clipsToBounds = true
             if cell.isSelected {
                 cell.tagName.backgroundColor = UIColor.cyan
             }
+            cell.tagObject = fullTagList[indexPath.item]
         }
         return cell
         
@@ -77,19 +78,9 @@ class TagsViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("selectin")
          let cell = collectionView.cellForItem(at: indexPath) as! TagCell
+        let tag = cell.tagObject
+        selectedTags.insert(tag!)
         cell.tagName.backgroundColor = UIColor.blue
-        for tag in fullTagList {
-            if tag["name"] as? String == cell.returnTag() {
-                print(tag["name"])
-                let newTag = Tag()
-                newTag.name = tag["name"] as? String
-                newTag.tagId = tag.objectId as! String
-                selectedTags.insert(newTag)
-                print("added!")
-            }
-            print(tag)
-        }
-        
         
     }
     
@@ -114,7 +105,7 @@ class TagsViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return fullTagList.count
     }
     
     

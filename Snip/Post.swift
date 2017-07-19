@@ -22,6 +22,9 @@ class Post: PFObject, PFSubclassing {
     }
     
     class func postPost(pictures: UIImage, barber: String, barbershop: String, tags: [Tag], price: Int) {
+        let shopQuery = PFQuery(className: "Barbershop")
+        
+        
         let post = PFObject(className: "Post")
         if !(tags.isEmpty){
             post["tags"] = tags
@@ -35,15 +38,26 @@ class Post: PFObject, PFSubclassing {
         }
         
         post["barber"] = barber
-        
-        let photo = PFObject(className: "Photo")
-        
-        photo["image"] = getPFFileFromImage(image: pictures)
-        
-        photo["post"] = post.objectId
-        
-        photo.saveInBackground()
         post.saveInBackground()
+        let query = PFQuery(className: "Post")
+        query.addDescendingOrder("createdAt")
+        query.includeKey("objectId")
+        query.getFirstObjectInBackground(block: { (thisPost: PFObject?, error: Error?) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                let photo = PFObject(className: "Photo")
+                
+                photo["image"] = getPFFileFromImage(image: pictures)
+                
+                photo["post"] = thisPost
+                
+                photo.saveInBackground()
+                
+                print("post and photo successfully saved")
+            }
+        })
+
         
     }
     

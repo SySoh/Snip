@@ -19,6 +19,7 @@ class TagCell: UICollectionViewCell {
 //       tagName.backgroundColor = UIColor.green
 //    }
 //    
+    var tagObject: Tag?
     var delegate: TagCellDelegate?
     @IBOutlet weak var tagName: UILabel!
     
