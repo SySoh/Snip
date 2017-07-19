@@ -15,15 +15,22 @@ import Parse
 
 class BarberShopPickViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    
+    //Outlets and variables
+    
     @IBOutlet weak var tableView: UITableView!
     var barberShopList: [Barbershop] = []
-    var chosenBarberShop: String = ""
-    
     var delegate: BarberShopPickDelegate?
     
+    
+    
+    //Actions
     @IBAction func goBack(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,9 +41,17 @@ class BarberShopPickViewController: UIViewController, UITableViewDelegate, UITab
         // Do any additional setup after loading the view.
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    
+    
+    //Tableview setup
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return barberShopList.count
         
     }
     
@@ -49,30 +64,18 @@ class BarberShopPickViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    
+    
+    //Selection work
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! BarberShopCell
         cell.backgroundColor = UIColor.gray
-        chosenBarberShop = cell.nameLabel.text ?? "No name"
         print("Chose barbershop!")
         //DelegateWork here
         print(delegate)
         delegate?.didChooseBarberShop(barberShopName: cell.barbershop!)
         dismiss(animated: true, completion: nil)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
