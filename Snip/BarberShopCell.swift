@@ -12,6 +12,7 @@ class BarberShopCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
+    var barbershop: Barbershop?
     
     override func awakeFromNib() {
         super.awakeFromNib()

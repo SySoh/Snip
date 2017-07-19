@@ -9,10 +9,17 @@
 import UIKit
 import Parse
 
+@objc protocol BarberShopPickDelegate {
+    func didChooseBarberShop(barberShopName: Barbershop)
+}
+
 class BarberShopPickViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
-    var barberShopList: [PFObject] = []
+    var barberShopList: [Barbershop] = []
+    var chosenBarberShop: String = ""
+    
+    var delegate: BarberShopPickDelegate?
     
     @IBAction func goBack(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -37,6 +44,7 @@ class BarberShopPickViewController: UIViewController, UITableViewDelegate, UITab
         let cell = tableView.dequeueReusableCell(withIdentifier: "BarberShopCell", for: indexPath) as! BarberShopCell
         cell.nameLabel.text = barberShopList[indexPath.item].object(forKey: "name") as? String
         cell.locationLabel.text = barberShopList[indexPath.item].object(forKey: "location") as? String
+        cell.barbershop = barberShopList[indexPath.item]
         return cell
     }
     
@@ -46,6 +54,16 @@ class BarberShopPickViewController: UIViewController, UITableViewDelegate, UITab
         // Dispose of any resources that can be recreated.
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! BarberShopCell
+        cell.backgroundColor = UIColor.gray
+        chosenBarberShop = cell.nameLabel.text ?? "No name"
+        print("Chose barbershop!")
+        //DelegateWork here
+        print(delegate)
+        delegate?.didChooseBarberShop(barberShopName: cell.barbershop!)
+        dismiss(animated: true, completion: nil)
+    }
 
     /*
     // MARK: - Navigation

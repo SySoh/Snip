@@ -14,7 +14,7 @@ import Parse
 }
 
 class TagsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-    var fullTagList: [PFObject] = []
+    var fullTagList: [Tag] = []
     var selectedTags = Set<Tag>()
     var tagList: [String] = []
     
@@ -68,6 +68,7 @@ class TagsViewController: UIViewController, UICollectionViewDelegate, UICollecti
             if cell.isSelected {
                 cell.tagName.backgroundColor = UIColor.cyan
             }
+            cell.tagObject = fullTagList[indexPath.item]
         }
         return cell
         
@@ -77,18 +78,9 @@ class TagsViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("selectin")
          let cell = collectionView.cellForItem(at: indexPath) as! TagCell
+        let tag = cell.tagObject
+        selectedTags.insert(tag!)
         cell.tagName.backgroundColor = UIColor.blue
-        for tag in fullTagList {
-            if tag["name"] as? String == cell.returnTag() {
-                print(tag["name"])
-                let newTag = Tag()
-                newTag.name = tag["name"] as? String
-                newTag.tagId = tag.objectId as! String
-                selectedTags.insert(newTag)
-                print("added!")
-            }
-        }
-        
         
     }
     

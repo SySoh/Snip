@@ -9,38 +9,68 @@
 import UIKit
 import Parse
 
-class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource, TagsViewDelegate  {
+class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource, TagsViewDelegate, BarberShopPickDelegate {
     
-    @IBOutlet weak var collectionView: UICollectionView!
+
+    
+    
     //tagList is used to obtain ALL tags and pass them into the tagView
-    var tagList: [PFObject] = []
+    var tagList: [Tag] = []
     //tagReuse is used to accumulate selected tags. It will be populated by tagView. Probably by a prepareForSegue.
     var tagReuse: [Tag] = []
+    //shopList is the list of all barber shops in the system, passed to the BarberShopPicker view.
+    var shopList: [Barbershop] = []
     
-    var shopList: [PFObject] = []
     
-        
-    
-    @IBAction func goBack(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
+    //all outlets
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var priceText: UITextField!
     @IBOutlet weak var shopChoosingButton: UIButton!
     @IBOutlet weak var shopNameText: UILabel!
     @IBOutlet weak var barberChoosingButton: UIButton!
     @IBOutlet weak var barberNameText: UILabel!
-    
     @IBOutlet weak var pictureView: UIImageView!
+    
+    
+    //All button actions
     @IBAction func locationToggle(_ sender: Any) {
     }
+    
+    @IBAction func goBack(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
 
-
-    @IBOutlet weak var priceText: UITextField!
     @IBAction func addPhoto(_ sender: Any) {
         choosePic()
     }
     
+
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        collectionView.dataSource = self
+        collectionView.reloadData()
+        //Grab info for other view controllers
+        getTags()
+        barberShopQuery()
+        // Do any additional setup after loading the view.
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    
+    
+    //All delegate functions here
     func didChooseTags(tags: Set<Tag>) {
         tagReuse = Array(tags)
+        collectionView.reloadData()
+    }
+    
+    func didChooseBarberShop(barberShopName: Barbershop) {
+        shopNameText.text = barberShopName.name
     }
     
     @IBAction func makePost(_ sender: Any) {
@@ -56,6 +86,12 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         Post.postPost(pictures: image, barber: barberNameText.text!, barbershop: shopNameText.text!, tags: tagReuse, price: 10)
         }
     }
+    
+    //End delegate functions
+    
+    
+    
+    //Image work functions
     
     func choosePic() {
         let vc = UIImagePickerController()
@@ -86,46 +122,29 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         
     }
     
-        
+    //End imagework functions
+    
+    
+    
+    
+    //Start tagView setup
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TagCell", for: indexPath) as! TagCell
-//        if !(tagReuse.isEmpty) {
             cell.tagName.text = (tagReuse[indexPath.item].name)
         print(tagReuse[indexPath.item].name)
-        print(tagReuse[indexPath.item].tagId ?? 0)
-//        } else {
-//            cell.tagName.text = "No name"
-//        }
+
             return cell
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return tagReuse.count
     }
     
-    
-    override func viewWillAppear(_ animated: Bool) {
-        print("Console working")
-        getTags()
-
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        collectionView.dataSource = self
-        collectionView.reloadData()
-        //Grab info for other view controllers
-        getTags()
-        barberShopQuery()
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    //End tagView setup
     
 
+    //Data querying work
     func getTags() {
         let query = PFQuery(className: "Tag")
         query.addDescendingOrder("createdAt")
@@ -135,7 +154,7 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
                 print (error.localizedDescription)
             } else {
                 if let tags = tags {
-                    self.tagList = tags
+                    self.tagList = tags as! [Tag]
                 } else {
                     print ("No tags retrieved")
                 }
@@ -153,11 +172,14 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
             if let error = error {
                 print(error.localizedDescription)
             } else {
-                self.shopList = shops!
+                self.shopList = shops as! [Barbershop]
             }
         }
         
     }
+    
+    
+    
     
     // MARK: - Navigation
 
@@ -180,10 +202,11 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
             //Barbershop segue work
         } else if (segue.identifier == "BarberShopSegue") {
             let destVC = segue.destination as! BarberShopPickViewController
-            //Add delegate line here
+            destVC.delegate = self
             destVC.barberShopList = self.shopList
-        
         }
+        
+            //Barber segue work
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
