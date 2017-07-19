@@ -9,6 +9,19 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
+    
+    @IBOutlet weak var profileImageVIew: UIImageView!
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var favShopConstantLabel: UILabel!
+    @IBOutlet weak var favBarberConstantLabel: UILabel!
+    @IBOutlet weak var favShopLabel: UILabel!
+    @IBOutlet weak var favBarberLabel: UILabel!
+    @IBOutlet weak var venmoConstantLabel: UILabel!
+    @IBOutlet weak var venmoLabel: UILabel!
+    @IBOutlet weak var postCollectionView: UICollectionView!
+    @IBOutlet weak var tagCollectionView: UICollectionView!
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
