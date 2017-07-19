@@ -10,7 +10,7 @@ import Foundation
 import Parse
 
 class Barber: PFObject, PFSubclassing {
-    var barberId: String?
+    var barbershop: Barbershop?
     var name: String?
     var venmo: String?
     var profile_pic: PFFile?
