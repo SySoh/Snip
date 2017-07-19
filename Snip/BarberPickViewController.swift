@@ -21,6 +21,7 @@ class BarberPickViewController: UIViewController, UITableViewDelegate, UITableVi
     var barberList: [Barber] = []
     var chosenBarber: Barber?
     var delegate: BarberPickDelegate?
+    var barberShop: Barbershop?
     
     
     //Actions
@@ -53,12 +54,13 @@ class BarberPickViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BarberCell", for: indexPath) as! BarberCell
         cell.nameLabel.text = barberList[indexPath.item].object(forKey: "name") as? String
-        print(barberList[indexPath.item].object(forKey: "name") as? String)
         let imageURL = barberList[indexPath.item].object(forKey: "profile_pic") as? PFFile
-        let imageUrl = cell.profilePic.file
+        cell.profilePic.file = imageURL
         cell.profilePic.loadInBackground()
         cell.barber = barberList[indexPath.item]
-        return cell
+        chosenBarber = barberList[indexPath.item]
+        cell.barbershopLabel.text = barberList[indexPath.item].object(forKey:"barbershop.name") as? String
+            return cell
     }
     
     

@@ -198,6 +198,7 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         let query = PFQuery(className:"Barber")
         query.includeKey("objectId")
         query.addDescendingOrder("createdAt")
+        query.includeKey("barber.barbershop")
         query.findObjectsInBackground { ( barbers: [PFObject]?, error: Error?) in
             if let error = error {
                 print(error.localizedDescription)
