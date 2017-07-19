@@ -314,10 +314,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="81" height="36"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KHV-BW-LVw">
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KHV-BW-LVw">
                                                     <rect key="frame" x="0.0" y="0.0" width="81" height="36"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.82764597900000003" green="0.91809363290000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <accessibility key="accessibilityConfiguration">
+                                                        <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
+                                                    </accessibility>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -405,14 +408,6 @@
                                 <state key="normal" title="Make Post"/>
                                 <connections>
                                     <action selector="makePost:" destination="sI4-xA-N1i" eventType="touchUpInside" id="y2J-Au-wx6"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6lk-oT-335">
-                                <rect key="frame" x="323" y="255" width="36" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="location toggle" image="compass-icon"/>
-                                <connections>
-                                    <action selector="locationToggle:" destination="sI4-xA-N1i" eventType="touchUpInside" id="wE9-JC-4nH"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -659,7 +654,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="compass-icon" width="2000" height="2375"/>
         <image name="cut1" width="219" height="230"/>
         <image name="profile_filler" width="225" height="225"/>
     </resources>
