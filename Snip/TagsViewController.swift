@@ -14,14 +14,20 @@ import Parse
 }
 
 class TagsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-    var fullTagList: [PFObject] = []
+    
+    //Variables
+    
+    var fullTagList: [Tag] = []
     var selectedTags = Set<Tag>()
     var tagList: [String] = []
+    var delegate: TagsViewDelegate?
     
-
+    
+    
+    //Outlets and actions
+    
     @IBOutlet  var collectionView: UICollectionView!
     
-    var delegate: TagsViewDelegate?
     
     @IBAction func goBack(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -34,19 +40,13 @@ class TagsViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
 
     
-    func addString(string: String) {
-        tagList.append(string)
-    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.reloadData()
         collectionView.sizeToFit()
-        
-//        collectionView.allowsMultipleSelection = true
-//        collectionView.allowsSelection = true
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,53 +59,40 @@ class TagsViewController: UIViewController, UICollectionViewDelegate, UICollecti
         collectionView.reloadData()
     }
 
+    
+//Collectionview setup
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TagCell", for: indexPath) as! TagCell
         if fullTagList.count > 0 {
-            cell.tagName.text = fullTagList[indexPath.item].object(forKey: "name") as? String
+            cell.tagName.text = fullTagList[indexPath.item].object(forKey: "name") as! String
         cell.layer.cornerRadius = 50
         cell.clipsToBounds = true
             if cell.isSelected {
                 cell.tagName.backgroundColor = UIColor.cyan
             }
+            cell.tagObject = fullTagList[indexPath.item]
         }
         return cell
         
     }
     
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return fullTagList.count
+    }
+//End collectionview setup
+    
+    
+//Selection work
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("selectin")
          let cell = collectionView.cellForItem(at: indexPath) as! TagCell
+        let tag = cell.tagObject
+        selectedTags.insert(tag!)
         cell.tagName.backgroundColor = UIColor.blue
-        for tag in fullTagList {
-            if tag["name"] as? String == cell.returnTag() {
-                print(tag["name"])
-                let newTag = Tag()
-                newTag.name = tag["name"] as? String
-                newTag.tagId = tag.objectId as! String
-                selectedTags.insert(newTag)
-                print("added!")
-            }
-            print(tag)
-        }
-        
         
     }
-    
-
-//    func collectionView( _ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-//        print("selecting")
-//        if let selectedItems = collectionView.indexPathsForSelectedItems {
-//            if selectedItems.contains(indexPath) {
-//                collectionView.deselectItem(at: indexPath, animated: true)
-//                return false
-//            }
-//        }
-//        return true
-//    }
-
-    
    
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -113,19 +100,7 @@ class TagsViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
-    }
-    
-    
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let destVC = segue.destination as! ComposeViewController
-//        let source = sender as! UIButton
-//        
-//    }
 
  
 
