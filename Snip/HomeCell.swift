@@ -10,6 +10,10 @@ import UIKit
 import Parse
 import ParseUI
 
+@objc protocol HomeCellDelegate {
+    func didMoveToProfile(HomeCell: HomeCell)
+}
+
 class HomeCell: UICollectionViewCell {
     
     //post variables
@@ -35,8 +39,13 @@ class HomeCell: UICollectionViewCell {
     var phone: String?
     var rating: Int?
     
+    var delegate: HomeCellDelegate?
+    
     //cut image
     @IBOutlet weak var cutImageView: PFImageView!
+    
+    
+    
     
     var photo: PFObject! {
         didSet {

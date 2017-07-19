@@ -14,7 +14,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var favShopConstantLabel: UILabel!
     @IBOutlet weak var favBarberConstantLabel: UILabel!
-    @IBOutlet weak var favShopLabel: UILabel!
+    @IBOutlet weak var barbershopLabel: UILabel!
     @IBOutlet weak var favBarberLabel: UILabel!
     @IBOutlet weak var venmoConstantLabel: UILabel!
     @IBOutlet weak var venmoLabel: UILabel!

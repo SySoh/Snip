@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import ParseUI
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController,  HomeCellDelegate {
     
     var photo: PFObject?
     var post: Post?
@@ -41,7 +41,7 @@ class DetailViewController: UIViewController {
     
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var barbershopConstantLabel: UILabel!
-    @IBOutlet weak var captionLabel: UILabel!
+    @IBOutlet weak var captionLabel: UILabel?
     @IBOutlet weak var barbershopLabel: UILabel!
     @IBOutlet weak var barberLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
@@ -50,13 +50,24 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var postImageView: UIImageView!
     
     var photoArray: [PFObject]? = []
+    //homeCell:
 
     
     @IBAction func pressDismiss(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    @IBAction func didPressBarberProfile(_ sender: Any) {
+        performSegue(withIdentifier: "barberProfileSegue", sender: DetailViewController.self)
+    }
     
-    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "barberProfileSegue" {
+//            let vc = segue.destination as! ProfileViewController
+//            let cell = sender as! HomeCell
+//            let photo = photoArray
+//            vc.photo = photo
+//        }
+//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,15 +78,23 @@ class DetailViewController: UIViewController {
         let barber = post["barber"] as! Barber
         let barbershop = barber["barbershop"] as! Barbershop
         
-        print(post["price"])
+        print(barbershop)
         
         self.dateLabel.text = "\(post.createdAt!)"
         self.barberLabel.text = barber["name"] as! String
         self.barbershopLabel.text = barbershop["name"] as? String
-        self.priceLabel.text = "\(post["price"]!)"
-        self.captionLabel.text = post["caption"] as! String
-        
+        self.priceLabel.text = "$" + "\(post["price"]!)"
+        if post["caption"] != nil {
+        self.captionLabel?.text = post["caption"] as! String
+        } else{
+            self.captionLabel?.text = ""
         }
+        
+    }
+    
+    func didMoveToProfile(HomeCell: HomeCell) {
+        performSegue(withIdentifier: "barberProfileSegue", sender: HomeCell)
+    }
     
 
         
