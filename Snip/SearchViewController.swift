@@ -14,7 +14,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
-    var data: [[PFObject]] = []
+    var data: [PFObject] = []
     var filteredData: [[PFObject]] = []
     
     var temp: [PFObject] = []
@@ -32,7 +32,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         tableView.delegate = self
         tableView.dataSource = self
         self.getData()
-        //print(self.data)
         //print(self.getTagNames(tags: tags))
         
         //filteredData = data
@@ -42,9 +41,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     
     func getData() {
         self.queryParse(className: "Photo", keys: ["image", "post"])
-        self.queryParse(className: "Post", keys: ["user", "barber", "price", "tags"])
-        self.queryParse(className: "Barber", keys: ["name", "barbershop", "profile_pic"])
-        self.queryParse(className: "Barbershop", keys: ["name", "picture", "location"])
+      //  self.queryParse(className: "Post", keys: ["user", "barber", "price", "tags"])
+       // self.queryParse(className: "Barber", keys: ["name", "barbershop", "profile_pic"])
+       // self.queryParse(className: "Barbershop", keys: ["name", "picture", "location"])
     }
     
     func getTagNames(tags: [PFObject]) -> [String] {
@@ -63,14 +62,14 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         }
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
             if let objects = objects {
-                self.temp = objects
+                self.data = objects
+                self.tableView.reloadData()
             } else {
                 print(error?.localizedDescription ?? "Error getting \(className)s")
             }
         }
-        print(self.data)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -80,12 +79,13 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
 //    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return data.count
 //        return filteredData[1].count + filteredData[2].count + filteredData[3].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Search Cell", for: indexPath) as! SearchCell
+        cell.bigLabel.text = data[indexPath.row].objectId
         return cell
     }
     
