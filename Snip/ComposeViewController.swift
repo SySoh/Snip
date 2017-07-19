@@ -8,8 +8,9 @@
 
 import UIKit
 import Parse
+import ParseUI
 
-class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource, TagsViewDelegate, BarberShopPickDelegate {
+class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource, TagsViewDelegate, BarberShopPickDelegate, BarberPickDelegate {
     
 
     
@@ -20,6 +21,12 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     var tagReuse: [Tag] = []
     //shopList is the list of all barber shops in the system, passed to the BarberShopPicker view.
     var shopList: [Barbershop] = []
+    //The barberlist to pass to the BarberPicker view
+    var barberList: [Barber] = []
+    //The barbershop object to be passed into the post function
+    var barbershop: Barbershop?
+    //The barber object to be passed into the post function
+    var barber: Barber?
     
     
     //all outlets
@@ -30,7 +37,9 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var barberChoosingButton: UIButton!
     @IBOutlet weak var barberNameText: UILabel!
     @IBOutlet weak var pictureView: UIImageView!
+    @IBOutlet weak var captionTextView: UITextView!
     
+    @IBOutlet weak var pickBarberButton: UIButton!
     
     //All button actions
     @IBAction func locationToggle(_ sender: Any) {
@@ -44,6 +53,22 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         choosePic()
     }
     
+    @IBAction func makePost(_ sender: Any) {
+        let alertController = UIAlertController(title: "One or more fields were left empty", message: "Please fill out all fields", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title:"Okay", style: .cancel) {(UIAlertAction) in }
+        alertController.addAction(cancelAction)
+        
+        if ((barbershop == nil) || (barber == nil) || (priceText.text?.isEmpty)! || tagReuse.isEmpty || pictureView.image == nil){
+            present(alertController, animated: true)
+            print("pop up notif here")
+        } else {
+            let image = pictureView.image!
+            
+            //redo post function
+            Post.postPost(pictures: image, barber: self.barber!, barbershop: self.barbershop!, tags: tagReuse, price: Int64(priceText.text!)!, caption: captionTextView.text)
+            dismiss(animated: true, completion: nil)
+        }
+    }
 
     
     override func viewDidLoad() {
@@ -53,6 +78,17 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         //Grab info for other view controllers
         getTags()
         barberShopQuery()
+        barberQuery()
+        if barbershop == nil {
+            pickBarberButton.isEnabled = false
+            pickBarberButton.titleLabel?.textColor = UIColor.gray
+        }
+        collectionView.layer.borderColor = UIColor.black.cgColor
+        collectionView.layer.borderWidth = 1.0
+        captionTextView.layer.borderColor = UIColor.black.cgColor
+        captionTextView.layer.borderWidth = 0.5
+        
+        
         // Do any additional setup after loading the view.
     }
     
@@ -71,21 +107,16 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     func didChooseBarberShop(barberShopName: Barbershop) {
         shopNameText.text = barberShopName.name
+        self.barbershop = barberShopName
+        pickBarberButton.isEnabled = true
+        pickBarberButton.titleLabel?.textColor = UIColor.blue
     }
     
-    @IBAction func makePost(_ sender: Any) {
-        let alertController = UIAlertController(title: "One or more fields were left empty", message: "Please fill out all fields", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title:"Okay", style: .cancel) {(UIAlertAction) in }
-        alertController.addAction(cancelAction)
-        
-        if ((shopNameText.text?.isEmpty)! || (barberNameText.text?.isEmpty)! || (priceText.text?.isEmpty)! || tagReuse.isEmpty || pictureView.image == nil){
-            present(alertController, animated: true)
-            print("pop up notif here")
-        } else {
-        let image = pictureView.image!
-        Post.postPost(pictures: image, barber: barberNameText.text!, barbershop: shopNameText.text!, tags: tagReuse, price: 10)
-        }
+    func didChooseBarber(barberName: Barber) {
+        barberNameText.text = barberName.name
+        self.barber = barberName
     }
+    
     
     //End delegate functions
     
@@ -178,6 +209,19 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         
     }
     
+    func barberQuery(){
+        let query = PFQuery(className:"Barber")
+        query.includeKey("objectId")
+        query.addDescendingOrder("createdAt")
+        query.includeKey("barber.barbershop")
+        query.findObjectsInBackground { ( barbers: [PFObject]?, error: Error?) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                self.barberList = barbers as! [Barber]
+            }
+    }
+    }
     
     
     
@@ -204,6 +248,14 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
             let destVC = segue.destination as! BarberShopPickViewController
             destVC.delegate = self
             destVC.barberShopList = self.shopList
+        } else if (segue.identifier == "BarberPick") {
+            let destVC = segue.destination as! BarberPickViewController
+            destVC.delegate = self
+            for barber in self.barberList {
+                if barbershop?.objectId == barber.barbershop?.objectId {
+                destVC.barberList.append(barber)
+            }
+        }
         }
         
             //Barber segue work
