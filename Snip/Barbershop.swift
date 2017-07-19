@@ -10,11 +10,11 @@ import Foundation
 import Parse
 
 class Barbershop: PFObject, PFSubclassing {
-    var barbershopId: String?
-    var name: String?
-    var picture: PFFile?
-    var location: String?
-    var phone: String?
+    @NSManaged var name: String?
+    @NSManaged var picture: PFFile?
+    @NSManaged var location: String?
+    @NSManaged var hours: String?
+    @NSManaged var phone: String?
     var rating: Int?
     //var updatedAt: Date?
     

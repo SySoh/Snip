@@ -10,10 +10,10 @@ import Foundation
 import Parse
 
 class Barber: PFObject, PFSubclassing {
-    var barberId: String?
-    var name: String?
-    var venmo: String?
-    var profile_pic: PFFile?
+    @NSManaged var barbershop: Barbershop?
+    @NSManaged var name: String?
+    @NSManaged var venmo: String?
+    @NSManaged var profile_pic: PFFile?
     
     class func parseClassName() -> String {
         return "Barber"
