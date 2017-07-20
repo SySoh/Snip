@@ -59,8 +59,7 @@ class BarberPickViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.profilePic.loadInBackground()
         cell.barber = barberList[indexPath.item]
         chosenBarber = barberList[indexPath.item]
-        cell.barbershopLabel.text = barberList[indexPath.item].object(forKey:"barbershop.name") as? String
-            return cell
+        return cell
     }
     
     

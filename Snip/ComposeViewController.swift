@@ -13,8 +13,6 @@ import CoreLocation
 
 class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, TagsViewDelegate, BarberShopPickDelegate, BarberPickDelegate {
     
-
- 
     
     //tagList is used to obtain ALL tags and pass them into the tagView
     var tagList: [Tag] = []
@@ -239,7 +237,6 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
             }
     }
     }
-    
     
     
     // MARK: - Navigation

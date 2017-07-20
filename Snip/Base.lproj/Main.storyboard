@@ -59,7 +59,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="123.5" height="123.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="124" height="123"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="123" height="123"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cut1" translatesAutoresizingMaskIntoConstraints="NO" id="OgZ-RC-n7q">
@@ -427,7 +427,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tGp-9h-9gJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1070" y="-552"/>
+            <point key="canvasLocation" x="1183" y="121"/>
         </scene>
         <!--Compose View Controller-->
         <scene sceneID="FLR-Ri-DX9">
@@ -630,10 +630,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-<<<<<<< HEAD
-            <point key="canvasLocation" x="1036" y="-584"/>
-=======
-            <point key="canvasLocation" x="1237.5999999999999" y="76.911544227886068"/>
+            <point key="canvasLocation" x="265" y="-663"/>
         </scene>
         <!--Barber Pick View Controller-->
         <scene sceneID="s6q-5c-KiH">
@@ -696,7 +693,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5TP-YH-nJX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2301.5999999999999" y="-545.57721139430294"/>
+            <point key="canvasLocation" x="265" y="-1385"/>
         </scene>
         <!--Barber Shop Pick View Controller-->
         <scene sceneID="QrB-NE-y9c">
@@ -762,8 +759,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="btw-dc-9bC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2309.5999999999999" y="120.98950524737631"/>
->>>>>>> 1c5325dd66250dcae8321dced04d4bdea9e7983b
+            <point key="canvasLocation" x="-626" y="-1386"/>
         </scene>
         <!--Tags View Controller-->
         <scene sceneID="K5d-Dp-hJG">
@@ -848,8 +844,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mjJ-iP-ind" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-<<<<<<< HEAD
-            <point key="canvasLocation" x="2114" y="121"/>
+            <point key="canvasLocation" x="1182" y="-1385"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="EhX-D0-vGX">
@@ -867,10 +862,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Za-Ng-WuQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3270" y="-48"/>
-=======
-            <point key="canvasLocation" x="1732" y="905"/>
->>>>>>> 1c5325dd66250dcae8321dced04d4bdea9e7983b
+            <point key="canvasLocation" x="2044" y="121"/>
         </scene>
     </scenes>
     <resources>

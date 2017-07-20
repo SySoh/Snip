@@ -34,7 +34,6 @@ class TagsViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
 
     @IBAction func didFinish(_ sender: Any) {
-        print(delegate)
         delegate?.didChooseTags(tags: selectedTags)
         dismiss(animated: true, completion: nil)
     }
