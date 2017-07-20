@@ -59,7 +59,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="123.5" height="123.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="124" height="123"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="123" height="123"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cut1" translatesAutoresizingMaskIntoConstraints="NO" id="OgZ-RC-n7q">
@@ -427,7 +427,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tGp-9h-9gJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1070" y="-552"/>
+            <point key="canvasLocation" x="1121" y="99"/>
         </scene>
         <!--Compose View Controller-->
         <scene sceneID="FLR-Ri-DX9">
@@ -630,10 +630,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-<<<<<<< HEAD
-            <point key="canvasLocation" x="1036" y="-584"/>
-=======
-            <point key="canvasLocation" x="1237.5999999999999" y="76.911544227886068"/>
+            <point key="canvasLocation" x="265" y="-669"/>
         </scene>
         <!--Barber Pick View Controller-->
         <scene sceneID="s6q-5c-KiH">
@@ -696,7 +693,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5TP-YH-nJX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2301.5999999999999" y="-545.57721139430294"/>
+            <point key="canvasLocation" x="265" y="-1406"/>
         </scene>
         <!--Barber Shop Pick View Controller-->
         <scene sceneID="QrB-NE-y9c">
@@ -762,8 +759,66 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="btw-dc-9bC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2309.5999999999999" y="120.98950524737631"/>
->>>>>>> 1c5325dd66250dcae8321dced04d4bdea9e7983b
+            <point key="canvasLocation" x="-532" y="-1406"/>
+        </scene>
+        <!--Barber Shop View Controller-->
+        <scene sceneID="fXn-g3-Coc">
+            <objects>
+                <viewController id="dey-tC-3b4" customClass="BarberShopViewController" customModule="Snip" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="VqR-eb-Ihn"/>
+                        <viewControllerLayoutGuide type="bottom" id="45n-xx-qCn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="n6e-Ma-nuH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3DW-gB-OGw" customClass="PFImageView">
+                                <rect key="frame" x="16" y="28" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GgP-Th-rVh">
+                                <rect key="frame" x="37" y="207" width="45" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ywb-TP-Rsm">
+                                <rect key="frame" x="37" y="268" width="66" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Phone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tkH-8V-6un">
+                                <rect key="frame" x="37" y="339" width="49" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="rATING" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eu4-Nu-8r1">
+                                <rect key="frame" x="37" y="402" width="55" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="locationLabel" destination="Ywb-TP-Rsm" id="r9t-tt-Ivy"/>
+                        <outlet property="nameLabel" destination="GgP-Th-rVh" id="YDJ-02-OeH"/>
+                        <outlet property="phoneLabel" destination="tkH-8V-6un" id="XyZ-n2-Sa9"/>
+                        <outlet property="ratingLabel" destination="eu4-Nu-8r1" id="84k-hn-8Di"/>
+                        <outlet property="shopImage" destination="3DW-gB-OGw" id="KaK-mY-94y"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rF5-t0-nto" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2913" y="99"/>
         </scene>
         <!--Tags View Controller-->
         <scene sceneID="K5d-Dp-hJG">
@@ -848,29 +903,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mjJ-iP-ind" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-<<<<<<< HEAD
-            <point key="canvasLocation" x="2114" y="121"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="EhX-D0-vGX">
-            <objects>
-                <viewController id="GRA-qv-gup" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="dah-Bc-u4L"/>
-                        <viewControllerLayoutGuide type="bottom" id="NE9-lr-N3c"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="PgW-dW-eUd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1Za-Ng-WuQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3270" y="-48"/>
-=======
-            <point key="canvasLocation" x="1732" y="905"/>
->>>>>>> 1c5325dd66250dcae8321dced04d4bdea9e7983b
+            <point key="canvasLocation" x="1121" y="-1406"/>
         </scene>
     </scenes>
     <resources>
