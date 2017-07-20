@@ -40,6 +40,7 @@ class SearchViewController: UIViewController {
             .menuItemSeparatorWidth(0.0),
             .useMenuLikeSegmentedControl(true),
             .menuItemSeparatorPercentageHeight(0.1),
+            .scrollAnimationDurationOnMenuItemTap(250)
         ]
         
         // Initialize page menu with controller array, frame, and optional parameters
