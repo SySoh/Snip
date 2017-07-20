@@ -71,8 +71,8 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
             let vc = segue.destination as! ProfileViewController
             vc.barberName = self.barberLabel.text
             vc.barbershopName = self.barbershopLabel.text
-//            vc.venmo = self.venmo!
-            vc.profileImage = self.profile_pic
+            vc.venmo = self.venmo
+            vc.profileImage = self.profileImageView.image
             print(self.profile_pic)
             print("here is the profile pic^")
             vc.photoArray = self.photoArray
@@ -125,6 +125,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
         self.barberLabel.text = barber["name"] as! String
         self.barbershopLabel.text = barbershop["name"] as? String
         self.priceLabel.text = "$" + "\(post["price"]!)"
+        self.venmo = barber["venmo"] as? String
         print(barber["profile_pic"])
         print("above is the image")
         self.profileImageView.file = barber["profile_pic"] as! PFFile
