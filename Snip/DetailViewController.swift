@@ -72,12 +72,14 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
             vc.barberName = self.barberLabel.text
             vc.barbershopName = self.barbershopLabel.text
             vc.venmo = self.venmo
-            vc.profileImage = self.profileImageView.image
-            print(self.profile_pic)
+            print("venmo")
+            print(self.venmo)
+            vc.barber = self.barber
+            print("profile pic")
             print("here is the profile pic^")
-            vc.photoArray = self.photoArray
+            //vc.photoArray = self.photoArray
             //print(self.photoArray)
-            vc.tagNameArray = self.tagNameArray
+            //vc.tagNameArray = self.tagNameArray
             
             
             
@@ -104,36 +106,41 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
         // Do any additional setup after loading the view.
         self.postImageView.image = self.postImage
         //self.postImageView.loadInBackground()
-        let post = photo!["post"] as! Post
-        let barber = post["barber"] as! Barber
+        self.post = photo!["post"] as! Post
+        print("post")
+        print(post)
+        self.barber = self.post?["barber"] as! Barber
+        print("barber")
         print(barber)
-        let tagArray = post["tags"] as! [Tag]
+        self.tagArray = post?["tags"] as! [Tag]
+        print("tagarray")
+        print(tagArray)
 //        let tag = tagArray[0] as! Tag
 //        print(tagArray)
-        for tag in tagArray {
+        for tag in tagArray! {
             self.tagNameArray.append(tag.name!)
             print(tagNameArray)
         }
-        let barbershop = barber["barbershop"] as! Barbershop
+        self.barbershop = self.barber?["barbershop"] as! Barbershop
         
 
-        print(barbershop)
-        print(post["price"])
+        print(self.barbershop)
+        print(post?["price"])
 
         
-        self.dateLabel.text = "\(post.createdAt!)"
-        self.barberLabel.text = barber["name"] as! String
-        self.barbershopLabel.text = barbershop["name"] as? String
-        self.priceLabel.text = "$" + "\(post["price"]!)"
-        self.venmo = barber["venmo"] as? String
-        print(barber["profile_pic"])
+        self.dateLabel.text = "\(self.post?.createdAt!)"
+        self.barberLabel.text = self.barber?["name"] as! String
+        self.barbershopLabel.text = self.barbershop?["name"] as? String
+        self.priceLabel.text = "$" + "\(self.post?["price"]!)"
+        self.venmo = self.barber?["venmo"] as? String
+        print(self.barber?["profile_pic"])
         print("above is the image")
-        self.profileImageView.file = barber["profile_pic"] as! PFFile
+        self.profileImageView.file = barber?["profile_pic"] as! PFFile
         self.profileImageView.loadInBackground()
-        print(barber["profile_pic"])
+        print(self.barber?["profile_pic"])
         print("here is the image^")
-        if post["caption"] != nil {
-        self.captionLabel?.text = post["caption"] as! String
+        if post?["caption"] != nil {
+        self.captionLabel?.text = post?["caption"] as! String
         } else{
             self.captionLabel?.text = ""
         }

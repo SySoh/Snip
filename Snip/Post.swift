@@ -13,7 +13,7 @@ class Post: PFObject, PFSubclassing {
     @NSManaged var user: User?
     @NSManaged var barber: Barber?
     @NSManaged var barbershop: Barbershop?
-    var photos: [PFFile]?
+    var photos: [PFFile] = []
     var tags: [Tag]?
     var price: Int?
     

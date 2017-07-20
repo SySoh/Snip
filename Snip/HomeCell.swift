@@ -16,6 +16,7 @@ import ParseUI
 
 class HomeCell: UICollectionViewCell {
     
+    @IBOutlet weak var profileCutImageView: PFImageView!
     //post variables
     var postId: String?
     var user: User?

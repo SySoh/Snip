@@ -63,8 +63,10 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             vc.postImage = cell.cutImageView.image!
             let indexPath = homeCollectionView.indexPath(for: cell)
             let photo = photoArray[(indexPath?.item)!]
+            print(photo)
             vc.photo = photo as! Photo
             vc.photoArray = self.photoArray
+            print(photoArray)
             }
     }
     
