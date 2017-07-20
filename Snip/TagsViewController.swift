@@ -89,13 +89,21 @@ class TagsViewController: UIViewController, UICollectionViewDelegate, UICollecti
         print("selectin")
          let cell = collectionView.cellForItem(at: indexPath) as! TagCell
         let tag = cell.tagObject
+        if selectedTags.contains(tag!){
+            selectedTags.remove(tag!)
+            cell.tagName.backgroundColor = UIColor.white
+            cell.tagName.textColor = UIColor.black
+        } else {
         selectedTags.insert(tag!)
         cell.tagName.backgroundColor = UIColor.blue
+        cell.tagName.textColor = UIColor.white
+        }
         
     }
    
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        
         
     }
     

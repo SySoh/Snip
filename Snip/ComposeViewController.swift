@@ -9,11 +9,12 @@
 import UIKit
 import Parse
 import ParseUI
+import CoreLocation
 
-class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource, TagsViewDelegate, BarberShopPickDelegate, BarberPickDelegate {
+class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, TagsViewDelegate, BarberShopPickDelegate, BarberPickDelegate {
     
 
-    
+ 
     
     //tagList is used to obtain ALL tags and pass them into the tagView
     var tagList: [Tag] = []
@@ -42,8 +43,7 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var pickBarberButton: UIButton!
     
     //All button actions
-    @IBAction func locationToggle(_ sender: Any) {
-    }
+
     
     @IBAction func goBack(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -51,6 +51,9 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
 
     @IBAction func addPhoto(_ sender: Any) {
         choosePic()
+    }
+    @IBAction func onTap(_ sender: Any) {
+        view.endEditing(true)
     }
     
     @IBAction func makePost(_ sender: Any) {
@@ -74,7 +77,9 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.reloadData()
+        
         //Grab info for other view controllers
         getTags()
         barberShopQuery()
@@ -87,6 +92,7 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         collectionView.layer.borderWidth = 1.0
         captionTextView.layer.borderColor = UIColor.black.cgColor
         captionTextView.layer.borderWidth = 0.5
+        collectionView.allowsSelection = true
         
         
         // Do any additional setup after loading the view.
@@ -171,6 +177,17 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return tagReuse.count
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+                print("selecting")
+                tagReuse.remove(at: indexPath.item)
+                collectionView.reloadData()
+                print(tagReuse[indexPath.item])
+    }
+    
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
+
+//    }
     
     //End tagView setup
     
