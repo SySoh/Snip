@@ -10,28 +10,59 @@ import Foundation
 import Parse
 
 class Post: PFObject, PFSubclassing {
+<<<<<<< HEAD
     @NSManaged var barber: Barber?
     @NSManaged var tags: [Tag]?
+=======
+    @NSManaged var user: User?
+    @NSManaged var barber: Barber?
+    @NSManaged var barbershop: Barbershop?
+    var photos: [PFFile]?
+    var tags: [Tag]?
+>>>>>>> 1c5325dd66250dcae8321dced04d4bdea9e7983b
     var price: Int?
     
     class func parseClassName() -> String {
         return "Post"
     }
     
-    class func postPost(pictures: UIImage, barber: String, barbershop: String, tags: [Tag], price: Int) {
+    class func postPost(pictures: UIImage, barber: Barber, barbershop: Barbershop, tags: [Tag], price: Int64, caption: String?) {
         let post = PFObject(className: "Post")
-        post["user"] = PFUser.current
-        post["tags"] = tags
-        post["price"] = price
-        post["user"] = PFUser.current()
+        post["barbershop"] = barbershop
         post["barber"] = barber
-
-        let photo = PFObject(className: "Photo")
-        photo["image"] = getPFFileFromImage(image: pictures)
-        photo["post"] = post.objectId
-        photo.saveInBackground()
-
+        if !(tags.isEmpty){
+            post["tags"] = tags
+        }
+        post["price"] = price
+        
+        post["caption"] = caption
+        
+        if PFUser.current() != nil {
+            post["user"] = PFUser.current()
+        } else {
+            post["user"] = NSNull()
+        }
+        
         post.saveInBackground()
+        let query = PFQuery(className: "Post")
+        query.addDescendingOrder("createdAt")
+        query.includeKey("objectId")
+        query.getFirstObjectInBackground(block: { (thisPost: PFObject?, error: Error?) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                let photo = PFObject(className: "Photo")
+                
+                photo["image"] = getPFFileFromImage(image: pictures)
+                
+                photo["post"] = thisPost
+                
+                photo.saveInBackground()
+                
+                print("post and photo successfully saved")
+            }
+        })
+
         
     }
     

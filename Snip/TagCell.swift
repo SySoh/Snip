@@ -14,17 +14,18 @@ import UIKit
 
 class TagCell: UICollectionViewCell {
 
-    @IBAction func didTap(_ sender: Any) {
-        delegate!.addString(tagCell: self)
-    }
-    
+//    @IBAction func didTap(_ sender: Any) {
+//        delegate!.addString(tagCell: self)
+//       tagName.backgroundColor = UIColor.green
+//    }
+//    
+    var tagObject: Tag?
     var delegate: TagCellDelegate?
-    @IBOutlet weak var tagName: UIButton!
+    @IBOutlet weak var tagName: UILabel!
     
     func returnTag() -> String? {
-        return tagName.titleLabel?.text
+        return tagName.text;
     }
-    
-    
+                
     
 }

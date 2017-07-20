@@ -10,7 +10,7 @@ import Foundation
 import Parse
 
 class User: PFObject, PFSubclassing {
-    var userId: String?
+    var user: User?
     var username: String?
     var password: String?
     var email: String?
