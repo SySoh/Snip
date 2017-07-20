@@ -16,6 +16,7 @@ target 'Snip' do
   pod 'ActiveLabel'
   pod 'Parse'
   pod 'ParseUI'
+  pod 'PageMenu'
   pod 'IQKeyboardManagerSwift'
 
   target 'SnipTests' do

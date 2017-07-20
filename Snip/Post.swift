@@ -10,11 +10,12 @@ import Foundation
 import Parse
 
 class Post: PFObject, PFSubclassing {
-    @NSManaged var user: User?
+
     @NSManaged var barber: Barber?
+    @NSManaged var tags: [Tag]?
+    @NSManaged var user: User?
     @NSManaged var barbershop: Barbershop?
     var photos: [PFFile] = []
-    var tags: [Tag]?
     var price: Int?
     
     class func parseClassName() -> String {
@@ -25,6 +26,7 @@ class Post: PFObject, PFSubclassing {
         let post = PFObject(className: "Post")
         post["barbershop"] = barbershop
         post["barber"] = barber
+        
         if !(tags.isEmpty){
             post["tags"] = tags
         }

@@ -13,8 +13,10 @@ class Barbershop: PFObject, PFSubclassing {
     @NSManaged var name: String?
     @NSManaged var picture: PFFile?
     @NSManaged var location: String?
+    @NSManaged var hours: String?
     @NSManaged var phone: String?
     @NSManaged var rating: String?
+
     //var updatedAt: Date?
     
     class func parseClassName() -> String {
