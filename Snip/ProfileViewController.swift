@@ -35,6 +35,9 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     var barber: Barber!
     var barberId: String!
     
+    @IBAction func pressBack(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
