@@ -14,7 +14,7 @@ class BarberSearchViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBOutlet weak var tableView: UITableView!
     
-    var tags: [PFObject] = []
+    var barbers: [PFObject] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,12 +25,13 @@ class BarberSearchViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func getTags() {
-        let query = PFQuery(className: "Tag")
+        let query = PFQuery(className: "Barber")
         query.order(byDescending: "createdAt")
         query.includeKey("name")
+        query.includeKey("profile_pic")
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
             if let objects = objects {
-                self.tags = objects
+                self.barbers = objects
                 self.tableView.reloadData()
             } else {
                 print(error?.localizedDescription ?? "Error fetching tags")
@@ -39,14 +40,36 @@ class BarberSearchViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tags.count
+        return barbers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Tag Search Cell", for: indexPath) as! TagSearchCell
-        let tag = self.tags[indexPath.row]
-        let tagName = tag["name"] as! String
-        cell.tagLabel.text = tagName
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Barber Search Cell", for: indexPath) as! BarberSearchCell
+        let barber = self.barbers[indexPath.row]
+        
+        // Set Barber Name
+        let barberName = barber["name"] as! String
+        cell.nameLabel.text = barberName
+        
+        // Set Barber Profile Picture
+        let profile_pic = barber["profile_pic"] as? PFFile
+        profile_pic?.getDataInBackground { (backgroundData: Data?, erro: Error?) in
+            if let backgroundData = backgroundData {
+                cell.profileImage.layer.cornerRadius = cell.profileImage.frame.size.width / 2
+                cell.profileImage.contentMode = .scaleAspectFill
+                cell.profileImage.image = UIImage(data: backgroundData)
+            }
+        }
+        
+        // Set Number of Cuts
+        let query = PFQuery(className: "Post")
+        query.whereKey("barber", equalTo: barber)
+        query.countObjectsInBackground { (count: Int32, error: Error?) in
+            if error == nil {
+                cell.cutLabel.text = "\(count)" + " cuts"
+            }
+        }
+        
         return cell
     }
     
