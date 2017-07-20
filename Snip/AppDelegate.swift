@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Barbershop.registerSubclass()
         Post.registerSubclass()
         Photo.registerSubclass()
+        Tag.registerSubclass()
         // Override point for customization after application launch.
         Tag.registerSubclass()
 

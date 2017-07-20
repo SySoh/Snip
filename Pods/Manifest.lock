@@ -10,6 +10,7 @@ PODS:
   - OAuthSwiftAlamofire (0.1.0):
     - Alamofire
     - OAuthSwift
+  - PageMenu (2.0.0)
   - Parse (1.14.4):
     - Bolts/Tasks (~> 1.8)
   - ParseUI (1.2.0):
@@ -31,6 +32,7 @@ DEPENDENCIES:
   - KeychainAccess
   - OAuthSwift (~> 1.1.0)
   - OAuthSwiftAlamofire
+  - PageMenu
   - Parse
   - ParseUI
   - Prephirences
@@ -45,11 +47,16 @@ SPEC CHECKSUMS:
   KeychainAccess: a986406022dfc7c634c691ad3bec670cc6a32002
   OAuthSwift: 5aa5659984d3ca3206ba636a9e7a9c6626b2e8bd
   OAuthSwiftAlamofire: 20bb998ac506f82c3bab0625fbc98a9c6fca783f
+  PageMenu: 9c38fd7e0d9ef4b1408320f55bb907bbc0e538dc
   Parse: b0aa91d2c435e53d4a9af26e741e014c9b35c42e
   ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
   Prephirences: d0ec0bd6047edb3370364345857a769aaf3db312
   RSKPlaceholderTextView: 301f0f30e70e7c42fe4e941e3a08365ab0d890d5
 
+<<<<<<< HEAD
+PODFILE CHECKSUM: 019566a1f30f4259467e537d7cda91c6bae47513
+=======
 PODFILE CHECKSUM: a540eef7c4af24771f72ce4af29a6672918be235
+>>>>>>> 1c5325dd66250dcae8321dced04d4bdea9e7983b
 
 COCOAPODS: 1.2.1
