@@ -1,17 +1,15 @@
 //
-//  SearchCell.swift
+//  BarberSearchCell.swift
 //  Snip
 //
-//  Created by Chase Warren on 7/17/17.
+//  Created by Chase Warren on 7/20/17.
 //  Copyright © 2017 Shao Yie Soh. All rights reserved.
 //
 
 import UIKit
 
-class SearchCell: UITableViewCell {
+class BarberSearchCell: UITableViewCell {
 
-    @IBOutlet weak var bigLabel: UILabel!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
