@@ -25,6 +25,7 @@ class Post: PFObject, PFSubclassing {
         let post = PFObject(className: "Post")
         post["barbershop"] = barbershop
         post["barber"] = barber
+        
         if !(tags.isEmpty){
             post["tags"] = tags
         }
