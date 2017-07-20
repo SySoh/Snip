@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import ParseUI
+import IQKeyboardManagerSwift
 
 
 @UIApplicationMain
@@ -22,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Barbershop.registerSubclass()
         Post.registerSubclass()
         Photo.registerSubclass()
+        Tag.registerSubclass()
         // Override point for customization after application launch.
         Tag.registerSubclass()
 
@@ -38,6 +40,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = HomeViewController
             
         }
+        
+        IQKeyboardManager.sharedManager().enable = true
+
         
 //        NotificationCenter.default.addObserver(forName: NSNotification.Name("onLogout"), object: nil, queue: OperationQueue.main, using: { (Notification) in let storyboard = UIStoryboard(name: "Main", bundle: nil)
 //            let vc = storyboard.instantiateViewController(withIdentifier: "signInView") as! LoginViewController

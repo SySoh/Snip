@@ -24,11 +24,13 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var postCollectionView: UICollectionView!
     @IBOutlet weak var tagCollectionView: UICollectionView!
     
+    var photoArray: [PFObject]!
     var photo: PFObject!
     var barberName: String!
     var barbershopName: String!
     var venmo: String!
     var profileImage: UIImage!
+    var tagNameArray: [String]!
     
 
     override func viewDidLoad() {

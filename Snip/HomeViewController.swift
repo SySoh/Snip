@@ -64,6 +64,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             let indexPath = homeCollectionView.indexPath(for: cell)
             let photo = photoArray[(indexPath?.item)!]
             vc.photo = photo as! Photo
+            vc.photoArray = self.photoArray
             }
     }
     
@@ -74,28 +75,29 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         query.includeKey("image")
         query.includeKey("post.barber")
         query.includeKey("post.barber.barbershop")
+        query.includeKey("post.tags")
         query.limit = 20
         //fetch data asynchronously
         query.findObjectsInBackground { (objects, error: Error?) in
             if let photos = objects {
-                print("made it here")
+//                print("made it here")
                 let photo = photos.first as! Photo
                 let post = photo["post"] as! Post
-                self.price = post["price"] as! Int
-                self.tags = post["tags"] as! [Tag]
-                //self.user = post["user"] as! User
-                self.barber = post["barber"] as! Barber
-                print(self.barber?["name"])
-                print("ABOVE IS THE NAME")
-                self.barberName = self.barber?["name"] as! String
-                self.venmo = self.barber?["venmo"] as! String
-                self.profile_pic = self.barber?["profile_pic"] as! PFFile
-                self.barbershop = self.barber?["barbershop"] as! Barbershop
-                self.shopName = self.barbershop?["name"] as! String
-                //let shopPic = barbershop["picture"] as! PFFile
-                self.location = self.barbershop?["location"] as! String
-                self.phone = self.barbershop?["phone"] as! String
-                self.rating = self.barbershop?["rating"] as! Int
+//                self.price = post["price"] as! Int
+//                self.tags = post["tags"] as! [Tag]
+//                //self.user = post["user"] as! User
+//                self.barber = post["barber"] as! Barber
+//                print(self.barber?["name"])
+//                print("ABOVE IS THE NAME")
+//                self.barberName = self.barber?["name"] as! String
+//                self.venmo = self.barber?["venmo"] as! String
+//                self.profile_pic = self.barber?["profile_pic"] as! PFFile
+//                self.barbershop = self.barber?["barbershop"] as! Barbershop
+//                self.shopName = self.barbershop?["name"] as! String
+//                //let shopPic = barbershop["picture"] as! PFFile
+//                self.location = self.barbershop?["location"] as! String
+//                self.phone = self.barbershop?["phone"] as! String
+//                self.rating = self.barbershop?["rating"] as! Int
                 //print(barber["name"])
                 self.photoArray = photos
                 self.homeCollectionView.reloadData()

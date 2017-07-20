@@ -10,12 +10,15 @@ import UIKit
 import Parse
 import ParseUI
 
-class DetailViewController: UIViewController{
+
+
+class DetailViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+
     
     var photo: PFObject?
     var post: Post?
     var price: Int?
-    var tags: [Tag]?
+    var tagsArray: [String]?
     var user: User?
     var barber: Barber?
 
@@ -36,8 +39,8 @@ class DetailViewController: UIViewController{
     var homeViewController: HomeViewController?
     
     // outlets
-    @IBOutlet weak var profileImageView: PFImageView!
     
+    @IBOutlet weak var profileImageView: PFImageView!
     
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var barbershopConstantLabel: UILabel!
@@ -50,8 +53,13 @@ class DetailViewController: UIViewController{
     @IBOutlet weak var postImageView: UIImageView!
     
     var photoArray: [PFObject]? = []
+
     var detailView: DetailViewController!
     //homeCell:
+
+    var tagArray: [Tag]? = []
+    var tagNameArray: [String]! = []
+
 
     
     @IBAction func pressDismiss(_ sender: Any) {
@@ -65,6 +73,12 @@ class DetailViewController: UIViewController{
             vc.barbershopName = self.barbershopLabel.text
 //            vc.venmo = self.venmo!
             vc.profileImage = self.profile_pic
+            print(self.profile_pic)
+            print("here is the profile pic^")
+            vc.photoArray = self.photoArray
+            //print(self.photoArray)
+            vc.tagNameArray = self.tagNameArray
+            
             
             
         }
@@ -85,19 +99,38 @@ class DetailViewController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        detailCollectionView.delegate = self
+        detailCollectionView.dataSource = self
         // Do any additional setup after loading the view.
         self.postImageView.image = self.postImage
         //self.postImageView.loadInBackground()
         let post = photo!["post"] as! Post
         let barber = post["barber"] as! Barber
+        print(barber)
+        let tagArray = post["tags"] as! [Tag]
+//        let tag = tagArray[0] as! Tag
+//        print(tagArray)
+        for tag in tagArray {
+            self.tagNameArray.append(tag.name!)
+            print(tagNameArray)
+        }
         let barbershop = barber["barbershop"] as! Barbershop
         
+
         print(barbershop)
+        print(post["price"])
+
         
         self.dateLabel.text = "\(post.createdAt!)"
         self.barberLabel.text = barber["name"] as! String
         self.barbershopLabel.text = barbershop["name"] as? String
         self.priceLabel.text = "$" + "\(post["price"]!)"
+        print(barber["profile_pic"])
+        print("above is the image")
+        self.profileImageView.file = barber["profile_pic"] as! PFFile
+        self.profileImageView.loadInBackground()
+        print(barber["profile_pic"])
+        print("here is the image^")
         if post["caption"] != nil {
         self.captionLabel?.text = post["caption"] as! String
         } else{
@@ -107,9 +140,20 @@ class DetailViewController: UIViewController{
     }
     
 
-
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print(tagsArray)
+        //return tagsArray!.count
+        return tagNameArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "detailCell", for: indexPath) as! DetailCell
+        let tag = self.tagsArray?[indexPath.item]
+        cell.tagLabel.text = tagNameArray[indexPath.item]
+        print(tag)
+        return cell
         
-
+    }
     
 
     override func didReceiveMemoryWarning() {
