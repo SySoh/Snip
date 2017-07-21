@@ -37,6 +37,7 @@ class HomeCell: UICollectionViewCell {
     
     //cut image
     @IBOutlet weak var cutImageView: PFImageView!
+    @IBOutlet weak var TSRCutImageView: UIImageView!
     
     var photo: PFObject! {
         didSet {

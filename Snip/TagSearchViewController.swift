@@ -41,26 +41,13 @@ class TagSearchViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "TagSearchSegue" {
-//            let vc = segue.destination as! DetailViewController
-//            let cell = sender as! HomeCell
-//            //vc.caption = cell.captionLabel.text
-//            //vc.username = cell.usernameLabel.text
-//            //vc.date = cell.creationDateLabel.text
-//            //vc.profileImage = cell.profilePicImageView.file
-//            print(barberName)
-//            //vc.profileImageView.file = profile_pic as! PFFile
-//            //            vc.barberLabel.text = "\(barberName)"
-//            //            vc.barbershopLabel.text = shopName
-//            //            vc.priceLabel.text = String(describing: price)
-//            //            vc.dateLabel.text = photo?.createdAt as! String
-//            vc.postImage = cell.cutImageView.image!
-//            let indexPath = homeCollectionView.indexPath(for: cell)
-//            let photo = photoArray[(indexPath?.item)!]
-//            vc.photo = photo as! Photo
-//        }
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "TagSearchSegue" {
+            let vc = segue.destination as! TSRViewController
+            let cell = sender as! TagSearchCell
+            vc.tag = cell.cellTag
+        }
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredTags.count
@@ -69,6 +56,7 @@ class TagSearchViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Tag Search Cell", for: indexPath) as! TagSearchCell
         let tag = self.filteredTags[indexPath.row]
+        cell.cellTag = tag as! Tag
         let tagName = tag["name"] as! String
         cell.tagLabel.text = tagName
         return cell
