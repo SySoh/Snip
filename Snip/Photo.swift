@@ -12,6 +12,7 @@ import Parse
 class Photo: PFObject, PFSubclassing {
     @NSManaged var post: Post?
     @NSManaged var image: PFFile?
+
     
     class func parseClassName() -> String {
         return "Photo"
