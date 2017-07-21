@@ -31,6 +31,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     var location: String?
     var phone: String?
     var rating: Int?
+    var first: Bool?
 
     
     // outlets
@@ -75,6 +76,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         let query = PFQuery(className: "Photo")
         query.order(byDescending: "createdAt")
         query.includeKey("image")
+        query.includeKey("first")
         query.includeKey("post.barber")
         query.includeKey("post.barber.barbershop")
         query.includeKey("post.tags")
@@ -82,26 +84,18 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         //fetch data asynchronously
         query.findObjectsInBackground { (objects, error: Error?) in
             if let photos = objects {
-//                print("made it here")
                 let photo = photos.first as! Photo
                 let post = photo["post"] as! Post
-//                self.price = post["price"] as! Int
-//                self.tags = post["tags"] as! [Tag]
-//                //self.user = post["user"] as! User
-//                self.barber = post["barber"] as! Barber
-//                print(self.barber?["name"])
-//                print("ABOVE IS THE NAME")
-//                self.barberName = self.barber?["name"] as! String
-//                self.venmo = self.barber?["venmo"] as! String
-//                self.profile_pic = self.barber?["profile_pic"] as! PFFile
-//                self.barbershop = self.barber?["barbershop"] as! Barbershop
-//                self.shopName = self.barbershop?["name"] as! String
-//                //let shopPic = barbershop["picture"] as! PFFile
-//                self.location = self.barbershop?["location"] as! String
-//                self.phone = self.barbershop?["phone"] as! String
-//                self.rating = self.barbershop?["rating"] as! Int
-                //print(barber["name"])
-                self.photoArray = photos
+                for photoOb in photos {
+                    self.photo = photoOb as! Photo
+                    print(self.photo?["first"])
+                    self.first = self.photo!["first"] as! Bool
+                    if self.first == true {
+                        self.photoArray.append(self.photo!)
+                    }
+                    
+                }
+                //self.photoArray = photos
                 self.homeCollectionView.reloadData()
             } else {
                 print(error?.localizedDescription)
@@ -118,13 +112,14 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeCell", for: indexPath) as! HomeCell
         let photo = self.photoArray[indexPath.item]
-        let media = photo["image"] as? PFFile
-        //let media = fullPhotoList[indexPath.item] as? PFFile
-        media?.getDataInBackground { (backgroundData: Data?, erro: Error?) in
-            if let backgroundData = backgroundData {
-                cell.cutImageView.contentMode = .scaleAspectFill
-                cell.cutImageView.clipsToBounds = true
-                cell.cutImageView.image = UIImage(data: backgroundData)
+        self.first = photo["first"] as! Bool
+            let media = photo["image"] as? PFFile
+            //let media = fullPhotoList[indexPath.item] as? PFFile
+            media?.getDataInBackground { (backgroundData: Data?, erro: Error?) in
+                if let backgroundData = backgroundData {
+                    cell.cutImageView.contentMode = .scaleAspectFill
+                    cell.cutImageView.clipsToBounds = true
+                    cell.cutImageView.image = UIImage(data: backgroundData)
             }
         }
         //cell.cutImageView.image = UIImage(data: <#T##Data#>)
