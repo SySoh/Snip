@@ -14,7 +14,6 @@
 		1E8E682E1F16D2B500635F93 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E682D1F16D2B500635F93 /* DetailViewController.swift */; };
 		1E9BDE941F1D943300ACE230 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9BDE931F1D943300ACE230 /* DetailCell.swift */; };
 		1E9BDE981F1EC5C000ACE230 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9BDE971F1EC5C000ACE230 /* ProfileViewController.swift */; };
-		1E9BDE9C1F1EE4CF00ACE230 /* ProfileTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9BDE9B1F1EE4CF00ACE230 /* ProfileTagCell.swift */; };
 		2C13359FEE42DCB61FE9CDEF /* Pods_SnipTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C855E1780E72449BA87A51B /* Pods_SnipTests.framework */; };
 		2E093BD71F16D19500D2C000 /* TagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E093BD61F16D19500D2C000 /* TagsViewController.swift */; };
 		2E160D6F1F157F740042419F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E160D6E1F157F740042419F /* AppDelegate.swift */; };
@@ -71,7 +70,6 @@
 		1E8E682D1F16D2B500635F93 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		1E9BDE931F1D943300ACE230 /* DetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		1E9BDE971F1EC5C000ACE230 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		1E9BDE9B1F1EE4CF00ACE230 /* ProfileTagCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTagCell.swift; sourceTree = "<group>"; };
 		2E093BD61F16D19500D2C000 /* TagsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsViewController.swift; sourceTree = "<group>"; };
 		2E160D6B1F157F740042419F /* Snip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E160D6E1F157F740042419F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -156,7 +154,6 @@
 				4B20978F1F20225D0067DC2F /* TagSearchCell.swift */,
 				4B2097931F2123740067DC2F /* BarberSearchCell.swift */,
 				1E9BDE931F1D943300ACE230 /* DetailCell.swift */,
-				1E9BDE9B1F1EE4CF00ACE230 /* ProfileTagCell.swift */,
 				2E509D6E1F1ED7290085F5C2 /* BarberShopCell.swift */,
 			);
 			name = Views;
@@ -566,7 +563,6 @@
 				4BF10CD11F17F5BA00900F07 /* SearchViewController.swift in Sources */,
 				2E160DA61F168F830042419F /* Tag.swift in Sources */,
 				1E8E682A1F169B1A00635F93 /* HomeCell.swift in Sources */,
-				1E9BDE9C1F1EE4CF00ACE230 /* ProfileTagCell.swift in Sources */,
 				1E9BDE981F1EC5C000ACE230 /* ProfileViewController.swift in Sources */,
 				2E509D6B1F1ED57E0085F5C2 /* BarberPickViewController.swift in Sources */,
 				2E093BD71F16D19500D2C000 /* TagsViewController.swift in Sources */,

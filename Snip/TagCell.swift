@@ -22,6 +22,7 @@ class TagCell: UICollectionViewCell {
     var tagObject: Tag?
     var delegate: TagCellDelegate?
     @IBOutlet weak var tagName: UILabel!
+    @IBOutlet weak var profileTagLabel: UILabel!
     
     func returnTag() -> String? {
         return tagName.text;
