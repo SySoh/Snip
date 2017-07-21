@@ -80,9 +80,11 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
             //vc.photoArray = self.photoArray
             //print(self.photoArray)
             //vc.tagNameArray = self.tagNameArray
-            
-            
-            
+        }
+        
+        if segue.identifier == "ShopView" {
+            let destVC = segue.destination as! BarberShopViewController
+            destVC.barberShop = self.barbershop
         }
     }
     
@@ -171,17 +173,6 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     
 
     
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShopView" {
-            let destVC = segue.destination as! BarberShopViewController
-            destVC.barberShop = self.barbershop
-        }
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
  
 
 }
