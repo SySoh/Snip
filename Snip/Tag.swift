@@ -10,11 +10,7 @@ import Foundation
 import Parse
 
 class Tag : PFObject, PFSubclassing {
-    @NSManaged var name: String?
-<<<<<<< HEAD
-=======
-
->>>>>>> 1c5325dd66250dcae8321dced04d4bdea9e7983b
+    @NSManaged var name: String!
     
     class func parseClassName() -> String {
         return "Tag"
