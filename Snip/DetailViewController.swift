@@ -80,9 +80,11 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
             //vc.photoArray = self.photoArray
             //print(self.photoArray)
             //vc.tagNameArray = self.tagNameArray
-            
-            
-            
+        }
+        
+        if segue.identifier == "ShopView" {
+            let destVC = segue.destination as! BarberShopViewController
+            destVC.barberShop = self.barbershop
         }
     }
     
@@ -121,12 +123,12 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
             self.tagNameArray.append(tag.name!)
             print(tagNameArray)
         }
+
         self.barbershop = self.barber?["barbershop"] as! Barbershop
         
 
         print(self.barbershop)
         print(post?["price"])
-
         
         self.dateLabel.text = "\(self.post?.createdAt!)"
         self.barberLabel.text = self.barber?["name"] as! String
@@ -170,14 +172,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
+ 
 
 }

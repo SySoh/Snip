@@ -11,6 +11,7 @@ import Parse
 
 class Post: PFObject, PFSubclassing {
 
+
     @NSManaged var barber: Barber?
     @NSManaged var tags: [Tag]?
     @NSManaged var user: User?

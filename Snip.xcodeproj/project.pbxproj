@@ -217,6 +217,7 @@
 		2E160DA71F1694700042419F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1E9BDE911F1D6B6400ACE230 /* Photo.swift */,
 				1E4998911F2164E70093A595 /* Photo.swift */,
 				2E160D9F1F168F350042419F /* Barber.swift */,
 				2E160D9D1F168EFB0042419F /* Post.swift */,
@@ -545,6 +546,7 @@
 			files = (
 				2E75E3EF1F212A56006294EB /* BarberShopViewController.swift in Sources */,
 				4B2097901F20225D0067DC2F /* TagSearchCell.swift in Sources */,
+				1E9BDE921F1D6B6400ACE230 /* Photo.swift in Sources */,
 				1E8E682E1F16D2B500635F93 /* DetailViewController.swift in Sources */,
 				2E160D9E1F168EFB0042419F /* Post.swift in Sources */,
 				4B2097961F2123AA0067DC2F /* BarberSearchViewController.swift in Sources */,
