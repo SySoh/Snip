@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import ParseUI
 
-class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate {
     
     var photoArray: [PFObject] = []
     var fullPhotoList: [PFFile] = []
@@ -32,6 +32,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     var phone: String?
     var rating: Int?
     var first: Bool?
+    var isDataLoading = false
 
     
     // outlets
@@ -56,6 +57,40 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         homeCollectionView.insertSubview(refreshcontrol, at: 0)
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        if offsetY > contentHeight - scrollView.frame.size.height {
+            refresh()
+            self.homeCollectionView.reloadData()
+        }
+    }
+    
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        if (!isDataLoading) {
+//            //calculate the position fo one screen length before the bottom of the results
+//            let scrollViewContentHeight = homeCollectionView.contentSize.height
+//            let scrollOffsetThreshold = scrollViewContentHeight - homeCollectionView.bounds.size.height
+//            //when the user has scrolled past the threshold, start requesting
+//            if(scrollView.contentOffset.y > scrollOffsetThreshold && homeCollectionView.isDragging) {
+//                self.isDataLoading = true
+//            }
+//        }
+//    }
+    
+//    func loadMoreData() {
+//        let myRequest = refresh()
+//        //configure session so that completion handler is executed on main UI thread
+//        let session = URLSession(configuration: URLSessionConfiguration.default, delegate: nil, delegateQueue: OperationQueue.main)
+//        let task: URLSessionDataTask = session.dataTask(with: myRequest) { (data, response, error) in
+//            self.isDataLoading = false
+//            self.homeCollectionView.reloadData()
+//            
+//        }
+//
+//        task.resume()
+//    }
+//    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "DetailSegue" {
             let vc = segue.destination as! DetailViewController
