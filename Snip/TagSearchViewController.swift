@@ -56,7 +56,7 @@ class TagSearchViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Tag Search Cell", for: indexPath) as! TagSearchCell
         let tag = self.filteredTags[indexPath.row]
-        cell.cellTag = tag as! Tag
+        cell.cellTag = tag as? Tag
         let tagName = tag["name"] as! String
         cell.tagLabel.text = tagName
         return cell

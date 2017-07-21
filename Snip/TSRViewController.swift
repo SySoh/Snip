@@ -12,6 +12,7 @@ import Parse
 class TSRViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var tagLabel: UILabel!
     
     var photos: [PFObject] = []
     var photo: PFObject?
@@ -23,6 +24,7 @@ class TSRViewController: UIViewController, UICollectionViewDelegate, UICollectio
         super.viewDidLoad()
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
+        self.tagLabel.text = self.tag?.name
         let query = PFQuery(className: "Post")
         query.whereKey("tags", equalTo: self.tag)
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
