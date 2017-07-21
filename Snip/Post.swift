@@ -51,11 +51,17 @@ class Post: PFObject, PFSubclassing {
                 print(error.localizedDescription)
             } else {
                 
-                for pic in pictures {
+                for i in 0 ..< pictures.count {
                 let photo = PFObject(className: "Photo")
                 //change this after
-                photo["image"] = getPFFileFromImage(image: pic)
-                
+                photo["image"] = getPFFileFromImage(image: pictures[i])
+                    
+                if i == 0 {
+                    photo["first"] = true
+                } else {
+                    photo["first"] = false
+                }
+            
                 photo["post"] = thisPost
                 
                 photo.saveInBackground()
