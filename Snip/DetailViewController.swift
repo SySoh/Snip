@@ -78,7 +78,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
             self.tagNameArray.append(tag.name!)
             print(tagNameArray)
         }
-        let barbershop = barber["barbershop"] as! Barbershop
+        self.barbershop = barber["barbershop"] as! Barbershop
         
         
         
@@ -86,7 +86,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         self.dateLabel.text = "\(post.createdAt!)"
         self.barberLabel.text = barber["name"] as! String
-        self.barbershopLabel.text = barbershop["name"] as? String
+        self.barbershopLabel.text = barbershop?["name"] as? String
         self.priceLabel.text = "\(post["price"]!)"
         
         }
@@ -114,14 +114,18 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShopView" {
+            let destVC = segue.destination as! BarberShopViewController
+            destVC.barberShop = self.barbershop
+        }
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
+ 
 
 }
