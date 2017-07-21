@@ -10,21 +10,23 @@ import UIKit
 import Parse
 import ParseUI
 
-class BarberSearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class BarberSearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
     var barbers: [PFObject] = []
+    var filteredBarbers: [PFObject] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.getTags()
+        self.getBarbers()
+        self.filteredBarbers = self.barbers
         self.tableView.delegate = self
         self.tableView.dataSource = self
         // Do any additional setup after loading the view.
     }
     
-    func getTags() {
+    func getBarbers() {
         let query = PFQuery(className: "Barber")
         query.order(byDescending: "createdAt")
         query.includeKey("name")
@@ -32,20 +34,21 @@ class BarberSearchViewController: UIViewController, UITableViewDelegate, UITable
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
             if let objects = objects {
                 self.barbers = objects
+                self.filteredBarbers = objects
                 self.tableView.reloadData()
             } else {
-                print(error?.localizedDescription ?? "Error fetching tags")
+                print(error?.localizedDescription ?? "Error fetching barbers")
             }
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return barbers.count
+        return filteredBarbers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Barber Search Cell", for: indexPath) as! BarberSearchCell
-        let barber = self.barbers[indexPath.row]
+        let barber = self.filteredBarbers[indexPath.row]
         
         // Set Barber Name
         let barberName = barber["name"] as! String
@@ -73,6 +76,23 @@ class BarberSearchViewController: UIViewController, UITableViewDelegate, UITable
         return cell
     }
     
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredBarbers = searchText.isEmpty ? barbers : barbers.filter { (barber: PFObject) -> Bool in
+            let name = barber["name"] as! String
+            return name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+        
+        tableView.reloadData()
+    }
+    
+    func didMoveSearch(currentSearchText: String) {
+        print("Barber Did Move Search")
+        filteredBarbers = currentSearchText.isEmpty ? barbers : barbers.filter { (barber: PFObject) -> Bool in
+            let name = barber["name"] as! String
+            return name.range(of: currentSearchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+        tableView.reloadData()
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
