@@ -33,6 +33,7 @@
 		2E509D6F1F1ED7290085F5C2 /* BarberShopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E509D6E1F1ED7290085F5C2 /* BarberShopCell.swift */; };
 		2E75E3EF1F212A56006294EB /* BarberShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E75E3EE1F212A56006294EB /* BarberShopViewController.swift */; };
 		2E7DA7FA1F1FCEBF003308D7 /* BarberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7DA7F91F1FCEBF003308D7 /* BarberCell.swift */; };
+		2EE757C71F22B0EE00A806E5 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE757C61F22B0EE00A806E5 /* ImageCell.swift */; };
 		4B2097901F20225D0067DC2F /* TagSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B20978F1F20225D0067DC2F /* TagSearchCell.swift */; };
 		4B2097921F211E4B0067DC2F /* TagSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2097911F211E4B0067DC2F /* TagSearchViewController.swift */; };
 		4B2097941F2123740067DC2F /* BarberSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2097931F2123740067DC2F /* BarberSearchCell.swift */; };
@@ -94,6 +95,8 @@
 		2E509D6E1F1ED7290085F5C2 /* BarberShopCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarberShopCell.swift; sourceTree = "<group>"; };
 		2E75E3EE1F212A56006294EB /* BarberShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarberShopViewController.swift; sourceTree = "<group>"; };
 		2E7DA7F91F1FCEBF003308D7 /* BarberCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarberCell.swift; sourceTree = "<group>"; };
+		2E86B8231F1D6A0B00C4828C /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		2EE757C61F22B0EE00A806E5 /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		3C855E1780E72449BA87A51B /* Pods_SnipTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnipTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B20978F1F20225D0067DC2F /* TagSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagSearchCell.swift; sourceTree = "<group>"; };
 		4B2097911F211E4B0067DC2F /* TagSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagSearchViewController.swift; sourceTree = "<group>"; };
@@ -151,6 +154,7 @@
 				1E8E68291F169B1A00635F93 /* HomeCell.swift */,
 				2E7DA7F91F1FCEBF003308D7 /* BarberCell.swift */,
 				2E160DAB1F16AA730042419F /* TagCell.swift */,
+				2EE757C61F22B0EE00A806E5 /* ImageCell.swift */,
 				4B20978F1F20225D0067DC2F /* TagSearchCell.swift */,
 				4B2097931F2123740067DC2F /* BarberSearchCell.swift */,
 				1E9BDE931F1D943300ACE230 /* DetailCell.swift */,
@@ -570,6 +574,7 @@
 				2E093BD71F16D19500D2C000 /* TagsViewController.swift in Sources */,
 				2E509D6D1F1ED5930085F5C2 /* BarberShopPickViewController.swift in Sources */,
 				2E160D6F1F157F740042419F /* AppDelegate.swift in Sources */,
+				2EE757C71F22B0EE00A806E5 /* ImageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
