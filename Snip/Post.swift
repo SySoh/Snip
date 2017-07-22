@@ -26,7 +26,6 @@ class Post: PFObject, PFSubclassing {
     
     class func postPost(pictures: [UIImage], barber: Barber, barbershop: Barbershop, tags: [Tag], price: Int64, caption: String?) {
         let post = PFObject(className: "Post")
-        post["barbershop"] = barbershop
         post["barber"] = barber
         
         if !(tags.isEmpty){
@@ -34,7 +33,11 @@ class Post: PFObject, PFSubclassing {
         }
         post["price"] = price
         
+        if caption == nil {
+        post["caption"] = ""
+        } else {
         post["caption"] = caption
+        }
         
         if PFUser.current() != nil {
             post["user"] = PFUser.current()
