@@ -61,7 +61,6 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         if ((barbershop == nil) || (barber == nil) || (priceText.text?.isEmpty)! || tagReuse.isEmpty || pictureView.image == nil){
             present(alertController, animated: true)
-            print("pop up notif here")
         } else {
             let image = pictureView.image!
             
@@ -134,10 +133,8 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         vc.allowsEditing = true
         
         if UIImagePickerController.isSourceTypeAvailable(.camera){
-            print("Camera Available")
             vc.sourceType = UIImagePickerControllerSourceType.camera
         } else {
-            print("Camera not available, so photo lib instead")
             vc.sourceType = .photoLibrary
         }
         
@@ -166,8 +163,6 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TagCell", for: indexPath) as! TagCell
             cell.tagName.text = (tagReuse[indexPath.item].name)
-        print(tagReuse[indexPath.item].name)
-
             return cell
     }
     
@@ -177,18 +172,9 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-                print("selecting")
                 tagReuse.remove(at: indexPath.item)
                 collectionView.reloadData()
-                print(tagReuse[indexPath.item])
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
-
-//    }
-    
-    //End tagView setup
-    
 
     //Data querying work
     func getTags() {
@@ -238,12 +224,8 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     }
     
-    
-    // MARK: - Navigation
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            print("sending")
         //Tag segue work
         if segue.identifier == "TagSegue"{
             let destVC = segue.destination as! TagsViewController

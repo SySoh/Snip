@@ -16,7 +16,8 @@ class Barbershop: PFObject, PFSubclassing {
     @NSManaged var hours: String?
     @NSManaged var phone: String?
     @NSManaged var rating: String?
-    
+    @NSManaged var geopoint: PFGeoPoint?
+
     class func parseClassName() -> String {
         return "Barbershop"
     }
