@@ -55,7 +55,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         self.profileImageVIew.loadInBackground()
         self.barbershopLabel.text = barbershopName
         self.venmoLabel.text = venmo
-        self.usernameLabel.text = barberNamez
+        self.usernameLabel.text = barberName
         //        self.post = photo["post"] as! Post
         //        self.barber = post["barber"] as! Barber
         

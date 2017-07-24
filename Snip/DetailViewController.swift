@@ -78,6 +78,8 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
         if segue.identifier == "ShopView" {
             let destVC = segue.destination as! BarberShopViewController
             destVC.barberShop = self.barbershop
+            //destVC.locationLabel.text = self.location
+            
         }
     }
     
@@ -103,6 +105,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
         self.dateLabel.text = "\(self.post?.createdAt!)"
         self.barberLabel.text = self.barber?["name"] as! String
         self.barbershopLabel.text = self.barbershop?["name"] as? String
+        self.location = self.barbershop?["location"] as? String
         self.priceLabel.text = "$" + "\(self.post?["price"]!)"
         self.venmo = self.barber?["venmo"] as? String
         self.profileImageView.file = barber?["profile_pic"] as! PFFile
