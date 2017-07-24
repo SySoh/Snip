@@ -69,7 +69,7 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
             let image = pictureView.image!
             
             //redo post function
-            Post.postPost(pictures: pictures, barber: self.barber!, barbershop: self.barbershop!, tags: tagReuse, price: Int64(priceText.text!)!, caption: captionTextView.text)
+            Post.postPost(pictures: pictures, barber: self.barber!, tags: tagReuse, price: Int64(priceText.text!)!, caption: captionTextView.text)
             dismiss(animated: true, completion: nil)
         }
     }
