@@ -66,12 +66,13 @@ class TagsViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TagCell", for: indexPath) as! TagCell
         if fullTagList.count > 0 {
             cell.tagName.text = fullTagList[indexPath.item].object(forKey: "name") as! String
-        cell.layer.cornerRadius = 50
+        cell.layer.cornerRadius = 30
         cell.clipsToBounds = true
-            if cell.isSelected {
-                cell.tagName.backgroundColor = UIColor.cyan
+        cell.tagObject = fullTagList[indexPath.item]
+            if selectedTags.contains(cell.tagObject!) {
+                cell.tagName.backgroundColor = UIColor.blue
+                cell.tagName.textColor = UIColor.white
             }
-            cell.tagObject = fullTagList[indexPath.item]
         }
         return cell
         
