@@ -5,6 +5,7 @@ PODS:
     - Alamofire (~> 4.1)
   - Bolts/Tasks (1.8.4)
   - IQKeyboardManagerSwift (4.0.10)
+  - JTAppleCalendar (7.0.4)
   - KeychainAccess (3.0.2)
   - OAuthSwift (1.1.2)
   - OAuthSwiftAlamofire (0.1.0):
@@ -29,6 +30,7 @@ DEPENDENCIES:
   - Alamofire (~> 4.4)
   - AlamofireImage (~> 3.1)
   - IQKeyboardManagerSwift
+  - JTAppleCalendar (~> 7.0)
   - KeychainAccess
   - OAuthSwift (~> 1.1.0)
   - OAuthSwiftAlamofire
@@ -44,6 +46,7 @@ SPEC CHECKSUMS:
   AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   IQKeyboardManagerSwift: 75ba21a23794a1e6b6fe6d9a267ea17f80e06771
+  JTAppleCalendar: 6def48ecd0daae1d5baaa45e813124c2a20b184d
   KeychainAccess: a986406022dfc7c634c691ad3bec670cc6a32002
   OAuthSwift: 5aa5659984d3ca3206ba636a9e7a9c6626b2e8bd
   OAuthSwiftAlamofire: 20bb998ac506f82c3bab0625fbc98a9c6fca783f
@@ -53,6 +56,6 @@ SPEC CHECKSUMS:
   Prephirences: d0ec0bd6047edb3370364345857a769aaf3db312
   RSKPlaceholderTextView: 301f0f30e70e7c42fe4e941e3a08365ab0d890d5
 
-PODFILE CHECKSUM: 94ae4faa00415652844405585eebcbd0c27e3a48
+PODFILE CHECKSUM: 4ecf39525d3459f438dc8a206b0ba3040741c067
 
 COCOAPODS: 1.2.1

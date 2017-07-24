@@ -6,7 +6,7 @@ target 'Snip' do
   use_frameworks!
 
   # Pods for Snip
- pod 'Alamofire', '~> 4.4'
+  pod 'Alamofire', '~> 4.4'
   pod 'OAuthSwift', '~> 1.1.0'
   pod 'OAuthSwiftAlamofire'
   pod 'Prephirences'
@@ -18,6 +18,7 @@ target 'Snip' do
   pod 'ParseUI'
   pod 'PageMenu'
   pod 'IQKeyboardManagerSwift'
+  pod 'JTAppleCalendar', '~> 7.0'
 
   target 'SnipTests' do
     inherit! :search_paths
