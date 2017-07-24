@@ -10,6 +10,7 @@ import Foundation
 import Parse
 
 class Post: PFObject, PFSubclassing {
+
     @NSManaged var barber: Barber?
     @NSManaged var tags: [Tag]?
     @NSManaged var user: User?
@@ -22,7 +23,7 @@ class Post: PFObject, PFSubclassing {
         return "Post"
     }
     
-    class func postPost(pictures: UIImage, barber: Barber, barbershop: Barbershop, tags: [Tag], price: Int64, caption: String?) {
+    class func postPost(pictures: [UIImage], barber: Barber, barbershop: Barbershop, tags: [Tag], price: Int64, caption: String?) {
         let post = PFObject(className: "Post")
         post["barber"] = barber
         
@@ -51,15 +52,24 @@ class Post: PFObject, PFSubclassing {
             if let error = error {
                 print(error.localizedDescription)
             } else {
+                
+                for i in 0 ..< pictures.count {
                 let photo = PFObject(className: "Photo")
-                
-                photo["image"] = getPFFileFromImage(image: pictures)
-                
+                //change this after
+                photo["image"] = getPFFileFromImage(image: pictures[i])
+                    
+                if i == 0 {
+                    photo["first"] = true
+                } else {
+                    photo["first"] = false
+                }
+            
                 photo["post"] = thisPost
                 
                 photo.saveInBackground()
                 
                 print("post and photo successfully saved")
+                }
             }
         })
 

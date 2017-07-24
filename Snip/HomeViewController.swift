@@ -50,6 +50,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         refresh()
         homeCollectionView.dataSource = self
         homeCollectionView.delegate = self
+        homeCollectionView.alwaysBounceVertical = true
         // Do any additional setup after loading the view.
         let refreshcontrol = UIRefreshControl()
         refreshcontrol.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)

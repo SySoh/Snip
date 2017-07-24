@@ -26,10 +26,11 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     var barbershop: Barbershop?
     //The barber object to be passed into the post function
     var barber: Barber?
-    
+    // Image array
+    var pictures: [UIImage] = []
     
     //all outlets
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var tagCollectionView: UICollectionView!
     @IBOutlet weak var priceText: UITextField!
     @IBOutlet weak var shopChoosingButton: UIButton!
     @IBOutlet weak var shopNameText: UILabel!
@@ -39,6 +40,9 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var captionTextView: UITextView!
     
     @IBOutlet weak var pickBarberButton: UIButton!
+    
+    @IBOutlet weak var imageCollectionView: UICollectionView!
+    
     
     //All button actions
 
@@ -65,7 +69,7 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
             let image = pictureView.image!
             
             //redo post function
-            Post.postPost(pictures: image, barber: self.barber!, barbershop: self.barbershop!, tags: tagReuse, price: Int64(priceText.text!)!, caption: captionTextView.text)
+            Post.postPost(pictures: pictures, barber: self.barber!, barbershop: self.barbershop!, tags: tagReuse, price: Int64(priceText.text!)!, caption: captionTextView.text)
             dismiss(animated: true, completion: nil)
         }
     }
@@ -73,9 +77,15 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.reloadData()
+        tagCollectionView.dataSource = self
+        tagCollectionView.delegate = self
+        tagCollectionView.reloadData()
+        
+        imageCollectionView.dataSource = self
+        imageCollectionView.delegate = self
+        
+        self.view.addSubview(tagCollectionView)
+        self.view.addSubview(imageCollectionView)
         
         //Grab info for other view controllers
         getTags()
@@ -85,11 +95,11 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
             pickBarberButton.isEnabled = false
             pickBarberButton.titleLabel?.textColor = UIColor.gray
         }
-        collectionView.layer.borderColor = UIColor.black.cgColor
-        collectionView.layer.borderWidth = 1.0
+        tagCollectionView.layer.borderColor = UIColor.black.cgColor
+        tagCollectionView.layer.borderWidth = 1.0
         captionTextView.layer.borderColor = UIColor.black.cgColor
         captionTextView.layer.borderWidth = 0.5
-        collectionView.allowsSelection = true
+        tagCollectionView.allowsSelection = true
         
         
         // Do any additional setup after loading the view.
@@ -105,7 +115,7 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     //All delegate functions here
     func didChooseTags(tags: Set<Tag>) {
         tagReuse = Array(tags)
-        collectionView.reloadData()
+        tagCollectionView.reloadData()
     }
     
     func didChooseBarberShop(barberShopName: Barbershop) {
@@ -149,7 +159,9 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
         
         pictureView.image = editedImage
+        pictures.append(editedImage)
         
+        imageCollectionView.reloadData()
         dismiss(animated: true, completion: nil)
         
     }
@@ -161,20 +173,32 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     //Start tagView setup
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TagCell", for: indexPath) as! TagCell
+        if collectionView == self.tagCollectionView {
+         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TagCell", for: indexPath) as! TagCell
             cell.tagName.text = (tagReuse[indexPath.item].name)
             return cell
+            
+        } else {
+        let cell = imageCollectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCell
+            cell.pictureView.image = pictures[indexPath.item]
+            return cell
+        }
     }
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == self.tagCollectionView {
         return tagReuse.count
+        } else {
+        return pictures.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
                 tagReuse.remove(at: indexPath.item)
                 collectionView.reloadData()
     }
+
 
     //Data querying work
     func getTags() {
@@ -192,7 +216,7 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
                 }
             }
         }
-        self.collectionView.reloadData()
+        self.tagCollectionView.reloadData()
     }
     
     func barberShopQuery(){

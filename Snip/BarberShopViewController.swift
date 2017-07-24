@@ -29,6 +29,9 @@ class BarberShopViewController: UIViewController {
     //Whoever segues to this page needs to pass in a barbershop.
     var barberShop: Barbershop?
     
+    @IBAction func goBack(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     
     
     override func viewDidLoad() {
