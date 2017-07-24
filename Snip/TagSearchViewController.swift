@@ -10,15 +10,17 @@ import UIKit
 import Parse
 import ParseUI
 
-class TagSearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TagSearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
     var tags: [PFObject] = []
+    var filteredTags: [PFObject] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.getTags()
+        self.filteredTags = self.tags
         self.tableView.delegate = self
         self.tableView.dataSource = self
         // Do any additional setup after loading the view.
@@ -31,6 +33,7 @@ class TagSearchViewController: UIViewController, UITableViewDelegate, UITableVie
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
             if let objects = objects {
                 self.tags = objects
+                self.filteredTags = objects
                 self.tableView.reloadData()
             } else {
                 print(error?.localizedDescription ?? "Error fetching tags")
@@ -38,16 +41,41 @@ class TagSearchViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "TagSearchSegue" {
+            let vc = segue.destination as! TSRViewController
+            let cell = sender as! TagSearchCell
+            vc.tag = cell.cellTag
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tags.count
+        return filteredTags.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Tag Search Cell", for: indexPath) as! TagSearchCell
-        let tag = self.tags[indexPath.row]
+        let tag = self.filteredTags[indexPath.row]
+        cell.cellTag = tag as? Tag
         let tagName = tag["name"] as! String
         cell.tagLabel.text = tagName
         return cell
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredTags = searchText.isEmpty ? tags : tags.filter { (tag: PFObject) -> Bool in
+            let name = tag["name"] as! String
+            return name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+        tableView.reloadData()
+    }
+    
+    func didMoveSearch(currentSearchText: String) {
+        filteredTags = currentSearchText.isEmpty ? tags : tags.filter { (tag: PFObject) -> Bool in
+            let name = tag["name"] as! String
+            return name.range(of: currentSearchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+        tableView.reloadData()
     }
     
 

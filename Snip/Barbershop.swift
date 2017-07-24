@@ -18,8 +18,6 @@ class Barbershop: PFObject, PFSubclassing {
     @NSManaged var rating: String?
     @NSManaged var geopoint: PFGeoPoint?
 
-    //var updatedAt: Date?
-    
     class func parseClassName() -> String {
         return "Barbershop"
     }

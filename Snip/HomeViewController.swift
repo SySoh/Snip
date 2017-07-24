@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import ParseUI
 
-class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate {
     
     var photoArray: [PFObject] = []
     var fullPhotoList: [PFFile] = []
@@ -32,6 +32,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     var phone: String?
     var rating: Int?
     var first: Bool?
+    var isDataLoading = false
 
     
     // outlets
@@ -49,6 +50,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         refresh()
         homeCollectionView.dataSource = self
         homeCollectionView.delegate = self
+        homeCollectionView.alwaysBounceVertical = true
         // Do any additional setup after loading the view.
         let refreshcontrol = UIRefreshControl()
         refreshcontrol.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
@@ -56,18 +58,24 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         homeCollectionView.insertSubview(refreshcontrol, at: 0)
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        if offsetY > contentHeight - scrollView.frame.size.height {
+            refresh()
+            self.homeCollectionView.reloadData()
+        }
+    }
+        
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "DetailSegue" {
             let vc = segue.destination as! DetailViewController
             let cell = sender as! HomeCell
-//            print(barberName)
             vc.postImage = cell.cutImageView.image!
             let indexPath = homeCollectionView.indexPath(for: cell)
             let photo = photoArray[(indexPath?.item)!]
-            print(photo)
             vc.photo = photo as! Photo
             vc.photoArray = self.photoArray
-            print(photoArray)
             }
     }
     
@@ -88,7 +96,6 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                 let post = photo["post"] as! Post
                 for photoOb in photos {
                     self.photo = photoOb as! Photo
-                    print(self.photo?["first"])
                     self.first = self.photo!["first"] as! Bool
                     if self.first == true {
                         self.photoArray.append(self.photo!)
