@@ -15,6 +15,7 @@ class BarberShopViewController: UIViewController {
     
     @IBOutlet weak var shopImage: PFImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var map: MKMapView!
@@ -38,9 +39,13 @@ class BarberShopViewController: UIViewController {
         super.viewDidLoad()
         map.isZoomEnabled = true
         nameLabel.text = barberShop?.name as! String
-        shopImage.file = barberShop?.picture
-        shopImage.loadInBackground()
-        locationLabel.text = barberShop?.location as! String
+//        shopImage.file = barberShop?.picture
+//        shopImage.loadInBackground()
+        if barberShop?.location != nil{
+            locationLabel.text = barberShop?.location as! String
+        } else {
+            locationLabel.text = ""
+        }
         phoneLabel.text = barberShop?.phone as! String
         latitude = barberShop?.geopoint?.latitude
         longitude = barberShop?.geopoint?.longitude
