@@ -18,12 +18,10 @@ class DetailCell: UICollectionViewCell {
     
     var post: PFObject! {
         didSet{
-            print(post["tags"])
             self.tagArray = (post["tags"] as? [Tag])!
             for tag in tagArray {
                 self.tagNameArray.append("\(tag.name)")
             }
-            print(tagNameArray)
         }
         
     }

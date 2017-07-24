@@ -71,9 +71,7 @@ class BarberShopPickViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! BarberShopCell
         cell.backgroundColor = UIColor.gray
-        print("Chose barbershop!")
         //DelegateWork here
-        print(delegate)
         delegate?.didChooseBarberShop(barberShopName: cell.barbershop!)
         dismiss(animated: true, completion: nil)
     }
