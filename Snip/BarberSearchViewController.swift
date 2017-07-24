@@ -86,7 +86,6 @@ class BarberSearchViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func didMoveSearch(currentSearchText: String) {
-        print("Barber Did Move Search")
         filteredBarbers = currentSearchText.isEmpty ? barbers : barbers.filter { (barber: PFObject) -> Bool in
             let name = barber["name"] as! String
             return name.range(of: currentSearchText, options: .caseInsensitive, range: nil, locale: nil) != nil
