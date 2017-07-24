@@ -56,8 +56,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         self.barbershopLabel.text = barbershopName
         self.venmoLabel.text = venmo
         self.usernameLabel.text = barberName
-        print(self.usernameLabel.text)
-        print(self.barber)
         //        self.post = photo["post"] as! Post
         //        self.barber = post["barber"] as! Barber
         
@@ -70,12 +68,9 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
                 query.whereKey("tags", containedIn: objects!)
                 self.posts = objects as! [Post]
                 for postOb in self.posts {
-                    //print(self.posts.count)
-                    print(postOb)
                     self.post = postOb as! Post
                     self.tagArray = self.post.tags as! [Tag]
                     for tagOb in self.tagArray {
-                        print(tagOb.name!)
                         self.tagNameSet.insert("\(tagOb.name!)")
                     }
                 }
@@ -85,13 +80,11 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
                 //for tag in self.tagArray {
                   //  self.tagNameArray.append(tag.name!)
                 }
-                print(objects)
                 let secondQuery = PFQuery(className: "Photo")
                 secondQuery.whereKey("post", containedIn: objects!)
 //                secondQuery.includeKey("tag")
                 secondQuery.findObjectsInBackground { (secondObjects: [PFObject]?, error: Error?) in
                     if secondObjects != nil {
-                        //print(secondObjects)
                         self.photoArray = secondObjects as! [Photo]
                         self.postCollectionView.reloadData()
                        

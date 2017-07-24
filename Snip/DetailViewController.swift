@@ -72,34 +72,20 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
             vc.barberName = self.barberLabel.text
             vc.barbershopName = self.barbershopLabel.text
             vc.venmo = self.venmo
-            print("venmo")
-            print(self.venmo)
             vc.barber = self.barber
-            print("profile pic")
-            print("here is the profile pic^")
-            //vc.photoArray = self.photoArray
-            //print(self.photoArray)
-            //vc.tagNameArray = self.tagNameArray
         }
         
         if segue.identifier == "ShopView" {
             let destVC = segue.destination as! BarberShopViewController
             destVC.barberShop = self.barbershop
+            //destVC.locationLabel.text = self.location
+            
         }
     }
     
     @IBAction func didPressBarberProfile(_ sender: Any) {
         performSegue(withIdentifier: "barberProfileSegue", sender: DetailViewController.self)
     }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "barberProfileSegue" {
-//            let vc = segue.destination as! ProfileViewController
-//            let cell = sender as! HomeCell
-//            let photo = photoArray
-//            vc.photo = photo
-//        }
-//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,38 +95,21 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
         self.postImageView.image = self.postImage
         //self.postImageView.loadInBackground()
         self.post = photo!["post"] as! Post
-        print("post")
-        print(post)
         self.barber = self.post?["barber"] as! Barber
-        print("barber")
-        print(barber)
         self.tagArray = post?["tags"] as! [Tag]
-        print("tagarray")
-        print(tagArray)
-//        let tag = tagArray[0] as! Tag
-//        print(tagArray)
         for tag in tagArray! {
             self.tagNameArray.append(tag.name!)
-            print(tagNameArray)
         }
 
         self.barbershop = self.barber?["barbershop"] as! Barbershop
-        
-
-        print(self.barbershop)
-        print(post?["price"])
-        
         self.dateLabel.text = "\(self.post?.createdAt!)"
         self.barberLabel.text = self.barber?["name"] as! String
         self.barbershopLabel.text = self.barbershop?["name"] as? String
+        self.location = self.barbershop?["location"] as? String
         self.priceLabel.text = "$" + "\(self.post?["price"]!)"
         self.venmo = self.barber?["venmo"] as? String
-        print(self.barber?["profile_pic"])
-        print("above is the image")
         self.profileImageView.file = barber?["profile_pic"] as! PFFile
         self.profileImageView.loadInBackground()
-        print(self.barber?["profile_pic"])
-        print("here is the image^")
         if post?["caption"] != nil {
         self.captionLabel?.text = post?["caption"] as! String
         } else{
@@ -151,7 +120,6 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(tagsArray)
         //return tagsArray!.count
         return tagNameArray.count
     }
@@ -160,7 +128,6 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "detailCell", for: indexPath) as! DetailCell
         let tag = self.tagsArray?[indexPath.item]
         cell.tagLabel.text = tagNameArray[indexPath.item]
-        print(tag)
         return cell
         
     }
