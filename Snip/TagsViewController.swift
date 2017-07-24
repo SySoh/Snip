@@ -34,7 +34,6 @@ class TagsViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
 
     @IBAction func didFinish(_ sender: Any) {
-        print(delegate)
         delegate?.didChooseTags(tags: selectedTags)
         dismiss(animated: true, completion: nil)
     }
@@ -86,7 +85,6 @@ class TagsViewController: UIViewController, UICollectionViewDelegate, UICollecti
 //Selection work
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("selectin")
          let cell = collectionView.cellForItem(at: indexPath) as! TagCell
         let tag = cell.tagObject
         if selectedTags.contains(tag!){

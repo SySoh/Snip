@@ -39,14 +39,11 @@ class BarberShopViewController: UIViewController {
         map.isZoomEnabled = true
         nameLabel.text = barberShop?.name as! String
         shopImage.file = barberShop?.picture
-        print(shopImage.file)
-        print(barberShop?.picture)
         shopImage.loadInBackground()
         locationLabel.text = barberShop?.location as! String
         phoneLabel.text = barberShop?.phone as! String
         latitude = barberShop?.geopoint?.latitude
         longitude = barberShop?.geopoint?.longitude
-        
         location = CLLocationCoordinate2D(latitude: self.latitude!, longitude: self.longitude!)
         
         
@@ -68,20 +65,13 @@ class BarberShopViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func clickBack(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }

@@ -1,19 +1,18 @@
 //
-//  TagSearchCell.swift
+//  BarbershopSearchCell.swift
 //  Snip
 //
-//  Created by Chase Warren on 7/19/17.
+//  Created by Chase Warren on 7/20/17.
 //  Copyright © 2017 Shao Yie Soh. All rights reserved.
 //
 
 import UIKit
 
-class TagSearchCell: UITableViewCell {
+class BarbershopSearchCell: UITableViewCell {
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
 
-    @IBOutlet weak var tagLabel: UILabel!
-    
-    var cellTag: Tag?
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

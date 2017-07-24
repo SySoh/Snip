@@ -11,13 +11,12 @@ import Parse
 
 class Post: PFObject, PFSubclassing {
 
-
-
     @NSManaged var barber: Barber?
     @NSManaged var tags: [Tag]?
     @NSManaged var user: User?
     @NSManaged var barbershop: Barbershop?
     var photos: [PFFile] = []
+
     var price: Int?
     
     class func parseClassName() -> String {
@@ -34,9 +33,9 @@ class Post: PFObject, PFSubclassing {
         post["price"] = price
         
         if caption == nil {
-        post["caption"] = ""
+            post["caption"] = ""
         } else {
-        post["caption"] = caption
+            post["caption"] = caption
         }
         
         if PFUser.current() != nil {

@@ -66,44 +66,16 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             self.homeCollectionView.reloadData()
         }
     }
-    
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        if (!isDataLoading) {
-//            //calculate the position fo one screen length before the bottom of the results
-//            let scrollViewContentHeight = homeCollectionView.contentSize.height
-//            let scrollOffsetThreshold = scrollViewContentHeight - homeCollectionView.bounds.size.height
-//            //when the user has scrolled past the threshold, start requesting
-//            if(scrollView.contentOffset.y > scrollOffsetThreshold && homeCollectionView.isDragging) {
-//                self.isDataLoading = true
-//            }
-//        }
-//    }
-    
-//    func loadMoreData() {
-//        let myRequest = refresh()
-//        //configure session so that completion handler is executed on main UI thread
-//        let session = URLSession(configuration: URLSessionConfiguration.default, delegate: nil, delegateQueue: OperationQueue.main)
-//        let task: URLSessionDataTask = session.dataTask(with: myRequest) { (data, response, error) in
-//            self.isDataLoading = false
-//            self.homeCollectionView.reloadData()
-//            
-//        }
-//
-//        task.resume()
-//    }
-//    
+        
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "DetailSegue" {
             let vc = segue.destination as! DetailViewController
             let cell = sender as! HomeCell
-//            print(barberName)
             vc.postImage = cell.cutImageView.image!
             let indexPath = homeCollectionView.indexPath(for: cell)
             let photo = photoArray[(indexPath?.item)!]
-            print(photo)
             vc.photo = photo as! Photo
             vc.photoArray = self.photoArray
-            print(photoArray)
             }
     }
     
@@ -124,7 +96,6 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                 let post = photo["post"] as! Post
                 for photoOb in photos {
                     self.photo = photoOb as! Photo
-                    print(self.photo?["first"])
                     self.first = self.photo!["first"] as! Bool
                     if self.first == true {
                         self.photoArray.append(self.photo!)
