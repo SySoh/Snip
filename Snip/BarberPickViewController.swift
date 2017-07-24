@@ -36,6 +36,7 @@ class BarberPickViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        
 
         // Do any additional setup after loading the view.
     }
