@@ -15,6 +15,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     var photoArray: [PFObject] = []
     var fullPhotoList: [PFFile] = []
     var postArray: [PFObject] = []
+    var barbershops: [PFObject] = []
     
     var photo: Photo?
     var post: Post?
@@ -36,7 +37,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 
     
     // outlets
-    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var mapViewButton: UIButton!
     @IBOutlet weak var homeCollectionView: UICollectionView!
     
     @IBAction func touchCamera(_ sender: Any) {
@@ -48,6 +49,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         refresh()
+        getShopLocations()
         homeCollectionView.dataSource = self
         homeCollectionView.delegate = self
         homeCollectionView.alwaysBounceVertical = true
@@ -77,6 +79,22 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             vc.photo = photo as! Photo
             vc.photoArray = self.photoArray
             }
+        if segue.identifier == "MapView" {
+            let destVC = segue.destination as! MapViewController
+            destVC.shops = self.barbershops as! [Barbershop]
+        }
+    }
+    
+    func getShopLocations() {
+        let query = PFQuery(className: "Barbershop")
+        query.includeKey("geopoint")
+        query.findObjectsInBackground { (objects, error: Error?) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                self.barbershops = objects!
+            }
+        }
     }
     
     func refresh() {
