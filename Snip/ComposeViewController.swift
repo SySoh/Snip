@@ -13,7 +13,6 @@ import CoreLocation
 
 class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, TagsViewDelegate, BarberShopPickDelegate, BarberPickDelegate {
     
-    
     //tagList is used to obtain ALL tags and pass them into the tagView
     var tagList: [Tag] = []
     //tagReuse is used to accumulate selected tags. It will be populated by tagView. Probably by a prepareForSegue.

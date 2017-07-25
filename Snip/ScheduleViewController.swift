@@ -34,10 +34,13 @@ extension ScheduleViewController: JTAppleCalendarViewDelegate, JTAppleCalendarVi
         formatter.timeZone = Calendar.current.timeZone
         formatter.locale = Calendar.current.locale
         
-        let start = formatter.date(from: "01 01 2017")
-        let end = formatter.date(from: "12 31 2017")
+        let today = Date()
         
-        let parameters = ConfigurationParameters(startDate: start!, endDate: end!)
+        var dateComponent = DateComponents()
+        dateComponent.day = 7
+        let end = Calendar.current.date(byAdding: dateComponent, to: today)
+        
+        let parameters = ConfigurationParameters(startDate: Date(), endDate: end!)
         return parameters
     }
     
