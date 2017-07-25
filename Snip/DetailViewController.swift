@@ -116,6 +116,10 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
             self.captionLabel?.text = ""
         }
         
+        if let layout = self.detailCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .horizontal
+        }
+        
     }
     
 

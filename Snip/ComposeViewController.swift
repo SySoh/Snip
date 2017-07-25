@@ -101,7 +101,9 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         captionTextView.layer.borderWidth = 0.5
         tagCollectionView.allowsSelection = true
         
-        
+        if let layout = self.imageCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .horizontal
+        }
         // Do any additional setup after loading the view.
     }
     
