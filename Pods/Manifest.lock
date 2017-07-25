@@ -4,6 +4,7 @@ PODS:
   - AlamofireImage (3.2.0):
     - Alamofire (~> 4.1)
   - Bolts/Tasks (1.8.4)
+  - ESTabBarController-swift (2.4)
   - IQKeyboardManagerSwift (4.0.10)
   - JTAppleCalendar (7.0.4)
   - KeychainAccess (3.0.2)
@@ -29,6 +30,7 @@ DEPENDENCIES:
   - ActiveLabel
   - Alamofire (~> 4.4)
   - AlamofireImage (~> 3.1)
+  - ESTabBarController-swift (~> 2.4)
   - IQKeyboardManagerSwift
   - JTAppleCalendar (~> 7.0)
   - KeychainAccess
@@ -45,6 +47,7 @@ SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
   AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  ESTabBarController-swift: af496895039ba10ae60bf825473c45f23fc5c8b6
   IQKeyboardManagerSwift: 75ba21a23794a1e6b6fe6d9a267ea17f80e06771
   JTAppleCalendar: 6def48ecd0daae1d5baaa45e813124c2a20b184d
   KeychainAccess: a986406022dfc7c634c691ad3bec670cc6a32002
@@ -56,6 +59,6 @@ SPEC CHECKSUMS:
   Prephirences: d0ec0bd6047edb3370364345857a769aaf3db312
   RSKPlaceholderTextView: 301f0f30e70e7c42fe4e941e3a08365ab0d890d5
 
-PODFILE CHECKSUM: 4ecf39525d3459f438dc8a206b0ba3040741c067
+PODFILE CHECKSUM: 6deb37ed3707c061b9a3b2de55418a4febda4a99
 
 COCOAPODS: 1.2.1

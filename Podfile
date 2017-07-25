@@ -19,6 +19,7 @@ target 'Snip' do
   pod 'PageMenu'
   pod 'IQKeyboardManagerSwift'
   pod 'JTAppleCalendar', '~> 7.0'
+  pod 'ESTabBarController-swift', '~> 2.4'
 
   target 'SnipTests' do
     inherit! :search_paths

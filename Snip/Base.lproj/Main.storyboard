@@ -38,7 +38,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9iz-6D-FND">
                                 <rect key="frame" x="0.0" y="58" width="375" height="609"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.31509143114089966" green="0.32755580544471741" blue="0.4118557870388031" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="437-QM-2FF">
                                     <size key="itemSize" width="123.5" height="123.5"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -77,7 +77,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.31509143114089966" green="0.32755580544471741" blue="0.4118557870388031" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
                     <connections>
                         <outlet property="homeCollectionView" destination="9iz-6D-FND" id="e5p-kh-6Io"/>
@@ -519,7 +519,7 @@
                                 </connections>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.76608328222222222" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <outlet property="barberLabel" destination="dkh-Rm-Dvv" id="3kn-mh-WoW"/>
@@ -541,7 +541,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1146" y="-621"/>
+            <point key="canvasLocation" x="1182" y="-670"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="cOm-aS-fvg">
@@ -688,7 +688,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DzO-OZ-WGw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="48.799999999999997" y="-553.67316341829087"/>
+            <point key="canvasLocation" x="-626" y="-670"/>
         </scene>
         <!--Compose View Controller-->
         <scene sceneID="FLR-Ri-DX9">
@@ -1171,7 +1171,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hA5-mo-uao" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-695.20000000000005" y="98.50074962518741"/>
+            <point key="canvasLocation" x="-626" y="99"/>
         </scene>
         <!--Barber Shop View Controller-->
         <scene sceneID="fXn-g3-Coc">
