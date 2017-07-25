@@ -4,6 +4,7 @@ PODS:
   - AlamofireImage (3.2.0):
     - Alamofire (~> 4.1)
   - Bolts/Tasks (1.8.4)
+  - Cosmos (10.0.0)
   - IQKeyboardManagerSwift (4.0.10)
   - KeychainAccess (3.0.2)
   - OAuthSwift (1.1.2)
@@ -28,6 +29,7 @@ DEPENDENCIES:
   - ActiveLabel
   - Alamofire (~> 4.4)
   - AlamofireImage (~> 3.1)
+  - Cosmos
   - IQKeyboardManagerSwift
   - KeychainAccess
   - OAuthSwift (~> 1.1.0)
@@ -43,6 +45,7 @@ SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
   AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  Cosmos: bb9310e73ad1ad472b183b848b959302c569cf09
   IQKeyboardManagerSwift: 75ba21a23794a1e6b6fe6d9a267ea17f80e06771
   KeychainAccess: a986406022dfc7c634c691ad3bec670cc6a32002
   OAuthSwift: 5aa5659984d3ca3206ba636a9e7a9c6626b2e8bd
@@ -53,6 +56,6 @@ SPEC CHECKSUMS:
   Prephirences: d0ec0bd6047edb3370364345857a769aaf3db312
   RSKPlaceholderTextView: 301f0f30e70e7c42fe4e941e3a08365ab0d890d5
 
-PODFILE CHECKSUM: 94ae4faa00415652844405585eebcbd0c27e3a48
+PODFILE CHECKSUM: 505f72ccef3ec09ccbbfb13d5c581e58b6081544
 
 COCOAPODS: 1.2.1

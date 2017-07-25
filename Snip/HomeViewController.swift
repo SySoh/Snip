@@ -58,14 +58,14 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         homeCollectionView.insertSubview(refreshcontrol, at: 0)
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offsetY = scrollView.contentOffset.y
-        let contentHeight = scrollView.contentSize.height
-        if offsetY > contentHeight - scrollView.frame.size.height {
-            refresh()
-            self.homeCollectionView.reloadData()
-        }
-    }
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        let offsetY = scrollView.contentOffset.y
+//        let contentHeight = scrollView.contentSize.height
+//        if offsetY > contentHeight - scrollView.frame.size.height {
+//            refresh()
+//            self.homeCollectionView.reloadData()
+//        }
+//    }
         
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "DetailSegue" {
