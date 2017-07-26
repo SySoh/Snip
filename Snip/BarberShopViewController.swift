@@ -10,6 +10,8 @@ import UIKit
 import Parse
 import ParseUI
 import MapKit
+import Cosmos
+
 
 class BarberShopViewController: UIViewController {
     
@@ -20,7 +22,8 @@ class BarberShopViewController: UIViewController {
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var map: MKMapView!
     
-    @IBOutlet weak var ratingLabel: UILabel!
+    @IBOutlet weak var ratingStars: CosmosView!
+    
     
     var latitude: CLLocationDegrees?
     var longitude: CLLocationDegrees?
@@ -46,6 +49,7 @@ class BarberShopViewController: UIViewController {
         } else {
             locationLabel.text = ""
         }
+        ratingStars.rating = Double((barberShop?.rating)!)!
         phoneLabel.text = barberShop?.phone as! String
         latitude = barberShop?.geopoint?.latitude
         longitude = barberShop?.geopoint?.longitude

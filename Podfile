@@ -18,8 +18,8 @@ target 'Snip' do
   pod 'ParseUI'
   pod 'PageMenu'
   pod 'IQKeyboardManagerSwift'
+  pod 'Cosmos'
   pod 'RSKPlaceholderTextView'
-
 
   target 'SnipTests' do
     inherit! :search_paths

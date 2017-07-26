@@ -15,7 +15,10 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     var photoArray: [PFObject] = []
     var fullPhotoList: [PFFile] = []
     var postArray: [PFObject] = []
+    var barbershops: [PFObject] = []
+
     var detailArray: [PFObject]?
+
     var photo: Photo?
     var post: Post?
     var price: Int?
@@ -37,7 +40,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     
     // outlets
-    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var mapViewButton: UIButton!
     @IBOutlet weak var homeCollectionView: UICollectionView!
     
     @IBAction func touchCamera(_ sender: Any) {
@@ -49,6 +52,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         refresh()
+        getShopLocations()
         homeCollectionView.dataSource = self
         homeCollectionView.delegate = self
         homeCollectionView.alwaysBounceVertical = true
@@ -60,14 +64,15 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         
     }
     
-    //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    //        let offsetY = scrollView.contentOffset.y
-    //        let contentHeight = scrollView.contentSize.height
-    //        if offsetY > contentHeight - scrollView.frame.size.height {
-    //            refresh()
-    //            self.homeCollectionView.reloadData()
-    //        }
-    //    }
+
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        let offsetY = scrollView.contentOffset.y
+//        let contentHeight = scrollView.contentSize.height
+//        if offsetY > contentHeight - scrollView.frame.size.height {
+//            refresh()
+//            self.homeCollectionView.reloadData()
+//        }
+//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "DetailSegue" {
@@ -78,8 +83,27 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             let photo = photoArray[(indexPath?.item)!]
             vc.post = photo["post"] as! Post
             vc.photoArray = self.detailArray
+            }
+        if segue.identifier == "MapView" {
+            let destVC = segue.destination as! MapViewController
+            destVC.shops = self.barbershops as! [Barbershop]
         }
     }
+    
+    func getShopLocations() {
+        let query = PFQuery(className: "Barbershop")
+        query.includeKey("geopoint")
+        query.findObjectsInBackground { (objects, error: Error?) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                self.barbershops = objects!
+            }
+            
+        }
+    }
+    
+    
     
     func refresh() {
         //construct PFQuery
