@@ -112,7 +112,9 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         shopChoosingButton.layer.cornerRadius = 10
         barberChoosingButton.layer.cornerRadius = 10
         
-        
+        if let layout = self.imageCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .horizontal
+        }
         // Do any additional setup after loading the view.
     }
     
