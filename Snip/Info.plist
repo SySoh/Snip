@@ -2,13 +2,21 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Need location for mapview</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>NeedLibrary access for uploading Images</string>
+	<key>Privacy - Location Always Usage Description   </key>
+	<string>Snip mapview location use</string>
+	<key>Privacy - Location When In Use Usage Description   </key>
+	<string>Snip mapview location use</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Need camera access for uploading Images</string>
 	<key>CFBundleDevelopmentRegion</key>

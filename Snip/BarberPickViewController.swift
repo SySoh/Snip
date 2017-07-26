@@ -36,6 +36,7 @@ class BarberPickViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        
 
         // Do any additional setup after loading the view.
     }
@@ -59,7 +60,7 @@ class BarberPickViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.profilePic.loadInBackground()
         cell.barber = barberList[indexPath.item]
         chosenBarber = barberList[indexPath.item]
-            return cell
+        return cell
     }
     
     
@@ -67,7 +68,6 @@ class BarberPickViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! BarberCell
         cell.backgroundColor = UIColor.gray
-        print("chose barber!")
         delegate?.didChooseBarber(barberName: cell.barber!)
         dismiss(animated: true, completion: nil)
     }

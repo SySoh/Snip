@@ -12,6 +12,8 @@ class TagSearchCell: UITableViewCell {
 
     @IBOutlet weak var tagLabel: UILabel!
     
+    var cellTag: Tag?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

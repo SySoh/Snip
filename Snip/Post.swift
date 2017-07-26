@@ -10,29 +10,22 @@ import Foundation
 import Parse
 
 class Post: PFObject, PFSubclassing {
-<<<<<<< HEAD
-=======
 
     @NSManaged var barber: Barber?
     @NSManaged var tags: [Tag]?
->>>>>>> 6bfaf429f089527cbd13fb19f5856a7ea6bef0e7
     @NSManaged var user: User?
     @NSManaged var barbershop: Barbershop?
-<<<<<<< HEAD
-    var photos: [PFFile]?
-    var tags: [Tag]?
-=======
     var photos: [PFFile] = []
->>>>>>> 6bfaf429f089527cbd13fb19f5856a7ea6bef0e7
+
     var price: Int?
     
     class func parseClassName() -> String {
         return "Post"
     }
     
-    class func postPost(pictures: UIImage, barber: Barber, barbershop: Barbershop, tags: [Tag], price: Int64, caption: String?) {
+    class func postPost(pictures: [UIImage], barber: Barber, tags: [Tag], price: Int64, caption: String?) {
+        var IDforPhoto: String?
         let post = PFObject(className: "Post")
-        post["barbershop"] = barbershop
         post["barber"] = barber
         
         if !(tags.isEmpty){
@@ -40,34 +33,59 @@ class Post: PFObject, PFSubclassing {
         }
         post["price"] = price
         
-        post["caption"] = caption
+        if caption == nil {
+            post["caption"] = ""
+        } else {
+            post["caption"] = caption
+        }
         
         if PFUser.current() != nil {
             post["user"] = PFUser.current()
         } else {
             post["user"] = NSNull()
         }
+        post.saveInBackground { (success, error) in
+            if success {
+                print("post was posted, now posting pictures")
+                IDforPhoto = post.objectId
+                postPhoto(pictures: pictures, ID: IDforPhoto)
+            } else if let error = error {
+                print("problem posting : \(error.localizedDescription)")
+            }
+        }
         
-        post.saveInBackground()
+        
+    }
+    
+    class func postPhoto(pictures: [UIImage], ID: String?) {
         let query = PFQuery(className: "Post")
         query.addDescendingOrder("createdAt")
         query.includeKey("objectId")
-        query.getFirstObjectInBackground(block: { (thisPost: PFObject?, error: Error?) in
+        query.whereKey("objectId", equalTo: ID ?? "")
+        query.getObjectInBackground(withId: ID!, block: { (thisPost: PFObject?, error: Error?) in
             if let error = error {
                 print(error.localizedDescription)
             } else {
-                let photo = PFObject(className: "Photo")
                 
-                photo["image"] = getPFFileFromImage(image: pictures)
-                
-                photo["post"] = thisPost
-                
-                photo.saveInBackground()
-                
-                print("post and photo successfully saved")
+                for i in 0 ..< pictures.count {
+                    let photo = PFObject(className: "Photo")
+                    //change this after
+                    photo["image"] = getPFFileFromImage(image: pictures[i])
+                    
+                    if i == 0 {
+                        photo["first"] = true
+                    } else {
+                        photo["first"] = false
+                    }
+                    
+                    photo["post"] = thisPost
+                    
+                    photo.saveInBackground()
+                    
+                    print("post and photo successfully saved")
+                }
             }
         })
-
         
     }
     

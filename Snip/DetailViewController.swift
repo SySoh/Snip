@@ -13,15 +13,15 @@ import ParseUI
 
 
 class DetailViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-
     
-    var photo: PFObject?
+    
+    var photo: Photo?
     var post: Post?
     var price: Int?
     var tagsArray: [String]?
     var user: User?
     var barber: Barber?
-
+    
     var barberName: String!
     var venmo: String?
     var profile_pic: UIImage?
@@ -32,7 +32,9 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     var phone: String?
     var rating: Int?
     var date: Date?
-
+    var imageArray: [UIImage]?
+    var image: UIImage?
+    
     
     var postImage: UIImage!
     
@@ -50,17 +52,19 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var detailCollectionView: UICollectionView!
     
-    @IBOutlet weak var postImageView: UIImageView!
+    @IBOutlet weak var photoCollectionView: UICollectionView!
     
-    var photoArray: [PFObject]? = []
-
+    var photoArray: [PFObject]?
+    var filteredPhotos: [PFObject]?
+    
     var detailView: DetailViewController!
     //homeCell:
-
+    
     var tagArray: [Tag]? = []
     var tagNameArray: [String]! = []
-
-
+    
+    
+    
     
     @IBAction func pressDismiss(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -72,19 +76,14 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
             vc.barberName = self.barberLabel.text
             vc.barbershopName = self.barbershopLabel.text
             vc.venmo = self.venmo
-            print("venmo")
-            print(self.venmo)
             vc.barber = self.barber
-            print("profile pic")
-            print("here is the profile pic^")
-            //vc.photoArray = self.photoArray
-            //print(self.photoArray)
-            //vc.tagNameArray = self.tagNameArray
         }
         
         if segue.identifier == "ShopView" {
             let destVC = segue.destination as! BarberShopViewController
             destVC.barberShop = self.barbershop
+            //destVC.locationLabel.text = self.location
+            
         }
     }
     
@@ -92,87 +91,105 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
         performSegue(withIdentifier: "barberProfileSegue", sender: DetailViewController.self)
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "barberProfileSegue" {
-//            let vc = segue.destination as! ProfileViewController
-//            let cell = sender as! HomeCell
-//            let photo = photoArray
-//            vc.photo = photo
-//        }
-//    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("made it here")
         detailCollectionView.delegate = self
         detailCollectionView.dataSource = self
-        // Do any additional setup after loading the view.
-        self.postImageView.image = self.postImage
-        //self.postImageView.loadInBackground()
-        self.post = photo!["post"] as! Post
-        print("post")
-        print(post)
-        self.barber = self.post?["barber"] as! Barber
-        print("barber")
-        print(barber)
-        self.tagArray = post?["tags"] as! [Tag]
-        print("tagarray")
-        print(tagArray)
-//        let tag = tagArray[0] as! Tag
-//        print(tagArray)
-        for tag in tagArray! {
-            self.tagNameArray.append(tag.name!)
-            print(tagNameArray)
+        photoCollectionView.delegate = self
+        photoCollectionView.dataSource = self
+        onlyWithPost(post: self.post!)
+        self.view.addSubview(detailCollectionView)
+        self.view.addSubview(photoCollectionView)
+        
+        
+        
+       
+        for photoOb in self.filteredPhotos! {
+            imageArray?.append(photoOb["image"] as! UIImage)
         }
-
+        self.barber = self.post?["barber"] as! Barber
+        self.tagArray = self.post?["tags"] as! [Tag]
+        for tag in self.tagArray! {
+            self.tagNameArray.append(tag.name!)
+        }
+        
         self.barbershop = self.barber?["barbershop"] as! Barbershop
-        
-
-        print(self.barbershop)
-        print(post?["price"])
-        
         self.dateLabel.text = "\(self.post?.createdAt!)"
         self.barberLabel.text = self.barber?["name"] as! String
         self.barbershopLabel.text = self.barbershop?["name"] as? String
+        self.location = self.barbershop?["location"] as? String
         self.priceLabel.text = "$" + "\(self.post?["price"]!)"
         self.venmo = self.barber?["venmo"] as? String
-        print(self.barber?["profile_pic"])
-        print("above is the image")
         self.profileImageView.file = barber?["profile_pic"] as! PFFile
         self.profileImageView.loadInBackground()
-        print(self.barber?["profile_pic"])
-        print("here is the image^")
         if post?["caption"] != nil {
-        self.captionLabel?.text = post?["caption"] as! String
+            self.captionLabel?.text = post?["caption"] as! String
         } else{
             self.captionLabel?.text = ""
         }
         
+        if let layout = self.detailCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .horizontal
+        }
+        
+        if let secondLayout = self.photoCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+                secondLayout.scrollDirection = .horizontal
+            }
+        
+        
     }
-    
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(tagsArray)
-        //return tagsArray!.count
-        return tagNameArray.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "detailCell", for: indexPath) as! DetailCell
-        let tag = self.tagsArray?[indexPath.item]
-        cell.tagLabel.text = tagNameArray[indexPath.item]
-        print(tag)
-        return cell
+  
+    func onlyWithPost(post: Post) {
+        let postID = post.objectId!
+        self.filteredPhotos = self.photoArray?.filter { (photo: PFObject) -> Bool in
+            let photoPost = photo["post"] as! Post
+            let photoPostID = photoPost.objectId!
+            return photoPostID == postID
+        }
         
     }
     
-
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print(filteredPhotos)
+        if collectionView == detailCollectionView {
+            //return tagsArray!.count
+            return tagNameArray.count
+        } else {
+            return filteredPhotos!.count
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if collectionView == detailCollectionView {
+            let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: "detailCell", for: indexPath) as! DetailCell
+            let tag = self.tagsArray?[indexPath.item]
+            tagCell.tagLabel.text = tagNameArray[indexPath.item]
+            return tagCell
+        } else {
+            let photoCell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! DetailPostCell
+            let photo = self.filteredPhotos?[indexPath.item]
+            let media = photo?["image"] as? PFFile
+            media?.getDataInBackground { (backgroundData: Data?, error: Error?) in
+                if let backgroundData = backgroundData {
+                    photoCell.postImageView.contentMode = .scaleAspectFill
+                    photoCell.postImageView.clipsToBounds = true
+                    photoCell.postImageView.image = UIImage(data: backgroundData)
+                }
+            }
+            return photoCell
+        }
+        
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
     
- 
-
+    
+    
+    
 }
