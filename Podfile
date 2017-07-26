@@ -22,6 +22,7 @@ target 'Snip' do
   pod 'ESTabBarController-swift', '~> 2.4'
   pod 'Cosmos'
   pod 'RSKPlaceholderTextView'
+  pod 'pop', '~> 1.0'
 
   target 'SnipTests' do
     inherit! :search_paths
