@@ -60,27 +60,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         tabBarController.title = "Irregularity"
         tabBarController.tabBar.shadowImage = UIImage(named: "transparent")
         tabBarController.tabBar.backgroundImage = UIImage(named: "background_dark")
-//        tabBarController.shouldHijackHandler = {
-//            tabbarController, viewController, index in
-//            if index == 2 {
-//                return true
-//            }
-//            return false
-//        }
-//        tabBarController.didHijackHandler = {
-//            [weak tabBarController] tabbarController, viewController, index in
-//            
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-//                let alertController = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
-//                let takePhotoAction = UIAlertAction(title: "Take a photo", style: .default, handler: nil)
-//                alertController.addAction(takePhotoAction)
-//                let selectFromAlbumAction = UIAlertAction(title: "Select from album", style: .default, handler: nil)
-//                alertController.addAction(selectFromAlbumAction)
-//                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-//                alertController.addAction(cancelAction)
-//                tabBarController?.present(alertController, animated: true, completion: nil)
-//            }
-//        }
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
@@ -100,8 +79,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         tabBarController.viewControllers = [v1, v2, v3, v4, v5]
         
         let navigationController = ExampleNavigationController.init(rootViewController: tabBarController)
-        tabBarController.title = "Example"
-        
+        tabBarController.title = "Snip"
         
         self.window?.rootViewController = navigationController
     }

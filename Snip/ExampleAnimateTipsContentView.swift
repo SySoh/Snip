@@ -53,3 +53,5 @@ class ExampleAnimateTipsContentView3: ExampleAnimateTipsContentView {
     }
     
 }
+
+
