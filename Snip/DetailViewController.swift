@@ -65,6 +65,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     
     @IBAction func pressSave(_ sender: Any) {
+        Post.saveImage(pictures: self.filteredPhotos!)
     }
     
     
@@ -153,7 +154,6 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(filteredPhotos)
         if collectionView == detailCollectionView {
             //return tagsArray!.count
             return tagNameArray.count
