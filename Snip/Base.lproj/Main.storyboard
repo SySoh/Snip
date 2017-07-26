@@ -13,7 +13,7 @@
         <!--Map View Controller-->
         <scene sceneID="eqR-Wa-t89">
             <objects>
-                <viewController id="VRY-jz-zQk" customClass="MapViewController" customModule="Snip" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Nearby" id="VRY-jz-zQk" customClass="MapViewController" customModule="Snip" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FpH-kH-TYT"/>
                         <viewControllerLayoutGuide type="bottom" id="DwH-A7-EWz"/>
@@ -35,7 +35,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lwF-pm-iKJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-426.39999999999998" y="117.39130434782609"/>
+            <point key="canvasLocation" x="1182" y="99"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -567,7 +567,7 @@
                                 <connections>
                                     <action selector="didPressBarberProfile:" destination="8hR-A2-Bpa" eventType="touchUpInside" id="dmd-1I-57y"/>
                                 </connections>
-                            </button>c
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Caption" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wyW-5G-o6m">
                                 <rect key="frame" x="31" y="481" width="296" height="81"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1428,7 +1428,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IUl-D2-8bb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-674" y="99"/>
+            <point key="canvasLocation" x="-1178" y="111"/>
         </scene>
     </scenes>
     <resources>
