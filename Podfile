@@ -21,7 +21,6 @@ target 'Snip' do
   pod 'Cosmos'
   pod 'RSKPlaceholderTextView'
 
-
   target 'SnipTests' do
     inherit! :search_paths
     # Pods for testing
