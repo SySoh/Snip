@@ -31,7 +31,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     var location: String?
     var phone: String?
     var rating: Int?
-    var date: Date?
+    var date: Date!
     var imageArray: [UIImage]?
     var image: UIImage?
     var photoId: String?
@@ -127,13 +127,14 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
         for tag in self.tagArray! {
             self.tagNameArray.append(tag.name!)
         }
-        
+        self.date = self.post?.createdAt!
+        self.price = self.post?["price"] as! Int
         self.barbershop = self.barber?["barbershop"] as! Barbershop
-        self.dateLabel.text = "\(self.post?.createdAt!)"
+        self.dateLabel.text = "\(self.date.getElapsedInterval())"
         self.barberLabel.text = self.barber?["name"] as! String
         self.barbershopLabel.text = self.barbershop?["name"] as? String
         self.location = self.barbershop?["location"] as? String
-        self.priceLabel.text = "$" + "\(self.post?["price"]!)"
+        self.priceLabel.text = "$" + "\(self.price!)"
         self.venmo = self.barber?["venmo"] as? String
         self.profileImageView.file = barber?["profile_pic"] as! PFFile
         self.profileImageView.loadInBackground()
@@ -150,10 +151,9 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
         if let secondLayout = self.photoCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
                 secondLayout.scrollDirection = .horizontal
             }
-        
-        
     }
-  
+    
+    
     func onlyWithPost(post: Post) {
         let postID = post.objectId!
         self.filteredPhotos = self.photoArray?.filter { (photo: PFObject) -> Bool in
@@ -201,8 +201,33 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
         // Dispose of any resources that can be recreated.
     }
     
-    
-    
-    
-    
 }
+
+extension Date {
+    
+    func getElapsedInterval() -> String {
+        
+        let interval = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: self, to: Date())
+        
+        if let year = interval.year, year > 0 {
+            return year == 1 ? "\(year)" + " " + "YEAR AGO" :
+                "\(year)" + " " + "YEARS AGO"
+        } else if let month = interval.month, month > 0 {
+            return month == 1 ? "\(month)" + " " + "MONTH AGO" :
+                "\(month)" + " " + "MONTHS AGO"
+        } else if let day = interval.day, day > 0 {
+            return day == 1 ? "\(day)" + " " + "DAY AGO" :
+                "\(day)" + " " + "DAYS AGO"
+        } else if let hour = interval.hour, hour > 0 {
+            return hour == 1 ? "\(hour)" + " " + "HOUR AGO" :
+                "\(hour)" + " " + "HOURS AGO"
+        } else if let minute = interval.minute, minute > 0 {
+            return minute == 1 ? "\(minute)" + " " + "MINUTE AGO" :
+                "\(minute)" + " " + "MINUTES AGO"
+        } else {
+            return "A MOMENT AGO"
+        }
+        
+    }
+}
+

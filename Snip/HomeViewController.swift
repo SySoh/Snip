@@ -80,7 +80,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             let cell = sender as! HomeCell
             vc.postImage = cell.cutImageView.image!
             let indexPath = homeCollectionView.indexPath(for: cell)
-            let photo = photoArray[(indexPath?.item)!]
+            let photo = photoArray[(indexPath?.item)!] as! Photo
             vc.post = photo["post"] as! Post
             vc.photoArray = self.detailArray
             vc.photoId = photo.objectId as! String
@@ -114,6 +114,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         query.includeKey("objectId")
         query.includeKey("favorited")
         query.includeKey("post.barber")
+        query.includeKey("post.price")
         query.includeKey("post.barber.barbershop")
         query.includeKey("post.tags")
         query.limit = 30
