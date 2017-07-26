@@ -10,20 +10,28 @@ import UIKit
 import Parse
 import ParseUI
 
-class UserViewController: UIViewController {
+class UserViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
-    
     @IBOutlet weak var savedCollectionView: UICollectionView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        savedCollectionView.delegate = self
+        savedCollectionView.dataSource = self
 
         // Do any additional setup after loading the view.
     }
 
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        <#code#>
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        <#code#>
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
