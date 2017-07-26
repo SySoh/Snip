@@ -57,17 +57,7 @@ class Post: PFObject, PFSubclassing {
         
     }
     
-    class func saveImage(pictures: [PFObject]) {
-        let post = PFObject(className: "Post")
-        post["save"] = pictures
-        post.saveInBackground { (success, error) in
-            if success{
-                print("picture was saved")
-            } else if let error = error {
-                print("problem saving: \(error.localizedDescription)")
-            }
-        }
-    }
+
     
     class func postPhoto(pictures: [UIImage], ID: String?) {
         let query = PFQuery(className: "Post")
