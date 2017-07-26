@@ -5,6 +5,7 @@ PODS:
     - Alamofire (~> 4.1)
   - Bolts/Tasks (1.8.4)
   - ESTabBarController-swift (2.4)
+  - Cosmos (10.0.0)
   - IQKeyboardManagerSwift (4.0.10)
   - JTAppleCalendar (7.0.4)
   - KeychainAccess (3.0.2)
@@ -31,6 +32,7 @@ DEPENDENCIES:
   - Alamofire (~> 4.4)
   - AlamofireImage (~> 3.1)
   - ESTabBarController-swift (~> 2.4)
+  - Cosmos
   - IQKeyboardManagerSwift
   - JTAppleCalendar (~> 7.0)
   - KeychainAccess
@@ -48,6 +50,7 @@ SPEC CHECKSUMS:
   AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   ESTabBarController-swift: af496895039ba10ae60bf825473c45f23fc5c8b6
+  Cosmos: bb9310e73ad1ad472b183b848b959302c569cf09
   IQKeyboardManagerSwift: 75ba21a23794a1e6b6fe6d9a267ea17f80e06771
   JTAppleCalendar: 6def48ecd0daae1d5baaa45e813124c2a20b184d
   KeychainAccess: a986406022dfc7c634c691ad3bec670cc6a32002

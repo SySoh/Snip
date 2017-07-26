@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import ParseUI
+import RSKPlaceholderTextView
 
 class ProfileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -18,7 +19,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var shopConstantLabel: UILabel!
     @IBOutlet weak var barbershopLabel: UILabel!
     @IBOutlet weak var venmoConstantLabel: UILabel!
-    @IBOutlet weak var venmoLabel: UILabel!
+    @IBOutlet weak var venmoTextView: UITextView!
+    
     @IBOutlet weak var postCollectionView: UICollectionView!
     @IBOutlet weak var tagCollectionView: UICollectionView!
     
@@ -50,11 +52,12 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         tagCollectionView.dataSource = self
         self.view.addSubview(postCollectionView)
         self.view.addSubview(tagCollectionView)
-        
+    
         self.profileImageVIew.file = barber["profile_pic"] as! PFFile
         self.profileImageVIew.loadInBackground()
         self.barbershopLabel.text = barbershopName
-        self.venmoLabel.text = venmo
+        self.venmoTextView.text = "venmo.com/" + venmo
+        print(self.venmoTextView.text)
         self.usernameLabel.text = barberName
         //        self.post = photo["post"] as! Post
         //        self.barber = post["barber"] as! Barber
@@ -74,86 +77,73 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
                         self.tagNameSet.insert("\(tagOb.name!)")
                     }
                 }
-//                self.post = self.posts.first as! Post
-//                self.tagArray = self.post.tags as! [Tag]
-                //self.tagArray = self.post["tag"] as! [Tag]
-                //for tag in self.tagArray {
-                  //  self.tagNameArray.append(tag.name!)
-                }
+                
                 let secondQuery = PFQuery(className: "Photo")
                 secondQuery.whereKey("post", containedIn: objects!)
-//                secondQuery.includeKey("tag")
+                //                secondQuery.includeKey("tag")
                 secondQuery.findObjectsInBackground { (secondObjects: [PFObject]?, error: Error?) in
                     if secondObjects != nil {
                         self.photoArray = secondObjects as! [Photo]
                         self.postCollectionView.reloadData()
-                       
-//                        self.tagNameArray = self.tagArray["name"] as! String
-                        
-                        
-//                        let tagArray = secondObjects["tag"] as! Tag
-//                        self.tagNameArray = tagArray["name"] as! String
                         self.tagCollectionView.reloadData()
-                
+                        
                     } else {
                         print(error?.localizedDescription)
                     }
+                }
+            }
+            if let layout = self.tagCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+                layout.scrollDirection = .horizontal
             }
         }
         
-    }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == self.postCollectionView {
-            let postCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileCell", for: indexPath) as! HomeCell
-            let photo = self.photoArray[indexPath.item]
-            print("here is the post object")
-            let media = photo["image"] as? PFFile
-            print("sup")
-            print(media)
-            //let media = fullPhotoList[indexPath.item] as? PFFile
-            media?.getDataInBackground { (backgroundData: Data?, error: Error?) in
-                if let backgroundData = backgroundData {
-                    postCell.profileCutImageView.contentMode = .scaleAspectFill
-                    postCell.profileCutImageView.clipsToBounds = true
-                    postCell.profileCutImageView.image = UIImage(data: backgroundData)
+        }
+        
+        
+        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+            if collectionView == self.postCollectionView {
+                let postCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileCell", for: indexPath) as! HomeCell
+                let photo = self.photoArray[indexPath.item]
+                let media = photo["image"] as? PFFile
+                media?.getDataInBackground { (backgroundData: Data?, error: Error?) in
+                    if let backgroundData = backgroundData {
+                        postCell.profileCutImageView.contentMode = .scaleAspectFill
+                        postCell.profileCutImageView.clipsToBounds = true
+                        postCell.profileCutImageView.image = UIImage(data: backgroundData)
+                    }
                 }
+                return postCell
+                
+            } else {
+                let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: "tagCell", for: indexPath) as! TagCell
+                self.tagNameArray = Array(tagNameSet)
+                tagCell.profileTagLabel.text = self.tagNameArray[indexPath.item]
+                return tagCell
             }
-            return postCell
-            
-        } else {
-            let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: "tagCell", for: indexPath) as! TagCell
-            self.tagNameArray = Array(tagNameSet)
-            print(self.tagNameArray)
-            tagCell.profileTagLabel.text = self.tagNameArray[indexPath.item]
-            print(tag)
-            return tagCell
         }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == self.postCollectionView {
-            return self.photoArray.count
+        
+        func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+            if collectionView == self.postCollectionView {
+                return self.photoArray.count
+            }
+            //return tagNameArray.count
+            return self.tagNameSet.count
         }
-        //return tagNameArray.count
-        return self.tagNameSet.count
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
+        
+        override func didReceiveMemoryWarning() {
+            super.didReceiveMemoryWarning()
+            // Dispose of any resources that can be recreated.
+        }
+        
+        
+        /*
+         // MARK: - Navigation
+         
+         // In a storyboard-based application, you will often want to do a little preparation before navigation
+         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+         // Get the new view controller using segue.destinationViewController.
+         // Pass the selected object to the new view controller.
+         }
+         */
+        
 }
