@@ -110,7 +110,7 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
         print("fillin out pics")
         cell.barberPic.file = barbers[indexPath.item].profile_pic
         cell.barberPic.loadInBackground()
-        cell.barberPic.layer.cornerRadius = cell.barberPic.frame.size.width / 2
+        cell.barberPic.mitlayer.cornerRadius = cell.barberPic.frame.size.width / 2
         return cell
     }
     
