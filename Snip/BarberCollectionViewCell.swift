@@ -11,6 +11,6 @@ import Parse
 import ParseUI
 
 class BarberCollectionViewCell: UICollectionViewCell {
-    
+    var barber: Barber?
     @IBOutlet weak var barberPic: PFImageView!
 }

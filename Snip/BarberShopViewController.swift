@@ -32,6 +32,7 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
     @IBOutlet weak var barberCollectionView: UICollectionView!
     
     var barbers: [Barber] = []
+    var selectedBarber: Barber?
     
     //Whoever segues to this page needs to pass in a barbershop.
     var barberShop: Barbershop?
@@ -45,10 +46,11 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
         super.viewDidLoad()
         
         map.isZoomEnabled = true
-        barberCollectionView.dataSource = self
-        barberCollectionView.delegate = self
         queryForBarbers()
         nameLabel.text = barberShop?.name as! String
+        barberCollectionView.dataSource = self
+        barberCollectionView.delegate = self
+        barberCollectionView.reloadData()
 //        shopImage.file = barberShop?.picture
 //        shopImage.loadInBackground()
         if barberShop?.location != nil{
@@ -93,24 +95,32 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
         self.barbers = objects as! [Barber]
         print("barber array filled")
         print(self.barbers)
+        self.barberCollectionView.reloadData()
     }
         
         }
-    barberCollectionView.reloadData()
+        print("ya reloadin?")
     
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = barberCollectionView.dequeueReusableCell(withReuseIdentifier: "barberCell", for: indexPath) as! BarberCollectionViewCell
+        cell.barber = barbers[indexPath.item]
+        print("fillin out pics")
         cell.barberPic.file = barbers[indexPath.item].profile_pic
         cell.barberPic.loadInBackground()
+        cell.barberPic.layer.cornerRadius = cell.barberPic.frame.size.width / 2
         return cell
     }
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return barbers.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedBarber = barbers[indexPath.item]
     }
     
     @IBAction func clickBack(_ sender: Any) {
@@ -122,4 +132,11 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
         // Dispose of any resources that can be recreated.
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let source = sender as! BarberCollectionViewCell
+        let destVC = segue.destination as! ProfileViewController
+        destVC.barber = source.barber
+        destVC.barberName = source.barber?.name
+        destVC.venmo = source.barber?.venmo
+    }
 }
