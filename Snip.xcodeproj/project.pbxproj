@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1E4998921F2164E70093A595 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4998911F2164E70093A595 /* Photo.swift */; };
 		1E4998961F26E38F0093A595 /* DetailPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4998951F26E38F0093A595 /* DetailPostCell.swift */; };
+		1E4998981F290C560093A595 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4998971F290C560093A595 /* UserViewController.swift */; };
+		1E49989A1F290E080093A595 /* SavedPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4998991F290E080093A595 /* SavedPostCell.swift */; };
 		1E8E68271F16982300635F93 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E68261F16982300635F93 /* HomeViewController.swift */; };
 		1E8E682A1F169B1A00635F93 /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E68291F169B1A00635F93 /* HomeCell.swift */; };
 		1E8E682C1F16AA3100635F93 /* Barbershop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E682B1F16AA3100635F93 /* Barbershop.swift */; };
@@ -72,6 +74,8 @@
 		19A250A47550172BDCBC858D /* Pods-SnipUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnipUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SnipUITests/Pods-SnipUITests.release.xcconfig"; sourceTree = "<group>"; };
 		1E4998911F2164E70093A595 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		1E4998951F26E38F0093A595 /* DetailPostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailPostCell.swift; sourceTree = "<group>"; };
+		1E4998971F290C560093A595 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		1E4998991F290E080093A595 /* SavedPostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedPostCell.swift; sourceTree = "<group>"; };
 		1E8E68261F16982300635F93 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1E8E68291F169B1A00635F93 /* HomeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
 		1E8E682B1F16AA3100635F93 /* Barbershop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Barbershop.swift; sourceTree = "<group>"; };
@@ -173,6 +177,7 @@
 				2E509D6E1F1ED7290085F5C2 /* BarberShopCell.swift */,
 				4BBAFF0C1F217705001A144F /* BarbershopSearchCell.swift */,
 				1E4998951F26E38F0093A595 /* DetailPostCell.swift */,
+				1E4998991F290E080093A595 /* SavedPostCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -257,6 +262,7 @@
 				2E1BED9B1F27D274008C86A3 /* MapViewController.swift */,
 				2E093BD61F16D19500D2C000 /* TagsViewController.swift */,
 				2E509D6C1F1ED5930085F5C2 /* BarberShopPickViewController.swift */,
+				1E4998971F290C560093A595 /* UserViewController.swift */,
 			);
 			name = CustomViewControllers;
 			sourceTree = "<group>";
@@ -590,11 +596,13 @@
 				2E1BED9C1F27D274008C86A3 /* MapViewController.swift in Sources */,
 				4B2097941F2123740067DC2F /* BarberSearchCell.swift in Sources */,
 				2E160DA41F168F790042419F /* User.swift in Sources */,
+				1E4998981F290C560093A595 /* UserViewController.swift in Sources */,
 				2E160DAA1F1698110042419F /* ComposeViewController.swift in Sources */,
 				4BBAFF0D1F217705001A144F /* BarbershopSearchCell.swift in Sources */,
 				4B2097921F211E4B0067DC2F /* TagSearchViewController.swift in Sources */,
 				1E8E68271F16982300635F93 /* HomeViewController.swift in Sources */,
 				4BBAFF0F1F22700B001A144F /* BarbershopSearchViewController.swift in Sources */,
+				1E49989A1F290E080093A595 /* SavedPostCell.swift in Sources */,
 				4BF10CD11F17F5BA00900F07 /* SearchViewController.swift in Sources */,
 				2E160DA61F168F830042419F /* Tag.swift in Sources */,
 				1E8E682A1F169B1A00635F93 /* HomeCell.swift in Sources */,
