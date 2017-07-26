@@ -64,6 +64,8 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     var tagNameArray: [String]! = []
     
     
+    @IBAction func pressSave(_ sender: Any) {
+    }
     
     
     @IBAction func pressDismiss(_ sender: Any) {
