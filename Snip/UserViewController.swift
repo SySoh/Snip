@@ -16,20 +16,60 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var savedCollectionView: UICollectionView!
     
+    var photoArray: [PFObject] = []
+    var photo: Photo?
+    var favorited: Bool?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         savedCollectionView.delegate = self
         savedCollectionView.dataSource = self
 
+        let query = PFQuery(className: "Photo")
+        query.order(byDescending: "createdAt")
+        query.includeKey("favorited")
+        query.includeKey("post.barber")
+        query.includeKey("post.barber.barbershop")
+        query.includeKey("post.tags")
+        query.limit = 30
+        //fetch data asynchronously
+        query.findObjectsInBackground { (objects, error: Error?) in
+            if let photos = objects {
+                let photo = photos.first as! Photo
+                let post = photo["post"] as! Post
+                for photoOb in photos {
+                    self.photo = photoOb as! Photo
+                    self.favorited = self.photo!["favorited"] as! Bool
+                    if self.favorited == true {
+                        self.photoArray.append(self.photo!)
+                    }
+                }
+                
+                self.savedCollectionView.reloadData()
+                
+                
+            }
+        }
+
         // Do any additional setup after loading the view.
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        <#code#>
+        return photoArray.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        <#code#>
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "savedPostCell", for: indexPath) as! SavedPostCell
+        let photo = photoArray[indexPath.item]
+        let media = photo["image"] as? PFFile
+        media?.getDataInBackground { (backgroundData: Data?, error: Error?) in
+            if let backgroundData = backgroundData {
+                cell.savedImageView.contentMode = .scaleAspectFill
+                cell.savedImageView.clipsToBounds = true
+                cell.savedImageView.image = UIImage(data: backgroundData)
+            }
+        }
+        return cell
     }
     
     override func didReceiveMemoryWarning() {

@@ -104,7 +104,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="profile_filler"/>
                                 <connections>
-                                    <segue destination="VRY-jz-zQk" kind="presentation" identifier="MapView" id="9NY-Fr-w9E"/>
+                                    <segue destination="OUc-Es-I02" kind="presentation" id="PhE-qN-nT5"/>
                                 </connections>
                             </button>
                         </subviews>

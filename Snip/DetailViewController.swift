@@ -34,6 +34,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     var date: Date?
     var imageArray: [UIImage]?
     var image: UIImage?
+    var photoId: String?
     
     
     var postImage: UIImage!
@@ -65,9 +66,18 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     
     @IBAction func pressSave(_ sender: Any) {
-        Post.saveImage(pictures: self.filteredPhotos!)
+        let query = PFQuery(className: "Photo")
+        
+        query.findObjectsInBackground(block: { (objects : [PFObject]?, error: Error?) -> Void in
+            if error != nil {
+                print(error?.localizedDescription)
+            } else {
+                self.photo?["favorited"] = true
+                self.photo?.saveInBackground()
+            }
+        })
+        
     }
-    
     
     @IBAction func pressDismiss(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -111,6 +121,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
         for photoOb in self.filteredPhotos! {
             imageArray?.append(photoOb["image"] as! UIImage)
         }
+//        self.photoId = self.photo?.objectId as! String
         self.barber = self.post?["barber"] as! Barber
         self.tagArray = self.post?["tags"] as! [Tag]
         for tag in self.tagArray! {
