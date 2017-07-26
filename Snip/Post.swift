@@ -57,6 +57,8 @@ class Post: PFObject, PFSubclassing {
         
     }
     
+
+    
     class func postPhoto(pictures: [UIImage], ID: String?) {
         let query = PFQuery(className: "Post")
         query.addDescendingOrder("createdAt")
