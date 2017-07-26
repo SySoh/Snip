@@ -49,7 +49,7 @@ class BarberShopViewController: UIViewController {
         } else {
             locationLabel.text = ""
         }
-        ratingStars.rating = Double((barberShop?.rating)!)!
+//        ratingStars.rating = Double((barberShop?.rating)!)!
         phoneLabel.text = barberShop?.phone as! String
         latitude = barberShop?.geopoint?.latitude
         longitude = barberShop?.geopoint?.longitude
