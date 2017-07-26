@@ -7,13 +7,13 @@
 //
 
 import UIKit
-import Parse
-import ParseUI
 import MapKit
 import Cosmos
+import Parse
+import ParseUI
 
 
-class BarberShopViewController: UIViewController {
+class BarberShopViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet weak var shopImage: PFImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -29,6 +29,10 @@ class BarberShopViewController: UIViewController {
     var longitude: CLLocationDegrees?
     var location: CLLocationCoordinate2D?
     
+    @IBOutlet weak var barberCollectionView: UICollectionView!
+    
+    var barbers: [Barber] = []
+    var selectedBarber: Barber?
     
     //Whoever segues to this page needs to pass in a barbershop.
     var barberShop: Barbershop?
@@ -40,8 +44,13 @@ class BarberShopViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         map.isZoomEnabled = true
+        queryForBarbers()
         nameLabel.text = barberShop?.name as! String
+        barberCollectionView.dataSource = self
+        barberCollectionView.delegate = self
+        barberCollectionView.reloadData()
 //        shopImage.file = barberShop?.picture
 //        shopImage.loadInBackground()
         if barberShop?.location != nil{
@@ -49,7 +58,8 @@ class BarberShopViewController: UIViewController {
         } else {
             locationLabel.text = ""
         }
-        ratingStars.rating = Double((barberShop?.rating)!)!
+        print(barberShop?.ratings?[0])
+        ratingStars.rating = Double((barberShop?.ratings?[0])!)
         phoneLabel.text = barberShop?.phone as! String
         latitude = barberShop?.geopoint?.latitude
         longitude = barberShop?.geopoint?.longitude
@@ -74,6 +84,45 @@ class BarberShopViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    func queryForBarbers() {
+    let query = PFQuery(className: "Barber")
+        query.whereKey("barbershop", equalTo: barberShop)
+        query.findObjectsInBackground { (objects, error) in
+    if let error = error {
+        print("we have an issue")
+        print(error.localizedDescription)
+    } else {
+        self.barbers = objects as! [Barber]
+        print("barber array filled")
+        print(self.barbers)
+        self.barberCollectionView.reloadData()
+    }
+        
+        }
+        print("ya reloadin?")
+    
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = barberCollectionView.dequeueReusableCell(withReuseIdentifier: "barberCell", for: indexPath) as! BarberCollectionViewCell
+        cell.barber = barbers[indexPath.item]
+        print("fillin out pics")
+        cell.barberPic.file = barbers[indexPath.item].profile_pic
+        cell.barberPic.loadInBackground()
+        cell.barberPic.layer.cornerRadius = cell.barberPic.frame.size.width / 2
+        return cell
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return barbers.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedBarber = barbers[indexPath.item]
+    }
+    
     @IBAction func clickBack(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -83,4 +132,11 @@ class BarberShopViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let source = sender as! BarberCollectionViewCell
+        let destVC = segue.destination as! ProfileViewController
+        destVC.barber = source.barber
+        destVC.barberName = source.barber?.name
+        destVC.venmo = source.barber?.venmo
+    }
 }
