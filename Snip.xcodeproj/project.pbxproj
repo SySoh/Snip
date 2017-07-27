@@ -37,6 +37,7 @@
 		2E509D6F1F1ED7290085F5C2 /* BarberShopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E509D6E1F1ED7290085F5C2 /* BarberShopCell.swift */; };
 		2E75E3EF1F212A56006294EB /* BarberShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E75E3EE1F212A56006294EB /* BarberShopViewController.swift */; };
 		2E7DA7FA1F1FCEBF003308D7 /* BarberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7DA7F91F1FCEBF003308D7 /* BarberCell.swift */; };
+		2E8809451F290A4B00D784E2 /* BarberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8809441F290A4B00D784E2 /* BarberCollectionViewCell.swift */; };
 		2EE757C71F22B0EE00A806E5 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE757C61F22B0EE00A806E5 /* ImageCell.swift */; };
 		4B1539C01F26777E008701E1 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1539BF1F26777E008701E1 /* ScheduleViewController.swift */; };
 		4B1539C21F267E8D008701E1 /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1539C11F267E8D008701E1 /* DateCell.swift */; };
@@ -116,6 +117,7 @@
 		2E509D6E1F1ED7290085F5C2 /* BarberShopCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarberShopCell.swift; sourceTree = "<group>"; };
 		2E75E3EE1F212A56006294EB /* BarberShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarberShopViewController.swift; sourceTree = "<group>"; };
 		2E7DA7F91F1FCEBF003308D7 /* BarberCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarberCell.swift; sourceTree = "<group>"; };
+		2E8809441F290A4B00D784E2 /* BarberCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarberCollectionViewCell.swift; sourceTree = "<group>"; };
 		2EE757C61F22B0EE00A806E5 /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		3C855E1780E72449BA87A51B /* Pods_SnipTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnipTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B1539BF1F26777E008701E1 /* ScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				1E8E68291F169B1A00635F93 /* HomeCell.swift */,
+				2E8809441F290A4B00D784E2 /* BarberCollectionViewCell.swift */,
 				2E7DA7F91F1FCEBF003308D7 /* BarberCell.swift */,
 				2E160DAB1F16AA730042419F /* TagCell.swift */,
 				2EE757C61F22B0EE00A806E5 /* ImageCell.swift */,
@@ -631,6 +634,7 @@
 				2E7DA7FA1F1FCEBF003308D7 /* BarberCell.swift in Sources */,
 				1E9BDE941F1D943300ACE230 /* DetailCell.swift in Sources */,
 				2E160DAC1F16AA730042419F /* TagCell.swift in Sources */,
+				2E8809451F290A4B00D784E2 /* BarberCollectionViewCell.swift in Sources */,
 				2E1BED9C1F27D274008C86A3 /* MapViewController.swift in Sources */,
 				4B2A7D801F2935A30056F2A6 /* ExampleTipsContentView.swift in Sources */,
 				4B2097941F2123740067DC2F /* BarberSearchCell.swift in Sources */,
