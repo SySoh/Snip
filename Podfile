@@ -20,6 +20,7 @@ target 'Snip' do
   pod 'IQKeyboardManagerSwift'
   pod 'Cosmos'
   pod 'RSKPlaceholderTextView'
+  pod 'SwiftHEXColors'
 
   target 'SnipTests' do
     inherit! :search_paths

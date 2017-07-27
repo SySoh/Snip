@@ -10,6 +10,7 @@ import UIKit
 import Parse
 import ParseUI
 import CoreLocation
+import SwiftHEXColors
 
 class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, TagsViewDelegate, BarberShopPickDelegate, BarberPickDelegate, UITextViewDelegate {
     
@@ -95,26 +96,22 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         barberQuery()
         if barbershop == nil {
             pickBarberButton.isEnabled = false
-            pickBarberButton.titleLabel?.textColor = UIColor.gray
+            pickBarberButton.backgroundColor = UIColor.lightGray
         }
         
         
         //Aesthetics
         captionTextView.text = "Have anything to say about this haircut?"
         captionTextView.textColor = UIColor.lightGray
-        tagCollectionView.layer.borderColor = UIColor.black.cgColor
+        tagCollectionView.layer.borderColor = UIColor(hex: 0xFFFCF2)?.cgColor
         tagCollectionView.layer.borderWidth = 1.0
         tagCollectionView.layer.cornerRadius = 10
         captionTextView.layer.cornerRadius = 10
-        captionTextView.layer.borderColor = UIColor.black.cgColor
+        captionTextView.layer.borderColor = UIColor(hex: 0xFFFCF2)?.cgColor
         captionTextView.layer.borderWidth = 0.5
         tagCollectionView.allowsSelection = true
         shopChoosingButton.layer.cornerRadius = 10
         barberChoosingButton.layer.cornerRadius = 10
-        
-        if let layout = self.imageCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.scrollDirection = .horizontal
-        }
         // Do any additional setup after loading the view.
     }
     
@@ -135,7 +132,7 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         shopChoosingButton.setTitle(barberShopName.name, for: .normal)
         self.barbershop = barberShopName
         pickBarberButton.isEnabled = true
-        pickBarberButton.titleLabel?.textColor = UIColor.blue
+        pickBarberButton.backgroundColor = UIColor(hex:0x5983C4)
     }
     
     func didChooseBarber(barberName: Barber) {
