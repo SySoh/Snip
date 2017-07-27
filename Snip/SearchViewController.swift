@@ -15,8 +15,13 @@ class SearchViewController: UIViewController, CAPSPageMenuDelegate {
     var pageMenu: CAPSPageMenu?
     @IBOutlet weak var searchBar: UISearchBar!
     
+    @IBAction func onCancel(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         // Array to keep track of controllers in page menu

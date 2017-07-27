@@ -10,13 +10,13 @@ import UIKit
 import Parse
 import ParseUI
 import IQKeyboardManagerSwift
+import ESTabBarController_swift
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegate {
 
     var window: UIWindow?
-    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         Barber.registerSubclass()
@@ -25,7 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Photo.registerSubclass()
         Tag.registerSubclass()
         // Override point for customization after application launch.
-        Tag.registerSubclass()
 
         Parse.initialize(
             with: ParseClientConfiguration(block: { (configuration: ParseMutableClientConfiguration) -> Void in
@@ -36,8 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if PFUser.current() != nil {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let HomeViewController = storyboard.instantiateViewController(withIdentifier: "HVC")
-            window?.rootViewController = HomeViewController
+            let NavController = storyboard.instantiateViewController(withIdentifier: "Navigation")
+            window?.rootViewController = NavController
             
         }
         
@@ -50,7 +49,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            
 //        })
         
+        applicationDidFinishLaunching(application)
+        
         return true
+    }
+    
+    func applicationDidFinishLaunching(_ application: UIApplication) {
+        let tabBarController = ESTabBarController()
+        tabBarController.delegate = self
+        tabBarController.title = "Irregularity"
+        tabBarController.tabBar.shadowImage = UIImage(named: "transparent")
+        tabBarController.tabBar.backgroundImage = UIImage(named: "background_dark")
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let v1 = storyboard.instantiateViewController(withIdentifier: "HVC")
+        let v2 = storyboard.instantiateViewController(withIdentifier: "Search")
+        let v3 = storyboard.instantiateViewController(withIdentifier: "composeView")
+        let v4 = storyboard.instantiateViewController(withIdentifier: "Nearby")
+        let v5 = storyboard.instantiateViewController(withIdentifier: "Favorites")
+        
+        
+        v1.tabBarItem = ESTabBarItem.init(ExampleIrregularityBasicContentView(), title: "Home", image: UIImage(named: "home"), selectedImage: UIImage(named: "home_1"))
+        v2.tabBarItem = ESTabBarItem.init(ExampleIrregularityBasicContentView(), title: "Find", image: UIImage(named: "find"), selectedImage: UIImage(named: "find_1"))
+        v3.tabBarItem = ESTabBarItem.init(ExampleIrregularityContentView(), title: nil, image: UIImage(named: "photo_verybig"), selectedImage: UIImage(named: "photo_verybig"))
+        v4.tabBarItem = ESTabBarItem.init(ExampleIrregularityBasicContentView(), title: "Nearby", image: UIImage(named: "favor"), selectedImage: UIImage(named: "favor_1"))
+        v5.tabBarItem = ESTabBarItem.init(ExampleIrregularityBasicContentView(), title: "Saved", image: UIImage(named: "me"), selectedImage: UIImage(named: "me_1"))
+        
+        tabBarController.viewControllers = [v1, v2, v3, v4, v5]
+        
+        let navigationController = ExampleNavigationController.init(rootViewController: tabBarController)
+        tabBarController.title = "Snip"
+        
+        self.window?.rootViewController = navigationController
     }
 
 
