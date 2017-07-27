@@ -63,6 +63,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     var tagArray: [Tag]? = []
     var tagNameArray: [String]! = []
+    var allPhotos: [PFObject]! = []
     
     
     @IBAction func pressSave(_ sender: Any) {
@@ -90,6 +91,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
             vc.barbershopName = self.barbershopLabel.text
             vc.venmo = self.venmo
             vc.barber = self.barber
+            vc.allPhotos = self.allPhotos
         }
         
         if segue.identifier == "ShopView" {
@@ -126,7 +128,8 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
         for photoOb in self.filteredPhotos! {
             imageArray?.append(photoOb["image"] as! UIImage)
         }
-//        self.photoId = self.photo?.objectId as! String
+     
+        //self.photoId = self.photo?.objectId as! String
         self.barber = self.post?["barber"] as! Barber
         self.tagArray = self.post?["tags"] as! [Tag]
         for tag in self.tagArray! {

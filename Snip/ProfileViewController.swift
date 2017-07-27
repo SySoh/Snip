@@ -25,6 +25,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var tagCollectionView: UICollectionView!
     
     var photoArray: [PFObject] = []
+    var allPhotos: [PFObject] = []
     var photo: PFObject!
     var barberName: String?
     var barbershopName: String!
@@ -44,6 +45,24 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         dismiss(animated: true, completion: nil)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "profileDetailSegue" {
+            let detailViewController = segue.destination as! DetailViewController
+            let cell = sender as! HomeCell
+            let indexPath = postCollectionView.indexPath(for: cell)
+            let photo = self.photoArray[(indexPath?.item)!] as! Photo
+            //detailViewController.barber = cell.barber
+            let post = self.photo["post"] as! Post
+            detailViewController.post = post
+            detailViewController.photoArray = self.photoArray
+            detailViewController.photoId = photo.objectId as! String
+            
+            //detailViewController.photo = photo as! Photo
+            
+        }
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         postCollectionView.delegate = self
@@ -52,7 +71,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         tagCollectionView.dataSource = self
         self.view.addSubview(postCollectionView)
         self.view.addSubview(tagCollectionView)
-    
+        
         self.profileImageVIew.file = barber["profile_pic"] as! PFFile
         self.profileImageVIew.loadInBackground()
         self.barbershopLabel.text = barbershopName
@@ -66,9 +85,15 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         profileImageVIew.layer.cornerRadius = profileImageVIew.frame.height/2
         profileImageVIew.clipsToBounds = true
         
+
+        
         let query = PFQuery(className: "Post")
         query.whereKey("barber", equalTo: self.barber)
         query.includeKey("tags")
+        query.includeKey("barber")
+        query.includeKey("barber.name")
+        query.includeKey("barber.barbershop")
+        query.includeKey("barber.profile_pic")
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
             if objects != nil {
                 query.whereKey("tags", containedIn: objects!)
@@ -83,10 +108,26 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
                 
                 let secondQuery = PFQuery(className: "Photo")
                 secondQuery.whereKey("post", containedIn: objects!)
+                secondQuery.includeKey("first")
+                secondQuery.includeKey("favorited")
+                secondQuery.includeKey("objectId")
+                secondQuery.includeKey("post")
+                secondQuery.includeKey("post.barber")
+                secondQuery.includeKey("post.price")
+                secondQuery.includeKey("post.barber.barbershop")
+                secondQuery.includeKey("post.tags")
+
                 //                secondQuery.includeKey("tag")
                 secondQuery.findObjectsInBackground { (secondObjects: [PFObject]?, error: Error?) in
                     if secondObjects != nil {
+                        let photos = secondObjects
+                        let photo = photos?.first as! Photo
+                        for photoOb in photos! {
+                            self.photo = photoOb as! Photo
+                            self.photoArray.append(self.photo!)
+                        }
                         self.photoArray = secondObjects as! [Photo]
+                        
                         self.postCollectionView.reloadData()
                         self.tagCollectionView.reloadData()
                         
@@ -100,53 +141,53 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
             }
         }
         
-        }
-        
-        
-        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            if collectionView == self.postCollectionView {
-                let postCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileCell", for: indexPath) as! HomeCell
-                let photo = self.photoArray[indexPath.item]
-                let media = photo["image"] as? PFFile
-                media?.getDataInBackground { (backgroundData: Data?, error: Error?) in
-                    if let backgroundData = backgroundData {
-                        postCell.profileCutImageView.contentMode = .scaleAspectFill
-                        postCell.profileCutImageView.clipsToBounds = true
-                        postCell.profileCutImageView.image = UIImage(data: backgroundData)
-                    }
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if collectionView == self.postCollectionView {
+            let postCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileCell", for: indexPath) as! HomeCell
+            let photo = self.photoArray[indexPath.item]
+            let media = photo["image"] as? PFFile
+            media?.getDataInBackground { (backgroundData: Data?, error: Error?) in
+                if let backgroundData = backgroundData {
+                    postCell.profileCutImageView.contentMode = .scaleAspectFill
+                    postCell.profileCutImageView.clipsToBounds = true
+                    postCell.profileCutImageView.image = UIImage(data: backgroundData)
                 }
-                return postCell
-                
-            } else {
-                let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: "tagCell", for: indexPath) as! TagCell
-                self.tagNameArray = Array(tagNameSet)
-                tagCell.profileTagLabel.text = self.tagNameArray[indexPath.item]
-                return tagCell
             }
+            return postCell
+            
+        } else {
+            let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: "tagCell", for: indexPath) as! TagCell
+            self.tagNameArray = Array(tagNameSet)
+            tagCell.profileTagLabel.text = self.tagNameArray[indexPath.item]
+            return tagCell
         }
-        
-        func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            if collectionView == self.postCollectionView {
-                return self.photoArray.count
-            }
-            //return tagNameArray.count
-            return self.tagNameSet.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == self.postCollectionView {
+            return self.photoArray.count
         }
-        
-        override func didReceiveMemoryWarning() {
-            super.didReceiveMemoryWarning()
-            // Dispose of any resources that can be recreated.
-        }
-        
-        
-        /*
-         // MARK: - Navigation
-         
-         // In a storyboard-based application, you will often want to do a little preparation before navigation
-         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         // Get the new view controller using segue.destinationViewController.
-         // Pass the selected object to the new view controller.
-         }
-         */
-        
+        //return tagNameArray.count
+        return self.tagNameSet.count
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

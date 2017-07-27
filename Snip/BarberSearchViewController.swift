@@ -66,6 +66,7 @@ class BarberSearchViewController: UIViewController, UITableViewDelegate, UITable
         
         // Set Number of Cuts
         let query = PFQuery(className: "Post")
+        query.includeKey("barber")
         query.whereKey("barber", equalTo: barber)
         query.countObjectsInBackground { (count: Int32, error: Error?) in
             if error == nil {
