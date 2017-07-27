@@ -162,6 +162,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
             let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: "tagCell", for: indexPath) as! TagCell
             self.tagNameArray = Array(tagNameSet)
             tagCell.profileTagLabel.text = self.tagNameArray[indexPath.item]
+            tagCell.layer.cornerRadius = 15
+
             return tagCell
         }
     }

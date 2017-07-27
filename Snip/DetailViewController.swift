@@ -186,6 +186,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
             let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: "detailCell", for: indexPath) as! DetailCell
             let tag = self.tagsArray?[indexPath.item]
             tagCell.tagLabel.text = tagNameArray[indexPath.item]
+            tagCell.layer.cornerRadius = 15
             return tagCell
         } else {
             let photoCell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! DetailPostCell
