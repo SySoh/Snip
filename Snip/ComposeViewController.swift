@@ -10,8 +10,9 @@ import UIKit
 import Parse
 import ParseUI
 import CoreLocation
+import SwiftHEXColors
 
-class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, TagsViewDelegate, BarberShopPickDelegate, BarberPickDelegate {
+class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, TagsViewDelegate, BarberShopPickDelegate, BarberPickDelegate, UITextViewDelegate {
     
     //tagList is used to obtain ALL tags and pass them into the tagView
     var tagList: [Tag] = []
@@ -32,9 +33,7 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var tagCollectionView: UICollectionView!
     @IBOutlet weak var priceText: UITextField!
     @IBOutlet weak var shopChoosingButton: UIButton!
-    @IBOutlet weak var shopNameText: UILabel!
     @IBOutlet weak var barberChoosingButton: UIButton!
-    @IBOutlet weak var barberNameText: UILabel!
     @IBOutlet weak var pictureView: UIImageView!
     @IBOutlet weak var captionTextView: UITextView!
     
@@ -47,6 +46,7 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
 
     
     @IBAction func goBack(_ sender: Any) {
+        print("cancel")
         dismiss(animated: true, completion: nil)
     }
 
@@ -80,8 +80,12 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         tagCollectionView.delegate = self
         tagCollectionView.reloadData()
         
+        captionTextView.delegate = self
+        
         imageCollectionView.dataSource = self
         imageCollectionView.delegate = self
+        
+        
         
         self.view.addSubview(tagCollectionView)
         self.view.addSubview(imageCollectionView)
@@ -92,17 +96,22 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         barberQuery()
         if barbershop == nil {
             pickBarberButton.isEnabled = false
-            pickBarberButton.titleLabel?.textColor = UIColor.gray
+            pickBarberButton.backgroundColor = UIColor.lightGray
         }
-        tagCollectionView.layer.borderColor = UIColor.black.cgColor
+        
+        
+        //Aesthetics
+        captionTextView.text = "Have anything to say about this haircut?"
+        captionTextView.textColor = UIColor.lightGray
+        tagCollectionView.layer.borderColor = UIColor(hex: 0xFFFCF2)?.cgColor
         tagCollectionView.layer.borderWidth = 1.0
-        captionTextView.layer.borderColor = UIColor.black.cgColor
+        tagCollectionView.layer.cornerRadius = 10
+        captionTextView.layer.cornerRadius = 10
+        captionTextView.layer.borderColor = UIColor(hex: 0xFFFCF2)?.cgColor
         captionTextView.layer.borderWidth = 0.5
         tagCollectionView.allowsSelection = true
-        
-        if let layout = self.imageCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.scrollDirection = .horizontal
-        }
+        shopChoosingButton.layer.cornerRadius = 10
+        barberChoosingButton.layer.cornerRadius = 10
         // Do any additional setup after loading the view.
     }
     
@@ -120,14 +129,14 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     func didChooseBarberShop(barberShopName: Barbershop) {
-        shopNameText.text = barberShopName.name
+        shopChoosingButton.setTitle(barberShopName.name, for: .normal)
         self.barbershop = barberShopName
         pickBarberButton.isEnabled = true
-        pickBarberButton.titleLabel?.textColor = UIColor.blue
+        pickBarberButton.backgroundColor = UIColor(hex:0x5983C4)
     }
     
     func didChooseBarber(barberName: Barber) {
-        barberNameText.text = barberName.name
+        barberChoosingButton.setTitle(barberName.name, for: .normal)
         self.barber = barberName
     }
     
@@ -142,16 +151,39 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         let vc = UIImagePickerController()
         vc.delegate = self
         vc.allowsEditing = true
-        
+        let alertController = UIAlertController(title: "Camera unavailable", message: nil, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title:"Okay", style: .cancel) {(UIAlertAction) in }
+        alertController.addAction(cancelAction)
         if UIImagePickerController.isSourceTypeAvailable(.camera){
             vc.sourceType = UIImagePickerControllerSourceType.camera
         } else {
             vc.sourceType = .photoLibrary
         }
+        self.present(vc, animated: true, completion: {if vc.sourceType == .photoLibrary {
+            vc.present(alertController, animated: true)
+            }})
         
-        self.present(vc, animated: true, completion: nil)
         
+    }
+    
+    func choosePicRoll() {
+        let vc = UIImagePickerController()
+        vc.delegate = self
+        vc.allowsEditing = true
+        let alertController = UIAlertController(title: "Photo library unavailable", message: nil, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title:"Okay", style: .cancel) {(UIAlertAction) in }
+        alertController.addAction(cancelAction)
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+            vc.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        } else {
+            
+            
+            vc.sourceType = .camera
+        }
         
+        self.present(vc, animated: true, completion: {if vc.sourceType == .camera {
+            vc.present(alertController, animated: true)
+            }})
     }
     
     
@@ -177,6 +209,7 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         if collectionView == self.tagCollectionView {
          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TagCell", for: indexPath) as! TagCell
             cell.tagName.text = (tagReuse[indexPath.item].name)
+            cell.layer.cornerRadius = 15
             return cell
             
         } else {
@@ -247,6 +280,25 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
                 self.barberList = barbers as! [Barber]
             }
     }
+    }
+    
+    
+    //Cancel placeholder text for caption
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            captionTextView.text = ""
+            captionTextView.textColor = UIColor.black
+        }
+    }
+ 
+    
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+            if textView.text.isEmpty {
+                textView.text = "Have anything to say about this haircut?"
+                textView.textColor = UIColor.lightGray
+            }
     }
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation

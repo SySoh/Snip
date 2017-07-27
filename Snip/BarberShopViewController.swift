@@ -58,8 +58,8 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
         } else {
             locationLabel.text = ""
         }
-        print(barberShop?.ratings?[0])
-        ratingStars.rating = Double((barberShop?.ratings?[0])!)
+//        ratingStars.rating = Double((barberShop?.rating)!)!
+
         phoneLabel.text = barberShop?.phone as! String
         latitude = barberShop?.geopoint?.latitude
         longitude = barberShop?.geopoint?.longitude
