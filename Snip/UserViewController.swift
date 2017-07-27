@@ -15,12 +15,12 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var savedCollectionView: UICollectionView!
-    
+
     var photoArray: [PFObject] = []
     var photo: Photo?
     var favorited: Bool?
-    
-    
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         savedCollectionView.delegate = self
@@ -45,10 +45,10 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
                         self.photoArray.append(self.photo!)
                     }
                 }
-                
+
                 self.savedCollectionView.reloadData()
-                
-                
+
+
             }
         }
 
@@ -71,12 +71,12 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
         return cell
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
 
     /*
     // MARK: - Navigation
