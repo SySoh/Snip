@@ -59,10 +59,13 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         self.venmoTextView.text = "venmo.com/" + venmo
         print(self.venmoTextView.text)
         self.usernameLabel.text = barberName
-        //        self.post = photo["post"] as! Post
-        //        self.barber = post["barber"] as! Barber
+        // Make profile pic circular
+        profileImageVIew.layer.borderWidth = 1
+        profileImageVIew.layer.masksToBounds = false
+        profileImageVIew.layer.borderColor = UIColor.lightGray.cgColor
+        profileImageVIew.layer.cornerRadius = profileImageVIew.frame.height/2
+        profileImageVIew.clipsToBounds = true
         
-        // Do any additional setup after loading the view.
         let query = PFQuery(className: "Post")
         query.whereKey("barber", equalTo: self.barber)
         query.includeKey("tags")

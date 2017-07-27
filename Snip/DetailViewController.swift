@@ -115,7 +115,12 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
         self.view.addSubview(detailCollectionView)
         self.view.addSubview(photoCollectionView)
         
-        
+        // Make profile pic circular
+        profileImageView.layer.borderWidth = 1
+        profileImageView.layer.masksToBounds = false
+        profileImageView.layer.borderColor = UIColor.lightGray.cgColor
+        profileImageView.layer.cornerRadius = profileImageView.frame.height/2
+        profileImageView.clipsToBounds = true
         
        
         for photoOb in self.filteredPhotos! {
