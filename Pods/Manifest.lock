@@ -27,6 +27,7 @@ PODS:
   - Prephirences/Keys (3.0.1):
     - Prephirences/Core
   - RSKPlaceholderTextView (2.0.0)
+  - SwiftHEXColors (1.1.0)
 
 DEPENDENCIES:
   - ActiveLabel
@@ -45,6 +46,7 @@ DEPENDENCIES:
   - pop (~> 1.0)
   - Prephirences
   - RSKPlaceholderTextView
+  - SwiftHEXColors
 
 SPEC CHECKSUMS:
   ActiveLabel: 68625f22775f51c31bb691ca8de20f1e5a3bc825
@@ -64,7 +66,8 @@ SPEC CHECKSUMS:
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   Prephirences: d0ec0bd6047edb3370364345857a769aaf3db312
   RSKPlaceholderTextView: 301f0f30e70e7c42fe4e941e3a08365ab0d890d5
+  SwiftHEXColors: 8f7e364df7929e32cff9f9eeb044bb215167d6be
 
-PODFILE CHECKSUM: 2c90683ae991fbc636ca07c4bf9ea62cb56c2eeb
+PODFILE CHECKSUM: 336f7702eb6e8d1cd7bfb0dd7e44ddddf9eab33a
 
 COCOAPODS: 1.2.1

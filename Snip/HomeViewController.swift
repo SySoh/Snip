@@ -89,6 +89,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             let destVC = segue.destination as! MapViewController
             destVC.shops = self.barbershops as! [Barbershop]
         }
+        if segue.identifier == "compose_view" {
+            print("goin")
+        }
     }
     
     func getShopLocations() {

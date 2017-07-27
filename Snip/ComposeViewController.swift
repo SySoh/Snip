@@ -46,6 +46,7 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
 
     
     @IBAction func goBack(_ sender: Any) {
+        print("cancel")
         dismiss(animated: true, completion: nil)
     }
 
@@ -150,16 +151,39 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         let vc = UIImagePickerController()
         vc.delegate = self
         vc.allowsEditing = true
-        
+        let alertController = UIAlertController(title: "Camera unavailable", message: nil, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title:"Okay", style: .cancel) {(UIAlertAction) in }
+        alertController.addAction(cancelAction)
         if UIImagePickerController.isSourceTypeAvailable(.camera){
             vc.sourceType = UIImagePickerControllerSourceType.camera
         } else {
             vc.sourceType = .photoLibrary
         }
+        self.present(vc, animated: true, completion: {if vc.sourceType == .photoLibrary {
+            vc.present(alertController, animated: true)
+            }})
         
-        self.present(vc, animated: true, completion: nil)
         
+    }
+    
+    func choosePicRoll() {
+        let vc = UIImagePickerController()
+        vc.delegate = self
+        vc.allowsEditing = true
+        let alertController = UIAlertController(title: "Photo library unavailable", message: nil, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title:"Okay", style: .cancel) {(UIAlertAction) in }
+        alertController.addAction(cancelAction)
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+            vc.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        } else {
+            
+            
+            vc.sourceType = .camera
+        }
         
+        self.present(vc, animated: true, completion: {if vc.sourceType == .camera {
+            vc.present(alertController, animated: true)
+            }})
     }
     
     
