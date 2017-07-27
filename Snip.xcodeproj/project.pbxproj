@@ -53,6 +53,7 @@
 		4B2A7D7F1F2935A30056F2A6 /* ExampleIrregularityContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2A7D781F2935A30056F2A6 /* ExampleIrregularityContentView.swift */; };
 		4B2A7D801F2935A30056F2A6 /* ExampleTipsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2A7D791F2935A30056F2A6 /* ExampleTipsContentView.swift */; };
 		4B2A7D821F2936770056F2A6 /* ExampleNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2A7D811F2936770056F2A6 /* ExampleNavigationController.swift */; };
+		4B55861C1F2A6C5C0063406E /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B55861B1F2A6C5C0063406E /* UIColorExtension.swift */; };
 		4BABA7BB1F227E9D009802DD /* TSRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BABA7BA1F227E9D009802DD /* TSRViewController.swift */; };
 		4BBAFF0D1F217705001A144F /* BarbershopSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BBAFF0C1F217705001A144F /* BarbershopSearchCell.swift */; };
 		4BBAFF0F1F22700B001A144F /* BarbershopSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BBAFF0E1F22700B001A144F /* BarbershopSearchViewController.swift */; };
@@ -134,6 +135,7 @@
 		4B2A7D781F2935A30056F2A6 /* ExampleIrregularityContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleIrregularityContentView.swift; sourceTree = "<group>"; };
 		4B2A7D791F2935A30056F2A6 /* ExampleTipsContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleTipsContentView.swift; sourceTree = "<group>"; };
 		4B2A7D811F2936770056F2A6 /* ExampleNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleNavigationController.swift; sourceTree = "<group>"; };
+		4B55861B1F2A6C5C0063406E /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		4BABA7BA1F227E9D009802DD /* TSRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TSRViewController.swift; sourceTree = "<group>"; };
 		4BBAFF0C1F217705001A144F /* BarbershopSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarbershopSearchCell.swift; sourceTree = "<group>"; };
 		4BBAFF0E1F22700B001A144F /* BarbershopSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarbershopSearchViewController.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 			children = (
 				2E160D721F157F740042419F /* Main.storyboard */,
 				2E160D6E1F157F740042419F /* AppDelegate.swift */,
+				4B55861B1F2A6C5C0063406E /* UIColorExtension.swift */,
 				4B55861A1F293A320063406E /* Tab Bar */,
 				1E8E68281F169ACD00635F93 /* Views */,
 				2E160DA81F1694E70042419F /* CustomViewControllers */,
@@ -648,6 +651,7 @@
 				4B2097921F211E4B0067DC2F /* TagSearchViewController.swift in Sources */,
 				1E8E68271F16982300635F93 /* HomeViewController.swift in Sources */,
 				4B2A7D7F1F2935A30056F2A6 /* ExampleIrregularityContentView.swift in Sources */,
+				4B55861C1F2A6C5C0063406E /* UIColorExtension.swift in Sources */,
 				4BBAFF0F1F22700B001A144F /* BarbershopSearchViewController.swift in Sources */,
 				1E49989A1F290E080093A595 /* SavedPostCell.swift in Sources */,
 				4BF10CD11F17F5BA00900F07 /* SearchViewController.swift in Sources */,

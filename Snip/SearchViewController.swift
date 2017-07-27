@@ -22,6 +22,8 @@ class SearchViewController: UIViewController, CAPSPageMenuDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.isNavigationBarHidden = true
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         // Array to keep track of controllers in page menu

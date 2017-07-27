@@ -24,7 +24,7 @@ class TSRViewController: UIViewController, UICollectionViewDelegate, UICollectio
         super.viewDidLoad()
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
-        self.tagLabel.text = self.tag?.name
+        //self.tagLabel.text = self.tag?.name
         let query = PFQuery(className: "Post")
         query.whereKey("tags", equalTo: self.tag)
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
