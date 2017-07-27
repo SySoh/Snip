@@ -15,9 +15,9 @@ class ExampleIrregularityBasicContentView: ExampleBouncesContentView {
         super.init(frame: frame)
         
         textColor = UIColor.init(white: 255.0 / 255.0, alpha: 1.0)
-        highlightTextColor = UIColor.init(red: 23/255.0, green: 149/255.0, blue: 158/255.0, alpha: 1.0)
+        highlightTextColor = UIColor.init(red: 160/255.0, green: 65/255.0, blue: 72/255.0, alpha: 1.0)
         iconColor = UIColor.init(white: 255.0 / 255.0, alpha: 1.0)
-        highlightIconColor = UIColor.init(red: 23/255.0, green: 149/255.0, blue: 158/255.0, alpha: 1.0)
+        highlightIconColor = UIColor.init(red: 160/255.0, green: 65/255.0, blue: 72/255.0, alpha: 1.0)
         backdropColor = UIColor.init(red: 10/255.0, green: 66/255.0, blue: 91/255.0, alpha: 1.0)
         highlightBackdropColor = UIColor.init(red: 10/255.0, green: 66/255.0, blue: 91/255.0, alpha: 1.0)
     }
@@ -27,12 +27,15 @@ class ExampleIrregularityBasicContentView: ExampleBouncesContentView {
     }
 }
 
+// (red: 160/255.0, green: 65/255.0, blue: 72/255.0, alpha: 1.0)
+// (red: 10/255.0, green: 66/255.0, blue: 91/255.0, alpha: 1.0)
+
 class ExampleIrregularityContentView: ESTabBarItemContentView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.imageView.backgroundColor = UIColor.init(red: 23/255.0, green: 149/255.0, blue: 158/255.0, alpha: 1.0)
+        self.imageView.backgroundColor = UIColor.init(red: 160/255.0, green: 65/255.0, blue: 72/255.0, alpha: 1.0)
         self.imageView.layer.borderWidth = 3.0
         self.imageView.layer.borderColor = UIColor.init(white: 235 / 255.0, alpha: 1.0).cgColor
         self.imageView.layer.cornerRadius = 35
@@ -124,25 +127,4 @@ class ExampleIrregularityContentView: ESTabBarItemContentView {
         })
     }
 
-}
-
-extension UIColor {
-    convenience init(hex: String) {
-        let scanner = Scanner(string: hex)
-        scanner.scanLocation = 0
-        
-        var rgbValue: UInt64 = 0
-        
-        scanner.scanHexInt64(&rgbValue)
-        
-        let r = (rgbValue & 0xff0000) >> 16
-        let g = (rgbValue & 0xff00) >> 8
-        let b = rgbValue & 0xff
-        
-        self.init(
-            red: CGFloat(r) / 0xff,
-            green: CGFloat(g) / 0xff,
-            blue: CGFloat(b) / 0xff, alpha: 1
-        )
-    }
 }

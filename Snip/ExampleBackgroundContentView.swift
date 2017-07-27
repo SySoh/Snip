@@ -17,7 +17,7 @@ class ExampleBackgroundContentView: ExampleBasicContentView {
         highlightTextColor = UIColor.init(white: 255.0 / 255.0, alpha: 1.0)
         iconColor = UIColor.init(white: 165.0 / 255.0, alpha: 1.0)
         highlightIconColor = UIColor.init(white: 255.0 / 255.0, alpha: 1.0)
-        backdropColor = UIColor.init(red: 37/255.0, green: 39/255.0, blue: 42/255.0, alpha: 1.0)
+        backdropColor = UIColor.init(red: 38/255.0, green: 160/255.0, blue: 218/255.0, alpha: 1.0)
         highlightBackdropColor = UIColor.init(red: 22/255.0, green: 24/255.0, blue: 25/255.0, alpha: 1.0)
     }
     
@@ -51,26 +51,5 @@ class ExampleBackgroundContentView: ExampleBasicContentView {
         impliesAnimation.calculationMode = kCAAnimationCubic
         impliesAnimation.isRemovedOnCompletion = true
         view.layer.add(impliesAnimation, forKey: nil)
-    }
-}
-
-extension UIColor {
-    convenience init(hex: String) {
-        let scanner = Scanner(string: hex)
-        scanner.scanLocation = 0
-        
-        var rgbValue: UInt64 = 0
-        
-        scanner.scanHexInt64(&rgbValue)
-        
-        let r = (rgbValue & 0xff0000) >> 16
-        let g = (rgbValue & 0xff00) >> 8
-        let b = rgbValue & 0xff
-        
-        self.init(
-            red: CGFloat(r) / 0xff,
-            green: CGFloat(g) / 0xff,
-            blue: CGFloat(b) / 0xff, alpha: 1
-        )
     }
 }

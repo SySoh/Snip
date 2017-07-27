@@ -49,17 +49,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2cw-Oe-zJj">
-                                <rect key="frame" x="163" y="20" width="48" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Search"/>
-                                <connections>
-                                    <action selector="touchSearch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lBf-vt-WYj"/>
-                                    <segue destination="HjC-QA-70E" kind="show" id="hCK-NG-DRG"/>
-                                </connections>
-                            </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9iz-6D-FND">
-                                <rect key="frame" x="0.0" y="58" width="375" height="609"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="437-QM-2FF">
                                     <size key="itemSize" width="187" height="187"/>
@@ -82,6 +73,7 @@
                                                 </imageView>
                                             </subviews>
                                         </view>
+                                        <color key="backgroundColor" red="0.088683821260929108" green="0.583609938621521" blue="0.6213153600692749" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="cutImageView" destination="OgZ-RC-n7q" id="n3Q-2H-pU7"/>
                                             <segue destination="8hR-A2-Bpa" kind="show" identifier="DetailSegue" id="aRW-zb-oxh"/>
@@ -89,35 +81,17 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lhd-eG-q44">
-                                <rect key="frame" x="305" y="20" width="54" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Camera"/>
-                                <connections>
-                                    <action selector="touchCamera:" destination="BYZ-38-t0r" eventType="touchUpInside" id="goU-Ta-huz"/>
-                                    <segue destination="sI4-xA-N1i" kind="presentation" identifier="ComposeSegue" id="zN7-E3-hY1"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YQS-p7-glz">
-                                <rect key="frame" x="16" y="20" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="profile_filler"/>
-                                <connections>
-                                    <segue destination="OUc-Es-I02" kind="presentation" id="PhE-qN-nT5"/>
-                                </connections>
-                            </button>
                         </subviews>
                     </view>
                     <navigationItem key="navigationItem" id="Qm9-VJ-vvW"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="homeCollectionView" destination="9iz-6D-FND" id="e5p-kh-6Io"/>
-                        <outlet property="mapViewButton" destination="YQS-p7-glz" id="gOo-eY-W3g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="265" y="99"/>
+            <point key="canvasLocation" x="356" y="87.706146926536732"/>
         </scene>
         <!--User View Controller-->
         <scene sceneID="3mB-a0-61S">
@@ -592,13 +566,6 @@
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="rS0-TL-lN1" appends="YES" id="cQ7-Vv-94v"/>
                                 </connections>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="7/12/17" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEf-R0-pdt">
-                                <rect key="frame" x="281" y="441" width="55" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Joe Martinez" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dkh-Rm-Dvv">
                                 <rect key="frame" x="75" y="75" width="100" height="21"/>
