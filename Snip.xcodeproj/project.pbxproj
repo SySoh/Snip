@@ -423,6 +423,7 @@
 				TargetAttributes = {
 					2E160D6A1F157F740042419F = {
 						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = 8G73AS2J3U;
 						ProvisioningStyle = Automatic;
 					};
 					2E160D7E1F157F740042419F = {
@@ -826,6 +827,7 @@
 			baseConfigurationReference = B0B879B7BEB0AF92F6AC0A1C /* Pods-Snip.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 8G73AS2J3U;
 				INFOPLIST_FILE = Snip/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fb.Snip;
@@ -839,6 +841,7 @@
 			baseConfigurationReference = AE97803698347DEC0A51E1DD /* Pods-Snip.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 8G73AS2J3U;
 				INFOPLIST_FILE = Snip/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fb.Snip;

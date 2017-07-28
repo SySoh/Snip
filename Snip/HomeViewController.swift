@@ -78,11 +78,11 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         if segue.identifier == "DetailSegue" {
             let vc = segue.destination as! DetailViewController
             let cell = sender as! HomeCell
-            vc.postImage = cell.cutImageView.image!
             let indexPath = homeCollectionView.indexPath(for: cell)
             let photo = photoArray[(indexPath?.item)!] as! Photo
             vc.post = photo["post"] as! Post
             vc.photoArray = self.detailArray
+            vc.allPhotos = self.photoArray
             vc.photoId = photo.objectId as! String
             }
         if segue.identifier == "MapView" {
@@ -114,18 +114,16 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         let query = PFQuery(className: "Photo")
         query.order(byDescending: "createdAt")
         query.includeKey("first")
-        query.includeKey("objectId")
         query.includeKey("favorited")
+        query.includeKey("objectId")
+        query.includeKey("post")
         query.includeKey("post.barber")
         query.includeKey("post.price")
         query.includeKey("post.barber.barbershop")
         query.includeKey("post.tags")
-        query.limit = 30
         //fetch data asynchronously
         query.findObjectsInBackground { (objects, error: Error?) in
             if let photos = objects {
-                let photo = photos.first as! Photo
-                let post = photo["post"] as! Post
                 for photoOb in photos {
                     self.photo = photoOb as! Photo
                     self.first = self.photo!["first"] as! Bool
