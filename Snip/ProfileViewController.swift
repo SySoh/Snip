@@ -58,7 +58,11 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
             detailViewController.photoId = photo.objectId as! String
             
             //detailViewController.photo = photo as! Photo
-            
+        }
+        if segue.identifier == "shop_view" {
+            print("sending")
+            let destVC = segue.destination as! BarberShopViewController
+            destVC.barberShop = barber["barbershop"] as! Barbershop
         }
     }
     
