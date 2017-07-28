@@ -23,5 +23,4 @@ class TagCell: UICollectionViewCell {
         return tagName.text;
     }
                 
-    
 }

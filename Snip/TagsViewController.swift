@@ -65,12 +65,13 @@ class TagsViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TagCell", for: indexPath) as! TagCell
         if fullTagList.count > 0 {
             cell.tagName.text = fullTagList[indexPath.item].object(forKey: "name") as! String
-        cell.layer.cornerRadius = 30
+        cell.layer.cornerRadius = 15
         cell.clipsToBounds = true
+        cell.backgroundColor = UIColor(hex:0xFFFCF2, alpha: 0.8)
         cell.tagObject = fullTagList[indexPath.item]
             if selectedTags.contains(cell.tagObject!) {
-                cell.tagName.backgroundColor = UIColor.blue
-                cell.tagName.textColor = UIColor.white
+                cell.backgroundColor = UIColor(hex:0x5983C4, alpha: 0.8)
+                cell.tagName.textColor = UIColor(hex:0xFFFCF2, alpha: 0.8)
             }
         }
         return cell
@@ -90,12 +91,12 @@ class TagsViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let tag = cell.tagObject
         if selectedTags.contains(tag!){
             selectedTags.remove(tag!)
-            cell.tagName.backgroundColor = UIColor.white
+            cell.backgroundColor = UIColor(hex:0xFFFCF2, alpha: 0.8)
             cell.tagName.textColor = UIColor.black
         } else {
         selectedTags.insert(tag!)
-        cell.tagName.backgroundColor = UIColor.blue
-        cell.tagName.textColor = UIColor.white
+            cell.backgroundColor = UIColor(hex:0x5983C4, alpha: 0.8)
+            cell.tagName.textColor = UIColor(hex:0xFFFCF2, alpha: 0.8)
         }
         
     }
