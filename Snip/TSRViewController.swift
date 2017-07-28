@@ -19,24 +19,33 @@ class TSRViewController: UIViewController, UICollectionViewDelegate, UICollectio
     var tag: Tag?
     var posts: [Post]?
     var post: Post?
+    var detailArray: [PFObject]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
-        //self.tagLabel.text = self.tag?.name
         let query = PFQuery(className: "Post")
         query.whereKey("tags", equalTo: self.tag)
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
             if objects != nil {
                 let secondQuery = PFQuery(className: "Photo")
-                secondQuery
+                
                 secondQuery.whereKey("post", containedIn: objects!)
+                secondQuery.whereKey("first", equalTo: true)
+                
+                secondQuery.includeKey("first")
+                secondQuery.includeKey("objectId")
+                secondQuery.includeKey("favorited")
+                secondQuery.includeKey("post.barber")
+                secondQuery.includeKey("post.price")
+                secondQuery.includeKey("post.barber.barbershop")
+                secondQuery.includeKey("post.tags")
+                
                 secondQuery.findObjectsInBackground { (secondObjects: [PFObject]?, error: Error?) in
                     if secondObjects != nil {
                         self.photos = secondObjects as! [Photo]
                         self.collectionView.reloadData()
-                        
                     } else {
                         print(error?.localizedDescription)
                     }
@@ -47,39 +56,16 @@ class TSRViewController: UIViewController, UICollectionViewDelegate, UICollectio
         }
     }
     
-    func refresh() {
-        //construct PFQuery
-        let query = PFQuery(className: "Photo")
-        query.order(byDescending: "createdAt")
-        query.includeKey("first")
-        query.includeKey("objectId")
-        query.includeKey("favorited")
-        query.includeKey("post.barber")
-        query.includeKey("post.price")
-        query.includeKey("post.barber.barbershop")
-        query.includeKey("post.tags")
-        query.limit = 30
-        //fetch data asynchronously
-        query.findObjectsInBackground { (objects, error: Error?) in
-            if let photos = objects {
-                let photo = photos.first as! Photo
-                let post = photo["post"] as! Post
-                for photoOb in photos {
-                    self.photo = photoOb as! Photo
-                    self.first = self.photo!["first"] as! Bool
-                    if self.first == true {
-                        self.photoArray.append(self.photo!)
-                    }
-                    self.detailArray = photos as! [Photo]
-                }
-                //                self.photoArray = photos
-                self.homeCollectionView.reloadData()
-                
-                
-            }
-        }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc = segue.destination as! DetailViewController
+        let cell = sender as! HomeCell
+        vc.postImage = cell.TSRCutImageView.image!
+        let indexPath = collectionView.indexPath(for: cell)
+        let photo = self.photos[(indexPath?.item)!] as! Photo
+        vc.post = photo["post"] as! Post
+        vc.photoArray = self.photos
+        vc.photoId = photo.objectId! as String
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TSRCell", for: indexPath) as! HomeCell
