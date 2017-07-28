@@ -277,6 +277,7 @@
 			children = (
 				4BABA7B71F227181009802DD /* Search */,
 				2E160DA91F1698110042419F /* ComposeViewController.swift */,
+				1E9BDE971F1EC5C000ACE230 /* ProfileViewController.swift */,
 				2E75E3EE1F212A56006294EB /* BarberShopViewController.swift */,
 				1E8E68261F16982300635F93 /* HomeViewController.swift */,
 				2E509D6A1F1ED57E0085F5C2 /* BarberPickViewController.swift */,
@@ -309,7 +310,6 @@
 			isa = PBXGroup;
 			children = (
 				4BF10CD01F17F5BA00900F07 /* SearchViewController.swift */,
-				1E9BDE971F1EC5C000ACE230 /* ProfileViewController.swift */,
 				4B2097911F211E4B0067DC2F /* TagSearchViewController.swift */,
 				4B2097951F2123AA0067DC2F /* BarberSearchViewController.swift */,
 				4BBAFF0E1F22700B001A144F /* BarbershopSearchViewController.swift */,
