@@ -63,6 +63,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     var tagArray: [Tag]? = []
     var tagNameArray: [String]! = []
+    var allPhotos: [PFObject]! = []
     
     
     @IBAction func pressSave(_ sender: Any) {
@@ -90,6 +91,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
             vc.barbershopName = self.barbershopLabel.text
             vc.venmo = self.venmo
             vc.barber = self.barber
+            vc.allPhotos = self.allPhotos
         }
         
         if segue.identifier == "ShopView" {
@@ -115,13 +117,19 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
         self.view.addSubview(detailCollectionView)
         self.view.addSubview(photoCollectionView)
         
-        
+        // Make profile pic circular
+        profileImageView.layer.borderWidth = 1
+        profileImageView.layer.masksToBounds = false
+        profileImageView.layer.borderColor = UIColor.lightGray.cgColor
+        profileImageView.layer.cornerRadius = profileImageView.frame.height/2
+        profileImageView.clipsToBounds = true
         
        
         for photoOb in self.filteredPhotos! {
             imageArray?.append(photoOb["image"] as! UIImage)
         }
-//        self.photoId = self.photo?.objectId as! String
+     
+        //self.photoId = self.photo?.objectId as! String
         self.barber = self.post?["barber"] as! Barber
         self.tagArray = self.post?["tags"] as! [Tag]
         for tag in self.tagArray! {
@@ -178,6 +186,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
             let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: "detailCell", for: indexPath) as! DetailCell
             let tag = self.tagsArray?[indexPath.item]
             tagCell.tagLabel.text = tagNameArray[indexPath.item]
+            tagCell.layer.cornerRadius = 15
             return tagCell
         } else {
             let photoCell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! DetailPostCell
