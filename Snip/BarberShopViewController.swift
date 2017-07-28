@@ -51,8 +51,8 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
         barberCollectionView.dataSource = self
         barberCollectionView.delegate = self
         barberCollectionView.reloadData()
-//        shopImage.file = barberShop?.picture
-//        shopImage.loadInBackground()
+        shopImage.file = barberShop?.picture
+        shopImage.loadInBackground()
         if barberShop?.location != nil{
             locationLabel.text = barberShop?.location as! String
         } else {
