@@ -26,15 +26,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         self.map.delegate = self
         self.map.showsUserLocation = true
         manager.delegate = self
+        getShopLocations()
         manager.requestWhenInUseAuthorization()
         manager.requestLocation()
-        for shop in shops {
-            let annotation = MKPointAnnotation()
-            annotation.title = shop.name
-            annotation.coordinate.latitude = (shop.geopoint?.latitude)!
-            annotation.coordinate.longitude = (shop.geopoint?.longitude)!
-            map.addAnnotation(annotation)
-        }
+        
 
 
         // Do any additional setup after loading the view.
@@ -55,6 +50,29 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             region.span.longitudeDelta = 1
             map.setRegion(region, animated: true)
             print("Found user's location: \(location)")
+        }
+    }
+    
+    
+    func getShopLocations() {
+        let query = PFQuery(className: "Barbershop")
+        query.includeKey("geopoint")
+        query.findObjectsInBackground { (objects, error: Error?) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                self.shops = objects as! [Barbershop]
+                for shop in self.shops {
+                    let annotation = MKPointAnnotation()
+                    annotation.title = shop.name
+                    annotation.coordinate.latitude = (shop.geopoint?.latitude)!
+                    annotation.coordinate.longitude = (shop.geopoint?.longitude)!
+                    self.map.addAnnotation(annotation)
+                    print("Adding")
+                    print(shop)
+                }
+            }
+            
         }
     }
     
