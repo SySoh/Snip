@@ -14,6 +14,7 @@ class BarberSearchCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var cutLabel: UILabel!
     
+    var barber: Barber?
 
     override func awakeFromNib() {
         super.awakeFromNib()

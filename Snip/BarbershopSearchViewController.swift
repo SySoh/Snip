@@ -41,6 +41,14 @@ class BarbershopSearchViewController: UIViewController, UITableViewDataSource, U
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "BarbershopSearchSegue" {
+            let vc = segue.destination as! BarberShopViewController
+            let cell = sender as! BarbershopSearchCell
+            vc.barberShop = cell.barbershop
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredBarbershops.count
     }
@@ -48,6 +56,8 @@ class BarbershopSearchViewController: UIViewController, UITableViewDataSource, U
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Barbershop Search Cell", for: indexPath) as! BarbershopSearchCell
         let barbershop = self.filteredBarbershops[indexPath.row]
+        
+        cell.barbershop = barbershop as? Barbershop
         
         // Set Barbershop Name
         let barbershopName = barbershop["name"] as! String

@@ -19,6 +19,7 @@
 		1E9BDE981F1EC5C000ACE230 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9BDE971F1EC5C000ACE230 /* ProfileViewController.swift */; };
 		1EE9EAE81F2BBC3700D200EF /* blessed_day in Resources */ = {isa = PBXBuildFile; fileRef = 1EE9EAE71F2BBC3700D200EF /* blessed_day */; };
 		1EE9EAEA1F2BBD6B00D200EF /* BLESD___ .ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1EE9EAE91F2BBD6B00D200EF /* BLESD___ .ttf */; };
+		1EE9EAEC1F2BC82600D200EF /* UserSnipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9EAEB1F2BC82600D200EF /* UserSnipsViewController.swift */; };
 		2C13359FEE42DCB61FE9CDEF /* Pods_SnipTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C855E1780E72449BA87A51B /* Pods_SnipTests.framework */; };
 		2E093BD71F16D19500D2C000 /* TagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E093BD61F16D19500D2C000 /* TagsViewController.swift */; };
 		2E160D6F1F157F740042419F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E160D6E1F157F740042419F /* AppDelegate.swift */; };
@@ -55,6 +56,8 @@
 		4B2A7D7F1F2935A30056F2A6 /* ExampleIrregularityContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2A7D781F2935A30056F2A6 /* ExampleIrregularityContentView.swift */; };
 		4B2A7D801F2935A30056F2A6 /* ExampleTipsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2A7D791F2935A30056F2A6 /* ExampleTipsContentView.swift */; };
 		4B2A7D821F2936770056F2A6 /* ExampleNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2A7D811F2936770056F2A6 /* ExampleNavigationController.swift */; };
+		4B55861C1F2A6C5C0063406E /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B55861B1F2A6C5C0063406E /* UIColorExtension.swift */; };
+		4B5586211F2BB55B0063406E /* UserTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5586201F2BB55B0063406E /* UserTabViewController.swift */; };
 		4BABA7BB1F227E9D009802DD /* TSRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BABA7BA1F227E9D009802DD /* TSRViewController.swift */; };
 		4BBAFF0D1F217705001A144F /* BarbershopSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BBAFF0C1F217705001A144F /* BarbershopSearchCell.swift */; };
 		4BBAFF0F1F22700B001A144F /* BarbershopSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BBAFF0E1F22700B001A144F /* BarbershopSearchViewController.swift */; };
@@ -96,6 +99,7 @@
 		1E9BDE971F1EC5C000ACE230 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1EE9EAE71F2BBC3700D200EF /* blessed_day */ = {isa = PBXFileReference; lastKnownFileType = folder; path = blessed_day; sourceTree = "<group>"; };
 		1EE9EAE91F2BBD6B00D200EF /* BLESD___ .ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BLESD___ .ttf"; path = "blessed_day/BLESD___ .ttf"; sourceTree = "<group>"; };
+		1EE9EAEB1F2BC82600D200EF /* UserSnipsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSnipsViewController.swift; sourceTree = "<group>"; };
 		2E093BD61F16D19500D2C000 /* TagsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsViewController.swift; sourceTree = "<group>"; };
 		2E160D6B1F157F740042419F /* Snip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E160D6E1F157F740042419F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -138,6 +142,8 @@
 		4B2A7D781F2935A30056F2A6 /* ExampleIrregularityContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleIrregularityContentView.swift; sourceTree = "<group>"; };
 		4B2A7D791F2935A30056F2A6 /* ExampleTipsContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleTipsContentView.swift; sourceTree = "<group>"; };
 		4B2A7D811F2936770056F2A6 /* ExampleNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleNavigationController.swift; sourceTree = "<group>"; };
+		4B55861B1F2A6C5C0063406E /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		4B5586201F2BB55B0063406E /* UserTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTabViewController.swift; sourceTree = "<group>"; };
 		4BABA7BA1F227E9D009802DD /* TSRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TSRViewController.swift; sourceTree = "<group>"; };
 		4BBAFF0C1F217705001A144F /* BarbershopSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarbershopSearchCell.swift; sourceTree = "<group>"; };
 		4BBAFF0E1F22700B001A144F /* BarbershopSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarbershopSearchViewController.swift; sourceTree = "<group>"; };
@@ -190,16 +196,14 @@
 		1E8E68281F169ACD00635F93 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4B55861D1F2A847A0063406E /* Search */,
 				1E8E68291F169B1A00635F93 /* HomeCell.swift */,
 				2E8809441F290A4B00D784E2 /* BarberCollectionViewCell.swift */,
 				2E7DA7F91F1FCEBF003308D7 /* BarberCell.swift */,
 				2E160DAB1F16AA730042419F /* TagCell.swift */,
 				2EE757C61F22B0EE00A806E5 /* ImageCell.swift */,
-				4B20978F1F20225D0067DC2F /* TagSearchCell.swift */,
-				4B2097931F2123740067DC2F /* BarberSearchCell.swift */,
-				1E9BDE931F1D943300ACE230 /* DetailCell.swift */,
 				2E509D6E1F1ED7290085F5C2 /* BarberShopCell.swift */,
-				4BBAFF0C1F217705001A144F /* BarbershopSearchCell.swift */,
+				1E9BDE931F1D943300ACE230 /* DetailCell.swift */,
 				4B1539C11F267E8D008701E1 /* DateCell.swift */,
 				1E4998951F26E38F0093A595 /* DetailPostCell.swift */,
 				1E4998991F290E080093A595 /* SavedPostCell.swift */,
@@ -235,6 +239,7 @@
 				2E160D721F157F740042419F /* Main.storyboard */,
 				2E160D6E1F157F740042419F /* AppDelegate.swift */,
 				1EE9EAE71F2BBC3700D200EF /* blessed_day */,
+				4B55861B1F2A6C5C0063406E /* UIColorExtension.swift */,
 				4B55861A1F293A320063406E /* Tab Bar */,
 				1E8E68281F169ACD00635F93 /* Views */,
 				2E160DA81F1694E70042419F /* CustomViewControllers */,
@@ -293,6 +298,8 @@
 				2E509D6C1F1ED5930085F5C2 /* BarberShopPickViewController.swift */,
 				4B1539BF1F26777E008701E1 /* ScheduleViewController.swift */,
 				1E4998971F290C560093A595 /* UserViewController.swift */,
+				4B5586201F2BB55B0063406E /* UserTabViewController.swift */,
+				1EE9EAEB1F2BC82600D200EF /* UserSnipsViewController.swift */,
 			);
 			name = CustomViewControllers;
 			sourceTree = "<group>";
@@ -310,6 +317,16 @@
 				4B2A7D811F2936770056F2A6 /* ExampleNavigationController.swift */,
 			);
 			name = "Tab Bar";
+			sourceTree = "<group>";
+		};
+		4B55861D1F2A847A0063406E /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				4B20978F1F20225D0067DC2F /* TagSearchCell.swift */,
+				4B2097931F2123740067DC2F /* BarberSearchCell.swift */,
+				4BBAFF0C1F217705001A144F /* BarbershopSearchCell.swift */,
+			);
+			name = Search;
 			sourceTree = "<group>";
 		};
 		4BABA7B71F227181009802DD /* Search */ = {
@@ -634,6 +651,7 @@
 				4B2097961F2123AA0067DC2F /* BarberSearchViewController.swift in Sources */,
 				4BABA7BB1F227E9D009802DD /* TSRViewController.swift in Sources */,
 				4B2A7D7C1F2935A30056F2A6 /* ExampleBasicContentView.swift in Sources */,
+				4B5586211F2BB55B0063406E /* UserTabViewController.swift in Sources */,
 				4B2A7D7A1F2935A30056F2A6 /* ExampleAnimateTipsContentView.swift in Sources */,
 				1E8E682C1F16AA3100635F93 /* Barbershop.swift in Sources */,
 				1E4998921F2164E70093A595 /* Photo.swift in Sources */,
@@ -651,12 +669,14 @@
 				2E160DA41F168F790042419F /* User.swift in Sources */,
 				4B1539C01F26777E008701E1 /* ScheduleViewController.swift in Sources */,
 				1E4998981F290C560093A595 /* UserViewController.swift in Sources */,
+				1EE9EAEC1F2BC82600D200EF /* UserSnipsViewController.swift in Sources */,
 				2E160DAA1F1698110042419F /* ComposeViewController.swift in Sources */,
 				4BBAFF0D1F217705001A144F /* BarbershopSearchCell.swift in Sources */,
 				4B2A7D821F2936770056F2A6 /* ExampleNavigationController.swift in Sources */,
 				4B2097921F211E4B0067DC2F /* TagSearchViewController.swift in Sources */,
 				1E8E68271F16982300635F93 /* HomeViewController.swift in Sources */,
 				4B2A7D7F1F2935A30056F2A6 /* ExampleIrregularityContentView.swift in Sources */,
+				4B55861C1F2A6C5C0063406E /* UIColorExtension.swift in Sources */,
 				4BBAFF0F1F22700B001A144F /* BarbershopSearchViewController.swift in Sources */,
 				1E49989A1F290E080093A595 /* SavedPostCell.swift in Sources */,
 				4BF10CD11F17F5BA00900F07 /* SearchViewController.swift in Sources */,

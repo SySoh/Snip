@@ -11,4 +11,7 @@ import UIKit
 class SavedPostCell: UICollectionViewCell {
     
     @IBOutlet weak var savedImageView: UIImageView!
+    @IBOutlet weak var userSnipImageView: UIImageView!
+    
+    
 }
