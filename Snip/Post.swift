@@ -81,6 +81,7 @@ class Post: PFObject, PFSubclassing {
                     }
                     
                     photo["post"] = thisPost
+                    photo["favorited"] = false
                     
                     photo.saveInBackground()
                     

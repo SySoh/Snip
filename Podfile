@@ -23,6 +23,8 @@ target 'Snip' do
   pod 'Cosmos'
   pod 'RSKPlaceholderTextView'
   pod 'pop', '~> 1.0'
+  pod 'SwiftHEXColors'
+
 
   target 'SnipTests' do
     inherit! :search_paths
