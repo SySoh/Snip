@@ -42,7 +42,7 @@ class Post: PFObject, PFSubclassing {
         if PFUser.current() != nil {
             post["user"] = PFUser.current()
         } else {
-            post["user"] = NSNull()
+            post["user"] = false
         }
         post.saveInBackground { (success, error) in
             if success {
