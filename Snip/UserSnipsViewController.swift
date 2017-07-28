@@ -1,8 +1,8 @@
 //
-//  UserViewController.swift
+//  UserSnipsViewController.swift
 //  Snip
 //
-//  Created by Cameryn Boyd on 7/26/17.
+//  Created by Cameryn Boyd on 7/28/17.
 //  Copyright © 2017 Shao Yie Soh. All rights reserved.
 //
 
@@ -10,44 +10,50 @@ import UIKit
 import Parse
 import ParseUI
 
-class UserViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-
-    @IBOutlet weak var userImageView: UIImageView!
-    @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var savedCollectionView: UICollectionView!
-
+class UserSnipsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+    
+//    @IBOutlet weak var userImageView: UIImageView!
+//    @IBOutlet weak var usernameLabel: UILabel!
+    
+    @IBOutlet weak var snipsCollectionView: UICollectionView!
+    
     var photoArray: [PFObject] = []
     var allPhotos: [PFObject] = []
     var photo: Photo?
-    var favorited: Bool?
-
+    var user: Bool?
+    
+    
+    
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "userSaved" {
+        if segue.identifier == "userSnips" {
             let detailViewController = segue.destination as! DetailViewController
             let cell = sender as! SavedPostCell
-            let indexPath = savedCollectionView.indexPath(for: cell)
+            let indexPath = snipsCollectionView.indexPath(for: cell)
             let photo = self.photoArray[(indexPath?.item)!] as! Photo
             //detailViewController.barber = cell.barber
             let post = photo["post"] as! Post
             detailViewController.post = post
             detailViewController.photoArray = self.allPhotos
-//            detailViewController.photoId = photo.objectId as! String
+            //detailViewController.photoId = photo.objectId as! String
             
             
         }
     }
 
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        savedCollectionView.delegate = self
-        savedCollectionView.dataSource = self
+        snipsCollectionView.delegate = self
+        snipsCollectionView.dataSource = self
 
         let query = PFQuery(className: "Photo")
         query.order(byDescending: "createdAt")
-        query.includeKey("favorited")
-        query.includeKey("objectId")
+        query.includeKey("user")
         query.includeKey("first")
+        query.includeKey("objectId")
         query.includeKey("post")
         query.includeKey("post.barber")
         query.includeKey("post.barber.barbershop")
@@ -61,33 +67,33 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 let post = photo["post"] as! Post
                 for photoOb in photos {
                     self.photo = photoOb as! Photo
-                    self.favorited = self.photo!["favorited"] as! Bool
-                    if self.favorited == true {
+                    self.user = self.photo!["user"] as! Bool
+                    if self.user == true {
                         self.photoArray.append(self.photo!)
                     }
                 }
-
-                self.savedCollectionView.reloadData()
-
-
+                
+                self.snipsCollectionView.reloadData()
+                
+                
             }
         }
-
+        
         // Do any additional setup after loading the view.
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photoArray.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "savedPostCell", for: indexPath) as! SavedPostCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "userSnipCell", for: indexPath) as! SavedPostCell
         let photo = photoArray[indexPath.item]
         let media = photo["image"] as? PFFile
         media?.getDataInBackground { (backgroundData: Data?, error: Error?) in
             if let backgroundData = backgroundData {
-                cell.savedImageView.contentMode = .scaleAspectFill
-                cell.savedImageView.clipsToBounds = true
-                cell.savedImageView.image = UIImage(data: backgroundData)
+                cell.userSnipImageView.contentMode = .scaleAspectFill
+                cell.userSnipImageView.clipsToBounds = true
+                cell.userSnipImageView.image = UIImage(data: backgroundData)
             }
         }
         return cell
@@ -97,7 +103,7 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
 
     /*
     // MARK: - Navigation
