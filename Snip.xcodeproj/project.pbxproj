@@ -95,7 +95,7 @@
 		1E9BDE931F1D943300ACE230 /* DetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		1E9BDE971F1EC5C000ACE230 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1EE9EAE71F2BBC3700D200EF /* blessed_day */ = {isa = PBXFileReference; lastKnownFileType = folder; path = blessed_day; sourceTree = "<group>"; };
-		1EE9EAE91F2BBD6B00D200EF /* BLESD___ .ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BLESD___ .ttf"; path = "Snip/blessed_day/BLESD___ .ttf"; sourceTree = "<group>"; };
+		1EE9EAE91F2BBD6B00D200EF /* BLESD___ .ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BLESD___ .ttf"; path = "blessed_day/BLESD___ .ttf"; sourceTree = "<group>"; };
 		2E093BD61F16D19500D2C000 /* TagsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsViewController.swift; sourceTree = "<group>"; };
 		2E160D6B1F157F740042419F /* Snip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E160D6E1F157F740042419F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -210,7 +210,6 @@
 		2E160D621F157F740042419F = {
 			isa = PBXGroup;
 			children = (
-				1EE9EAE91F2BBD6B00D200EF /* BLESD___ .ttf */,
 				2E160D6D1F157F740042419F /* Snip */,
 				2E160D821F157F740042419F /* SnipTests */,
 				2E160D8D1F157F740042419F /* SnipUITests */,
@@ -243,6 +242,7 @@
 				2E160D751F157F740042419F /* Assets.xcassets */,
 				2E160D771F157F740042419F /* LaunchScreen.storyboard */,
 				2E160D7A1F157F740042419F /* Info.plist */,
+				1EE9EAE91F2BBD6B00D200EF /* BLESD___ .ttf */,
 			);
 			path = Snip;
 			sourceTree = "<group>";
