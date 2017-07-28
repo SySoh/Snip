@@ -30,6 +30,7 @@ class TSRViewController: UIViewController, UICollectionViewDelegate, UICollectio
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
             if objects != nil {
                 let secondQuery = PFQuery(className: "Photo")
+                secondQuery
                 secondQuery.whereKey("post", containedIn: objects!)
                 secondQuery.findObjectsInBackground { (secondObjects: [PFObject]?, error: Error?) in
                     if secondObjects != nil {
@@ -42,6 +43,39 @@ class TSRViewController: UIViewController, UICollectionViewDelegate, UICollectio
                 }
             } else {
                 print(error?.localizedDescription)
+            }
+        }
+    }
+    
+    func refresh() {
+        //construct PFQuery
+        let query = PFQuery(className: "Photo")
+        query.order(byDescending: "createdAt")
+        query.includeKey("first")
+        query.includeKey("objectId")
+        query.includeKey("favorited")
+        query.includeKey("post.barber")
+        query.includeKey("post.price")
+        query.includeKey("post.barber.barbershop")
+        query.includeKey("post.tags")
+        query.limit = 30
+        //fetch data asynchronously
+        query.findObjectsInBackground { (objects, error: Error?) in
+            if let photos = objects {
+                let photo = photos.first as! Photo
+                let post = photo["post"] as! Post
+                for photoOb in photos {
+                    self.photo = photoOb as! Photo
+                    self.first = self.photo!["first"] as! Bool
+                    if self.first == true {
+                        self.photoArray.append(self.photo!)
+                    }
+                    self.detailArray = photos as! [Photo]
+                }
+                //                self.photoArray = photos
+                self.homeCollectionView.reloadData()
+                
+                
             }
         }
     }

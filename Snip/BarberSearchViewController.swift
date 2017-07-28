@@ -30,6 +30,8 @@ class BarberSearchViewController: UIViewController, UITableViewDelegate, UITable
         let query = PFQuery(className: "Barber")
         query.order(byDescending: "createdAt")
         query.includeKey("name")
+        query.includeKey("barbershop")
+        query.includeKey("barbershop.name")
         query.includeKey("profile_pic")
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
             if let objects = objects {
@@ -42,6 +44,15 @@ class BarberSearchViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "BarberSearchSegue" {
+            let vc = segue.destination as! ProfileViewController
+            let cell = sender as! BarberSearchCell
+            vc.barber = cell.barber
+            let barber = cell.barber!
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredBarbers.count
     }
@@ -49,6 +60,8 @@ class BarberSearchViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Barber Search Cell", for: indexPath) as! BarberSearchCell
         let barber = self.filteredBarbers[indexPath.row]
+        
+        cell.barber = barber as? Barber
         
         // Set Barber Name
         let barberName = barber["name"] as! String

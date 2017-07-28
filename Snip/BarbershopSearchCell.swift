@@ -12,7 +12,9 @@ class BarbershopSearchCell: UITableViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
-
+    
+    var barbershop: Barbershop?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
