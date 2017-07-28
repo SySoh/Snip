@@ -52,12 +52,18 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
             let indexPath = postCollectionView.indexPath(for: cell)
             let photo = self.photoArray[(indexPath?.item)!] as! Photo
             //detailViewController.barber = cell.barber
-            let post = self.photo["post"] as! Post
+            let post = photo["post"] as! Post
             detailViewController.post = post
             detailViewController.photoArray = self.photoArray
             detailViewController.photoId = photo.objectId as! String
 
 
+            //detailViewController.photo = photo as! Photo
+        }
+        if segue.identifier == "shop_view" {
+            print("sending")
+            let destVC = segue.destination as! BarberShopViewController
+            destVC.barberShop = barber["barbershop"] as! Barbershop
         }
     }
 

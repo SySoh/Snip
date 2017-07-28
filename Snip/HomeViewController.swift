@@ -51,6 +51,34 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let query = PFQuery(className: "Photo")
+        query.order(byDescending: "createdAt")
+        query.includeKey("first")
+        query.includeKey("favorited")
+        query.includeKey("objectId")
+        query.includeKey("post")
+        query.includeKey("post.barber")
+        query.includeKey("post.price")
+        query.includeKey("post.barber.barbershop")
+        query.includeKey("post.tags")
+        //fetch data asynchronously
+        query.findObjectsInBackground { (objects, error: Error?) in
+            if let photos = objects {
+                for photoOb in photos {
+                    self.photo = photoOb as! Photo
+                    self.first = self.photo!["first"] as! Bool
+                    if self.first == true {
+                        self.photoArray.append(self.photo!)
+                    }
+                    self.detailArray = photos as! [Photo]
+                }
+                //                self.photoArray = photos
+                self.homeCollectionView.reloadData()
+                
+                
+            }
+        }
+
         refresh()
         getShopLocations()
         homeCollectionView.dataSource = self
@@ -110,8 +138,14 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     
     func refresh() {
+       
         //construct PFQuery
         let query = PFQuery(className: "Photo")
+        let defaults=UserDefaults.standard
+        
+        if let lastUpdateDate=defaults.object(forKey: "lastUpdateDate") as? NSDate {
+            query.whereKey("updatedAt",greaterThan:lastUpdateDate)
+        }
         query.order(byDescending: "createdAt")
         query.includeKey("first")
         query.includeKey("favorited")
@@ -124,6 +158,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         //fetch data asynchronously
         query.findObjectsInBackground { (objects, error: Error?) in
             if let photos = objects {
+                defaults.set(NSDate(),forKey:"lastUpdateDate")
                 for photoOb in photos {
                     self.photo = photoOb as! Photo
                     self.first = self.photo!["first"] as! Bool

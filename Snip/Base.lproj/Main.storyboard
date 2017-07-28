@@ -691,7 +691,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tGp-9h-9gJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="rS0-TL-lN1">
                     <connections>
-                        <segue destination="dey-tC-3b4" kind="presentation" identifier="ShopView" id="X26-bd-rJY"/>
+                        <segue destination="dey-tC-3b4" kind="show" identifier="ShopView" id="X26-bd-rJY"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -797,10 +797,21 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ace of Fades" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F6Y-nf-FVD">
                                 <rect key="frame" x="124" y="56" width="223" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
+                                </accessibility>
+                                <gestureRecognizers/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                 <color key="textColor" red="0.091641254723072052" green="0.28674256801605225" blue="0.43558898568153381" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dbE-Wu-Rb7">
+                                <rect key="frame" x="124" y="53" width="168" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <segue destination="dey-tC-3b4" kind="show" identifier="shop_view" id="2pg-sZ-O3Y"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.96134275197982788" green="0.92969369888305664" blue="0.85499924421310425" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -1316,16 +1327,6 @@
                                 <rect key="frame" x="0.0" y="465" width="375" height="202"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hgM-Hc-vWq">
-                                <rect key="frame" x="311" y="20" width="48" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Cancel">
-                                    <color key="titleColor" red="0.48310361330000001" green="0.61957304059999996" blue="0.81828997459999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </state>
-                                <connections>
-                                    <action selector="goBack:" destination="dey-tC-3b4" eventType="touchUpInside" id="ib2-cL-yXt"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Location" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mdt-ZO-9Mj">
                                 <rect key="frame" x="15" y="436" width="306" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1395,7 +1396,7 @@
                                         </view>
                                         <connections>
                                             <outlet property="barberPic" destination="RbA-Hh-tZs" id="rIl-eA-7MA"/>
-                                            <segue destination="0r9-h4-lev" kind="presentation" identifier="" id="Uoi-rp-UiA"/>
+                                            <segue destination="0r9-h4-lev" kind="show" identifier="toProfile" id="Uoi-rp-UiA"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -1522,7 +1523,7 @@
                 <navigationController storyboardIdentifier="Navigation" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="wpg-DR-Qwe" customClass="ExampleNavigationController" customModule="Snip" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="NfB-Mi-7mc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="NfB-Mi-7mc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1547,8 +1548,8 @@
         <image name="star_outline" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="aRW-zb-oxh"/>
-        <segue reference="ugo-57-2J3"/>
-        <segue reference="X26-bd-rJY"/>
+        <segue reference="Uoi-rp-UiA"/>
+        <segue reference="2pg-sZ-O3Y"/>
+        <segue reference="Tp3-uf-z1R"/>
     </inferredMetricsTieBreakers>
 </document>
