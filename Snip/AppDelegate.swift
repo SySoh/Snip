@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             }
             return false
         }
-        tabBarController.didHijackHandler = {
+tabBarController.didHijackHandler = {
             [weak tabBarController] tabbarController, viewController, index in
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
@@ -88,6 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
                 tabBarController?.present(alertController, animated: true, completion: nil)
             }
         }
+
         
         tabBarController.shouldHijackHandler = {
             tabbarController, viewController, index in
