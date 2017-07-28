@@ -18,19 +18,43 @@ class UserSnipsViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var snipsCollectionView: UICollectionView!
     
     var photoArray: [PFObject] = []
+    var allPhotos: [PFObject] = []
     var photo: Photo?
     var user: Bool?
+    
+    
+    
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "userSnips" {
+            let detailViewController = segue.destination as! DetailViewController
+            let cell = sender as! SavedPostCell
+            let indexPath = snipsCollectionView.indexPath(for: cell)
+            let photo = self.photoArray[(indexPath?.item)!] as! Photo
+            //detailViewController.barber = cell.barber
+            let post = photo["post"] as! Post
+            detailViewController.post = post
+            detailViewController.photoArray = self.allPhotos
+            //detailViewController.photoId = photo.objectId as! String
+            
+            
+        }
+    }
+
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         snipsCollectionView.delegate = self
         snipsCollectionView.dataSource = self
-        
+
         let query = PFQuery(className: "Photo")
         query.order(byDescending: "createdAt")
-        query.includeKey("favorited")
         query.includeKey("user")
+        query.includeKey("first")
+        query.includeKey("objectId")
+        query.includeKey("post")
         query.includeKey("post.barber")
         query.includeKey("post.barber.barbershop")
         query.includeKey("post.tags")
@@ -38,6 +62,7 @@ class UserSnipsViewController: UIViewController, UICollectionViewDelegate, UICol
         //fetch data asynchronously
         query.findObjectsInBackground { (objects, error: Error?) in
             if let photos = objects {
+                self.allPhotos = objects!
                 let photo = photos.first as! Photo
                 let post = photo["post"] as! Post
                 for photoOb in photos {

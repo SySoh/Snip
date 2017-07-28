@@ -133,6 +133,7 @@
                                         </view>
                                         <connections>
                                             <outlet property="savedImageView" destination="phY-Cy-zab" id="hZ6-8Q-zJL"/>
+                                            <segue destination="8hR-A2-Bpa" kind="show" identifier="userSaved" id="apZ-Yl-ZvM"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -188,6 +189,7 @@
                                         </view>
                                         <connections>
                                             <outlet property="userSnipImageView" destination="r4F-uX-X7y" id="WWN-fx-VoC"/>
+                                            <segue destination="8hR-A2-Bpa" kind="show" identifier="userSnips" id="wyv-5b-1oy"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -635,7 +637,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Joe's Barbershop" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UTB-oQ-R8D">
-                                <rect key="frame" x="86" y="50" width="137" height="24"/>
+                                <rect key="frame" x="86" y="50" width="230" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
@@ -1545,8 +1547,8 @@
         <image name="star_outline" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="aRW-zb-oxh"/>
         <segue reference="ugo-57-2J3"/>
-        <segue reference="Tp3-uf-z1R"/>
         <segue reference="X26-bd-rJY"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -17,9 +17,26 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var savedCollectionView: UICollectionView!
 
     var photoArray: [PFObject] = []
+    var allPhotos: [PFObject] = []
     var photo: Photo?
     var favorited: Bool?
 
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "userSaved" {
+            let detailViewController = segue.destination as! DetailViewController
+            let cell = sender as! SavedPostCell
+            let indexPath = savedCollectionView.indexPath(for: cell)
+            let photo = self.photoArray[(indexPath?.item)!] as! Photo
+            //detailViewController.barber = cell.barber
+            let post = photo["post"] as! Post
+            detailViewController.post = post
+            detailViewController.photoArray = self.allPhotos
+//            detailViewController.photoId = photo.objectId as! String
+            
+            
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +46,9 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let query = PFQuery(className: "Photo")
         query.order(byDescending: "createdAt")
         query.includeKey("favorited")
+        query.includeKey("objectId")
+        query.includeKey("first")
+        query.includeKey("post")
         query.includeKey("post.barber")
         query.includeKey("post.barber.barbershop")
         query.includeKey("post.tags")
@@ -36,6 +56,7 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
         //fetch data asynchronously
         query.findObjectsInBackground { (objects, error: Error?) in
             if let photos = objects {
+                self.allPhotos = objects!
                 let photo = photos.first as! Photo
                 let post = photo["post"] as! Post
                 for photoOb in photos {

@@ -57,7 +57,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
             detailViewController.photoArray = self.photoArray
             detailViewController.photoId = photo.objectId as! String
 
-            //detailViewController.photo = photo as! Photo
 
         }
     }
