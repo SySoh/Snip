@@ -73,7 +73,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 //            self.homeCollectionView.reloadData()
 //        }
 //    }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "DetailSegue" {
             let vc = segue.destination as! DetailViewController
@@ -88,6 +88,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         if segue.identifier == "MapView" {
             let destVC = segue.destination as! MapViewController
             destVC.shops = self.barbershops as! [Barbershop]
+        }
+        if segue.identifier == "compose_view" {
+            print("goin")
         }
     }
     
