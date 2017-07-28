@@ -41,13 +41,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         }
         
         IQKeyboardManager.sharedManager().enable = true
-
-        
-//        NotificationCenter.default.addObserver(forName: NSNotification.Name("onLogout"), object: nil, queue: OperationQueue.main, using: { (Notification) in let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let vc = storyboard.instantiateViewController(withIdentifier: "signInView") as! LoginViewController
-//            self.window?.rootViewController = vc
-//            
-//        })
         
         applicationDidFinishLaunching(application)
         
@@ -67,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             }
             return false
         }
-        tabBarController.didHijackHandler = {
+tabBarController.didHijackHandler = {
             [weak tabBarController] tabbarController, viewController, index in
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
@@ -95,7 +88,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
                 tabBarController?.present(alertController, animated: true, completion: nil)
             }
         }
-        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         let v1 = storyboard.instantiateViewController(withIdentifier: "HVC")
