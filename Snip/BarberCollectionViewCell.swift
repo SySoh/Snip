@@ -12,5 +12,5 @@ import ParseUI
 
 class BarberCollectionViewCell: UICollectionViewCell {
     var barber: Barber?
-    @IBOutlet weak var barberPic: PFImageView!
+    @IBOutlet weak var barberPic: UIImageView!
 }

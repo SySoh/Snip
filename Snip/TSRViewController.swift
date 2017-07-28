@@ -61,6 +61,9 @@ class TSRViewController: UIViewController, UICollectionViewDelegate, UICollectio
         return cell
     }
     
+    @IBAction func onBack(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.photos.count

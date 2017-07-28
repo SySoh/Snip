@@ -58,8 +58,8 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
         } else {
             locationLabel.text = ""
         }
-        print(barberShop?.ratings?[0])
-        ratingStars.rating = Double((barberShop?.ratings?[0])!)
+//        ratingStars.rating = Double((barberShop?.rating)!)!
+
         phoneLabel.text = barberShop?.phone as! String
         latitude = barberShop?.geopoint?.latitude
         longitude = barberShop?.geopoint?.longitude
@@ -108,9 +108,12 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
         let cell = barberCollectionView.dequeueReusableCell(withReuseIdentifier: "barberCell", for: indexPath) as! BarberCollectionViewCell
         cell.barber = barbers[indexPath.item]
         print("fillin out pics")
-        cell.barberPic.file = barbers[indexPath.item].profile_pic
-        cell.barberPic.loadInBackground()
-        cell.barberPic.mitlayer.cornerRadius = cell.barberPic.frame.size.width / 2
+        let file = barbers[indexPath.item].profile_pic as! PFFile
+        file.getDataInBackground { (photoData, error: Error?) in
+            cell.barberPic.layer.cornerRadius = cell.frame.size.width / 2
+            cell.layer.cornerRadius = 25
+            cell.barberPic.image = UIImage(data: photoData!)
+        }
         return cell
     }
     
