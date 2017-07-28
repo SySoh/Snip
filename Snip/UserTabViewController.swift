@@ -40,7 +40,7 @@ class UserTabViewController: UIViewController, CAPSPageMenuDelegate {
         ]
         
         // Initialize page menu with controller array, frame, and optional parameters
-        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRectMake(0.0, 128.0, self.view.frame.width, self.view.frame.height - 128.0), pageMenuOptions: parameters)
+        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRectMake(0.0, 85.0, self.view.frame.width, self.view.frame.height - 85.0), pageMenuOptions: parameters)
         
         pageMenu?.delegate = self
         
