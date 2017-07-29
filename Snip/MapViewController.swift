@@ -67,6 +67,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                     annotation.title = shop.name
                     annotation.coordinate.latitude = (shop.geopoint?.latitude)!
                     annotation.coordinate.longitude = (shop.geopoint?.longitude)!
+                    annotation.
                     self.map.addAnnotation(annotation)
                     print("Adding")
                     print(shop)

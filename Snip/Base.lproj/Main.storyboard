@@ -1549,8 +1549,8 @@
         <image name="star_outline" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ugo-57-2J3"/>
-        <segue reference="Tp3-uf-z1R"/>
         <segue reference="X26-bd-rJY"/>
+        <segue reference="Tp3-uf-z1R"/>
+        <segue reference="ugo-57-2J3"/>
     </inferredMetricsTieBreakers>
 </document>
