@@ -20,6 +20,8 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var allPhotos: [PFObject] = []
     var photo: Photo?
     var favorited: Bool?
+    var filteredPhotos: [PFObject]?
+
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -30,8 +32,9 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
             let photo = self.photoArray[(indexPath?.item)!] as! Photo
             //detailViewController.barber = cell.barber
             let post = photo["post"] as! Post
+            onlyWithPost(post: post)
             detailViewController.post = post
-            detailViewController.photoArray = self.allPhotos
+            detailViewController.filteredPhotos = self.filteredPhotos
         }
     }
     
@@ -73,6 +76,16 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
         //add refresh control to the table view
         self.savedCollectionView.insertSubview(refreshcontrol, at: 0)
         // Do any additional setup after loading the view.
+    }
+    
+    func onlyWithPost(post: Post) {
+        let postID = post.objectId!
+        self.filteredPhotos = self.allPhotos.filter { (photo: PFObject) -> Bool in
+            let photoPost = photo["post"] as! Post
+            let photoPostID = photoPost.objectId!
+            return photoPostID == postID
+        }
+        
     }
     
     func refresh() {

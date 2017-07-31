@@ -40,6 +40,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     var barbers: [Barber]!
     var barber: Barber!
     var barberId: String!
+    var filteredPhotos: [PFObject]?
+
 
     @IBAction func pressBack(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -53,8 +55,9 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
             let photo = self.photoArray[(indexPath?.item)!] as! Photo
             //detailViewController.barber = cell.barber
             let post = photo["post"] as! Post
+            onlyWithPost(post: post)
             detailViewController.post = post
-            detailViewController.photoArray = self.allPhotos
+            detailViewController.filteredPhotos = self.filteredPhotos
             detailViewController.photoId = photo.objectId as! String
 
 
@@ -236,6 +239,16 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     func refreshControlAction(_ refreshControl: UIRefreshControl) {
         refresh()
         refreshControl.endRefreshing()
+    }
+    
+    func onlyWithPost(post: Post) {
+        let postID = post.objectId!
+        self.filteredPhotos = self.allPhotos.filter { (photo: PFObject) -> Bool in
+            let photoPost = photo["post"] as! Post
+            let photoPostID = photoPost.objectId!
+            return photoPostID == postID
+        }
+        
     }
 
 

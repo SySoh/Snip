@@ -21,6 +21,8 @@ class UserSnipsViewController: UIViewController, UICollectionViewDelegate, UICol
     var allPhotos: [PFObject] = []
     var photo: Photo?
     var user: Bool?
+    var filteredPhotos: [PFObject]?
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "userSnips" {
@@ -30,8 +32,10 @@ class UserSnipsViewController: UIViewController, UICollectionViewDelegate, UICol
             let photo = self.photoArray[(indexPath?.item)!] as! Photo
             //detailViewController.barber = cell.barber
             let post = photo["post"] as! Post
+            onlyWithPost(post: post)
             detailViewController.post = post
-            detailViewController.photoArray = self.allPhotos
+            detailViewController.filteredPhotos = self.filteredPhotos
+
             //detailViewController.photoId = photo.objectId as! String
         }
     }
@@ -115,6 +119,17 @@ class UserSnipsViewController: UIViewController, UICollectionViewDelegate, UICol
             }
         }
     }
+    
+    func onlyWithPost(post: Post) {
+        let postID = post.objectId!
+        self.filteredPhotos = self.allPhotos.filter { (photo: PFObject) -> Bool in
+            let photoPost = photo["post"] as! Post
+            let photoPostID = photoPost.objectId!
+            return photoPostID == postID
+        }
+        
+    }
+
     
     //refresh control function
     func refreshControlAction(_ refreshControl: UIRefreshControl) {

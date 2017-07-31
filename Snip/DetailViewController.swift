@@ -131,7 +131,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
         detailCollectionView.dataSource = self
         photoCollectionView.delegate = self
         photoCollectionView.dataSource = self
-        onlyWithPost(post: self.post!)
+//        onlyWithPost(post: self.post!)
         self.view.addSubview(detailCollectionView)
         self.view.addSubview(photoCollectionView)
         
@@ -177,7 +177,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
         if let secondLayout = self.photoCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
                 secondLayout.scrollDirection = .horizontal
             }
-        for pic in photoArray! {
+        for pic in filteredPhotos! {
             if pic["first"] as! Bool == true {
                 firstPhoto = pic
             }
@@ -185,15 +185,15 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     
-    func onlyWithPost(post: Post) {
-        let postID = post.objectId!
-        self.filteredPhotos = self.photoArray?.filter { (photo: PFObject) -> Bool in
-            let photoPost = photo["post"] as! Post
-            let photoPostID = photoPost.objectId!
-            return photoPostID == postID
-        }
-        
-    }
+//    func onlyWithPost(post: Post) {
+//        let postID = post.objectId!
+//        self.filteredPhotos = self.photoArray?.filter { (photo: PFObject) -> Bool in
+//            let photoPost = photo["post"] as! Post
+//            let photoPostID = photoPost.objectId!
+//            return photoPostID == postID
+//        }
+//        
+//    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == detailCollectionView {
