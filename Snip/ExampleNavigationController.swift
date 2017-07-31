@@ -17,7 +17,7 @@ class ExampleNavigationController: UINavigationController {
         self.navigationBar.isTranslucent = false
         self.navigationBar.barTintColor = UIColor(hex: "1D4159")
         self.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(hex: "F5EDDA"), NSFontAttributeName: UIFont.init(name: "BlessedDay", size: 40.0)]
-        self.navigationBar.tintColor = UIColor.init(red: 38/255.0, green: 38/255.0, blue: 38/255.0, alpha: 1.0)
+        self.navigationBar.tintColor = UIColor(hex: "FFFFFF")
         self.navigationItem.title = "Example"
     }
     
