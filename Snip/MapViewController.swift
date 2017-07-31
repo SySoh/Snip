@@ -12,7 +12,7 @@ import Parse
 import ParseUI
 
 
-class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, MKAnnotationViewDelegate {
     
     var shops: [Barbershop] = []
     var manager = CLLocationManager()
@@ -63,7 +63,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             } else {
                 self.shops = objects as! [Barbershop]
                 for shop in self.shops {
-                    let annotation = MKPointAnnotation()
+                    let annotation = MKAnnotation?
                     annotation.title = shop.name
                     annotation.coordinate.latitude = (shop.geopoint?.latitude)!
                     annotation.coordinate.longitude = (shop.geopoint?.longitude)!
@@ -75,6 +75,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
         }
     }
+    
+    
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Failed to find user's location: \(error.localizedDescription)")
