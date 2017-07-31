@@ -80,7 +80,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         self.profileImageVIew.file = barber["profile_pic"] as! PFFile
         self.profileImageVIew.loadInBackground()
         let barbershop = barber["barbershop"] as? Barbershop
-        barbershopName = barbershop?["name"] as? String
+        //barbershopName = barbershop?["name"] as? String
         self.barbershopLabel.text = barbershopName
         venmo = barber["venmo"] as? String
         self.venmoTextView.text = "venmo.com/" + venmo

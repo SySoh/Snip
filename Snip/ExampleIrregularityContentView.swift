@@ -47,7 +47,7 @@ class ExampleIrregularityContentView: ESTabBarItemContentView {
         
         textColor = UIColor.init(white: 255.0 / 255.0, alpha: 1.0)
         highlightTextColor = UIColor.init(white: 255.0 / 255.0, alpha: 1.0)
-        iconColor = UIColor.init(white: 255.0 / 255.0, alpha: 1.0)
+        iconColor = UIColor.init(hex:"1D4159")
         highlightIconColor = UIColor.init(white: 255.0 / 255.0, alpha: 1.0)
         backdropColor = .clear
         highlightBackdropColor = .clear
@@ -108,7 +108,7 @@ class ExampleIrregularityContentView: ESTabBarItemContentView {
         scale?.fromValue = NSValue.init(cgSize: CGSize.init(width: 1.0, height: 1.0))
         scale?.toValue = NSValue.init(cgSize: CGSize.init(width: 36.0, height: 36.0))
         scale?.beginTime = CACurrentMediaTime()
-        scale?.duration = 0.3
+        scale?.duration = 0.0
         scale?.timingFunction = CAMediaTimingFunction.init(name: kCAMediaTimingFunctionEaseOut)
         scale?.removedOnCompletion = true
         
@@ -116,7 +116,7 @@ class ExampleIrregularityContentView: ESTabBarItemContentView {
         alpha?.fromValue = 0.6
         alpha?.toValue = 0.6
         alpha?.beginTime = CACurrentMediaTime()
-        alpha?.duration = 0.25
+        alpha?.duration = 0.0
         alpha?.timingFunction = CAMediaTimingFunction.init(name: kCAMediaTimingFunctionEaseOut)
         alpha?.removedOnCompletion = true
         
