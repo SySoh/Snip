@@ -47,7 +47,7 @@ class ExampleIrregularityContentView: ESTabBarItemContentView {
         
         textColor = UIColor.init(white: 255.0 / 255.0, alpha: 1.0)
         highlightTextColor = UIColor.init(white: 255.0 / 255.0, alpha: 1.0)
-        iconColor = UIColor.init(white: 255.0 / 255.0, alpha: 1.0)
+        iconColor = UIColor.init(hex:"1D4159")
         highlightIconColor = UIColor.init(white: 255.0 / 255.0, alpha: 1.0)
         backdropColor = .clear
         highlightBackdropColor = .clear

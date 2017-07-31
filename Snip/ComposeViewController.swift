@@ -105,11 +105,8 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         //Aesthetics
         captionTextView.text = "Have anything to say about this haircut?"
         captionTextView.textColor = UIColor.lightGray
-        tagCollectionView.layer.borderColor = UIColor(hex: 0xFFFCF2)?.cgColor
-        tagCollectionView.layer.borderWidth = 1.0
-        tagCollectionView.layer.cornerRadius = 10
         captionTextView.layer.cornerRadius = 10
-        captionTextView.layer.borderColor = UIColor(hex: 0xFFFCF2)?.cgColor
+        captionTextView.layer.borderColor = UIColor(hexString: "#FFFCF2")?.cgColor
         captionTextView.layer.borderWidth = 0.5
         tagCollectionView.allowsSelection = true
         shopChoosingButton.layer.cornerRadius = 10
@@ -134,7 +131,7 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         shopChoosingButton.setTitle(barberShopName.name, for: .normal)
         self.barbershop = barberShopName
         pickBarberButton.isEnabled = true
-        pickBarberButton.backgroundColor = UIColor(hex:0x5983C4)
+        pickBarberButton.backgroundColor = UIColor(hex: "F5EDDA")
     }
     
     func didChooseBarber(barberName: Barber) {
@@ -290,7 +287,7 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == UIColor.lightGray {
             captionTextView.text = ""
-            captionTextView.textColor = UIColor.black
+            captionTextView.textColor = UIColor(hex:"F5EDDA")
         }
     }
  

@@ -52,16 +52,23 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
             let indexPath = postCollectionView.indexPath(for: cell)
             let photo = self.photoArray[(indexPath?.item)!] as! Photo
             //detailViewController.barber = cell.barber
-            let post = self.photo["post"] as! Post
+            let post = photo["post"] as! Post
             detailViewController.post = post
             detailViewController.photoArray = self.photoArray
             detailViewController.photoId = photo.objectId as! String
-
             //detailViewController.photo = photo as! Photo
+            
         } else if segue.identifier == "profileTagSegue" {
             let vc = segue.destination as! TSRViewController
             let cell = sender as! TagCell
             vc.tag = cell.tagObject
+            //detailViewController.photo = photo as! Photo
+        }
+        
+        if segue.identifier == "shop_view" {
+            print("sending")
+            let destVC = segue.destination as! BarberShopViewController
+            destVC.barberShop = barber["barbershop"] as! Barbershop
         }
     }
 
@@ -78,7 +85,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         self.profileImageVIew.file = barber["profile_pic"] as! PFFile
         self.profileImageVIew.loadInBackground()
         let barbershop = barber["barbershop"] as? Barbershop
-        barbershopName = barbershop?["name"] as? String
+        //barbershopName = barbershop?["name"] as? String
         self.barbershopLabel.text = barbershopName
         venmo = barber["venmo"] as? String
         self.venmoTextView.text = "venmo.com/" + venmo
