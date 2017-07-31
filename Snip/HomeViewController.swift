@@ -36,6 +36,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     var rating: Int?
     var first: Bool?
     var fullArray: [PFObject]?
+    var filteredPhotos: [PFObject]?
     //var isDataLoading = false
     
     
@@ -43,11 +44,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     @IBOutlet weak var mapViewButton: UIButton!
     @IBOutlet weak var homeCollectionView: UICollectionView!
     
-    @IBAction func touchCamera(_ sender: Any) {
-    }
-    
-    @IBAction func touchSearch(_ sender: Any) {
-    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +69,6 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                     }
                     self.detailArray = photos as! [Photo]
                 }
-                //                self.photoArray = photos
                 self.homeCollectionView.reloadData()
                 
                 
@@ -80,6 +76,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
         refresh()
         getShopLocations()
+        
         homeCollectionView.dataSource = self
         homeCollectionView.delegate = self
         homeCollectionView.alwaysBounceVertical = true
@@ -92,24 +89,16 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
 
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        let offsetY = scrollView.contentOffset.y
-//        let contentHeight = scrollView.contentSize.height
-//        if offsetY > contentHeight - scrollView.frame.size.height {
-//            refresh()
-//            self.homeCollectionView.reloadData()
-//        }
-//    }
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "DetailSegue" {
             let vc = segue.destination as! DetailViewController
             let cell = sender as! HomeCell
             let indexPath = homeCollectionView.indexPath(for: cell)
             let photo = photoArray[(indexPath?.item)!] as! Photo
+            let post = photo["post"] as! Post
+            onlyWithPost(post: post)
             vc.post = photo["post"] as! Post
-            vc.photoArray = self.detailArray
-            vc.allPhotos = self.photoArray
+            vc.filteredPhotos = self.filteredPhotos
             vc.photoId = photo.objectId as! String
             }
         if segue.identifier == "MapView" {
@@ -134,6 +123,16 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     
+    func onlyWithPost(post: Post) {
+        let postID = post.objectId!
+        self.filteredPhotos = self.detailArray?.filter { (photo: PFObject) -> Bool in
+            let photoPost = photo["post"] as! Post
+            let photoPostID = photoPost.objectId!
+            return photoPostID == postID
+        }
+        
+    }
+
     
     
     func refresh() {
