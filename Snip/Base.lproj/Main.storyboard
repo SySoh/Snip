@@ -682,6 +682,7 @@
                         <outlet property="captionLabel" destination="wyW-5G-o6m" id="CMg-WP-MKm"/>
                         <outlet property="dateLabel" destination="EEf-R0-pdt" id="X4n-Ow-NWH"/>
                         <outlet property="detailCollectionView" destination="omm-AJ-MfD" id="iEr-jc-FT7"/>
+                        <outlet property="favoriteButton" destination="MNw-Th-JKT" id="89F-4M-oZk"/>
                         <outlet property="photoCollectionView" destination="Nmd-qR-eKh" id="Rtj-sG-qJ9"/>
                         <outlet property="priceLabel" destination="BS5-Wz-h1s" id="p7s-0n-wxz"/>
                         <outlet property="profileImageView" destination="1Xh-oC-FvA" id="c6T-CV-bmc"/>
@@ -1548,8 +1549,8 @@
         <image name="star_outline" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Uoi-rp-UiA"/>
-        <segue reference="2pg-sZ-O3Y"/>
+        <segue reference="X26-bd-rJY"/>
         <segue reference="Tp3-uf-z1R"/>
+        <segue reference="ugo-57-2J3"/>
     </inferredMetricsTieBreakers>
 </document>
