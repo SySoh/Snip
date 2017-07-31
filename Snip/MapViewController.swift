@@ -63,11 +63,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             } else {
                 self.shops = objects as! [Barbershop]
                 for shop in self.shops {
-                    let annotation = MKPointAnnotation()
-                    annotation.title = shop.name
-                    annotation.coordinate.latitude = (shop.geopoint?.latitude)!
-                    annotation.coordinate.longitude = (shop.geopoint?.longitude)!
-                    //annotation.
+                    let coord = CLLocationCoordinate2DMake((shop.geopoint?.latitude)!, (shop.geopoint?.longitude)!)
+                    let annotation = CustomMKAnnotation(title: shop.name!, locationName: shop.location!, barbershop: shop , coordinate: coord)
                     self.map.addAnnotation(annotation)
                     print("Adding")
                     print(shop)
@@ -77,19 +74,53 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
     
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if let annotation = annotation as? CustomMKAnnotation {
+            let identifier = "pin"
+            var view: MKPinAnnotationView
+            if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView {
+                dequeuedView.annotation = annotation
+                view = dequeuedView
+            } else {
+                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                view.canShowCallout = true
+                view.calloutOffset = CGPoint(x: -5, y: 5)
+                view.rightCalloutAccessoryView = UIButton.init(type: .detailDisclosure)
+            }
+            return view
+        }
+        return nil
+        
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if let thisAnnotation = view.annotation as? CustomMKAnnotation {
+        self.performSegue(withIdentifier: "shopFromMap", sender: thisAnnotation)
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+    }
+    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Failed to find user's location: \(error.localizedDescription)")
     }
 
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "shopFromMap" {
+            let source = sender as! CustomMKAnnotation
+            let destVC = segue.destination as! BarberShopViewController
+            destVC.barberShop = source.barbershop
+        }
     }
-    */
+ 
 
 }
