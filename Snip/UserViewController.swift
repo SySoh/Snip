@@ -11,16 +11,16 @@ import Parse
 import ParseUI
 
 class UserViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-
+    
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var savedCollectionView: UICollectionView!
-
+    
     var photoArray: [PFObject] = []
     var allPhotos: [PFObject] = []
     var photo: Photo?
     var favorited: Bool?
-
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "userSaved" {
@@ -32,17 +32,14 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
             let post = photo["post"] as! Post
             detailViewController.post = post
             detailViewController.photoArray = self.allPhotos
-//            detailViewController.photoId = photo.objectId as! String
-            
-            
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         savedCollectionView.delegate = self
         savedCollectionView.dataSource = self
-
+        
         let query = PFQuery(className: "Photo")
         query.order(byDescending: "createdAt")
         query.includeKey("favorited")
@@ -66,19 +63,64 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
                         self.photoArray.append(self.photo!)
                     }
                 }
-
                 self.savedCollectionView.reloadData()
-
-
             }
         }
-
+        let refreshcontrol = UIRefreshControl()
+        refreshcontrol.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
+        self.savedCollectionView.addSubview(refreshcontrol)
+        self.savedCollectionView.alwaysBounceVertical = true
+        //add refresh control to the table view
+        self.savedCollectionView.insertSubview(refreshcontrol, at: 0)
         // Do any additional setup after loading the view.
     }
-
+    
+    func refresh() {
+        //construct PFQuery
+        let query = PFQuery(className: "Photo")
+        let defaults=UserDefaults.standard
+        if let lastUpdateDate=defaults.object(forKey: "lastUpdateDate") as? NSDate {
+            query.whereKey("updatedAt",greaterThan:lastUpdateDate)
+        }
+        
+        query.order(byDescending: "createdAt")
+        query.includeKey("favorited")
+        query.includeKey("objectId")
+        query.includeKey("first")
+        query.includeKey("post")
+        query.includeKey("post.barber")
+        query.includeKey("post.barber.barbershop")
+        query.includeKey("post.tags")
+        //fetch data asynchronously
+        query.findObjectsInBackground { (objects, error: Error?) in
+            if objects != nil && objects?.isEmpty == false {
+                let photos = objects
+                defaults.set(NSDate(),forKey:"lastUpdateDate")
+                self.allPhotos = objects!
+                let photo = photos?.first as! Photo
+                let post = photo["post"] as! Post
+                for photoOb in photos! {
+                    self.photo = photoOb as! Photo
+                    self.favorited = self.photo!["favorited"] as! Bool
+                    if self.favorited == true {
+                        self.photoArray.append(self.photo!)
+                    }
+                }
+                self.savedCollectionView.reloadData()
+            }
+        }
+    }
+    
+    //refresh control function
+    func refreshControlAction(_ refreshControl: UIRefreshControl) {
+        refresh()
+        refreshControl.endRefreshing()
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photoArray.count
     }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "savedPostCell", for: indexPath) as! SavedPostCell
         let photo = photoArray[indexPath.item]
@@ -92,21 +134,21 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
         return cell
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

@@ -148,7 +148,89 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
                 layout.scrollDirection = .horizontal
             }
         }
+        let refreshcontrol = UIRefreshControl()
+        refreshcontrol.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
+        self.postCollectionView.addSubview(refreshcontrol)
+        self.postCollectionView.alwaysBounceVertical = true
+        self.tagCollectionView.addSubview(refreshcontrol)
+        self.tagCollectionView.alwaysBounceVertical = true
+        //add refresh control to the table view
+        self.tagCollectionView.insertSubview(refreshcontrol, at: 0)
+        self.postCollectionView.insertSubview(refreshcontrol, at: 0)
 
+
+    }
+    
+    func refresh() {
+        
+        //construct PFQuery
+        let query = PFQuery(className: "Post")
+        let defaults=UserDefaults.standard
+        
+        if let lastUpdateDate=defaults.object(forKey: "lastUpdateDate") as? NSDate {
+            query.whereKey("updatedAt",greaterThan:lastUpdateDate)
+        }
+        query.whereKey("barber", equalTo: self.barber)
+        query.includeKey("tags")
+        query.includeKey("barber")
+        query.includeKey("barber.name")
+        query.includeKey("barber.barbershop")
+        query.includeKey("barber.profile_pic")
+        //fetch data asynchronously
+        query.findObjectsInBackground { (objects, error: Error?) in
+            if objects != nil {
+                defaults.set(NSDate(),forKey:"lastUpdateDate")
+                query.whereKey("tags", containedIn: objects!)
+                self.posts = objects as! [Post]
+                for postOb in self.posts {
+                    self.post = postOb as! Post
+                    self.tagArray = self.post.tags as! [Tag]
+                    for tagOb in self.tagArray {
+                        self.tagNameSet.insert("\(tagOb.name!)")
+                    }
+                }
+                
+                let secondQuery = PFQuery(className: "Photo")
+                secondQuery.whereKey("post", containedIn: objects!)
+                secondQuery.includeKey("first")
+                secondQuery.includeKey("favorited")
+                secondQuery.includeKey("objectId")
+                secondQuery.includeKey("post")
+                secondQuery.includeKey("post.barber")
+                secondQuery.includeKey("post.price")
+                secondQuery.includeKey("post.barber.barbershop")
+                secondQuery.includeKey("post.tags")
+                
+                //                secondQuery.includeKey("tag")
+                secondQuery.findObjectsInBackground { (secondObjects: [PFObject]?, error: Error?) in
+                    if secondObjects != nil && secondObjects?.isEmpty == false {
+                        defaults.set(NSDate(),forKey:"lastUpdateDate")
+                        let photos = secondObjects
+                        let photo = photos?.first as! Photo
+                        for photoOb in photos! {
+                            self.photo = photoOb as! Photo
+                            self.photoArray.append(self.photo!)
+                        }
+                        self.photoArray = secondObjects as! [Photo]
+                        
+                        self.postCollectionView.reloadData()
+                        self.tagCollectionView.reloadData()
+                        
+                    } else {
+                        print(error?.localizedDescription)
+                    }
+                }
+                //                self.photoArray = photos
+                self.postCollectionView.reloadData()
+                self.tagCollectionView.reloadData()
+            }
+        }
+    }
+    
+    //refresh control function
+    func refreshControlAction(_ refreshControl: UIRefreshControl) {
+        refresh()
+        refreshControl.endRefreshing()
     }
 
 
