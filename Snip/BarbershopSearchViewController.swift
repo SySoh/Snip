@@ -16,6 +16,8 @@ class BarbershopSearchViewController: UIViewController, UITableViewDataSource, U
     var barbershops: [PFObject] = []
     var filteredBarbershops: [PFObject] = []
     
+    var parentNavigationController: UINavigationController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.getBarbershops()
@@ -30,6 +32,10 @@ class BarbershopSearchViewController: UIViewController, UITableViewDataSource, U
         query.order(byDescending: "createdAt")
         query.includeKey("name")
         query.includeKey("location")
+        query.includeKey("picture")
+        query.includeKey("ratings")
+        query.includeKey("hours")
+        query.includeKey("phone")
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
             if let objects = objects {
                 self.barbershops = objects
@@ -41,13 +47,13 @@ class BarbershopSearchViewController: UIViewController, UITableViewDataSource, U
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "BarbershopSearchSegue" {
-            let vc = segue.destination as! BarberShopViewController
-            let cell = sender as! BarbershopSearchCell
-            vc.barberShop = cell.barbershop
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "BarbershopSearchSegue" {
+//            let vc = segue.destination as! BarberShopViewController
+//            let cell = sender as! BarbershopSearchCell
+//            vc.barberShop = cell.barbershop
+//        }
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredBarbershops.count
@@ -94,5 +100,13 @@ class BarbershopSearchViewController: UIViewController, UITableViewDataSource, U
         // Dispose of any resources that can be recreated.
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let barbershopDetail = storyboard.instantiateViewController(withIdentifier: "barbershopDetail") as! BarberShopViewController
+        let barbershop = self.filteredBarbershops[indexPath.row] as? Barbershop
+        barbershopDetail.barberShop = barbershop
+        parentNavigationController!.pushViewController(barbershopDetail, animated: true)
+        barbershopDetail.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
     
 }

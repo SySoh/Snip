@@ -59,10 +59,15 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
             detailViewController.post = post
             detailViewController.filteredPhotos = self.filteredPhotos
             detailViewController.photoId = photo.objectId as! String
-
-
+            //detailViewController.photo = photo as! Photo
+            
+        } else if segue.identifier == "profileTagSegue" {
+            let vc = segue.destination as! TSRViewController
+            let cell = sender as! TagCell
+            vc.tag = cell.tagObject
             //detailViewController.photo = photo as! Photo
         }
+        
         if segue.identifier == "shop_view" {
             print("sending")
             let destVC = segue.destination as! BarberShopViewController
@@ -87,7 +92,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         self.barbershopLabel.text = barbershopName
         venmo = barber["venmo"] as? String
         self.venmoTextView.text = "venmo.com/" + venmo
-        print(self.venmoTextView.text)
+        barberName = barber["name"] as? String
         self.usernameLabel.text = barberName
         // Make profile pic circular
         profileImageVIew.layer.borderWidth = 1
@@ -269,6 +274,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         } else {
             let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: "tagCell", for: indexPath) as! TagCell
             self.tagNameArray = Array(tagNameSet)
+            tagCell.tagObject = self.tagArray[indexPath.item]
             tagCell.profileTagLabel.text = self.tagNameArray[indexPath.item]
             tagCell.layer.cornerRadius = 15
 

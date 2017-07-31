@@ -18,7 +18,8 @@ class SearchViewController: UIViewController, CAPSPageMenuDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.navigationController?.isNavigationBarHidden = true
+        let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.textColor = UIColor.white
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
@@ -27,15 +28,18 @@ class SearchViewController: UIViewController, CAPSPageMenuDelegate {
         
         // Create variables for all view controllers you want to put in the
         // page menu, initialize them, and add each to the controller array.
-        let tagsController: UIViewController = storyboard.instantiateViewController(withIdentifier: "tagSearch")
+        let tagsController = storyboard.instantiateViewController(withIdentifier: "tagSearch") as! TagSearchViewController
+        tagsController.parentNavigationController = self.navigationController as! ExampleNavigationController
         tagsController.title = "TAGS"
         controllerArray.append(tagsController)
         
-        let barbersController: UIViewController = storyboard.instantiateViewController(withIdentifier: "barberSearch")
+        let barbersController = storyboard.instantiateViewController(withIdentifier: "barberSearch") as! BarberSearchViewController
+        barbersController.parentNavigationController = self.navigationController as! ExampleNavigationController
         barbersController.title = "BARBERS"
         controllerArray.append(barbersController)
         
-        let barbershopsController: UIViewController = storyboard.instantiateViewController(withIdentifier: "barbershopSearch")
+        let barbershopsController = storyboard.instantiateViewController(withIdentifier: "barbershopSearch") as! BarbershopSearchViewController
+        barbershopsController.parentNavigationController = self.navigationController as! ExampleNavigationController
         barbershopsController.title = "BARBERSHOPS"
         controllerArray.append(barbershopsController)
         
@@ -44,11 +48,13 @@ class SearchViewController: UIViewController, CAPSPageMenuDelegate {
             .menuItemSeparatorWidth(0.0),
             .useMenuLikeSegmentedControl(true),
             .menuItemSeparatorPercentageHeight(0.1),
-            .scrollAnimationDurationOnMenuItemTap(250)
+            .scrollAnimationDurationOnMenuItemTap(250),
+            .scrollMenuBackgroundColor(UIColor.init(red: 11.0/255.0, green: 66.0/255.0, blue: 92.0/255.0, alpha: 1.0)),
+            .bottomMenuHairlineColor(UIColor.white)
         ]
         
         // Initialize page menu with controller array, frame, and optional parameters
-        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRectMake(0.0, 64.0, self.view.frame.width, self.view.frame.height - 64.0), pageMenuOptions: parameters)
+        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRectMake(0.0, 64.0, self.view.frame.width, self.view.frame.height), pageMenuOptions: parameters)
         
         self.searchBar.delegate = tagsController as? UISearchBarDelegate
         pageMenu?.delegate = self
@@ -56,6 +62,10 @@ class SearchViewController: UIViewController, CAPSPageMenuDelegate {
         // Lastly add page menu as subview of base view controller view
         // or use pageMenu controller in you view hierachy as desired
         self.view.addSubview(pageMenu!.view)
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     func didMoveToPage(_ controller: UIViewController, index: Int) {
@@ -80,6 +90,14 @@ class SearchViewController: UIViewController, CAPSPageMenuDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if !(self.navigationController?.isNavigationBarHidden)! {
+            self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        }
     }
     
     /*
