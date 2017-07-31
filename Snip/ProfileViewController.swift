@@ -54,7 +54,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
             //detailViewController.barber = cell.barber
             let post = photo["post"] as! Post
             detailViewController.post = post
-            detailViewController.photoArray = self.photoArray
+            detailViewController.photoArray = self.allPhotos
             detailViewController.photoId = photo.objectId as! String
 
 
@@ -129,15 +129,18 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
                 secondQuery.findObjectsInBackground { (secondObjects: [PFObject]?, error: Error?) in
                     if secondObjects != nil {
                         let photos = secondObjects
-                        let photo = photos?.first as! Photo
                         for photoOb in photos! {
+                            let first = photoOb["first"] as! Bool
+                            if first == true {
+                                self.photoArray.append(photoOb)
+                            }
                             self.photo = photoOb as! Photo
-                            self.photoArray.append(self.photo!)
                         }
-                        self.photoArray = secondObjects as! [Photo]
-
+                        self.allPhotos = secondObjects as! [Photo]
+                        
                         self.postCollectionView.reloadData()
                         self.tagCollectionView.reloadData()
+
 
                     } else {
                         print(error?.localizedDescription)
@@ -206,12 +209,14 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
                     if secondObjects != nil && secondObjects?.isEmpty == false {
                         defaults.set(NSDate(),forKey:"lastUpdateDate")
                         let photos = secondObjects
-                        let photo = photos?.first as! Photo
                         for photoOb in photos! {
+                            let first = photoOb["first"] as! Bool
+                            if first == true {
+                                self.photoArray.append(photoOb)
+                            }
                             self.photo = photoOb as! Photo
-                            self.photoArray.append(self.photo!)
-                        }
-                        self.photoArray = secondObjects as! [Photo]
+                                                   }
+                        //self.photoArray = secondObjects as! [Photo]
                         
                         self.postCollectionView.reloadData()
                         self.tagCollectionView.reloadData()
