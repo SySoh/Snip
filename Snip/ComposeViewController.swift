@@ -76,9 +76,11 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tagCollectionView.dataSource = self
         tagCollectionView.delegate = self
         tagCollectionView.reloadData()
+        
         
         captionTextView.delegate = self
         

@@ -23,6 +23,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+                
         self.map.delegate = self
         self.map.showsUserLocation = true
         manager.delegate = self
@@ -79,7 +80,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Failed to find user's location: \(error.localizedDescription)")
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if !(self.navigationController?.isNavigationBarHidden)! {
+            self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        }
+    }
 
     /*
     // MARK: - Navigation

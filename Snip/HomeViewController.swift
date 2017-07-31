@@ -51,6 +51,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     override func viewDidLoad() {
         super.viewDidLoad()
+                
         refresh()
         getShopLocations()
         homeCollectionView.dataSource = self
@@ -171,6 +172,15 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if (self.navigationController?.isNavigationBarHidden)! {
+            self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        }
+    }
+    
     
     
     /*
