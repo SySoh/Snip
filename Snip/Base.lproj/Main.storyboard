@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wpg-DR-Qwe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wpg-DR-Qwe">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -37,7 +37,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lwF-pm-iKJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1182" y="99"/>
+            <point key="canvasLocation" x="3710" y="178"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -94,7 +94,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="356" y="87.706146926536732"/>
+            <point key="canvasLocation" x="900" y="178"/>
         </scene>
         <!--User View Controller-->
         <scene sceneID="3mB-a0-61S">
@@ -123,7 +123,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="123.5" height="123.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="123.5" height="123.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="123" height="123"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="phY-Cy-zab">
@@ -150,7 +150,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6QS-4m-rsx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3800.8000000000002" y="1519.7901049475263"/>
+            <point key="canvasLocation" x="4660" y="964"/>
         </scene>
         <!--User Snips View Controller-->
         <scene sceneID="Ys7-eY-aeB">
@@ -179,7 +179,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="123.5" height="123.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="123.5" height="123.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="123" height="123"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r4F-uX-X7y">
@@ -204,7 +204,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EVM-ot-eAx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3008.8000000000002" y="1519.7901049475263"/>
+            <point key="canvasLocation" x="3710" y="964"/>
         </scene>
         <!--User Tab View Controller-->
         <scene sceneID="Lpm-lE-LL3">
@@ -235,7 +235,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rHQ-OA-2Ya" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2424.8000000000002" y="816.34182908545733"/>
+            <point key="canvasLocation" x="4660" y="178"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="MKg-hM-aG2">
@@ -266,7 +266,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MC5-wH-c3b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="785" y="816"/>
+            <point key="canvasLocation" x="1842" y="178"/>
         </scene>
         <!--Tag Search View Controller-->
         <scene sceneID="QAe-Eq-3gC">
@@ -322,7 +322,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="30w-vs-wPk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-12" y="1520"/>
+            <point key="canvasLocation" x="900" y="964"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="3iG-a9-Xji">
@@ -351,7 +351,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="123.5" height="123.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="123.5" height="123.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="123" height="123"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cut2" translatesAutoresizingMaskIntoConstraints="NO" id="OBt-3h-jOR">
@@ -376,7 +376,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MrF-5U-CLh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-428" y="2357.2713643178413"/>
+            <point key="canvasLocation" x="900" y="1713"/>
         </scene>
         <!--Barber Search View Controller-->
         <scene sceneID="I9o-Go-JOt">
@@ -458,7 +458,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qiz-Ae-OQt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="786" y="1520"/>
+            <point key="canvasLocation" x="1814" y="964"/>
         </scene>
         <!--Barbershop Search View Controller-->
         <scene sceneID="B0o-Sq-9Lp">
@@ -520,7 +520,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JGy-HO-xNb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1610" y="1520"/>
+            <point key="canvasLocation" x="2758" y="964"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="Mxp-Eq-OpW">
@@ -683,7 +683,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1181.5999999999999" y="-650.82458770614699"/>
+            <point key="canvasLocation" x="900" y="-601"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="cOm-aS-fvg">
@@ -716,7 +716,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="123.5" height="123.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="123.5" height="123.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="123" height="123"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bU6-AM-yxJ" customClass="PFImageView">
@@ -815,7 +815,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DzO-OZ-WGw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-626.39999999999998" y="-670.61469265367316"/>
+            <point key="canvasLocation" x="1841" y="1712"/>
         </scene>
         <!--Compose View Controller-->
         <scene sceneID="FLR-Ri-DX9">
@@ -1025,7 +1025,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="265" y="-672"/>
+            <point key="canvasLocation" x="2759" y="178"/>
         </scene>
         <!--Barber Pick View Controller-->
         <scene sceneID="s6q-5c-KiH">
@@ -1094,7 +1094,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5TP-YH-nJX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="264.80000000000001" y="-1385.7571214392804"/>
+            <point key="canvasLocation" x="2722" y="-601"/>
         </scene>
         <!--Barber Shop Pick View Controller-->
         <scene sceneID="QrB-NE-y9c">
@@ -1166,7 +1166,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="btw-dc-9bC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-626.39999999999998" y="-1386.656671664168"/>
+            <point key="canvasLocation" x="3710" y="-601"/>
         </scene>
         <!--Ib Calendar Data Source-->
         <scene sceneID="k8a-vK-DFf">
@@ -1286,7 +1286,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hA5-mo-uao" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1471" y="-671"/>
+            <point key="canvasLocation" x="1841" y="2456"/>
         </scene>
         <!--Barber Shop View Controller-->
         <scene sceneID="fXn-g3-Coc">
@@ -1415,7 +1415,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rF5-t0-nto" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2040.8" y="104.7976011994003"/>
+            <point key="canvasLocation" x="2758" y="1712"/>
         </scene>
         <!--Tags View Controller-->
         <scene sceneID="K5d-Dp-hJG">
@@ -1507,7 +1507,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mjJ-iP-ind" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1181.5999999999999" y="-1385.7571214392804"/>
+            <point key="canvasLocation" x="1841" y="-601"/>
         </scene>
         <!--Example Navigation Controller-->
         <scene sceneID="Kdt-SD-cni">
@@ -1515,7 +1515,7 @@
                 <navigationController storyboardIdentifier="Navigation" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="wpg-DR-Qwe" customClass="ExampleNavigationController" customModule="Snip" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="NfB-Mi-7mc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="NfB-Mi-7mc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1526,7 +1526,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IUl-D2-8bb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-626" y="99"/>
+            <point key="canvasLocation" x="-44" y="178"/>
         </scene>
     </scenes>
     <resources>
@@ -1539,8 +1539,8 @@
         <image name="star_outline" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="X26-bd-rJY"/>
-        <segue reference="b4l-e2-ss5"/>
-        <segue reference="ugo-57-2J3"/>
+        <segue reference="Uoi-rp-UiA"/>
+        <segue reference="2pg-sZ-O3Y"/>
+        <segue reference="Tp3-uf-z1R"/>
     </inferredMetricsTieBreakers>
 </document>
