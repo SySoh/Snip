@@ -20,6 +20,8 @@ class TSRViewController: UIViewController, UICollectionViewDelegate, UICollectio
     var posts: [Post]?
     var post: Post?
     var detailArray: [PFObject]?
+    var allPhotos: [PFObject] = []
+    var filteredPhotos: [PFObject] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,15 +58,48 @@ class TSRViewController: UIViewController, UICollectionViewDelegate, UICollectio
         }
     }
     
+    func onlyWithPost(post: Post) {
+        let postID = post.objectId!
+        self.filteredPhotos = self.allPhotos.filter { (photo: PFObject) -> Bool in
+            let photoPost = photo["post"] as! Post
+            let photoPostID = photoPost.objectId!
+            return photoPostID == postID
+        }
+        
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let vc = segue.destination as! DetailViewController
         let cell = sender as! HomeCell
         vc.postImage = cell.TSRCutImageView.image!
         let indexPath = collectionView.indexPath(for: cell)
         let photo = self.photos[(indexPath?.item)!] as! Photo
+        let post = photo["post"] as! Post
+        queryAllPhotos()
+        onlyWithPost(post: post)
         vc.post = photo["post"] as! Post
-        vc.photoArray = self.photos
+        vc.filteredPhotos = self.filteredPhotos
         vc.photoId = photo.objectId! as String
+    }
+    
+    func queryAllPhotos() {
+        let query = PFQuery(className: "Photo")
+        query.order(byDescending: "createdAt")
+        query.includeKey("first")
+        query.includeKey("favorited")
+        query.includeKey("objectId")
+        query.includeKey("post")
+        query.includeKey("post.barber")
+        query.includeKey("post.price")
+        query.includeKey("post.barber.barbershop")
+        query.includeKey("post.tags")
+        //fetch data asynchronously
+        query.findObjectsInBackground { (objects, error: Error?) in
+            if let photos = objects {
+                self.allPhotos = photos
+            }
+        }
+
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
