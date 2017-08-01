@@ -15,10 +15,10 @@ class ExampleIrregularityBasicContentView: ExampleBouncesContentView {
         super.init(frame: frame)
         
         textColor = UIColor.init(white: 255.0 / 255.0, alpha: 1.0)
-        highlightTextColor = UIColor.init(red: 250/255.0, green: 234/255.0, blue: 204/255.0, alpha: 1.0)
+        highlightTextColor = UIColor.init(red: 239/255.0, green: 237/255.0, blue: 238/255.0, alpha: 1.0)
         //highlightTextColor = UIColor.init(hex: "ff0000")
         iconColor = UIColor.init(white: 255.0 / 255.0, alpha: 1.0)
-        highlightIconColor = UIColor.init(red: 250/255.0, green: 234/255.0, blue: 204/255.0, alpha: 1.0)
+        highlightIconColor = UIColor.init(red: 239/255.0, green: 237/255.0, blue: 238/255.0, alpha: 1.0)
         backdropColor = UIColor.init(red: 10/255.0, green: 66/255.0, blue: 91/255.0, alpha: 1.0)
         highlightBackdropColor = UIColor.init(red: 10/255.0, green: 66/255.0, blue: 91/255.0, alpha: 1.0)
     }
@@ -36,7 +36,7 @@ class ExampleIrregularityContentView: ESTabBarItemContentView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.imageView.backgroundColor = UIColor.init(red: 250/255.0, green: 234/255.0, blue: 204/255.0, alpha: 1.0)
+        self.imageView.backgroundColor = UIColor.init(red: 239/255.0, green: 237/255.0, blue: 238/255.0, alpha: 1.0)
         self.imageView.layer.borderWidth = 3.0
         self.imageView.layer.borderColor = UIColor.init(white: 235 / 255.0, alpha: 1.0).cgColor
         self.imageView.layer.cornerRadius = 35
