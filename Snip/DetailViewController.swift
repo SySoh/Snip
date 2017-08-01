@@ -78,7 +78,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
                 if let err = error {
                     print(err.localizedDescription)
                 } else {
-                self.favoriteButton.isEnabled = true
+                    self.favoriteButton.isEnabled = true
                 }
             })
         } else {
@@ -94,8 +94,6 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
                 }
             })
         }
-        
-       
     }
     
     @IBAction func pressDismiss(_ sender: Any) {
@@ -115,8 +113,6 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
         if segue.identifier == "ShopView" {
             let destVC = segue.destination as! BarberShopViewController
             destVC.barberShop = self.barbershop
-            //destVC.locationLabel.text = self.location
-            
         }
     }
     
@@ -131,7 +127,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
         detailCollectionView.dataSource = self
         photoCollectionView.delegate = self
         photoCollectionView.dataSource = self
-//        onlyWithPost(post: self.post!)
+        //        onlyWithPost(post: self.post!)
         self.view.addSubview(detailCollectionView)
         self.view.addSubview(photoCollectionView)
         
@@ -142,12 +138,11 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
         profileImageView.layer.cornerRadius = profileImageView.frame.height/2
         profileImageView.clipsToBounds = true
         
-       
+        //add the images to an array
         for photoOb in self.filteredPhotos! {
             imageArray?.append(photoOb["image"] as! UIImage)
         }
-     
-        //self.photoId = self.photo?.objectId as! String
+        
         self.barber = self.post?["barber"] as! Barber
         self.tagArray = self.post?["tags"] as! [Tag]
         for tag in self.tagArray! {
@@ -175,25 +170,33 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
         }
         
         if let secondLayout = self.photoCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-                secondLayout.scrollDirection = .horizontal
-            }
+            secondLayout.scrollDirection = .horizontal
+        }
         for pic in filteredPhotos! {
             if pic["first"] as! Bool == true {
                 firstPhoto = pic
+                //check to see if the post was already favorited
+                if ((firstPhoto?["favorited"]) != nil) {
+                    let favorited = firstPhoto?["favorited"] as! Bool
+                        if favorited == true {
+                    self.favoriteButton.setImage(#imageLiteral(resourceName: "heart-filled"), for: .normal)
+                    }
+                }
+
             }
         }
     }
     
     
-//    func onlyWithPost(post: Post) {
-//        let postID = post.objectId!
-//        self.filteredPhotos = self.photoArray?.filter { (photo: PFObject) -> Bool in
-//            let photoPost = photo["post"] as! Post
-//            let photoPostID = photoPost.objectId!
-//            return photoPostID == postID
-//        }
-//        
-//    }
+    //    func onlyWithPost(post: Post) {
+    //        let postID = post.objectId!
+    //        self.filteredPhotos = self.photoArray?.filter { (photo: PFObject) -> Bool in
+    //            let photoPost = photo["post"] as! Post
+    //            let photoPostID = photoPost.objectId!
+    //            return photoPostID == postID
+    //        }
+    //
+    //    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == detailCollectionView {

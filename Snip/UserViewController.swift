@@ -18,7 +18,7 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     var photoArray: [PFObject] = []
     var allPhotos: [PFObject] = []
-    var photo: Photo?
+    var photo: Photo!
     var favorited: Bool?
     var filteredPhotos: [PFObject]?
 
@@ -52,18 +52,20 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
         query.includeKey("post.barber")
         query.includeKey("post.barber.barbershop")
         query.includeKey("post.tags")
-        query.limit = 30
         //fetch data asynchronously
         query.findObjectsInBackground { (objects, error: Error?) in
             if let photos = objects {
                 self.allPhotos = objects!
-                let photo = photos.first as! Photo
-                let post = photo["post"] as! Post
+                let photoTemp = photos.first as! Photo
+                let post = photoTemp["post"] as! Post
                 for photoOb in photos {
-                    self.photo = photoOb as! Photo
-                    self.favorited = self.photo!["favorited"] as! Bool
+//                    self.photo = photoOb as! Photo
+                    self.favorited = photoOb["favorited"] as! Bool
                     if self.favorited == true {
-                        self.photoArray.append(self.photo!)
+                    print(photoOb)
+                    }
+                    if self.favorited == true {
+                        self.photoArray.append(photoOb)
                     }
                 }
                 self.savedCollectionView.reloadData()
