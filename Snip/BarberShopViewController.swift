@@ -44,6 +44,7 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.setNavigationBarHidden(false, animated: true)
         
         map.isZoomEnabled = true
         queryForBarbers()
