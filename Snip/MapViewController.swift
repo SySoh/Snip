@@ -127,6 +127,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let source = sender as! CustomMKAnnotation
             let destVC = segue.destination as! BarberShopViewController
             destVC.barberShop = source.barbershop
+            destVC.navigationController?.setNavigationBarHidden(false, animated: true)
         }
     }
  
