@@ -231,6 +231,19 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
         
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == detailCollectionView {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let tag = self.tagArray?[indexPath.item]
+            let tagDetail = storyboard.instantiateViewController(withIdentifier: "tagDetail") as! TSRViewController
+            tagDetail.tag = tag
+            self.navigationController!.pushViewController(tagDetail, animated: true)
+            tagDetail.title = self.tagsArray?[indexPath.item]
+            tagDetail.navigationController?.title = self.tagsArray?[indexPath.item]
+            tagDetail.navigationController?.setNavigationBarHidden(false, animated: true)
+        }
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
