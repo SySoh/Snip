@@ -119,6 +119,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
                     self.tagArray = self.post.tags as! [Tag]
                     for tagOb in self.tagArray {
                         self.tagNameSet.insert("\(tagOb.name!)")
+                        self.tagArray.append(tagOb)
                     }
                 }
 
