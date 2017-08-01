@@ -210,6 +210,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
             let tag = self.tagsArray?[indexPath.item]
             tagCell.tagLabel.text = tagNameArray[indexPath.item]
             tagCell.layer.cornerRadius = 15
+            tagCell.tagLabel.adjustsFontSizeToFitWidth = true
             return tagCell
         } else {
             let photoCell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! DetailPostCell
