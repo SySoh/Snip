@@ -101,6 +101,9 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
             pickBarberButton.backgroundColor = UIColor.lightGray
         }
         
+        if let layout = self.tagCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .horizontal
+        }
         
         //Aesthetics
         captionTextView.text = "Have anything to say about this haircut?"
@@ -131,7 +134,7 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         shopChoosingButton.setTitle(barberShopName.name, for: .normal)
         self.barbershop = barberShopName
         pickBarberButton.isEnabled = true
-        pickBarberButton.backgroundColor = UIColor(hex: "F5EDDA")
+        pickBarberButton.backgroundColor = UIColor(hex: "FCFCFC")
     }
     
     func didChooseBarber(barberName: Barber) {

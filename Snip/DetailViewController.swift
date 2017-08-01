@@ -73,7 +73,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
             print("unfavoriting")
             favoriteButton.isEnabled = false
             self.firstPhoto?["favorited"] = false
-            self.favoriteButton.setImage(#imageLiteral(resourceName: "star_outline"), for: .normal)
+            self.favoriteButton.setImage(#imageLiteral(resourceName: "heart-outline"), for: .normal)
             firstPhoto?.saveInBackground(block: { (success, error: Error?) in
                 if let err = error {
                     print(err.localizedDescription)
@@ -85,7 +85,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
             print("favoriting")
             favoriteButton.isEnabled = false
             self.firstPhoto?["favorited"] = true
-            self.favoriteButton.setImage(#imageLiteral(resourceName: "star-filled"), for: .normal)
+            self.favoriteButton.setImage(#imageLiteral(resourceName: "heart-filled"), for: .normal)
             firstPhoto?.saveInBackground(block: { (success, error: Error?) in
                 if let err = error {
                     print(err.localizedDescription)
