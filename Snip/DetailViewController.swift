@@ -52,6 +52,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     @IBOutlet weak var barberLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var detailCollectionView: UICollectionView!
+    @IBOutlet weak var favoriteButton: UIButton!
     
     @IBOutlet weak var photoCollectionView: UICollectionView!
     
@@ -64,20 +65,37 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     var tagArray: [Tag]? = []
     var tagNameArray: [String]! = []
     var allPhotos: [PFObject]! = []
+    var firstPhoto: PFObject?
     
     
     @IBAction func pressSave(_ sender: Any) {
-        let query = PFQuery(className: "Photo")
+        if (firstPhoto?["favorited"] as! Bool){
+            print("unfavoriting")
+            favoriteButton.isEnabled = false
+            self.firstPhoto?["favorited"] = false
+            self.favoriteButton.setImage(#imageLiteral(resourceName: "star_outline"), for: .normal)
+            firstPhoto?.saveInBackground(block: { (success, error: Error?) in
+                if let err = error {
+                    print(err.localizedDescription)
+                } else {
+                self.favoriteButton.isEnabled = true
+                }
+            })
+        } else {
+            print("favoriting")
+            favoriteButton.isEnabled = false
+            self.firstPhoto?["favorited"] = true
+            self.favoriteButton.setImage(#imageLiteral(resourceName: "star-filled"), for: .normal)
+            firstPhoto?.saveInBackground(block: { (success, error: Error?) in
+                if let err = error {
+                    print(err.localizedDescription)
+                } else {
+                    self.favoriteButton.isEnabled = true
+                }
+            })
+        }
         
-        query.findObjectsInBackground(block: { (objects : [PFObject]?, error: Error?) -> Void in
-            if error != nil {
-                print(error?.localizedDescription)
-            } else {
-                self.photo?["favorited"] = true
-                self.photo?.saveInBackground()
-            }
-        })
-        
+       
     }
     
     @IBAction func pressDismiss(_ sender: Any) {
@@ -113,7 +131,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
         detailCollectionView.dataSource = self
         photoCollectionView.delegate = self
         photoCollectionView.dataSource = self
-        onlyWithPost(post: self.post!)
+//        onlyWithPost(post: self.post!)
         self.view.addSubview(detailCollectionView)
         self.view.addSubview(photoCollectionView)
         
@@ -159,18 +177,23 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
         if let secondLayout = self.photoCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
                 secondLayout.scrollDirection = .horizontal
             }
-    }
-    
-    
-    func onlyWithPost(post: Post) {
-        let postID = post.objectId!
-        self.filteredPhotos = self.photoArray?.filter { (photo: PFObject) -> Bool in
-            let photoPost = photo["post"] as! Post
-            let photoPostID = photoPost.objectId!
-            return photoPostID == postID
+        for pic in filteredPhotos! {
+            if pic["first"] as! Bool == true {
+                firstPhoto = pic
+            }
         }
-        
     }
+    
+    
+//    func onlyWithPost(post: Post) {
+//        let postID = post.objectId!
+//        self.filteredPhotos = self.photoArray?.filter { (photo: PFObject) -> Bool in
+//            let photoPost = photo["post"] as! Post
+//            let photoPostID = photoPost.objectId!
+//            return photoPostID == postID
+//        }
+//        
+//    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == detailCollectionView {

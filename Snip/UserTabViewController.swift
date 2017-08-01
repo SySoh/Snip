@@ -16,7 +16,7 @@ class UserTabViewController: UIViewController, CAPSPageMenuDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         // Array to keep track of controllers in page menu
@@ -40,7 +40,7 @@ class UserTabViewController: UIViewController, CAPSPageMenuDelegate {
         ]
         
         // Initialize page menu with controller array, frame, and optional parameters
-        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRectMake(0.0, 128.0, self.view.frame.width, self.view.frame.height - 128.0), pageMenuOptions: parameters)
+        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRectMake(0.0, 85.0, self.view.frame.width, self.view.frame.height - 85.0), pageMenuOptions: parameters)
         
         pageMenu?.delegate = self
         
@@ -56,6 +56,14 @@ class UserTabViewController: UIViewController, CAPSPageMenuDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if (self.navigationController?.isNavigationBarHidden)! {
+            self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        }
     }
     
     /*

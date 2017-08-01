@@ -16,9 +16,12 @@ class TagSearchViewController: UIViewController, UITableViewDelegate, UITableVie
     
     var tags: [PFObject] = []
     var filteredTags: [PFObject] = []
+    
+    var parentNavigationController: UINavigationController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.getTags()
         self.filteredTags = self.tags
         self.tableView.delegate = self
@@ -28,7 +31,7 @@ class TagSearchViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func getTags() {
         let query = PFQuery(className: "Tag")
-        query.order(byDescending: "createdAt")
+        query.order(byAscending: "name")
         query.includeKey("name")
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
             if let objects = objects {
@@ -38,14 +41,6 @@ class TagSearchViewController: UIViewController, UITableViewDelegate, UITableVie
             } else {
                 print(error?.localizedDescription ?? "Error fetching tags")
             }
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "TagSearchSegue" {
-            let vc = segue.destination as! TSRViewController
-            let cell = sender as! TagSearchCell
-            vc.tag = cell.cellTag
         }
     }
     
@@ -78,10 +73,22 @@ class TagSearchViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.reloadData()
     }
     
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let tagDetail = storyboard.instantiateViewController(withIdentifier: "tagDetail") as! TSRViewController
+        let tag = self.filteredTags[indexPath.row]
+        tagDetail.tag = tag as? Tag
+        parentNavigationController!.pushViewController(tagDetail, animated: true)
+//        UINavigationBar.appearance().barTintColor = UIColor(red: 0, green: 0/255, blue: 205/255, alpha: 1)
+//        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+//        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
+        tagDetail.navigationController?.setNavigationBarHidden(false, animated: true)
+        
     }
     
 

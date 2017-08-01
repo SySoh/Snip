@@ -36,6 +36,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     var rating: Int?
     var first: Bool?
     var fullArray: [PFObject]?
+    var filteredPhotos: [PFObject]?
     //var isDataLoading = false
     
     
@@ -43,16 +44,39 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     @IBOutlet weak var mapViewButton: UIButton!
     @IBOutlet weak var homeCollectionView: UICollectionView!
     
-    @IBAction func touchCamera(_ sender: Any) {
-    }
-    
-    @IBAction func touchSearch(_ sender: Any) {
-    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let query = PFQuery(className: "Photo")
+        query.order(byDescending: "createdAt")
+        query.includeKey("first")
+        query.includeKey("favorited")
+        query.includeKey("objectId")
+        query.includeKey("post")
+        query.includeKey("post.barber")
+        query.includeKey("post.price")
+        query.includeKey("post.barber.barbershop")
+        query.includeKey("post.tags")
+        //fetch data asynchronously
+        query.findObjectsInBackground { (objects, error: Error?) in
+            if let photos = objects {
+                for photoOb in photos {
+                    self.photo = photoOb as! Photo
+                    self.first = self.photo!["first"] as! Bool
+                    if self.first == true {
+                        self.photoArray.append(self.photo!)
+                    }
+                    self.detailArray = photos as! [Photo]
+                }
+                self.homeCollectionView.reloadData()
+                
+                
+            }
+        }
         refresh()
         getShopLocations()
+        
         homeCollectionView.dataSource = self
         homeCollectionView.delegate = self
         homeCollectionView.alwaysBounceVertical = true
@@ -65,24 +89,16 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
 
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        let offsetY = scrollView.contentOffset.y
-//        let contentHeight = scrollView.contentSize.height
-//        if offsetY > contentHeight - scrollView.frame.size.height {
-//            refresh()
-//            self.homeCollectionView.reloadData()
-//        }
-//    }
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "DetailSegue" {
             let vc = segue.destination as! DetailViewController
             let cell = sender as! HomeCell
             let indexPath = homeCollectionView.indexPath(for: cell)
             let photo = photoArray[(indexPath?.item)!] as! Photo
+            let post = photo["post"] as! Post
+            onlyWithPost(post: post)
             vc.post = photo["post"] as! Post
-            vc.photoArray = self.detailArray
-            vc.allPhotos = self.photoArray
+            vc.filteredPhotos = self.filteredPhotos
             vc.photoId = photo.objectId as! String
             }
         if segue.identifier == "MapView" {
@@ -107,11 +123,27 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     
+    func onlyWithPost(post: Post) {
+        let postID = post.objectId!
+        self.filteredPhotos = self.detailArray?.filter { (photo: PFObject) -> Bool in
+            let photoPost = photo["post"] as! Post
+            let photoPostID = photoPost.objectId!
+            return photoPostID == postID
+        }
+        
+    }
+
     
     
     func refresh() {
+       
         //construct PFQuery
         let query = PFQuery(className: "Photo")
+        let defaults=UserDefaults.standard
+        
+        if let lastUpdateDate=defaults.object(forKey: "lastUpdateDate") as? NSDate {
+            query.whereKey("updatedAt",greaterThan:lastUpdateDate)
+        }
         query.order(byDescending: "createdAt")
         query.includeKey("first")
         query.includeKey("favorited")
@@ -124,6 +156,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         //fetch data asynchronously
         query.findObjectsInBackground { (objects, error: Error?) in
             if let photos = objects {
+                defaults.set(NSDate(),forKey:"lastUpdateDate")
                 for photoOb in photos {
                     self.photo = photoOb as! Photo
                     self.first = self.photo!["first"] as! Bool
@@ -171,6 +204,15 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if (self.navigationController?.isNavigationBarHidden)! {
+            self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        }
+    }
+    
     
     
     /*

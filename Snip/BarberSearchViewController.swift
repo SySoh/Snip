@@ -17,6 +17,8 @@ class BarberSearchViewController: UIViewController, UITableViewDelegate, UITable
     var barbers: [PFObject] = []
     var filteredBarbers: [PFObject] = []
     
+    var parentNavigationController: UINavigationController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.getBarbers()
@@ -41,15 +43,6 @@ class BarberSearchViewController: UIViewController, UITableViewDelegate, UITable
             } else {
                 print(error?.localizedDescription ?? "Error fetching barbers")
             }
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "BarberSearchSegue" {
-            let vc = segue.destination as! ProfileViewController
-            let cell = sender as! BarberSearchCell
-            vc.barber = cell.barber
-            let barber = cell.barber!
         }
     }
     
@@ -110,6 +103,15 @@ class BarberSearchViewController: UIViewController, UITableViewDelegate, UITable
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let barberDetail = storyboard.instantiateViewController(withIdentifier: "barberDetail") as! ProfileViewController
+        let barber = self.filteredBarbers[indexPath.row]
+        barberDetail.barber = barber as? Barber
+        parentNavigationController!.pushViewController(barberDetail, animated: true)
+        barberDetail.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     

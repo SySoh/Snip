@@ -51,8 +51,8 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
         barberCollectionView.dataSource = self
         barberCollectionView.delegate = self
         barberCollectionView.reloadData()
-//        shopImage.file = barberShop?.picture
-//        shopImage.loadInBackground()
+        shopImage.file = barberShop?.picture
+        shopImage.loadInBackground()
         if barberShop?.location != nil{
             locationLabel.text = barberShop?.location as! String
         } else {
@@ -136,10 +136,13 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toProfile" {
         let source = sender as! BarberCollectionViewCell
         let destVC = segue.destination as! ProfileViewController
         destVC.barber = source.barber
         destVC.barberName = source.barber?.name
         destVC.venmo = source.barber?.venmo
+        destVC.barbershopName = barberShop?.name
+        }
     }
 }

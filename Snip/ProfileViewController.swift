@@ -40,6 +40,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     var barbers: [Barber]!
     var barber: Barber!
     var barberId: String!
+    var filteredPhotos: [PFObject]?
+
 
     @IBAction func pressBack(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -52,13 +54,24 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
             let indexPath = postCollectionView.indexPath(for: cell)
             let photo = self.photoArray[(indexPath?.item)!] as! Photo
             //detailViewController.barber = cell.barber
-            let post = self.photo["post"] as! Post
+            let post = photo["post"] as! Post
+            onlyWithPost(post: post)
             detailViewController.post = post
-            detailViewController.photoArray = self.photoArray
+            detailViewController.filteredPhotos = self.filteredPhotos
             detailViewController.photoId = photo.objectId as! String
-
             //detailViewController.photo = photo as! Photo
-
+            
+        } else if segue.identifier == "profileTagSegue" {
+            let vc = segue.destination as! TSRViewController
+            let cell = sender as! TagCell
+            vc.tag = cell.tagObject
+            //detailViewController.photo = photo as! Photo
+        }
+        
+        if segue.identifier == "shop_view" {
+            print("sending")
+            let destVC = segue.destination as! BarberShopViewController
+            destVC.barberShop = barber["barbershop"] as! Barbershop
         }
     }
 
@@ -75,11 +88,11 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         self.profileImageVIew.file = barber["profile_pic"] as! PFFile
         self.profileImageVIew.loadInBackground()
         let barbershop = barber["barbershop"] as? Barbershop
-        barbershopName = barbershop?["name"] as? String
+        //barbershopName = barbershop?["name"] as? String
         self.barbershopLabel.text = barbershopName
         venmo = barber["venmo"] as? String
         self.venmoTextView.text = "venmo.com/" + venmo
-        print(self.venmoTextView.text)
+        barberName = barber["name"] as? String
         self.usernameLabel.text = barberName
         // Make profile pic circular
         profileImageVIew.layer.borderWidth = 1
@@ -124,15 +137,18 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
                 secondQuery.findObjectsInBackground { (secondObjects: [PFObject]?, error: Error?) in
                     if secondObjects != nil {
                         let photos = secondObjects
-                        let photo = photos?.first as! Photo
                         for photoOb in photos! {
+                            let first = photoOb["first"] as! Bool
+                            if first == true {
+                                self.photoArray.append(photoOb)
+                            }
                             self.photo = photoOb as! Photo
-                            self.photoArray.append(self.photo!)
                         }
-                        self.photoArray = secondObjects as! [Photo]
-
+                        self.allPhotos = secondObjects as! [Photo]
+                        
                         self.postCollectionView.reloadData()
                         self.tagCollectionView.reloadData()
+
 
                     } else {
                         print(error?.localizedDescription)
@@ -143,7 +159,101 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
                 layout.scrollDirection = .horizontal
             }
         }
+        let refreshcontrol = UIRefreshControl()
+        refreshcontrol.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
+        self.postCollectionView.addSubview(refreshcontrol)
+        self.postCollectionView.alwaysBounceVertical = true
+        self.tagCollectionView.addSubview(refreshcontrol)
+        self.tagCollectionView.alwaysBounceVertical = true
+        //add refresh control to the table view
+        self.tagCollectionView.insertSubview(refreshcontrol, at: 0)
+        self.postCollectionView.insertSubview(refreshcontrol, at: 0)
 
+
+    }
+    
+    func refresh() {
+        
+        //construct PFQuery
+        let query = PFQuery(className: "Post")
+        let defaults=UserDefaults.standard
+        
+        if let lastUpdateDate=defaults.object(forKey: "lastUpdateDate") as? NSDate {
+            query.whereKey("updatedAt",greaterThan:lastUpdateDate)
+        }
+        query.whereKey("barber", equalTo: self.barber)
+        query.includeKey("tags")
+        query.includeKey("barber")
+        query.includeKey("barber.name")
+        query.includeKey("barber.barbershop")
+        query.includeKey("barber.profile_pic")
+        //fetch data asynchronously
+        query.findObjectsInBackground { (objects, error: Error?) in
+            if objects != nil {
+                defaults.set(NSDate(),forKey:"lastUpdateDate")
+                query.whereKey("tags", containedIn: objects!)
+                self.posts = objects as! [Post]
+                for postOb in self.posts {
+                    self.post = postOb as! Post
+                    self.tagArray = self.post.tags as! [Tag]
+                    for tagOb in self.tagArray {
+                        self.tagNameSet.insert("\(tagOb.name!)")
+                    }
+                }
+                
+                let secondQuery = PFQuery(className: "Photo")
+                secondQuery.whereKey("post", containedIn: objects!)
+                secondQuery.includeKey("first")
+                secondQuery.includeKey("favorited")
+                secondQuery.includeKey("objectId")
+                secondQuery.includeKey("post")
+                secondQuery.includeKey("post.barber")
+                secondQuery.includeKey("post.price")
+                secondQuery.includeKey("post.barber.barbershop")
+                secondQuery.includeKey("post.tags")
+                
+                //                secondQuery.includeKey("tag")
+                secondQuery.findObjectsInBackground { (secondObjects: [PFObject]?, error: Error?) in
+                    if secondObjects != nil && secondObjects?.isEmpty == false {
+                        defaults.set(NSDate(),forKey:"lastUpdateDate")
+                        let photos = secondObjects
+                        for photoOb in photos! {
+                            let first = photoOb["first"] as! Bool
+                            if first == true {
+                                self.photoArray.append(photoOb)
+                            }
+                            self.photo = photoOb as! Photo
+                                                   }
+                        //self.photoArray = secondObjects as! [Photo]
+                        
+                        self.postCollectionView.reloadData()
+                        self.tagCollectionView.reloadData()
+                        
+                    } else {
+                        print(error?.localizedDescription)
+                    }
+                }
+                //                self.photoArray = photos
+                self.postCollectionView.reloadData()
+                self.tagCollectionView.reloadData()
+            }
+        }
+    }
+    
+    //refresh control function
+    func refreshControlAction(_ refreshControl: UIRefreshControl) {
+        refresh()
+        refreshControl.endRefreshing()
+    }
+    
+    func onlyWithPost(post: Post) {
+        let postID = post.objectId!
+        self.filteredPhotos = self.allPhotos.filter { (photo: PFObject) -> Bool in
+            let photoPost = photo["post"] as! Post
+            let photoPostID = photoPost.objectId!
+            return photoPostID == postID
+        }
+        
     }
 
 
@@ -164,6 +274,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         } else {
             let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: "tagCell", for: indexPath) as! TagCell
             self.tagNameArray = Array(tagNameSet)
+            tagCell.tagObject = self.tagArray[indexPath.item]
             tagCell.profileTagLabel.text = self.tagNameArray[indexPath.item]
             tagCell.layer.cornerRadius = 15
 
