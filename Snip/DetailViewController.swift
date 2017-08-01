@@ -67,6 +67,9 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     var allPhotos: [PFObject]! = []
     var firstPhoto: PFObject?
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     @IBAction func pressSave(_ sender: Any) {
         if (firstPhoto?["favorited"] as! Bool){
@@ -125,8 +128,8 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     override func viewDidLoad() {
+        self.setNeedsStatusBarAppearanceUpdate()
         super.viewDidLoad()
-        print("made it here")
         detailCollectionView.delegate = self
         detailCollectionView.dataSource = self
         photoCollectionView.delegate = self
