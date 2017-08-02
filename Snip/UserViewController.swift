@@ -21,24 +21,8 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var photo: Photo!
     var favorited: Bool?
     var filteredPhotos: [PFObject]?
-
+    var parentNavigationController: UINavigationController?
     
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "userSaved" {
-            let detailViewController = segue.destination as! DetailViewController
-            let cell = sender as! SavedPostCell
-            let indexPath = savedCollectionView.indexPath(for: cell)
-            let photo = self.photoArray[(indexPath?.item)!] as! Photo
-            //detailViewController.barber = cell.barber
-            let post = photo["post"] as! Post
-            onlyWithPost(post: post)
-            detailViewController.post = post
-            detailViewController.filteredPhotos = self.filteredPhotos
-            detailViewController.navigationController?.setNavigationBarHidden(false, animated: true)
-            print("this segue")
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -136,6 +120,23 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photoArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let detailViewController = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        let photo = self.photoArray[indexPath.item] as! Photo
+        let post = photo["post"] as! Post
+        let barber = post["barber"] as! Barber
+        
+        onlyWithPost(post: post)
+        
+        detailViewController.filteredPhotos = self.filteredPhotos
+        detailViewController.post = post
+        detailViewController.barber = barber
+        
+        detailViewController.navigationController?.setNavigationBarHidden(false, animated: true)
+        parentNavigationController!.pushViewController(detailViewController, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

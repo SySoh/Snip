@@ -22,11 +22,13 @@ class UserTabViewController: UIViewController, CAPSPageMenuDelegate {
         // Array to keep track of controllers in page menu
         var controllerArray : [UIViewController] = []
         
-        let userSnipsController: UIViewController = storyboard.instantiateViewController(withIdentifier: "UserSnips")
+        let userSnipsController = storyboard.instantiateViewController(withIdentifier: "UserSnips") as! UserSnipsViewController
+        userSnipsController.parentNavigationController = self.navigationController as! ExampleNavigationController
         userSnipsController.title = "SNIPS"
         controllerArray.append(userSnipsController)
         
-        let favoritesController: UIViewController = storyboard.instantiateViewController(withIdentifier: "UserFavorites")
+        let favoritesController = storyboard.instantiateViewController(withIdentifier: "UserFavorites") as! UserViewController
+        favoritesController.parentNavigationController = self.navigationController as! ExampleNavigationController
         favoritesController.title = "FAVORITES"
         controllerArray.append(favoritesController)
         
