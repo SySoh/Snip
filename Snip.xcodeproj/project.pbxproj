@@ -310,20 +310,13 @@
 		2E160DA81F1694E70042419F /* CustomViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				4BABA7B71F227181009802DD /* Search */,
-				2E160DA91F1698110042419F /* ComposeViewController.swift */,
-				1E9BDE971F1EC5C000ACE230 /* ProfileViewController.swift */,
-				2E75E3EE1F212A56006294EB /* BarberShopViewController.swift */,
 				1E8E68261F16982300635F93 /* HomeViewController.swift */,
-				2E509D6A1F1ED57E0085F5C2 /* BarberPickViewController.swift */,
-				1E8E682D1F16D2B500635F93 /* DetailViewController.swift */,
+				4BABA7B71F227181009802DD /* Search */,
+				4B8B985E1F3290DC001B71EC /* Compose */,
 				2E1BED9B1F27D274008C86A3 /* MapViewController.swift */,
-				2E093BD61F16D19500D2C000 /* TagsViewController.swift */,
-				2E509D6C1F1ED5930085F5C2 /* BarberShopPickViewController.swift */,
+				4B8B985C1F329085001B71EC /* User */,
+				4B8B985D1F3290C2001B71EC /* Detail */,
 				4B1539BF1F26777E008701E1 /* ScheduleViewController.swift */,
-				1E4998971F290C560093A595 /* UserViewController.swift */,
-				4B5586201F2BB55B0063406E /* UserTabViewController.swift */,
-				1EE9EAEB1F2BC82600D200EF /* UserSnipsViewController.swift */,
 			);
 			name = CustomViewControllers;
 			sourceTree = "<group>";
@@ -371,6 +364,38 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		4B8B985C1F329085001B71EC /* User */ = {
+			isa = PBXGroup;
+			children = (
+				4B5586201F2BB55B0063406E /* UserTabViewController.swift */,
+				1E4998971F290C560093A595 /* UserViewController.swift */,
+				1EE9EAEB1F2BC82600D200EF /* UserSnipsViewController.swift */,
+			);
+			name = User;
+			sourceTree = "<group>";
+		};
+		4B8B985D1F3290C2001B71EC /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				4BABA7BA1F227E9D009802DD /* TSRViewController.swift */,
+				1E9BDE971F1EC5C000ACE230 /* ProfileViewController.swift */,
+				2E75E3EE1F212A56006294EB /* BarberShopViewController.swift */,
+				1E8E682D1F16D2B500635F93 /* DetailViewController.swift */,
+			);
+			name = Detail;
+			sourceTree = "<group>";
+		};
+		4B8B985E1F3290DC001B71EC /* Compose */ = {
+			isa = PBXGroup;
+			children = (
+				2E160DA91F1698110042419F /* ComposeViewController.swift */,
+				2E509D6A1F1ED57E0085F5C2 /* BarberPickViewController.swift */,
+				2E509D6C1F1ED5930085F5C2 /* BarberShopPickViewController.swift */,
+				2E093BD61F16D19500D2C000 /* TagsViewController.swift */,
+			);
+			name = Compose;
+			sourceTree = "<group>";
+		};
 		4BABA7B71F227181009802DD /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -378,7 +403,6 @@
 				4B2097911F211E4B0067DC2F /* TagSearchViewController.swift */,
 				4B2097951F2123AA0067DC2F /* BarberSearchViewController.swift */,
 				4BBAFF0E1F22700B001A144F /* BarbershopSearchViewController.swift */,
-				4BABA7BA1F227E9D009802DD /* TSRViewController.swift */,
 			);
 			name = Search;
 			sourceTree = "<group>";
