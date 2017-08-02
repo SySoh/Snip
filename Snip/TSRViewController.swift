@@ -23,6 +23,7 @@ class TSRViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.title = tag?.name
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         let query = PFQuery(className: "Post")

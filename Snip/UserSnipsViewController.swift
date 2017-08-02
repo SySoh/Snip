@@ -35,7 +35,7 @@ class UserSnipsViewController: UIViewController, UICollectionViewDelegate, UICol
             onlyWithPost(post: post)
             detailViewController.post = post
             detailViewController.filteredPhotos = self.filteredPhotos
-
+            detailViewController.navigationController?.setNavigationBarHidden(false, animated: true)
             //detailViewController.photoId = photo.objectId as! String
         }
     }

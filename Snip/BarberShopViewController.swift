@@ -41,7 +41,7 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
     
     
     @IBAction func onCall(_ sender: Any) {
-        let phone = barberShop?.phone as! String
+        let phone = barberShop?.phone!
         if let url = URL(string: "tel://\(phone)"), UIApplication.shared.canOpenURL(url) {
             if #available(iOS 10, *) {
                 UIApplication.shared.open(url)
@@ -53,6 +53,7 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.setNavigationBarHidden(false, animated: true)
         
         callImageView.layer.cornerRadius = 24
         callImageView.clipsToBounds = true
@@ -75,7 +76,6 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
         var annotation = MKPointAnnotation()
         annotation.title = barberShop?.location as! String
         annotation.coordinate = location!
-        annotation.
         var locationSpan = MKCoordinateSpan()
         locationSpan.latitudeDelta = 0.1
         locationSpan.longitudeDelta = 0.1
