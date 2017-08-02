@@ -29,6 +29,8 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     // Image array
     var pictures: [UIImage] = []
     
+    var useCamera: Bool = true
+    
     //all outlets
     @IBOutlet weak var tagCollectionView: UICollectionView!
     @IBOutlet weak var priceText: UITextField!
@@ -51,7 +53,7 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
 
     @IBAction func addPhoto(_ sender: Any) {
-        choosePic()
+        chooseCameraOrAlbum()
     }
     @IBAction func onTap(_ sender: Any) {
         view.endEditing(true)
@@ -149,12 +151,31 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     //Image work functions
     
+    func chooseCameraOrAlbum() {
+        let chooser = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let cancelAction = UIAlertAction(title:"Cancel", style: .cancel) {(UIAlertAction) in }
+        chooser.addAction(cancelAction)
+        let cameraAction = UIAlertAction(title:"Take photo", style: .default, handler: {(action) in
+            self.useCamera = true
+            self.choosePic()
+        })
+        chooser.addAction(cameraAction)
+        let albumAction = UIAlertAction(title: "Use photo album", style: .default, handler: {(action) in
+            self.useCamera = false
+            self.choosePicRoll()
+        })
+        chooser.addAction(albumAction)
+        
+        self.present(chooser, animated: true)
+    }
+    
+    
     func choosePic() {
         let vc = UIImagePickerController()
         vc.delegate = self
         vc.allowsEditing = true
         let alertController = UIAlertController(title: "Camera unavailable", message: nil, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title:"Okay", style: .cancel) {(UIAlertAction) in }
+        let cancelAction = UIAlertAction(title:"OK", style: .cancel) {(UIAlertAction) in }
         alertController.addAction(cancelAction)
         if UIImagePickerController.isSourceTypeAvailable(.camera){
             vc.sourceType = UIImagePickerControllerSourceType.camera
@@ -173,7 +194,7 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         vc.delegate = self
         vc.allowsEditing = true
         let alertController = UIAlertController(title: "Photo library unavailable", message: nil, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title:"Okay", style: .cancel) {(UIAlertAction) in }
+        let cancelAction = UIAlertAction(title:"OK", style: .cancel) {(UIAlertAction) in }
         alertController.addAction(cancelAction)
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
             vc.sourceType = UIImagePickerControllerSourceType.photoLibrary
