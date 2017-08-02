@@ -67,13 +67,16 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     var allPhotos: [PFObject]! = []
     var firstPhoto: PFObject?
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     @IBAction func pressSave(_ sender: Any) {
         if (firstPhoto?["favorited"] as! Bool){
             print("unfavoriting")
             favoriteButton.isEnabled = false
             self.firstPhoto?["favorited"] = false
-            self.favoriteButton.setImage(#imageLiteral(resourceName: "heart-outline"), for: .normal)
+            self.favoriteButton.setImage(#imageLiteral(resourceName: "favor"), for: .normal)
             firstPhoto?.saveInBackground(block: { (success, error: Error?) in
                 if let err = error {
                     print(err.localizedDescription)
@@ -85,7 +88,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
             print("favoriting")
             favoriteButton.isEnabled = false
             self.firstPhoto?["favorited"] = true
-            self.favoriteButton.setImage(#imageLiteral(resourceName: "heart-filled"), for: .normal)
+            self.favoriteButton.setImage(#imageLiteral(resourceName: "favor_1"), for: .normal)
             firstPhoto?.saveInBackground(block: { (success, error: Error?) in
                 if let err = error {
                     print(err.localizedDescription)
@@ -121,8 +124,8 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     override func viewDidLoad() {
+        self.setNeedsStatusBarAppearanceUpdate()
         super.viewDidLoad()
-        print("made it here")
         detailCollectionView.delegate = self
         detailCollectionView.dataSource = self
         photoCollectionView.delegate = self
@@ -179,7 +182,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
                 if ((firstPhoto?["favorited"]) != nil) {
                     let favorited = firstPhoto?["favorited"] as! Bool
                         if favorited == true {
-                    self.favoriteButton.setImage(#imageLiteral(resourceName: "heart-filled"), for: .normal)
+                    self.favoriteButton.setImage(#imageLiteral(resourceName: "favor_1"), for: .normal)
                     }
                 }
 
@@ -207,13 +210,17 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let size: CGSize = tagNameArray[indexPath.row].size(attributes: [NSFontAttributeName: UIFont.init(name: "OpenSans-Regular", size: 14.0)!])
+        return CGSize(width: size.width, height: detailCollectionView.bounds.size.height)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == detailCollectionView {
             let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: "detailCell", for: indexPath) as! DetailCell
             let tag = self.tagsArray?[indexPath.item]
             tagCell.tagLabel.text = tagNameArray[indexPath.item]
-            tagCell.layer.cornerRadius = 15
-            tagCell.tagLabel.adjustsFontSizeToFitWidth = true
+            tagCell.layer.cornerRadius = 12
             return tagCell
         } else {
             let photoCell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! DetailPostCell

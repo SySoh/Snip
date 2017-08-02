@@ -44,10 +44,10 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     @IBOutlet weak var mapViewButton: UIButton!
     @IBOutlet weak var homeCollectionView: UICollectionView!
     
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setNeedsStatusBarAppearanceUpdate()
         let query = PFQuery(className: "Photo")
         query.order(byDescending: "createdAt")
         query.includeKey("first")
@@ -59,6 +59,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         query.includeKey("post.barber.barbershop")
         query.includeKey("post.tags")
         //fetch data asynchronously
+
         query.findObjectsInBackground { (objects, error: Error?) in
             if let photos = objects {
                 for photoOb in photos {
@@ -88,6 +89,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "DetailSegue" {

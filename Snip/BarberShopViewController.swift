@@ -16,15 +16,13 @@ import ParseUI
 class BarberShopViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet weak var shopImage: PFImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    
-    @IBOutlet weak var locationLabel: UILabel!
-    @IBOutlet weak var phoneLabel: UILabel!
+    @IBOutlet weak var nameLabel: UINavigationItem!
     @IBOutlet weak var map: MKMapView!
     
     @IBOutlet weak var ratingStars: CosmosView!
     
     
+    @IBOutlet weak var callImageView: UIImageView!
     var latitude: CLLocationDegrees?
     var longitude: CLLocationDegrees?
     var location: CLLocationCoordinate2D?
@@ -42,33 +40,41 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
     }
     
     
+    @IBAction func onCall(_ sender: Any) {
+        let phone = barberShop?.phone!
+        if let url = URL(string: "tel://\(phone)"), UIApplication.shared.canOpenURL(url) {
+            if #available(iOS 10, *) {
+                UIApplication.shared.open(url)
+            } else {
+                UIApplication.shared.openURL(url)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(false, animated: true)
         
+        callImageView.layer.cornerRadius = 24
+        callImageView.clipsToBounds = true
+        
         map.isZoomEnabled = true
         queryForBarbers()
-        nameLabel.text = barberShop?.name as! String
+        nameLabel.title = barberShop?.name as! String
         barberCollectionView.dataSource = self
         barberCollectionView.delegate = self
         barberCollectionView.reloadData()
         shopImage.file = barberShop?.picture
         shopImage.loadInBackground()
-        if barberShop?.location != nil{
-            locationLabel.text = barberShop?.location as! String
-        } else {
-            locationLabel.text = ""
-        }
 //        ratingStars.rating = Double((barberShop?.rating)!)!
 
-        phoneLabel.text = barberShop?.phone as! String
         latitude = barberShop?.geopoint?.latitude
         longitude = barberShop?.geopoint?.longitude
         location = CLLocationCoordinate2D(latitude: self.latitude!, longitude: self.longitude!)
         
         
         var annotation = MKPointAnnotation()
-        annotation.title = barberShop?.name as! String
+        annotation.title = barberShop?.location as! String
         annotation.coordinate = location!
         var locationSpan = MKCoordinateSpan()
         locationSpan.latitudeDelta = 0.1
