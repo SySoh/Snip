@@ -12,9 +12,6 @@ import ParseUI
 
 class UserSnipsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    //    @IBOutlet weak var userImageView: UIImageView!
-    //    @IBOutlet weak var usernameLabel: UILabel!
-    
     @IBOutlet weak var snipsCollectionView: UICollectionView!
     
     var photoArray: [PFObject] = []
@@ -22,23 +19,23 @@ class UserSnipsViewController: UIViewController, UICollectionViewDelegate, UICol
     var photo: Photo?
     var user: Bool?
     var filteredPhotos: [PFObject]?
-
+    var parentNavigationController: UINavigationController?
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "userSnips" {
-            let detailViewController = segue.destination as! DetailViewController
-            let cell = sender as! SavedPostCell
-            let indexPath = snipsCollectionView.indexPath(for: cell)
-            let photo = self.photoArray[(indexPath?.item)!] as! Photo
-            //detailViewController.barber = cell.barber
-            let post = photo["post"] as! Post
-            onlyWithPost(post: post)
-            detailViewController.post = post
-            detailViewController.filteredPhotos = self.filteredPhotos
-            detailViewController.navigationController?.setNavigationBarHidden(false, animated: true)
-            //detailViewController.photoId = photo.objectId as! String
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "userSnips" {
+//            let detailViewController = segue.destination as! DetailViewController
+//            let cell = sender as! SavedPostCell
+//            let indexPath = snipsCollectionView.indexPath(for: cell)
+//            let photo = self.photoArray[(indexPath?.item)!] as! Photo
+//            //detailViewController.barber = cell.barber
+//            let post = photo["post"] as! Post
+//            onlyWithPost(post: post)
+//            detailViewController.post = post
+//            detailViewController.filteredPhotos = self.filteredPhotos
+//            detailViewController.navigationController?.setNavigationBarHidden(false, animated: true)
+//            //detailViewController.photoId = photo.objectId as! String
+//        }
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -154,6 +151,23 @@ class UserSnipsViewController: UIViewController, UICollectionViewDelegate, UICol
             }
         }
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let detailViewController = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        let photo = self.photoArray[indexPath.item] as! Photo
+        let post = photo["post"] as! Post
+        let barber = post["barber"] as! Barber
+        
+        onlyWithPost(post: post)
+        
+        detailViewController.filteredPhotos = self.filteredPhotos
+        detailViewController.post = post
+        detailViewController.barber = barber
+        
+        detailViewController.navigationController?.setNavigationBarHidden(false, animated: true)
+        parentNavigationController!.pushViewController(detailViewController, animated: true)
     }
     
     override func didReceiveMemoryWarning() {

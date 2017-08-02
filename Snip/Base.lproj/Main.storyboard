@@ -150,7 +150,6 @@
                                         </view>
                                         <connections>
                                             <outlet property="savedImageView" destination="phY-Cy-zab" id="hZ6-8Q-zJL"/>
-                                            <segue destination="8hR-A2-Bpa" kind="push" identifier="userSaved" id="loW-RG-pM0"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -207,7 +206,6 @@
                                         </view>
                                         <connections>
                                             <outlet property="userSnipImageView" destination="r4F-uX-X7y" id="WWN-fx-VoC"/>
-                                            <segue destination="8hR-A2-Bpa" kind="push" identifier="userSnips" id="wyv-5b-1oy"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -564,7 +562,7 @@
                                     <constraint firstAttribute="height" constant="375" id="Ewk-uJ-dk3"/>
                                     <constraint firstAttribute="width" constant="375" id="t4z-a3-Reo"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="jtt-Jk-nYf">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="jtt-Jk-nYf">
                                     <size key="itemSize" width="375" height="375"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -738,6 +736,7 @@
                         <outlet property="dateLabel" destination="EEf-R0-pdt" id="X4n-Ow-NWH"/>
                         <outlet property="detailCollectionView" destination="omm-AJ-MfD" id="iEr-jc-FT7"/>
                         <outlet property="favoriteButton" destination="MNw-Th-JKT" id="89F-4M-oZk"/>
+                        <outlet property="pageControl" destination="5Y0-Xk-Rlf" id="ssT-qQ-KeT"/>
                         <outlet property="photoCollectionView" destination="Nmd-qR-eKh" id="Rtj-sG-qJ9"/>
                         <outlet property="priceLabel" destination="BS5-Wz-h1s" id="p7s-0n-wxz"/>
                         <outlet property="profileImageView" destination="1Xh-oC-FvA" id="c6T-CV-bmc"/>
@@ -1616,7 +1615,7 @@
                 <navigationController storyboardIdentifier="Navigation" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="wpg-DR-Qwe" customClass="ExampleNavigationController" customModule="Snip" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="NfB-Mi-7mc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="NfB-Mi-7mc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1643,6 +1642,6 @@
         <segue reference="Uoi-rp-UiA"/>
         <segue reference="ugo-57-2J3"/>
         <segue reference="Tp3-uf-z1R"/>
-        <segue reference="2pg-sZ-O3Y"/>
+        <segue reference="X26-bd-rJY"/>
     </inferredMetricsTieBreakers>
 </document>
