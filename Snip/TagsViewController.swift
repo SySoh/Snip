@@ -67,10 +67,14 @@ class TagsViewController: UIViewController, UICollectionViewDelegate, UICollecti
             cell.tagName.text = fullTagList[indexPath.item].object(forKey: "name") as! String
         cell.layer.cornerRadius = 15
         cell.clipsToBounds = true
-        cell.backgroundColor = UIColor(hex:"FFFFFF")
+        cell.layer.borderColor = UIColor.white.cgColor
+        cell.layer.borderWidth = 1.0
+        cell.backgroundColor = UIColor(hex:"17496F")
+        cell.tagName.textColor = UIColor(hex:"FFFFFF")
         cell.tagObject = fullTagList[indexPath.item]
             if selectedTags.contains(cell.tagObject!) {
-                cell.backgroundColor = UIColor(hex:"F5EDDA")
+                cell.backgroundColor = UIColor(hex:"FFFFFF")
+                cell.tagName.textColor = UIColor(hex:"17496F")
             }
         }
         return cell
@@ -90,11 +94,12 @@ class TagsViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let tag = cell.tagObject
         if selectedTags.contains(tag!){
             selectedTags.remove(tag!)
-            cell.backgroundColor = UIColor(hex:"FFFFFF")
-            cell.tagName.textColor = UIColor.black
+            cell.backgroundColor = UIColor(hex:"F17496F")
+            cell.tagName.textColor = UIColor(hex:"FFFFFF")
         } else {
         selectedTags.insert(tag!)
-            cell.backgroundColor = UIColor(hex:"F5EDDA")
+            cell.backgroundColor = UIColor(hex:"FFFFFF")
+            cell.tagName.textColor = UIColor(hex:"17496F")
         }
         
     }
