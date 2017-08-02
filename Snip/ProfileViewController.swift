@@ -275,10 +275,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         } else {
             let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: "tagCell", for: indexPath) as! TagCell
             self.tagNameArray = Array(tagNameSet)
-            tagCell.tagObject = self.tagArray[indexPath.item]
+//            tagCell.tagObject = self.tagArray[indexPath.item]
             tagCell.profileTagLabel.text = self.tagNameArray[indexPath.item]
             tagCell.layer.cornerRadius = 15
-
+            tagCell.profileTagLabel.adjustsFontSizeToFitWidth = true
             return tagCell
         }
     }
