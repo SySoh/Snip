@@ -1623,7 +1623,7 @@
                 <navigationController storyboardIdentifier="Navigation" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="wpg-DR-Qwe" customClass="ExampleNavigationController" customModule="Snip" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="NfB-Mi-7mc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="NfB-Mi-7mc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1647,10 +1647,8 @@
         <image name="profile_filler" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Tp3-uf-z1R"/>
         <segue reference="ugo-57-2J3"/>
-        <segue reference="X26-bd-rJY"/>
         <segue reference="Tp3-uf-z1R"/>
-        <segue reference="ugo-57-2J3"/>
+        <segue reference="2pg-sZ-O3Y"/>
     </inferredMetricsTieBreakers>
 </document>
