@@ -124,6 +124,18 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     override func viewDidLoad() {
         self.setNeedsStatusBarAppearanceUpdate()
         super.viewDidLoad()
+        
+        //ensure the first photo displays first in the detail view
+        for object in filteredPhotos! {
+            let photoOb = object as! Photo
+            let firstOb = photoOb["first"] as! Bool
+            if firstOb == true {
+                let index = filteredPhotos?.index(of: photoOb)
+                filteredPhotos?.remove(at: index!)
+                filteredPhotos?.insert(photoOb, at: 0)
+            }
+        }
+
         detailCollectionView.delegate = self
         detailCollectionView.dataSource = self
         photoCollectionView.delegate = self
