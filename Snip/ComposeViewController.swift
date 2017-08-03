@@ -31,6 +31,8 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     var useCamera: Bool = true
     
+    var user: User?
+    
     //all outlets
     @IBOutlet weak var tagCollectionView: UICollectionView!
     @IBOutlet weak var priceText: UITextField!
@@ -43,6 +45,7 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var pickBarberButton: UIButton!
     
     @IBOutlet weak var imageCollectionView: UICollectionView!
+    
     
     
     //All button actions
@@ -88,7 +91,18 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let query = PFQuery(className: "User")
+        query.includeKey("objectId")
+        query.getFirstObjectInBackground { (resultUser, error: Error?) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+            self.user = resultUser as? User
+            print("finished setting user")
+            print(self.user)
+            print(resultUser)
+            }
+        }
         tagCollectionView.dataSource = self
         tagCollectionView.delegate = self
         tagCollectionView.reloadData()
