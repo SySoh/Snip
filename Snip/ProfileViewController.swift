@@ -19,7 +19,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var shopConstantLabel: UILabel!
     @IBOutlet weak var barbershopLabel: UILabel!
     @IBOutlet weak var venmoConstantLabel: UILabel!
-    @IBOutlet weak var venmoTextView: UITextView!
+    @IBOutlet weak var venmoImageView: UIImageView!
 
     @IBOutlet weak var postCollectionView: UICollectionView!
     @IBOutlet weak var tagCollectionView: UICollectionView!
@@ -42,6 +42,18 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     var barberId: String!
     var filteredPhotos: [PFObject]?
     
+    @IBAction func onVenmo(_ sender: Any) {
+        venmo = barber["venmo"] as? String
+        let url_string = "http://www.venmo.com/" + venmo
+        if let url = URL(string: url_string), UIApplication.shared.canOpenURL(url) {
+            if #available(iOS 10, *) {
+                UIApplication.shared.open(url)
+            } else {
+                UIApplication.shared.openURL(url)
+            }
+        }
+        
+    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "profileDetailSegue" {
@@ -80,14 +92,15 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         tagCollectionView.dataSource = self
         self.view.addSubview(postCollectionView)
         self.view.addSubview(tagCollectionView)
+        
+        venmoImageView.layer.cornerRadius = 17
+        venmoImageView.clipsToBounds = true
 
         self.profileImageVIew.file = barber["profile_pic"] as! PFFile
         self.profileImageVIew.loadInBackground()
         let barbershop = barber["barbershop"] as? Barbershop
         //barbershopName = barbershop?["name"] as? String
         self.barbershopLabel.text = barbershopName
-        venmo = barber["venmo"] as? String
-        self.venmoTextView.text = "venmo.com/" + venmo
         barberName = barber["name"] as? String
         self.usernameLabel.text = barberName
         // Make profile pic circular

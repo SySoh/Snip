@@ -36,13 +36,9 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
     //Whoever segues to this page needs to pass in a barbershop.
     var barberShop: Barbershop?
     
-    @IBAction func goBack(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
-    
     
     @IBAction func onCall(_ sender: Any) {
-        let phone = barberShop?.phone!
+        let phone = barberShop?.phone as! String
         if let url = URL(string: "tel://\(phone)"), UIApplication.shared.canOpenURL(url) {
             if #available(iOS 10, *) {
                 UIApplication.shared.open(url)
@@ -56,7 +52,7 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(hex: "FFFFFF"), NSFontAttributeName: UIFont.init(name: "Open Sans", size: 18.0)!]
-        
+        navigationController?.navigationBar.setTitleVerticalPositionAdjustment(CGFloat(0.0), for: .default)
         
         callImageView.layer.cornerRadius = 24
         callImageView.clipsToBounds = true
@@ -97,6 +93,11 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
         
         
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(hex: "FFFFFF"), NSFontAttributeName: UIFont.init(name: "Blessed Day", size: 42.0)!]
+        navigationController?.navigationBar.setTitleVerticalPositionAdjustment(CGFloat(10.0), for: .default)
     }
     
     func queryForBarbers() {
