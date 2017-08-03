@@ -41,11 +41,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     var barber: Barber!
     var barberId: String!
     var filteredPhotos: [PFObject]?
-
-
-    @IBAction func pressBack(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
+    
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "profileDetailSegue" {

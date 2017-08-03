@@ -44,16 +44,14 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     // outlets
     
     @IBOutlet weak var profileImageView: PFImageView!
-    
+    @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var barbershopConstantLabel: UILabel!
     @IBOutlet weak var captionLabel: UILabel?
     @IBOutlet weak var barbershopLabel: UILabel!
     @IBOutlet weak var barberLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var detailCollectionView: UICollectionView!
     @IBOutlet weak var favoriteButton: UIButton!
-    
     @IBOutlet weak var photoCollectionView: UICollectionView!
     
     var photoArray: [PFObject]?
@@ -134,6 +132,9 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
         self.view.addSubview(detailCollectionView)
         self.view.addSubview(photoCollectionView)
         
+        self.pageControl.hidesForSinglePage = true
+
+        
         // Make profile pic circular
         profileImageView.layer.borderWidth = 1
         profileImageView.layer.masksToBounds = false
@@ -188,6 +189,9 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
 
             }
         }
+        self.pageControl.numberOfPages = filteredPhotos!.count
+        self.pageControl.currentPage = 0
+        self.pageControl.updateCurrentPageDisplay()
     }
     
     
@@ -213,6 +217,13 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size: CGSize = tagNameArray[indexPath.row].size(attributes: [NSFontAttributeName: UIFont.init(name: "OpenSans-Regular", size: 14.0)!])
         return CGSize(width: size.width, height: detailCollectionView.bounds.size.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if collectionView == photoCollectionView {
+            self.pageControl.currentPage = indexPath.item
+            self.pageControl.updateCurrentPageDisplay()
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
