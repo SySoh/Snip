@@ -18,6 +18,7 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
     @IBOutlet weak var shopImage: PFImageView!
     @IBOutlet weak var nameLabel: UINavigationItem!
     @IBOutlet weak var map: MKMapView!
+    @IBOutlet weak var phoneLabel: UILabel!
     
     @IBOutlet weak var ratingStars: CosmosView!
     
@@ -66,13 +67,17 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
         barberCollectionView.reloadData()
         shopImage.file = barberShop?.picture
         shopImage.loadInBackground()
-//        ratingStars.rating = Double((barberShop?.rating)!)!
-
         latitude = barberShop?.geopoint?.latitude
         longitude = barberShop?.geopoint?.longitude
         location = CLLocationCoordinate2D(latitude: self.latitude!, longitude: self.longitude!)
         
-        
+        let phone = barberShop?.phone as! String
+        let num = String(format: "(%@) %@ - %@",
+                         phone.substring(with: phone.index(phone.startIndex, offsetBy: 0) ..< phone.index(phone.startIndex, offsetBy: 3)),
+                         phone.substring(with: phone.index(phone.startIndex, offsetBy: 3) ..< phone.index(phone.startIndex, offsetBy: 6)),
+                         phone.substring(with: phone.index(phone.startIndex, offsetBy: 6) ..< phone.index(phone.startIndex, offsetBy: 10))
+        )
+        phoneLabel.text = num
         var annotation = MKPointAnnotation()
         annotation.title = barberShop?.location as! String
         annotation.coordinate = location!

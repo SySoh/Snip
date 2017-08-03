@@ -43,7 +43,6 @@
 		2E8809451F290A4B00D784E2 /* BarberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8809441F290A4B00D784E2 /* BarberCollectionViewCell.swift */; };
 		2EDC97161F2FAB180014A562 /* CustomMKAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDC97151F2FAB180014A562 /* CustomMKAnnotation.swift */; };
 		2EE757C71F22B0EE00A806E5 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE757C61F22B0EE00A806E5 /* ImageCell.swift */; };
-		4B1539C01F26777E008701E1 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1539BF1F26777E008701E1 /* ScheduleViewController.swift */; };
 		4B1539C21F267E8D008701E1 /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1539C11F267E8D008701E1 /* DateCell.swift */; };
 		4B2097901F20225D0067DC2F /* TagSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B20978F1F20225D0067DC2F /* TagSearchCell.swift */; };
 		4B2097921F211E4B0067DC2F /* TagSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2097911F211E4B0067DC2F /* TagSearchViewController.swift */; };
@@ -140,7 +139,6 @@
 		2EDC97151F2FAB180014A562 /* CustomMKAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomMKAnnotation.swift; sourceTree = "<group>"; };
 		2EE757C61F22B0EE00A806E5 /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		3C855E1780E72449BA87A51B /* Pods_SnipTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnipTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4B1539BF1F26777E008701E1 /* ScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
 		4B1539C11F267E8D008701E1 /* DateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
 		4B20978F1F20225D0067DC2F /* TagSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagSearchCell.swift; sourceTree = "<group>"; };
 		4B2097911F211E4B0067DC2F /* TagSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagSearchViewController.swift; sourceTree = "<group>"; };
@@ -316,7 +314,6 @@
 				2E1BED9B1F27D274008C86A3 /* MapViewController.swift */,
 				4B8B985C1F329085001B71EC /* User */,
 				4B8B985D1F3290C2001B71EC /* Detail */,
-				4B1539BF1F26777E008701E1 /* ScheduleViewController.swift */,
 			);
 			name = CustomViewControllers;
 			sourceTree = "<group>";
@@ -744,7 +741,6 @@
 				4B2097941F2123740067DC2F /* BarberSearchCell.swift in Sources */,
 				4B2A7D7D1F2935A30056F2A6 /* ExampleBouncesContentView.swift in Sources */,
 				2E160DA41F168F790042419F /* User.swift in Sources */,
-				4B1539C01F26777E008701E1 /* ScheduleViewController.swift in Sources */,
 				1E4998981F290C560093A595 /* UserViewController.swift in Sources */,
 				1EE9EAEC1F2BC82600D200EF /* UserSnipsViewController.swift in Sources */,
 				2E160DAA1F1698110042419F /* ComposeViewController.swift in Sources */,

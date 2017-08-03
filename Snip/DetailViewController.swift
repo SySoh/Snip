@@ -182,8 +182,8 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
                 //check to see if the post was already favorited
                 if ((firstPhoto?["favorited"]) != nil) {
                     let favorited = firstPhoto?["favorited"] as! Bool
-                        if favorited == true {
-                    self.favoriteButton.setImage(#imageLiteral(resourceName: "favor_1"), for: .normal)
+                    if favorited == true {
+                        self.favoriteButton.setImage(#imageLiteral(resourceName: "favor_1"), for: .normal)
                     }
                 }
 
