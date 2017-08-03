@@ -38,6 +38,7 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var barberChoosingButton: UIButton!
     @IBOutlet weak var pictureView: UIImageView!
     @IBOutlet weak var captionTextView: UITextView!
+    @IBOutlet weak var charCount: UILabel!
     
     @IBOutlet weak var pickBarberButton: UIButton!
     
@@ -57,6 +58,15 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     @IBAction func onTap(_ sender: Any) {
         view.endEditing(true)
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        charCount.text = String(describing: (300 - captionTextView.text.characters.count))
+        if captionTextView.text.characters.count > 300 {
+            charCount.textColor = UIColor.red
+        } else {
+            charCount.textColor = UIColor.gray
+        }
     }
     
     @IBAction func makePost(_ sender: Any) {
