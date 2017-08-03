@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class TSRViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class TSRViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UINavigationBarDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tagLabel: UILabel!
@@ -25,7 +25,7 @@ class TSRViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.title = tag?.name
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(hex: "FFFFFF"), NSFontAttributeName: UIFont.init(name: "Open Sans", size: 18.0)!]
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         let query = PFQuery(className: "Post")

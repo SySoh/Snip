@@ -13,7 +13,7 @@ import Parse
 import ParseUI
 
 
-class BarberShopViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class BarberShopViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationBarDelegate {
     
     @IBOutlet weak var shopImage: PFImageView!
     @IBOutlet weak var nameLabel: UINavigationItem!
@@ -54,6 +54,8 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(hex: "FFFFFF"), NSFontAttributeName: UIFont.init(name: "Open Sans", size: 18.0)!]
+        
         
         callImageView.layer.cornerRadius = 24
         callImageView.clipsToBounds = true
@@ -66,7 +68,8 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
         barberCollectionView.reloadData()
         shopImage.file = barberShop?.picture
         shopImage.loadInBackground()
-//        ratingStars.rating = Double((barberShop?.rating)!)!
+        ratingStars.rating = aveRating(ratings:(barberShop?.ratings)!)
+        print(ratingStars.rating)
 
         latitude = barberShop?.geopoint?.latitude
         longitude = barberShop?.geopoint?.longitude
@@ -140,6 +143,15 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func aveRating(ratings: [Double]) -> Double {
+        var average: Double = 0.0
+        for num in ratings {
+            average += num
+        }
+        average = average / Double(ratings.count)
+        return average
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
