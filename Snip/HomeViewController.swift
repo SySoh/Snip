@@ -40,6 +40,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     //var isDataLoading = false
     
     
+    
     // outlets
     @IBOutlet weak var mapViewButton: UIButton!
     @IBOutlet weak var homeCollectionView: UICollectionView!
@@ -165,7 +166,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                     self.photo = photoOb as! Photo
                     self.first = self.photo!["first"] as! Bool
                     if self.first == true {
-                        self.photoArray.append(self.photo!)
+                        self.photoArray.insert(self.photo!, at: 0)
                     }
                     self.detailArray = photos as! [Photo]
                 }

@@ -1647,8 +1647,9 @@
         <image name="profile_filler" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="ugo-57-2J3"/>
         <segue reference="X26-bd-rJY"/>
         <segue reference="Tp3-uf-z1R"/>
-        <segue reference="ugo-57-2J3"/>
+        <segue reference="2pg-sZ-O3Y"/>
     </inferredMetricsTieBreakers>
 </document>
