@@ -22,7 +22,6 @@
 		1E57B6731F329AE200CC86A7 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E57B6681F329AE200CC86A7 /* OpenSans-Regular.ttf */; };
 		1E57B6741F329AE200CC86A7 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E57B6691F329AE200CC86A7 /* OpenSans-Semibold.ttf */; };
 		1E57B6751F329AE200CC86A7 /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E57B66A1F329AE200CC86A7 /* OpenSans-SemiboldItalic.ttf */; };
-		1E57B6791F34E5EF00CC86A7 /* CustomActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E57B6781F34E5EF00CC86A7 /* CustomActivityIndicatorView.swift */; };
 		1E8E68271F16982300635F93 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E68261F16982300635F93 /* HomeViewController.swift */; };
 		1E8E682A1F169B1A00635F93 /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E68291F169B1A00635F93 /* HomeCell.swift */; };
 		1E8E682C1F16AA3100635F93 /* Barbershop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E682B1F16AA3100635F93 /* Barbershop.swift */; };
@@ -115,7 +114,6 @@
 		1E57B6681F329AE200CC86A7 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		1E57B6691F329AE200CC86A7 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
 		1E57B66A1F329AE200CC86A7 /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
-		1E57B6781F34E5EF00CC86A7 /* CustomActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomActivityIndicatorView.swift; sourceTree = "<group>"; };
 		1E8E68261F16982300635F93 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1E8E68291F169B1A00635F93 /* HomeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
 		1E8E682B1F16AA3100635F93 /* Barbershop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Barbershop.swift; sourceTree = "<group>"; };
@@ -262,7 +260,6 @@
 				4B1539C11F267E8D008701E1 /* DateCell.swift */,
 				1E4998951F26E38F0093A595 /* DetailPostCell.swift */,
 				1E4998991F290E080093A595 /* SavedPostCell.swift */,
-				1E57B6781F34E5EF00CC86A7 /* CustomActivityIndicatorView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -762,7 +759,6 @@
 				4B2A7D7E1F2935A30056F2A6 /* ExampleHighlightableContentView.swift in Sources */,
 				2E7DA7FA1F1FCEBF003308D7 /* BarberCell.swift in Sources */,
 				2EDC97161F2FAB180014A562 /* CustomMKAnnotation.swift in Sources */,
-				1E57B6791F34E5EF00CC86A7 /* CustomActivityIndicatorView.swift in Sources */,
 				1E9BDE941F1D943300ACE230 /* DetailCell.swift in Sources */,
 				2E160DAC1F16AA730042419F /* TagCell.swift in Sources */,
 				2E8809451F290A4B00D784E2 /* BarberCollectionViewCell.swift in Sources */,
