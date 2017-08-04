@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import ParseUI
 
-class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate {
+class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     
     var photoArray: [PFObject] = []
     var fullPhotoList: [PFFile] = []
@@ -40,6 +40,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     //var isDataLoading = false
     
     
+    
     // outlets
     @IBOutlet weak var mapViewButton: UIButton!
     @IBOutlet weak var homeCollectionView: UICollectionView!
@@ -48,6 +49,14 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setNeedsStatusBarAppearanceUpdate()
+        
+        let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(onLongPress(_:)))
+        lpgr.minimumPressDuration = 0.5
+        lpgr.delaysTouchesBegan = true
+        lpgr.delegate = self
+        self.homeCollectionView.addGestureRecognizer(lpgr)
+
+        
         let query = PFQuery(className: "Photo")
         query.order(byDescending: "createdAt")
         query.includeKey("first")
@@ -89,29 +98,38 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         
     }
     
+    func onLongPress(_ gestureReconizer: UILongPressGestureRecognizer) {
+        if gestureReconizer.state != UIGestureRecognizerState.ended {
+            return
+        }
+        
+        let p = gestureReconizer.location(in: self.homeCollectionView)
+        let indexPath = self.homeCollectionView.indexPathForItem(at: p)
+        
+        if let index = indexPath {
+            let cell = self.homeCollectionView.cellForItem(at: index)
+            cell?.isHighlighted = true
+            // do stuff with your cell, for example print the indexPath
+            print(index.row)
+        } else {
+            print("Could not find index path")
+        }
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "DetailSegue" {
-            let vc = segue.destination as! DetailViewController
-            let cell = sender as! HomeCell
-            let indexPath = homeCollectionView.indexPath(for: cell)
-            let photo = photoArray[(indexPath?.item)!] as! Photo
-            let post = photo["post"] as! Post
-            onlyWithPost(post: post)
-            vc.post = photo["post"] as! Post
-            vc.filteredPhotos = self.filteredPhotos
-            vc.photoId = photo.objectId as! String
-            }
-        if segue.identifier == "MapView" {
-            let destVC = segue.destination as! MapViewController
-            destVC.shops = self.barbershops as! [Barbershop]
-        }
-        if segue.identifier == "compose_view" {
-            print("goin")
-        }
+        let vc = segue.destination as! DetailViewController
+        let cell = sender as! HomeCell
+        let indexPath = homeCollectionView.indexPath(for: cell)
+        let photo = photoArray[(indexPath?.item)!] as! Photo
+        let post = photo["post"] as! Post
+        onlyWithPost(post: post)
+        vc.post = photo["post"] as! Post
+        vc.filteredPhotos = self.filteredPhotos
+        vc.photoId = photo.objectId as! String
     }
     
     func getShopLocations() {
@@ -165,7 +183,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                     self.photo = photoOb as! Photo
                     self.first = self.photo!["first"] as! Bool
                     if self.first == true {
-                        self.photoArray.append(self.photo!)
+                        self.photoArray.insert(self.photo!, at: 0)
                     }
                     self.detailArray = photos as! [Photo]
                 }
@@ -212,10 +230,18 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(hex: "FFFFFF"), NSFontAttributeName: UIFont.init(name: "Blessed Day", size: 42.0)!]
+        navigationController?.navigationBar.setTitleVerticalPositionAdjustment(CGFloat(10.0), for: .default)
+        
         if (self.navigationController?.isNavigationBarHidden)! {
             self.navigationController?.setNavigationBarHidden(false, animated: animated)
         }
+        
+        self.tabBarController?.title = "Snip"
     }
+    
+    
     
     
     

@@ -18,6 +18,7 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
     @IBOutlet weak var shopImage: PFImageView!
     @IBOutlet weak var nameLabel: UINavigationItem!
     @IBOutlet weak var map: MKMapView!
+    @IBOutlet weak var phoneLabel: UILabel!
     
     @IBOutlet weak var ratingStars: CosmosView!
     
@@ -35,10 +36,6 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
     //Whoever segues to this page needs to pass in a barbershop.
     var barberShop: Barbershop?
     
-    @IBAction func goBack(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
-    
     
     @IBAction func onCall(_ sender: Any) {
         let phone = barberShop?.phone!
@@ -54,30 +51,34 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(false, animated: true)
-        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(hex: "FFFFFF"), NSFontAttributeName: UIFont.init(name: "Open Sans", size: 18.0)!]
-        
         
         callImageView.layer.cornerRadius = 24
         callImageView.clipsToBounds = true
         
         map.isZoomEnabled = true
         queryForBarbers()
-        nameLabel.title = barberShop?.name as! String
+        nameLabel.title = barberShop?.name
         barberCollectionView.dataSource = self
         barberCollectionView.delegate = self
         barberCollectionView.reloadData()
         shopImage.file = barberShop?.picture
+        shopImage.contentMode = .scaleAspectFill
+        shopImage.clipsToBounds = true
         shopImage.loadInBackground()
         ratingStars.rating = aveRating(ratings:(barberShop?.ratings)!)
-        print(ratingStars.rating)
-
         latitude = barberShop?.geopoint?.latitude
         longitude = barberShop?.geopoint?.longitude
         location = CLLocationCoordinate2D(latitude: self.latitude!, longitude: self.longitude!)
         
-        
-        var annotation = MKPointAnnotation()
-        annotation.title = barberShop?.location as! String
+        let phone = (barberShop?.phone as! String)
+        let num = String(format: "(%@) %@-%@",
+                         phone.substring(with: phone.index(phone.startIndex, offsetBy: 0) ..< phone.index(phone.startIndex, offsetBy: 3)),
+                         phone.substring(with: phone.index(phone.startIndex, offsetBy: 3) ..< phone.index(phone.startIndex, offsetBy: 6)),
+                         phone.substring(with: phone.index(phone.startIndex, offsetBy: 6) ..< phone.index(phone.startIndex, offsetBy: 10))
+        )
+        phoneLabel.text = num
+        let annotation = MKPointAnnotation()
+        annotation.title = barberShop?.location!
         annotation.coordinate = location!
         var locationSpan = MKCoordinateSpan()
         locationSpan.latitudeDelta = 0.1
@@ -94,23 +95,29 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(hex: "FFFFFF"), NSFontAttributeName: UIFont.init(name: "Open Sans", size: 18.0)!]
+        self.navigationController?.navigationBar.setTitleVerticalPositionAdjustment(CGFloat(0.0), for: .default)
+    }
+    
     func queryForBarbers() {
-    let query = PFQuery(className: "Barber")
+        let query = PFQuery(className: "Barber")
+        query.includeKey("barbershop.picture")
         query.whereKey("barbershop", equalTo: barberShop)
         query.findObjectsInBackground { (objects, error) in
-    if let error = error {
-        print("we have an issue")
-        print(error.localizedDescription)
-    } else {
-        self.barbers = objects as! [Barber]
-        print("barber array filled")
-        print(self.barbers)
-        self.barberCollectionView.reloadData()
-    }
-        
+            if let error = error {
+                print("we have an issue")
+                print(error.localizedDescription)
+            } else {
+                self.barbers = objects as! [Barber]
+                print("barber array filled")
+                print(self.barbers)
+                self.barberCollectionView.reloadData()
+            }
+            
         }
         print("ya reloadin?")
-    
+        
     }
     
     
@@ -156,12 +163,12 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toProfile" {
-        let source = sender as! BarberCollectionViewCell
-        let destVC = segue.destination as! ProfileViewController
-        destVC.barber = source.barber
-        destVC.barberName = source.barber?.name
-        destVC.venmo = source.barber?.venmo
-        destVC.barbershopName = barberShop?.name
+            let source = sender as! BarberCollectionViewCell
+            let destVC = segue.destination as! ProfileViewController
+            destVC.barber = source.barber
+            destVC.barberName = source.barber?.name
+            destVC.venmo = source.barber?.venmo
+            destVC.barbershopName = barberShop?.name
         }
     }
 }

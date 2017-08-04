@@ -10,12 +10,17 @@ import UIKit
 import Parse
 import PageMenu
 
-class UserTabViewController: UIViewController, CAPSPageMenuDelegate {
+class UserTabViewController: UIViewController, CAPSPageMenuDelegate, UINavigationBarDelegate {
     
     var pageMenu: CAPSPageMenu?
     
+    @IBOutlet weak var userProfileImageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        userProfileImageView.layer.cornerRadius = 42
+        userProfileImageView.clipsToBounds = true
                 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
@@ -38,11 +43,13 @@ class UserTabViewController: UIViewController, CAPSPageMenuDelegate {
             .useMenuLikeSegmentedControl(true),
             .menuItemSeparatorPercentageHeight(0.1),
             .scrollAnimationDurationOnMenuItemTap(250),
-            .scrollMenuBackgroundColor(UIColor(hex: "1D4159"))
+            .selectionIndicatorColor(UIColor(hex: "1D4159")),
+            .selectedMenuItemLabelColor(UIColor(hex: "1D4159")),
+            .scrollMenuBackgroundColor(UIColor(hex: "FFFFFF"))
         ]
         
         // Initialize page menu with controller array, frame, and optional parameters
-        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRectMake(0.0, 85.0, self.view.frame.width, self.view.frame.height - 85.0), pageMenuOptions: parameters)
+        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRectMake(0.0, 108.0, self.view.frame.width, self.view.frame.height - 108.0), pageMenuOptions: parameters)
         
         pageMenu?.delegate = self
         
@@ -66,6 +73,10 @@ class UserTabViewController: UIViewController, CAPSPageMenuDelegate {
         if (self.navigationController?.isNavigationBarHidden)! {
             self.navigationController?.setNavigationBarHidden(false, animated: animated)
         }
+        
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(hex: "FFFFFF"), NSFontAttributeName: UIFont.init(name: "Open Sans", size: 18.0)!]
+        self.navigationController?.navigationBar.setTitleVerticalPositionAdjustment(CGFloat(0.0), for: .default)
+        self.tabBarController?.title = "Jake Parker"
     }
     
     /*

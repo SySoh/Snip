@@ -194,8 +194,8 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
                 //check to see if the post was already favorited
                 if ((firstPhoto?["favorited"]) != nil) {
                     let favorited = firstPhoto?["favorited"] as! Bool
-                        if favorited == true {
-                    self.favoriteButton.setImage(#imageLiteral(resourceName: "favor_1"), for: .normal)
+                    if favorited == true {
+                        self.favoriteButton.setImage(#imageLiteral(resourceName: "favor_1"), for: .normal)
                     }
                 }
 
@@ -280,6 +280,9 @@ class DetailViewController: UIViewController, UICollectionViewDelegate, UICollec
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+    }
 }
 
 extension Date {
