@@ -29,6 +29,8 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
         savedCollectionView.delegate = self
         savedCollectionView.dataSource = self
         
+        savedCollectionView.alwaysBounceHorizontal = false
+        
         let query = PFQuery(className: "Photo")
         query.order(byDescending: "createdAt")
         query.includeKey("favorited")
