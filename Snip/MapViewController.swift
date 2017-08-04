@@ -23,9 +23,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
         self.map.delegate = self
         self.map.showsUserLocation = true
+        
         manager.delegate = self
         getShopLocations()
         manager.requestWhenInUseAuthorization()
@@ -73,6 +73,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             }
             
         }
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {

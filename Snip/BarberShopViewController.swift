@@ -38,7 +38,7 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
     
     
     @IBAction func onCall(_ sender: Any) {
-        let phone = barberShop?.phone as! String
+        let phone = barberShop?.phone!
         if let url = URL(string: "tel://\(phone)"), UIApplication.shared.canOpenURL(url) {
             if #available(iOS 10, *) {
                 UIApplication.shared.open(url)
@@ -51,15 +51,13 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(false, animated: true)
-        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(hex: "FFFFFF"), NSFontAttributeName: UIFont.init(name: "Open Sans", size: 18.0)!]
-        navigationController?.navigationBar.setTitleVerticalPositionAdjustment(CGFloat(0.0), for: .default)
         
         callImageView.layer.cornerRadius = 24
         callImageView.clipsToBounds = true
         
         map.isZoomEnabled = true
         queryForBarbers()
-        nameLabel.title = barberShop?.name as! String
+        nameLabel.title = barberShop?.name
         barberCollectionView.dataSource = self
         barberCollectionView.delegate = self
         barberCollectionView.reloadData()
@@ -71,14 +69,14 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
         location = CLLocationCoordinate2D(latitude: self.latitude!, longitude: self.longitude!)
         
         let phone = barberShop?.phone as! String
-        let num = String(format: "(%@) %@ - %@",
+        let num = String(format: "(%@) %@-%@",
                          phone.substring(with: phone.index(phone.startIndex, offsetBy: 0) ..< phone.index(phone.startIndex, offsetBy: 3)),
                          phone.substring(with: phone.index(phone.startIndex, offsetBy: 3) ..< phone.index(phone.startIndex, offsetBy: 6)),
                          phone.substring(with: phone.index(phone.startIndex, offsetBy: 6) ..< phone.index(phone.startIndex, offsetBy: 10))
         )
         phoneLabel.text = num
-        var annotation = MKPointAnnotation()
-        annotation.title = barberShop?.location as! String
+        let annotation = MKPointAnnotation()
+        annotation.title = barberShop?.location!
         annotation.coordinate = location!
         var locationSpan = MKCoordinateSpan()
         locationSpan.latitudeDelta = 0.1
@@ -95,9 +93,9 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
         // Do any additional setup after loading the view.
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(hex: "FFFFFF"), NSFontAttributeName: UIFont.init(name: "Blessed Day", size: 42.0)!]
-        navigationController?.navigationBar.setTitleVerticalPositionAdjustment(CGFloat(10.0), for: .default)
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(hex: "FFFFFF"), NSFontAttributeName: UIFont.init(name: "Open Sans", size: 18.0)!]
+        self.navigationController?.navigationBar.setTitleVerticalPositionAdjustment(CGFloat(0.0), for: .default)
     }
     
     func queryForBarbers() {

@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import PageMenu
+import IQKeyboardManagerSwift
 
 class SearchViewController: UIViewController, CAPSPageMenuDelegate {
     
@@ -20,6 +21,8 @@ class SearchViewController: UIViewController, CAPSPageMenuDelegate {
         
         let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
         textFieldInsideSearchBar?.textColor = UIColor.white
+        
+        searchBar.barStyle = .black
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
@@ -70,6 +73,7 @@ class SearchViewController: UIViewController, CAPSPageMenuDelegate {
     
     func didMoveToPage(_ controller: UIViewController, index: Int) {
         self.searchBar.delegate = controller as? UISearchBarDelegate
+        
         // Update each view controller with previously entered search text
         if controller.title == "TAGS" {
             let tagsController = controller as! TagSearchViewController
@@ -90,6 +94,10 @@ class SearchViewController: UIViewController, CAPSPageMenuDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.view.endEditing(true)
     }
     
     override func viewWillAppear(_ animated: Bool) {

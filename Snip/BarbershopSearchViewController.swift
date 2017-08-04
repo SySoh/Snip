@@ -29,7 +29,7 @@ class BarbershopSearchViewController: UIViewController, UITableViewDataSource, U
     
     func getBarbershops() {
         let query = PFQuery(className: "Barbershop")
-        query.order(byDescending: "createdAt")
+        query.order(byAscending: "name")
         query.includeKey("name")
         query.includeKey("location")
         query.includeKey("picture")
@@ -107,6 +107,9 @@ class BarbershopSearchViewController: UIViewController, UITableViewDataSource, U
         barbershopDetail.barberShop = barbershop
         parentNavigationController!.pushViewController(barbershopDetail, animated: true)
         barbershopDetail.navigationController?.setNavigationBarHidden(false, animated: true)
+        if let index = self.tableView.indexPathForSelectedRow {
+            self.tableView.deselectRow(at: index, animated: true)
+        }
     }
     
 }

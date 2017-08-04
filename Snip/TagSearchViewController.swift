@@ -84,10 +84,10 @@ class TagSearchViewController: UIViewController, UITableViewDelegate, UITableVie
         let tag = self.filteredTags[indexPath.row]
         tagDetail.tag = tag as? Tag
         parentNavigationController!.pushViewController(tagDetail, animated: true)
-//        UINavigationBar.appearance().barTintColor = UIColor(red: 0, green: 0/255, blue: 205/255, alpha: 1)
-//        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
-//        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
         tagDetail.navigationController?.setNavigationBarHidden(false, animated: true)
+        if let index = self.tableView.indexPathForSelectedRow {
+            self.tableView.deselectRow(at: index, animated: true)
+        }
         
     }
     

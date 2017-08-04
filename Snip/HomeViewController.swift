@@ -212,10 +212,16 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(hex: "FFFFFF"), NSFontAttributeName: UIFont.init(name: "Blessed Day", size: 42.0)!]
+        navigationController?.navigationBar.setTitleVerticalPositionAdjustment(CGFloat(10.0), for: .default)
+        
         if (self.navigationController?.isNavigationBarHidden)! {
             self.navigationController?.setNavigationBarHidden(false, animated: animated)
         }
     }
+    
+    
     
     
     

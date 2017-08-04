@@ -30,7 +30,7 @@ class BarberSearchViewController: UIViewController, UITableViewDelegate, UITable
     
     func getBarbers() {
         let query = PFQuery(className: "Barber")
-        query.order(byDescending: "createdAt")
+        query.order(byAscending: "name")
         query.includeKey("name")
         query.includeKey("barbershop")
         query.includeKey("barbershop.name")
@@ -112,6 +112,9 @@ class BarberSearchViewController: UIViewController, UITableViewDelegate, UITable
         barberDetail.barber = barber as? Barber
         parentNavigationController!.pushViewController(barberDetail, animated: true)
         barberDetail.navigationController?.setNavigationBarHidden(false, animated: true)
+        if let index = self.tableView.indexPathForSelectedRow {
+            self.tableView.deselectRow(at: index, animated: true)
+        }
     }
     
     
