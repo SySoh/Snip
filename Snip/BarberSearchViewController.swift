@@ -30,7 +30,7 @@ class BarberSearchViewController: UIViewController, UITableViewDelegate, UITable
     
     func getBarbers() {
         let query = PFQuery(className: "Barber")
-        query.order(byDescending: "createdAt")
+        query.order(byAscending: "name")
         query.includeKey("name")
         query.includeKey("barbershop")
         query.includeKey("barbershop.name")
@@ -46,8 +46,20 @@ class BarberSearchViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredBarbers.count
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = nil
+        self.filteredBarbers = self.barbers
+        tableView.reloadData()
+        searchBar.showsCancelButton = false
+        searchBar.endEditing(true)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -100,6 +112,10 @@ class BarberSearchViewController: UIViewController, UITableViewDelegate, UITable
         tableView.reloadData()
     }
     
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -112,6 +128,9 @@ class BarberSearchViewController: UIViewController, UITableViewDelegate, UITable
         barberDetail.barber = barber as? Barber
         parentNavigationController!.pushViewController(barberDetail, animated: true)
         barberDetail.navigationController?.setNavigationBarHidden(false, animated: true)
+        if let index = self.tableView.indexPathForSelectedRow {
+            self.tableView.deselectRow(at: index, animated: true)
+        }
     }
     
     

@@ -29,7 +29,7 @@ class BarbershopSearchViewController: UIViewController, UITableViewDataSource, U
     
     func getBarbershops() {
         let query = PFQuery(className: "Barbershop")
-        query.order(byDescending: "createdAt")
+        query.order(byAscending: "name")
         query.includeKey("name")
         query.includeKey("location")
         query.includeKey("picture")
@@ -76,6 +76,18 @@ class BarbershopSearchViewController: UIViewController, UITableViewDataSource, U
         return cell
     }
     
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = nil
+        self.filteredBarbershops = self.barbershops
+        tableView.reloadData()
+        searchBar.showsCancelButton = false
+        searchBar.endEditing(true)
+    }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         filteredBarbershops = searchText.isEmpty ? barbershops : barbershops.filter { (barbershop: PFObject) -> Bool in
             let name = barbershop["name"] as! String
@@ -92,7 +104,12 @@ class BarbershopSearchViewController: UIViewController, UITableViewDataSource, U
             let location = barbershop["location"] as! String
             return (name.range(of: currentSearchText, options: .caseInsensitive, range: nil, locale: nil) != nil) || (location.range(of: currentSearchText, options: .caseInsensitive, range: nil, locale: nil) != nil)
         }
+        
         tableView.reloadData()
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -107,6 +124,9 @@ class BarbershopSearchViewController: UIViewController, UITableViewDataSource, U
         barbershopDetail.barberShop = barbershop
         parentNavigationController!.pushViewController(barbershopDetail, animated: true)
         barbershopDetail.navigationController?.setNavigationBarHidden(false, animated: true)
+        if let index = self.tableView.indexPathForSelectedRow {
+            self.tableView.deselectRow(at: index, animated: true)
+        }
     }
     
 }
