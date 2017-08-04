@@ -39,11 +39,9 @@ class Post: PFObject, PFSubclassing {
             post["caption"] = caption
         }
         
-        if PFUser.current() != nil {
-            post["user"] = PFUser.current()
-        } else {
-            post["user"] = false
-        }
+        
+        post["user"] = NSNull()
+        
         post.saveInBackground { (success, error) in
             if success {
                 print("post was posted, now posting pictures")
@@ -82,6 +80,7 @@ class Post: PFObject, PFSubclassing {
                     
                     photo["post"] = thisPost
                     photo["favorited"] = false
+                    photo["user"] = true
                     
                     photo.saveInBackground()
                     
