@@ -74,11 +74,15 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     @IBAction func makePost(_ sender: Any) {
         let alertController = UIAlertController(title: "One or more fields were left empty", message: "Please fill out all fields", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title:"Okay", style: .cancel) {(UIAlertAction) in }
+        let cancelAction = UIAlertAction(title:"OK", style: .cancel) {(UIAlertAction) in }
         alertController.addAction(cancelAction)
+        let alertLengthController = UIAlertController(title: "Caption is too long", message: "Please keep your caption under 300 characters", preferredStyle: .alert)
+        alertLengthController.addAction(cancelAction)
         
         if ((barbershop == nil) || (barber == nil) || (priceText.text?.isEmpty)! || tagReuse.isEmpty || pictureView.image == nil){
             present(alertController, animated: true)
+        } else if (captionTextView.text.characters.count > 300){
+            present(alertLengthController, animated: true)
         } else {
             let image = pictureView.image!
             
@@ -284,7 +288,7 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     //Data querying work
     func getTags() {
         let query = PFQuery(className: "Tag")
-        query.addDescendingOrder("createdAt")
+        query.order(byAscending: "name")
         query.includeKey("objectId")
         query.findObjectsInBackground { (tags: [PFObject]?, error: Error?) in
             if let error = error {
@@ -303,7 +307,7 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     func barberShopQuery(){
         let query = PFQuery(className:"Barbershop")
         query.includeKey("objectId")
-        query.addDescendingOrder("createdAt")
+        query.order(byAscending: "name")
         query.findObjectsInBackground { (
             shops: [PFObject]?, error: Error?) in
             if let error = error {
@@ -318,7 +322,7 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     func barberQuery(){
         let query = PFQuery(className:"Barber")
         query.includeKey("objectId")
-        query.addDescendingOrder("createdAt")
+        query.order(byAscending: "name")
         query.includeKey("barber.barbershop")
         query.findObjectsInBackground { ( barbers: [PFObject]?, error: Error?) in
             if let error = error {
