@@ -1,4 +1,4 @@
-x //
+ //
 //  ProfileViewController.swift
 //  Snip
 //
@@ -157,9 +157,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
                     if secondObjects != nil {
                         let photos = secondObjects
                         for photoOb in photos! {
-                            let first = photoOb["first"] as! Bool
+                            let photo = photoOb as! Photo
+                            let first = photo["first"] as! Bool
                             if first == true {
-                                self.photoArray.append(photoOb)
+                                self.photoArray.append(photo)
                             }
                             self.photo = photoOb as! Photo
                         }
@@ -236,9 +237,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
                         defaults.set(NSDate(),forKey:"lastUpdateDate")
                         let photos = secondObjects
                         for photoOb in photos! {
-                            let first = photoOb["first"] as! Bool
+                            let photo = photoOb as! Photo
+                            let first = photo["first"] as! Bool
                             if first == true {
-                                self.photoArray.append(photoOb)
+                                self.photoArray.insert(photo, at: 0)
                             }
                             self.photo = photoOb as! Photo
                                                    }
