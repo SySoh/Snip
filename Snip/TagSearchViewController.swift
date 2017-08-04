@@ -21,7 +21,6 @@ class TagSearchViewController: UIViewController, UITableViewDelegate, UITableVie
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.getTags()
         self.filteredTags = self.tags
         self.tableView.delegate = self
@@ -65,6 +64,22 @@ class TagSearchViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.reloadData()
     }
     
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = nil
+        self.filteredTags = self.tags
+        tableView.reloadData()
+        searchBar.showsCancelButton = false
+        searchBar.endEditing(true)
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+    }
+    
     func didMoveSearch(currentSearchText: String) {
         filteredTags = currentSearchText.isEmpty ? tags : tags.filter { (tag: PFObject) -> Bool in
             let name = tag["name"] as! String
@@ -88,7 +103,6 @@ class TagSearchViewController: UIViewController, UITableViewDelegate, UITableVie
         if let index = self.tableView.indexPathForSelectedRow {
             self.tableView.deselectRow(at: index, animated: true)
         }
-        
     }
     
 

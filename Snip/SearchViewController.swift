@@ -21,9 +21,8 @@ class SearchViewController: UIViewController, CAPSPageMenuDelegate {
         
         let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
         textFieldInsideSearchBar?.textColor = UIColor.white
-        
-        searchBar.barStyle = .black
-        
+        textFieldInsideSearchBar?.keyboardAppearance = .dark
+                
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         // Array to keep track of controllers in page menu
@@ -38,12 +37,12 @@ class SearchViewController: UIViewController, CAPSPageMenuDelegate {
         
         let barbersController = storyboard.instantiateViewController(withIdentifier: "barberSearch") as! BarberSearchViewController
         barbersController.parentNavigationController = self.navigationController as! ExampleNavigationController
-        barbersController.title = "BARBERS"
+        barbersController.title = "CUTTERS"
         controllerArray.append(barbersController)
         
         let barbershopsController = storyboard.instantiateViewController(withIdentifier: "barbershopSearch") as! BarbershopSearchViewController
         barbershopsController.parentNavigationController = self.navigationController as! ExampleNavigationController
-        barbershopsController.title = "BARBERSHOPS"
+        barbershopsController.title = "SPOTS"
         controllerArray.append(barbershopsController)
         
         // Customize page menu to your liking (optional) or use default settings by sending nil for 'options' in the init
@@ -78,13 +77,14 @@ class SearchViewController: UIViewController, CAPSPageMenuDelegate {
         if controller.title == "TAGS" {
             let tagsController = controller as! TagSearchViewController
             tagsController.didMoveSearch(currentSearchText: self.searchBar.text!)
-        } else if controller.title == "BARBERS" {
+        } else if controller.title == "CUTTERS" {
             let barbersController = controller as! BarberSearchViewController
             barbersController.didMoveSearch(currentSearchText: self.searchBar.text!)
-        } else if controller.title == "BARBERSHOPS" {
+        } else if controller.title == "SPOTS" {
             let barbershopsController = controller as! BarbershopSearchViewController
             barbershopsController.didMoveSearch(currentSearchText: self.searchBar.text!)
         }
+        self.view.endEditing(true)
     }
     
     func CGRectMake(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) -> CGRect {

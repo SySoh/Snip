@@ -46,8 +46,20 @@ class BarberSearchViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredBarbers.count
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = nil
+        self.filteredBarbers = self.barbers
+        tableView.reloadData()
+        searchBar.showsCancelButton = false
+        searchBar.endEditing(true)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -98,6 +110,10 @@ class BarberSearchViewController: UIViewController, UITableViewDelegate, UITable
             return name.range(of: currentSearchText, options: .caseInsensitive, range: nil, locale: nil) != nil
         }
         tableView.reloadData()
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
     }
     
     override func didReceiveMemoryWarning() {

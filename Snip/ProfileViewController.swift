@@ -14,11 +14,11 @@ import RSKPlaceholderTextView
 class ProfileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     @IBOutlet weak var profileImageVIew: PFImageView!
-    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var usernameLabel: UINavigationItem!
 
+    @IBOutlet weak var barbershopImageView: PFImageView!
     @IBOutlet weak var shopConstantLabel: UILabel!
     @IBOutlet weak var barbershopLabel: UILabel!
-    @IBOutlet weak var venmoConstantLabel: UILabel!
     @IBOutlet weak var venmoImageView: UIImageView!
 
     @IBOutlet weak var postCollectionView: UICollectionView!
@@ -82,6 +82,11 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
             destVC.barberShop = barber["barbershop"] as! Barbershop
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(hex: "FFFFFF"), NSFontAttributeName: UIFont.init(name: "Open Sans", size: 18.0)!]
+        self.navigationController?.navigationBar.setTitleVerticalPositionAdjustment(CGFloat(0.0), for: .default)
+    }
 
 
     override func viewDidLoad() {
@@ -96,13 +101,17 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         venmoImageView.layer.cornerRadius = 17
         venmoImageView.clipsToBounds = true
 
-        self.profileImageVIew.file = barber["profile_pic"] as! PFFile
+        self.profileImageVIew.file = (barber["profile_pic"] as! PFFile)
         self.profileImageVIew.loadInBackground()
         let barbershop = barber["barbershop"] as? Barbershop
+        self.barbershopImageView.contentMode = .scaleAspectFill
+        self.barbershopImageView.clipsToBounds = true
+        self.barbershopImageView.file = barbershop?.picture as! PFFile
+        self.barbershopImageView.loadInBackground()
         //barbershopName = barbershop?["name"] as? String
         self.barbershopLabel.text = barbershopName
         barberName = barber["name"] as? String
-        self.usernameLabel.text = barberName
+        self.usernameLabel.title = barberName
         // Make profile pic circular
         profileImageVIew.layer.borderWidth = 1
         profileImageVIew.layer.masksToBounds = false
@@ -119,13 +128,14 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         query.includeKey("barber.name")
         query.includeKey("barber.barbershop")
         query.includeKey("barber.profile_pic")
+        query.includeKey("barber.barbershop.picture")
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
             if objects != nil {
                 query.whereKey("tags", containedIn: objects!)
                 self.posts = objects as! [Post]
                 for postOb in self.posts {
                     self.post = postOb as! Post
-                    self.tagArray = self.post.tags as! [Tag]
+                    self.tagArray = self.post.tags!
                     for tagOb in self.tagArray {
                         self.tagNameSet.insert("\(tagOb.name!)")
                         self.tagArray.append(tagOb)
@@ -142,8 +152,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
                 secondQuery.includeKey("post.price")
                 secondQuery.includeKey("post.barber.barbershop")
                 secondQuery.includeKey("post.tags")
-
-                //                secondQuery.includeKey("tag")
                 secondQuery.findObjectsInBackground { (secondObjects: [PFObject]?, error: Error?) in
                     if secondObjects != nil {
                         let photos = secondObjects

@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import ParseUI
 
-class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate {
+class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     
     var photoArray: [PFObject] = []
     var fullPhotoList: [PFFile] = []
@@ -48,6 +48,14 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setNeedsStatusBarAppearanceUpdate()
+        
+        let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(onLongPress(_:)))
+        lpgr.minimumPressDuration = 0.5
+        lpgr.delaysTouchesBegan = true
+        lpgr.delegate = self
+        self.homeCollectionView.addGestureRecognizer(lpgr)
+
+        
         let query = PFQuery(className: "Photo")
         query.order(byDescending: "createdAt")
         query.includeKey("first")
@@ -87,6 +95,24 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         //add refresh control to the table view
         homeCollectionView.insertSubview(refreshcontrol, at: 0)
         
+    }
+    
+    func onLongPress(_ gestureReconizer: UILongPressGestureRecognizer) {
+        if gestureReconizer.state != UIGestureRecognizerState.ended {
+            return
+        }
+        
+        let p = gestureReconizer.location(in: self.homeCollectionView)
+        let indexPath = self.homeCollectionView.indexPathForItem(at: p)
+        
+        if let index = indexPath {
+            let cell = self.homeCollectionView.cellForItem(at: index)
+            cell?.isHighlighted = true
+            // do stuff with your cell, for example print the indexPath
+            print(index.row)
+        } else {
+            print("Could not find index path")
+        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -219,6 +245,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         if (self.navigationController?.isNavigationBarHidden)! {
             self.navigationController?.setNavigationBarHidden(false, animated: animated)
         }
+        
+        self.tabBarController?.title = "Snip"
     }
     
     

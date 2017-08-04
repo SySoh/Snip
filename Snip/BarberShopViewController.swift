@@ -62,13 +62,15 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
         barberCollectionView.delegate = self
         barberCollectionView.reloadData()
         shopImage.file = barberShop?.picture
+        shopImage.contentMode = .scaleAspectFill
+        shopImage.clipsToBounds = true
         shopImage.loadInBackground()
         ratingStars.rating = aveRating(ratings:(barberShop?.ratings)!)
         latitude = barberShop?.geopoint?.latitude
         longitude = barberShop?.geopoint?.longitude
         location = CLLocationCoordinate2D(latitude: self.latitude!, longitude: self.longitude!)
         
-        let phone = barberShop?.phone as! String
+        let phone = (barberShop?.phone as! String)
         let num = String(format: "(%@) %@-%@",
                          phone.substring(with: phone.index(phone.startIndex, offsetBy: 0) ..< phone.index(phone.startIndex, offsetBy: 3)),
                          phone.substring(with: phone.index(phone.startIndex, offsetBy: 3) ..< phone.index(phone.startIndex, offsetBy: 6)),
