@@ -61,7 +61,8 @@ class UserSnipsViewController: UIViewController, UICollectionViewDelegate, UICol
                 for photoOb in photos {
                     self.photo = photoOb as! Photo
                     self.user = self.photo!["user"] as! Bool
-                    if self.user == true {
+                    let first = self.photo!["first"] as! Bool
+                    if self.user == true && first == true {
                         self.photoArray.append(self.photo!)
                     }
                 }
@@ -108,8 +109,9 @@ class UserSnipsViewController: UIViewController, UICollectionViewDelegate, UICol
                 for photoOb in photos! {
                     self.photo = photoOb as! Photo
                     self.user = self.photo!["user"] as! Bool
-                    if self.user == true {
-                        self.photoArray.append(self.photo!)
+                    let first = self.photo!["first"] as! Bool
+                    if self.user == true && first == true {
+                        self.photoArray.insert(self.photo!, at: 0)
                     }
                 }
                 self.snipsCollectionView.reloadData()
