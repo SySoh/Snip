@@ -101,22 +101,23 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
     }
     
     func queryForBarbers() {
-    let query = PFQuery(className: "Barber")
+        let query = PFQuery(className: "Barber")
+        query.includeKey("barbershop.picture")
         query.whereKey("barbershop", equalTo: barberShop)
         query.findObjectsInBackground { (objects, error) in
-    if let error = error {
-        print("we have an issue")
-        print(error.localizedDescription)
-    } else {
-        self.barbers = objects as! [Barber]
-        print("barber array filled")
-        print(self.barbers)
-        self.barberCollectionView.reloadData()
-    }
-        
+            if let error = error {
+                print("we have an issue")
+                print(error.localizedDescription)
+            } else {
+                self.barbers = objects as! [Barber]
+                print("barber array filled")
+                print(self.barbers)
+                self.barberCollectionView.reloadData()
+            }
+            
         }
         print("ya reloadin?")
-    
+        
     }
     
     
@@ -162,12 +163,12 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toProfile" {
-        let source = sender as! BarberCollectionViewCell
-        let destVC = segue.destination as! ProfileViewController
-        destVC.barber = source.barber
-        destVC.barberName = source.barber?.name
-        destVC.venmo = source.barber?.venmo
-        destVC.barbershopName = barberShop?.name
+            let source = sender as! BarberCollectionViewCell
+            let destVC = segue.destination as! ProfileViewController
+            destVC.barber = source.barber
+            destVC.barberName = source.barber?.name
+            destVC.venmo = source.barber?.venmo
+            destVC.barbershopName = barberShop?.name
         }
     }
 }

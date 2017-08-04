@@ -80,6 +80,10 @@ class TagSearchViewController: UIViewController, UITableViewDelegate, UITableVie
         searchBar.showsCancelButton = false
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+    }
+    
     func didMoveSearch(currentSearchText: String) {
         filteredTags = currentSearchText.isEmpty ? tags : tags.filter { (tag: PFObject) -> Bool in
             let name = tag["name"] as! String

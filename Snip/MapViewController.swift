@@ -50,7 +50,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             region.span.latitudeDelta = 1
             region.span.longitudeDelta = 1
             map.setRegion(region, animated: true)
-            print("Found user's location: \(location)")
         }
     }
     
@@ -67,8 +66,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                     let coord = CLLocationCoordinate2DMake((shop.geopoint?.latitude)!, (shop.geopoint?.longitude)!)
                     let annotation = CustomMKAnnotation(title: shop.name!, locationName: shop.location!, barbershop: shop , coordinate: coord)
                     self.map.addAnnotation(annotation)
-                    print("Adding")
-                    print(shop)
                 }
             }
             

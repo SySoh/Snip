@@ -120,24 +120,15 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "DetailSegue" {
-            let vc = segue.destination as! DetailViewController
-            let cell = sender as! HomeCell
-            let indexPath = homeCollectionView.indexPath(for: cell)
-            let photo = photoArray[(indexPath?.item)!] as! Photo
-            let post = photo["post"] as! Post
-            onlyWithPost(post: post)
-            vc.post = photo["post"] as! Post
-            vc.filteredPhotos = self.filteredPhotos
-            vc.photoId = photo.objectId as! String
-            }
-        if segue.identifier == "MapView" {
-            let destVC = segue.destination as! MapViewController
-            destVC.shops = self.barbershops as! [Barbershop]
-        }
-        if segue.identifier == "compose_view" {
-            print("goin")
-        }
+        let vc = segue.destination as! DetailViewController
+        let cell = sender as! HomeCell
+        let indexPath = homeCollectionView.indexPath(for: cell)
+        let photo = photoArray[(indexPath?.item)!] as! Photo
+        let post = photo["post"] as! Post
+        onlyWithPost(post: post)
+        vc.post = photo["post"] as! Post
+        vc.filteredPhotos = self.filteredPhotos
+        vc.photoId = photo.objectId as! String
     }
     
     func getShopLocations() {
