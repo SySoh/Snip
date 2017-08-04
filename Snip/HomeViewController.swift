@@ -39,14 +39,32 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     var filteredPhotos: [PFObject]?
     //var isDataLoading = false
     
+    lazy private var activityIndicator : CustomActivityIndicatorView = {
+        let image : UIImage = UIImage(named: "loading")!
+        return CustomActivityIndicatorView(image: image)
+    }()
+    
     
     // outlets
     @IBOutlet weak var mapViewButton: UIButton!
     @IBOutlet weak var homeCollectionView: UICollectionView!
     
+    func addLoadingIndicator () {
+        self.view.addSubview(activityIndicator)
+        activityIndicator.center = self.view.center
+    }
+    @IBAction func showLoadingIndicator(sender: AnyObject) {
+        activityIndicator.startAnimating()
+    }
+    
+    @IBAction func hideLoadingIndicator(sender: AnyObject) {
+        activityIndicator.stopAnimating()
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        addLoadingIndicator()
         self.setNeedsStatusBarAppearanceUpdate()
         let query = PFQuery(className: "Photo")
         query.order(byDescending: "createdAt")
@@ -165,7 +183,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                     self.photo = photoOb as! Photo
                     self.first = self.photo!["first"] as! Bool
                     if self.first == true {
-                        self.photoArray.append(self.photo!)
+                        self.photoArray.insert(self.photo!, at: 0)
                     }
                     self.detailArray = photos as! [Photo]
                 }
