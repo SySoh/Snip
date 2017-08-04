@@ -106,7 +106,7 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
                     self.photo = photoOb as! Photo
                     self.favorited = self.photo!["favorited"] as! Bool
                     if self.favorited == true {
-                        self.photoArray.append(self.photo!)
+                        self.photoArray.insert(self.photo!, at: 0)
                     }
                 }
                 self.savedCollectionView.reloadData()

@@ -26,6 +26,7 @@ class TSRViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        queryAllPhotos()
         tagTitle.title = tag?.name as! String
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
@@ -77,7 +78,6 @@ class TSRViewController: UIViewController, UICollectionViewDelegate, UICollectio
         let indexPath = collectionView.indexPath(for: cell)
         let photo = self.photos[(indexPath?.item)!] as! Photo
         let post = photo["post"] as! Post
-        queryAllPhotos()
         onlyWithPost(post: post)
         vc.post = photo["post"] as! Post
         vc.filteredPhotos = self.filteredPhotos
