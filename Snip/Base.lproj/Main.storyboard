@@ -91,7 +91,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="186.5" height="186.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="186" height="187"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="186" height="186"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OgZ-RC-n7q">
@@ -1592,7 +1592,11 @@
         <image name="user" width="550" height="550"/>
     </resources>
     <inferredMetricsTieBreakers>
+<<<<<<< HEAD
         <segue reference="ugo-57-2J3"/>
+=======
+        <segue reference="X26-bd-rJY"/>
+>>>>>>> eaa1d2a821bbd890acf7399f3461c49518d1cbe3
         <segue reference="Tp3-uf-z1R"/>
         <segue reference="X26-bd-rJY"/>
     </inferredMetricsTieBreakers>
