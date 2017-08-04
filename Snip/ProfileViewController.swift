@@ -1,4 +1,4 @@
-//
+x //
 //  ProfileViewController.swift
 //  Snip
 //
@@ -95,6 +95,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         postCollectionView.dataSource = self
         tagCollectionView.delegate = self
         tagCollectionView.dataSource = self
+        tagCollectionView.alwaysBounceVertical = false
         self.view.addSubview(postCollectionView)
         self.view.addSubview(tagCollectionView)
         
@@ -182,7 +183,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         self.postCollectionView.addSubview(refreshcontrol)
         self.postCollectionView.alwaysBounceVertical = true
         self.tagCollectionView.addSubview(refreshcontrol)
-        self.tagCollectionView.alwaysBounceVertical = true
         //add refresh control to the table view
         self.tagCollectionView.insertSubview(refreshcontrol, at: 0)
         self.postCollectionView.insertSubview(refreshcontrol, at: 0)
