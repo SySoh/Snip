@@ -38,6 +38,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     var fullArray: [PFObject]?
     var filteredPhotos: [PFObject]?
     //var isDataLoading = false
+    var loader = ActivityIndicatorWithLabel()
     
     
     
@@ -55,8 +56,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         lpgr.delaysTouchesBegan = true
         lpgr.delegate = self
         self.homeCollectionView.addGestureRecognizer(lpgr)
-
-        
+        self.view.addSubview(loader)
+        loader.startAnimation()
         let query = PFQuery(className: "Photo")
         query.order(byDescending: "createdAt")
         query.includeKey("first")
@@ -80,7 +81,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                     self.detailArray = photos as! [Photo]
                 }
                 self.homeCollectionView.reloadData()
-                
+                self.loader.stopAnimation()
                 
             }
         }

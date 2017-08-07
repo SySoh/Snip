@@ -24,6 +24,7 @@ target 'Snip' do
   pod 'RSKPlaceholderTextView'
   pod 'pop', '~> 1.0'
   pod 'SwiftHEXColors'
+  pod 'SwiftGifOrigin', '~> 1.6.1'
 
 
   target 'SnipTests' do
