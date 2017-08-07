@@ -51,6 +51,7 @@
 		2E75E3EF1F212A56006294EB /* BarberShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E75E3EE1F212A56006294EB /* BarberShopViewController.swift */; };
 		2E7DA7FA1F1FCEBF003308D7 /* BarberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7DA7F91F1FCEBF003308D7 /* BarberCell.swift */; };
 		2E8809451F290A4B00D784E2 /* BarberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8809441F290A4B00D784E2 /* BarberCollectionViewCell.swift */; };
+		2E98B8111F366E0D00366ADC /* ActivityIndicatorWithLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E98B8101F366E0D00366ADC /* ActivityIndicatorWithLabel.swift */; };
 		2EDC97161F2FAB180014A562 /* CustomMKAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDC97151F2FAB180014A562 /* CustomMKAnnotation.swift */; };
 		2EE757C71F22B0EE00A806E5 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE757C61F22B0EE00A806E5 /* ImageCell.swift */; };
 		4B1539C21F267E8D008701E1 /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1539C11F267E8D008701E1 /* DateCell.swift */; };
@@ -147,6 +148,7 @@
 		2E75E3EE1F212A56006294EB /* BarberShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarberShopViewController.swift; sourceTree = "<group>"; };
 		2E7DA7F91F1FCEBF003308D7 /* BarberCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarberCell.swift; sourceTree = "<group>"; };
 		2E8809441F290A4B00D784E2 /* BarberCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarberCollectionViewCell.swift; sourceTree = "<group>"; };
+		2E98B8101F366E0D00366ADC /* ActivityIndicatorWithLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorWithLabel.swift; sourceTree = "<group>"; };
 		2EDC97151F2FAB180014A562 /* CustomMKAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomMKAnnotation.swift; sourceTree = "<group>"; };
 		2EE757C61F22B0EE00A806E5 /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		3C855E1780E72449BA87A51B /* Pods_SnipTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnipTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -248,6 +250,7 @@
 				4B1539C11F267E8D008701E1 /* DateCell.swift */,
 				1E4998951F26E38F0093A595 /* DetailPostCell.swift */,
 				1E4998991F290E080093A595 /* SavedPostCell.swift */,
+				2E98B8101F366E0D00366ADC /* ActivityIndicatorWithLabel.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -720,6 +723,7 @@
 			files = (
 				1E4998961F26E38F0093A595 /* DetailPostCell.swift in Sources */,
 				2E75E3EF1F212A56006294EB /* BarberShopViewController.swift in Sources */,
+				2E98B8111F366E0D00366ADC /* ActivityIndicatorWithLabel.swift in Sources */,
 				4B2097901F20225D0067DC2F /* TagSearchCell.swift in Sources */,
 				4B2A7D7B1F2935A30056F2A6 /* ExampleBackgroundContentView.swift in Sources */,
 				1E8E682E1F16D2B500635F93 /* DetailViewController.swift in Sources */,
