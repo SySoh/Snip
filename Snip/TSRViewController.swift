@@ -99,6 +99,7 @@ class TSRViewController: UIViewController, UICollectionViewDelegate, UICollectio
         query.findObjectsInBackground { (objects, error: Error?) in
             if let photos = objects {
                 self.allPhotos = photos
+                
             }
         }
 

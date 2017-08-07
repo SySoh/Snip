@@ -52,6 +52,7 @@
 		2E7DA7FA1F1FCEBF003308D7 /* BarberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7DA7F91F1FCEBF003308D7 /* BarberCell.swift */; };
 		2E8809451F290A4B00D784E2 /* BarberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8809441F290A4B00D784E2 /* BarberCollectionViewCell.swift */; };
 		2E98B8111F366E0D00366ADC /* ActivityIndicatorWithLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E98B8101F366E0D00366ADC /* ActivityIndicatorWithLabel.swift */; };
+		2E98B8131F38E76F00366ADC /* LaunchScreencontrollerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E98B8121F38E76F00366ADC /* LaunchScreencontrollerViewController.swift */; };
 		2EDC97161F2FAB180014A562 /* CustomMKAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDC97151F2FAB180014A562 /* CustomMKAnnotation.swift */; };
 		2EE757C71F22B0EE00A806E5 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE757C61F22B0EE00A806E5 /* ImageCell.swift */; };
 		4B1539C21F267E8D008701E1 /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1539C11F267E8D008701E1 /* DateCell.swift */; };
@@ -149,6 +150,7 @@
 		2E7DA7F91F1FCEBF003308D7 /* BarberCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarberCell.swift; sourceTree = "<group>"; };
 		2E8809441F290A4B00D784E2 /* BarberCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarberCollectionViewCell.swift; sourceTree = "<group>"; };
 		2E98B8101F366E0D00366ADC /* ActivityIndicatorWithLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorWithLabel.swift; sourceTree = "<group>"; };
+		2E98B8121F38E76F00366ADC /* LaunchScreencontrollerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchScreencontrollerViewController.swift; sourceTree = "<group>"; };
 		2EDC97151F2FAB180014A562 /* CustomMKAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomMKAnnotation.swift; sourceTree = "<group>"; };
 		2EE757C61F22B0EE00A806E5 /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		3C855E1780E72449BA87A51B /* Pods_SnipTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnipTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -290,6 +292,7 @@
 				2E160D751F157F740042419F /* Assets.xcassets */,
 				1E57B65F1F329A9000CC86A7 /* Open-Sans */,
 				2E160D771F157F740042419F /* LaunchScreen.storyboard */,
+				2E98B8121F38E76F00366ADC /* LaunchScreencontrollerViewController.swift */,
 				2E160D7A1F157F740042419F /* Info.plist */,
 				4BAF35B81F33E0C300EEAF1A /* BLESD___ .ttf */,
 				1EE9EAE71F2BBC3700D200EF /* blessed_day */,
@@ -749,6 +752,7 @@
 				4B2A7D7D1F2935A30056F2A6 /* ExampleBouncesContentView.swift in Sources */,
 				2E160DA41F168F790042419F /* User.swift in Sources */,
 				1E4998981F290C560093A595 /* UserViewController.swift in Sources */,
+				2E98B8131F38E76F00366ADC /* LaunchScreencontrollerViewController.swift in Sources */,
 				1EE9EAEC1F2BC82600D200EF /* UserSnipsViewController.swift in Sources */,
 				2E160DAA1F1698110042419F /* ComposeViewController.swift in Sources */,
 				4BBAFF0D1F217705001A144F /* BarbershopSearchCell.swift in Sources */,

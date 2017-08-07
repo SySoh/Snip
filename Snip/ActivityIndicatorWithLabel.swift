@@ -14,12 +14,12 @@ protocol ActivityIndicatorWithLabelDataSource {
 
 class ActivityIndicatorWithLabel: UIView {
     
-    var images : [UIImage] = [#imageLiteral(resourceName: "cutLoad1"), #imageLiteral(resourceName: "cutLoad2"), #imageLiteral(resourceName: "cutLoad3"), #imageLiteral(resourceName: "cutLoad4")]
+    var images : [UIImage] = [#imageLiteral(resourceName: "cutLoad1R"), #imageLiteral(resourceName: "cutLoad2R"), #imageLiteral(resourceName: "cutLoad3R"), #imageLiteral(resourceName: "cutLoad4R")]
     var progressView = UIImageView()
     
     
     init() {
-        var frame = CGRect(x:40,y:60,width:200,height:300)
+        var frame = CGRect(x:80,y:115,width:70,height:50)
         self.progressView = UIImageView(frame: frame)
         self.progressView.animationImages = images
         self.progressView.animationDuration = 0.5
