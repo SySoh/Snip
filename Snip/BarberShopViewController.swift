@@ -37,7 +37,6 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
     
     //Whoever segues to this page needs to pass in a barbershop.
     var barberShop: Barbershop?
-    var loader = ActivityIndicatorWithLabel()
     
     @IBAction func onCall(_ sender: Any) {
         let phone = barberShop?.phone!
@@ -56,8 +55,6 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
         callImageView.layer.cornerRadius = 6
         map.delegate = self
         callImageView.clipsToBounds = true
-        self.view.addSubview(loader)
-        loader.startAnimation()
         manager.delegate = self
         manager.requestWhenInUseAuthorization()
         manager.requestLocation()
@@ -111,6 +108,7 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
         
         map.addAnnotation(annotation)
         map.setRegion(locationRegion, animated: true)
+        map.selectAnnotation(annotation, animated: true)
         
         
         
@@ -187,7 +185,6 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
                 print("barber array filled")
                 print(self.barbers)
                 self.barberCollectionView.reloadData()
-                self.loader.stopAnimation()
             }
             
         }
