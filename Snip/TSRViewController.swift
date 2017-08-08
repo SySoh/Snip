@@ -21,12 +21,15 @@ class TSRViewController: UIViewController, UICollectionViewDelegate, UICollectio
     var detailArray: [PFObject]?
     var allPhotos: [PFObject] = []
     var filteredPhotos: [PFObject] = []
+    var loader = ActivityIndicatorWithLabel()
     
     @IBOutlet weak var tagTitle: UINavigationItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         queryAllPhotos()
+        self.view.addSubview(loader)
+        loader.startAnimation()
         tagTitle.title = tag?["name"] as! String
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
@@ -50,6 +53,7 @@ class TSRViewController: UIViewController, UICollectionViewDelegate, UICollectio
                 secondQuery.findObjectsInBackground { (secondObjects: [PFObject]?, error: Error?) in
                     if secondObjects != nil {
                         self.photos = secondObjects as! [Photo]
+                        self.loader.stopAnimation()
                         self.collectionView.reloadData()
                     } else {
                         print(error?.localizedDescription)
@@ -99,7 +103,6 @@ class TSRViewController: UIViewController, UICollectionViewDelegate, UICollectio
         query.findObjectsInBackground { (objects, error: Error?) in
             if let photos = objects {
                 self.allPhotos = photos
-                
             }
         }
 
