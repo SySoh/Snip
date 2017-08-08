@@ -27,6 +27,7 @@ PODS:
   - Prephirences/Keys (3.0.1):
     - Prephirences/Core
   - RSKPlaceholderTextView (2.0.0)
+  - SwiftGifOrigin (1.6.1)
   - SwiftHEXColors (1.1.0)
 
 DEPENDENCIES:
@@ -46,6 +47,7 @@ DEPENDENCIES:
   - pop (~> 1.0)
   - Prephirences
   - RSKPlaceholderTextView
+  - SwiftGifOrigin (~> 1.6.1)
   - SwiftHEXColors
 
 SPEC CHECKSUMS:
@@ -66,8 +68,9 @@ SPEC CHECKSUMS:
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   Prephirences: d0ec0bd6047edb3370364345857a769aaf3db312
   RSKPlaceholderTextView: 301f0f30e70e7c42fe4e941e3a08365ab0d890d5
+  SwiftGifOrigin: d6679d3ebe9df2e049a84bc52582635107b581f6
   SwiftHEXColors: 8f7e364df7929e32cff9f9eeb044bb215167d6be
 
-PODFILE CHECKSUM: 336f7702eb6e8d1cd7bfb0dd7e44ddddf9eab33a
+PODFILE CHECKSUM: 1636f536bac7fa046ad3f8b2e4e1566d305566e5
 
 COCOAPODS: 1.2.1
