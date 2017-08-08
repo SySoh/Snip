@@ -186,10 +186,36 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                     if self.first == true {
                         self.photoArray.insert(self.photo!, at: 0)
                     }
-                    self.detailArray = photos as! [Photo]
+//                    self.detailArray = photos as! [Photo]
                 }
-//                self.photoArray = photos
-                self.homeCollectionView.reloadData()
+                
+                let secondQuery = PFQuery(className: "Photo")
+                secondQuery.whereKey("post", containedIn: objects!)
+                secondQuery.includeKey("first")
+                secondQuery.includeKey("favorited")
+                secondQuery.includeKey("objectId")
+                secondQuery.includeKey("post")
+                secondQuery.includeKey("post.barber")
+                secondQuery.includeKey("post.price")
+                secondQuery.includeKey("post.barber.barbershop")
+                secondQuery.includeKey("post.tags")
+                secondQuery.findObjectsInBackground { (objects, error: Error?) in
+                    if let photos = objects {
+                        for photoOb in photos {
+                            self.photo = photoOb as! Photo
+                            self.first = self.photo!["first"] as! Bool
+                            if self.first == true {
+                                self.photoArray.append(self.photo!)
+                            }
+                            self.detailArray = photos as! [Photo]
+                        }
+                        self.homeCollectionView.reloadData()
+                        
+                        
+                    } else {
+                        print(error?.localizedDescription)
+                    }
+                }
                 
 
             }

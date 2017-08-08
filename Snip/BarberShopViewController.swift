@@ -13,10 +13,10 @@ import Parse
 import ParseUI
 
 
-class BarberShopViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationBarDelegate {
+class BarberShopViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationBarDelegate, MKMapViewDelegate, CLLocationManagerDelegate {
     
     @IBOutlet weak var shopImage: PFImageView!
-    @IBOutlet weak var nameLabel: UINavigationItem!
+    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var phoneLabel: UILabel!
     
@@ -27,6 +27,8 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
     var latitude: CLLocationDegrees?
     var longitude: CLLocationDegrees?
     var location: CLLocationCoordinate2D?
+    var currentLoc: CLLocationCoordinate2D?
+    var manager = CLLocationManager()
     
     @IBOutlet weak var barberCollectionView: UICollectionView!
     
@@ -39,7 +41,7 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
     
     @IBAction func onCall(_ sender: Any) {
         let phone = barberShop?.phone!
-        if let url = URL(string: "tel://\(phone)"), UIApplication.shared.canOpenURL(url) {
+        if let url = URL(string: "tel://\(String(describing: phone))"), UIApplication.shared.canOpenURL(url) {
             if #available(iOS 10, *) {
                 UIApplication.shared.open(url)
             } else {
@@ -51,22 +53,43 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(false, animated: true)
-        
-        callImageView.layer.cornerRadius = 24
+        callImageView.layer.cornerRadius = 6
+        map.delegate = self
         callImageView.clipsToBounds = true
         self.view.addSubview(loader)
         loader.startAnimation()
+        manager.delegate = self
+        manager.requestWhenInUseAuthorization()
+        manager.requestLocation()
         
         map.isZoomEnabled = true
         queryForBarbers()
-        nameLabel.title = barberShop?.name
+        
+        nameLabel.text = barberShop?.name
+        nameLabel.adjustsFontSizeToFitWidth = true
+        
         barberCollectionView.dataSource = self
         barberCollectionView.delegate = self
+        barberCollectionView.alwaysBounceVertical = false
+        barberCollectionView.alwaysBounceHorizontal = true
         barberCollectionView.reloadData()
+        
         shopImage.file = barberShop?.picture
         shopImage.contentMode = .scaleAspectFill
         shopImage.clipsToBounds = true
         shopImage.loadInBackground()
+        
+        let gradient = CAGradientLayer()
+        gradient.frame = CGRect.init(x: 0.0, y: 0.0, width: 375.0, height: 96.0)
+        gradient.colors = [UIColor.black.cgColor, UIColor.clear.cgColor]
+        shopImage.layer.insertSublayer(gradient, at: 0)
+        
+        let gradient_2 = CAGradientLayer()
+        gradient_2.frame = CGRect.init(x: 0.0, y: 52.0, width: 375.0, height: 148.0)
+        gradient_2.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        shopImage.layer.insertSublayer(gradient_2, at: 0)
+
+        
         ratingStars.rating = aveRating(ratings:(barberShop?.ratings)!)
         latitude = barberShop?.geopoint?.latitude
         longitude = barberShop?.geopoint?.longitude
@@ -79,9 +102,7 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
                          phone.substring(with: phone.index(phone.startIndex, offsetBy: 6) ..< phone.index(phone.startIndex, offsetBy: 10))
         )
         phoneLabel.text = num
-        let annotation = MKPointAnnotation()
-        annotation.title = barberShop?.location!
-        annotation.coordinate = location!
+        let annotation = CustomMKAnnotation(title: (barberShop?.name)!, locationName: (barberShop?.location)!, barbershop: barberShop!, coordinate: location!)
         var locationSpan = MKCoordinateSpan()
         locationSpan.latitudeDelta = 0.1
         locationSpan.longitudeDelta = 0.1
@@ -97,9 +118,60 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
         // Do any additional setup after loading the view.
     }
     
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if let annotation = annotation as? CustomMKAnnotation {
+            let identifier = "pin"
+            var view: MKPinAnnotationView
+            if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView {
+                dequeuedView.annotation = annotation
+                view = dequeuedView
+            } else {
+                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                view.canShowCallout = true
+                view.calloutOffset = CGPoint(x: -5, y: 5)
+                let button = UIButton()
+                button.setImage(#imageLiteral(resourceName: "rightArrow"), for: .normal)
+                button.frame = CGRect(x: 0, y: 0, width: 18, height: 18)
+                view.rightCalloutAccessoryView = button
+                view.rightCalloutAccessoryView?.isHidden = false
+            }
+            return view
+            
+        }
+        return nil
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if let thisAnnotation = view.annotation as? CustomMKAnnotation {
+            let url = URL(string: "http://maps.apple.com/maps?daddr=\(latitude!),\(longitude!)")
+            UIApplication.shared.open(url!)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            currentLoc = location.coordinate
+            print("location found")
+        }
+    }
+    
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Failed to find user's location: \(error.localizedDescription)")
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(hex: "FFFFFF"), NSFontAttributeName: UIFont.init(name: "Open Sans", size: 18.0)!]
-        self.navigationController?.navigationBar.setTitleVerticalPositionAdjustment(CGFloat(0.0), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = .clear
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.navigationBar.shadowImage = nil
+        self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.view.backgroundColor = UIColor.init(hex: "1D4159")
     }
     
     func queryForBarbers() {
