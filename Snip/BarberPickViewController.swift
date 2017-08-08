@@ -57,6 +57,11 @@ class BarberPickViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.nameLabel.text = barberList[indexPath.item].object(forKey: "name") as? String
         let imageURL = barberList[indexPath.item].object(forKey: "profile_pic") as? PFFile
         cell.profilePic.file = imageURL
+        cell.profilePic.clipsToBounds = true
+        cell.profilePic.layer.masksToBounds = true
+        cell.profilePic.layer.cornerRadius = 25
+        cell.profilePic.layer.borderColor = UIColor.white.cgColor
+        cell.profilePic.layer.borderWidth = 1
         cell.profilePic.loadInBackground()
         cell.barber = barberList[indexPath.item]
         chosenBarber = barberList[indexPath.item]

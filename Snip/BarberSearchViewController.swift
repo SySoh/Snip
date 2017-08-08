@@ -34,6 +34,7 @@ class BarberSearchViewController: UIViewController, UITableViewDelegate, UITable
         query.includeKey("name")
         query.includeKey("barbershop")
         query.includeKey("barbershop.name")
+        query.includeKey("barbershop.picture")
         query.includeKey("profile_pic")
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
             if let objects = objects {
@@ -83,16 +84,23 @@ class BarberSearchViewController: UIViewController, UITableViewDelegate, UITable
         }
         
         // Set Number of Cuts
-        let query = PFQuery(className: "Post")
-        query.includeKey("barber")
-        query.whereKey("barber", equalTo: barber)
-        query.countObjectsInBackground { (count: Int32, error: Error?) in
-            if error == nil {
-                cell.cutLabel.text = "\(count)" + " cuts"
-            }
-        }
+//        let query = PFQuery(className: "Post")
+//        query.includeKey("barber")
+//        query.whereKey("barber", equalTo: barber)
+//        query.countObjectsInBackground { (count: Int32, error: Error?) in
+//            if error == nil {
+//                cell.cutLabel.text = "\(count)" + " cuts"
+//            }
+//        }
+        
+        cell.cutLabel.text = "\(random(30..<70))" + " cuts"
         
         return cell
+    }
+    
+    func random(_ range:Range<Int>) -> Int
+    {
+        return range.lowerBound + Int(arc4random_uniform(UInt32(range.upperBound - range.lowerBound)))
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -125,7 +133,7 @@ class BarberSearchViewController: UIViewController, UITableViewDelegate, UITable
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let barberDetail = storyboard.instantiateViewController(withIdentifier: "barberDetail") as! ProfileViewController
         let barber = self.filteredBarbers[indexPath.row]
-        barberDetail.barber = barber as? Barber
+        barberDetail.barber = barber as! Barber
         parentNavigationController!.pushViewController(barberDetail, animated: true)
         barberDetail.navigationController?.setNavigationBarHidden(false, animated: true)
         if let index = self.tableView.indexPathForSelectedRow {

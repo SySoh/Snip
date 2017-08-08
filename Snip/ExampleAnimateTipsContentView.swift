@@ -23,7 +23,6 @@ class ExampleAnimateTipsContentView: ExampleBackgroundContentView {
         impliesAnimation.values = [0.0 ,-8.0, 4.0, -4.0, 3.0, -2.0, 0.0]
         impliesAnimation.duration = duration * 2
         impliesAnimation.calculationMode = kCAAnimationCubic
-        
         imageView.layer.add(impliesAnimation, forKey: nil)
     }
 }
