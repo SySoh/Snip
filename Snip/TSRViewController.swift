@@ -27,7 +27,7 @@ class TSRViewController: UIViewController, UICollectionViewDelegate, UICollectio
     override func viewDidLoad() {
         super.viewDidLoad()
         queryAllPhotos()
-        tagTitle.title = tag?.name as! String
+        tagTitle.title = tag?["name"] as! String
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         let query = PFQuery(className: "Post")
@@ -129,7 +129,7 @@ class TSRViewController: UIViewController, UICollectionViewDelegate, UICollectio
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(hex: "FFFFFF"), NSFontAttributeName: UIFont.init(name: "Open Sans", size: 18.0)!]
         self.navigationController?.navigationBar.setTitleVerticalPositionAdjustment(CGFloat(0.0), for: .default)
-    }    
+    }
                     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

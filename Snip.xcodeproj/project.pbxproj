@@ -72,6 +72,7 @@
 		4BAF35B91F33E0C300EEAF1A /* BLESD___ .ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4BAF35B81F33E0C300EEAF1A /* BLESD___ .ttf */; };
 		4BBAFF0D1F217705001A144F /* BarbershopSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BBAFF0C1F217705001A144F /* BarbershopSearchCell.swift */; };
 		4BBAFF0F1F22700B001A144F /* BarbershopSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BBAFF0E1F22700B001A144F /* BarbershopSearchViewController.swift */; };
+		4BD1A1271F39205F00056081 /* NextComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1A1261F39205F00056081 /* NextComposeViewController.swift */; };
 		4BF10CD11F17F5BA00900F07 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF10CD01F17F5BA00900F07 /* SearchViewController.swift */; };
 		D6A12BE4DCB05FBC9777D260 /* Pods_Snip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08842452727135F202DCCDC8 /* Pods_Snip.framework */; };
 		F863654F9B46812DA4C8B529 /* Pods_SnipUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E9DF5AC6B863AAA7218A0EE /* Pods_SnipUITests.framework */; };
@@ -169,6 +170,7 @@
 		4BAF35B81F33E0C300EEAF1A /* BLESD___ .ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BLESD___ .ttf"; path = "blessed_day/BLESD___ .ttf"; sourceTree = "<group>"; };
 		4BBAFF0C1F217705001A144F /* BarbershopSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarbershopSearchCell.swift; sourceTree = "<group>"; };
 		4BBAFF0E1F22700B001A144F /* BarbershopSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarbershopSearchViewController.swift; sourceTree = "<group>"; };
+		4BD1A1261F39205F00056081 /* NextComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextComposeViewController.swift; sourceTree = "<group>"; };
 		4BF10CD01F17F5BA00900F07 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		7E9DF5AC6B863AAA7218A0EE /* Pods_SnipUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnipUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE97803698347DEC0A51E1DD /* Pods-Snip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snip.release.xcconfig"; path = "Pods/Target Support Files/Pods-Snip/Pods-Snip.release.xcconfig"; sourceTree = "<group>"; };
@@ -391,6 +393,7 @@
 				2E509D6A1F1ED57E0085F5C2 /* BarberPickViewController.swift */,
 				2E509D6C1F1ED5930085F5C2 /* BarberShopPickViewController.swift */,
 				2E093BD61F16D19500D2C000 /* TagsViewController.swift */,
+				4BD1A1261F39205F00056081 /* NextComposeViewController.swift */,
 			);
 			name = Compose;
 			sourceTree = "<group>";
@@ -732,6 +735,7 @@
 				1E8E682C1F16AA3100635F93 /* Barbershop.swift in Sources */,
 				1E4998921F2164E70093A595 /* Photo.swift in Sources */,
 				2E160DA01F168F350042419F /* Barber.swift in Sources */,
+				4BD1A1271F39205F00056081 /* NextComposeViewController.swift in Sources */,
 				2E509D6F1F1ED7290085F5C2 /* BarberShopCell.swift in Sources */,
 				4B2A7D7E1F2935A30056F2A6 /* ExampleHighlightableContentView.swift in Sources */,
 				2E7DA7FA1F1FCEBF003308D7 /* BarberCell.swift in Sources */,

@@ -16,7 +16,7 @@ import ParseUI
 class BarberShopViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationBarDelegate {
     
     @IBOutlet weak var shopImage: PFImageView!
-    @IBOutlet weak var nameLabel: UINavigationItem!
+    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var phoneLabel: UILabel!
     
@@ -52,19 +52,38 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(false, animated: true)
         
-        callImageView.layer.cornerRadius = 24
+//        callImageView.layer.cornerRadius = callImageView.frame.height / 2
+        callImageView.layer.cornerRadius = 6
         callImageView.clipsToBounds = true
         
         map.isZoomEnabled = true
         queryForBarbers()
-        nameLabel.title = barberShop?.name
+        
+        nameLabel.text = barberShop?.name
+        nameLabel.adjustsFontSizeToFitWidth = true
+        
         barberCollectionView.dataSource = self
         barberCollectionView.delegate = self
+        barberCollectionView.alwaysBounceVertical = false
+        barberCollectionView.alwaysBounceHorizontal = true
         barberCollectionView.reloadData()
+        
         shopImage.file = barberShop?.picture
         shopImage.contentMode = .scaleAspectFill
         shopImage.clipsToBounds = true
         shopImage.loadInBackground()
+        
+        let gradient = CAGradientLayer()
+        gradient.frame = CGRect.init(x: 0.0, y: 0.0, width: 375.0, height: 96.0)
+        gradient.colors = [UIColor.black.cgColor, UIColor.clear.cgColor]
+        shopImage.layer.insertSublayer(gradient, at: 0)
+        
+        let gradient_2 = CAGradientLayer()
+        gradient_2.frame = CGRect.init(x: 0.0, y: 52.0, width: 375.0, height: 148.0)
+        gradient_2.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        shopImage.layer.insertSublayer(gradient_2, at: 0)
+
+        
         ratingStars.rating = aveRating(ratings:(barberShop?.ratings)!)
         latitude = barberShop?.geopoint?.latitude
         longitude = barberShop?.geopoint?.longitude
@@ -96,8 +115,17 @@ class BarberShopViewController: UIViewController, UICollectionViewDataSource, UI
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(hex: "FFFFFF"), NSFontAttributeName: UIFont.init(name: "Open Sans", size: 18.0)!]
-        self.navigationController?.navigationBar.setTitleVerticalPositionAdjustment(CGFloat(0.0), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = .clear
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.navigationBar.shadowImage = nil
+        self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.view.backgroundColor = UIColor.init(hex: "1D4159")
     }
     
     func queryForBarbers() {

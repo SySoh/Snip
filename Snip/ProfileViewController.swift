@@ -12,9 +12,10 @@ import RSKPlaceholderTextView
 
 class ProfileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
+    @IBOutlet weak var whiteBorderImageView: UIImageView!
     @IBOutlet weak var profileImageVIew: PFImageView!
-    @IBOutlet weak var usernameLabel: UINavigationItem!
 
+    @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var barbershopImageView: PFImageView!
     @IBOutlet weak var shopConstantLabel: UILabel!
     @IBOutlet weak var barbershopLabel: UILabel!
@@ -40,6 +41,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     var barber: Barber!
     var barberId: String!
     var filteredPhotos: [PFObject]?
+    var barbershop: Barbershop?
     
     @IBAction func onVenmo(_ sender: Any) {
         venmo = barber["venmo"] as? String
@@ -83,10 +85,18 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(hex: "FFFFFF"), NSFontAttributeName: UIFont.init(name: "Open Sans", size: 18.0)!]
-        self.navigationController?.navigationBar.setTitleVerticalPositionAdjustment(CGFloat(0.0), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = .clear
     }
-
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.navigationBar.shadowImage = nil
+        self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.view.backgroundColor = UIColor.init(hex: "1D4159")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,26 +108,42 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         self.view.addSubview(postCollectionView)
         self.view.addSubview(tagCollectionView)
         
-        venmoImageView.layer.cornerRadius = 17
+        venmoImageView.layer.cornerRadius = venmoImageView.frame.height / 2
         venmoImageView.clipsToBounds = true
 
         self.profileImageVIew.file = (barber["profile_pic"] as! PFFile)
         self.profileImageVIew.loadInBackground()
-        let barbershop = barber["barbershop"] as? Barbershop
+        
+        if barbershop == nil {
+            barbershop = barber["barbershop"] as? Barbershop
+        }
+    
         self.barbershopImageView.contentMode = .scaleAspectFill
         self.barbershopImageView.clipsToBounds = true
-        self.barbershopImageView.file = barbershop?.picture as! PFFile
+        self.barbershopImageView.file = barbershop?.picture
+        
+        let gradient = CAGradientLayer()
+        gradient.frame = barbershopImageView.frame
+        gradient.colors = [UIColor.black.cgColor, UIColor.clear.cgColor]
+        barbershopImageView.layer.insertSublayer(gradient, at: 0)
+        
         self.barbershopImageView.loadInBackground()
-        //barbershopName = barbershop?["name"] as? String
+        
+        if barbershopName == nil || barbershopName == "" {
+            barbershopName = barbershop?["name"] as? String
+        }
+        
         self.barbershopLabel.text = barbershopName
         barberName = barber["name"] as? String
-        self.usernameLabel.title = barberName
+        self.usernameLabel.text = barberName
+        
         // Make profile pic circular
-        profileImageVIew.layer.borderWidth = 1
         profileImageVIew.layer.masksToBounds = false
-        profileImageVIew.layer.borderColor = UIColor.lightGray.cgColor
         profileImageVIew.layer.cornerRadius = profileImageVIew.frame.height/2
         profileImageVIew.clipsToBounds = true
+        
+        whiteBorderImageView.layer.cornerRadius = profileImageVIew.frame.height/2
+        whiteBorderImageView.clipsToBounds = true
 
 
 
@@ -293,7 +319,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         } else {
             let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: "tagCell", for: indexPath) as! TagCell
             self.tagNameArray = Array(tagNameSet)
-//            tagCell.tagObject = self.tagArray[indexPath.item]
+            tagCell.tagObject = self.tagArray[indexPath.item]
             tagCell.profileTagLabel.text = self.tagNameArray[indexPath.item]
             tagCell.layer.cornerRadius = 15
             tagCell.profileTagLabel.adjustsFontSizeToFitWidth = true
@@ -313,16 +339,5 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
-    /*
-     // MARK: - Navigation
-
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
 
 }

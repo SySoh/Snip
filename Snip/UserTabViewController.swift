@@ -76,7 +76,7 @@ class UserTabViewController: UIViewController, CAPSPageMenuDelegate, UINavigatio
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(hex: "FFFFFF"), NSFontAttributeName: UIFont.init(name: "Open Sans", size: 18.0)!]
         self.navigationController?.navigationBar.setTitleVerticalPositionAdjustment(CGFloat(0.0), for: .default)
-        self.tabBarController?.title = "Jake Parker"
+        self.tabBarController?.title = "Chris Haven"
     }
     
     /*
