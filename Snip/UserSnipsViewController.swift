@@ -78,6 +78,9 @@ class UserSnipsViewController: UIViewController, UICollectionViewDelegate, UICol
         self.snipsCollectionView.insertSubview(refreshcontrol, at: 0)
         
         // Do any additional setup after loading the view.
+        snipsCollectionView.alwaysBounceVertical = true
+        snipsCollectionView.bounces = true
+
     }
     
     func refresh() {

@@ -21,6 +21,7 @@ class UserTabViewController: UIViewController, CAPSPageMenuDelegate, UINavigatio
         
         userProfileImageView.layer.cornerRadius = 42
         userProfileImageView.clipsToBounds = true
+        
                 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
