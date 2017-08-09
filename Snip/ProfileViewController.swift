@@ -108,7 +108,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         self.view.addSubview(postCollectionView)
         self.view.addSubview(tagCollectionView)
         
-        venmoImageView.layer.cornerRadius = venmoImageView.frame.height / 2
+        venmoImageView.layer.cornerRadius = 6
         venmoImageView.clipsToBounds = true
 
         self.profileImageVIew.file = (barber["profile_pic"] as! PFFile)
