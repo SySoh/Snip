@@ -42,6 +42,8 @@ class UserSnipsViewController: UIViewController, UICollectionViewDelegate, UICol
         snipsCollectionView.delegate = self
         snipsCollectionView.dataSource = self
         snipsCollectionView.alwaysBounceHorizontal = false
+        snipsCollectionView.alwaysBounceVertical = true
+        snipsCollectionView.bounces = true
         
         let query = PFQuery(className: "Photo")
         query.order(byDescending: "createdAt")
