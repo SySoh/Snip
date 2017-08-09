@@ -30,6 +30,8 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
         savedCollectionView.dataSource = self
         
         savedCollectionView.alwaysBounceHorizontal = false
+        savedCollectionView.alwaysBounceVertical = true
+        savedCollectionView.bounces = true
         
         let query = PFQuery(className: "Photo")
         query.order(byDescending: "createdAt")
