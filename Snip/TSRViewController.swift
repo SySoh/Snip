@@ -30,7 +30,9 @@ class TSRViewController: UIViewController, UICollectionViewDelegate, UICollectio
         queryAllPhotos()
         self.view.addSubview(loader)
         loader.startAnimation()
-        tagTitle.title = tag?["name"] as! String
+        if tagTitle.title == nil || tagTitle.title == "Title" {
+            tagTitle.title = tag?["name"] as! String
+        }
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         let query = PFQuery(className: "Post")

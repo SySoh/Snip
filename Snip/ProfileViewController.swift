@@ -73,6 +73,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         } else if segue.identifier == "profileTagSegue" {
             let vc = segue.destination as! TSRViewController
             let cell = sender as! TagCell
+            let indexPath = tagCollectionView.indexPath(for: cell)
+            vc.tagTitle.title = self.tagNameArray[(indexPath?.item)!]
             vc.tag = cell.tagObject
             //detailViewController.photo = photo as! Photo
         }
@@ -319,7 +321,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         } else {
             let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: "tagCell", for: indexPath) as! TagCell
             self.tagNameArray = Array(tagNameSet)
-            tagCell.tagObject = self.tagArray[indexPath.item]
+            tagCell.tagObject = self.tagArray[indexPath.item] as! Tag
             tagCell.profileTagLabel.text = self.tagNameArray[indexPath.item]
             tagCell.layer.cornerRadius = 15
             tagCell.profileTagLabel.adjustsFontSizeToFitWidth = true
